@@ -1,3 +1,4 @@
+#include <stdio.h>
 /**
  * Module:       motor_controls.c
  * Author(s):    Kristofer Hansson Aspman

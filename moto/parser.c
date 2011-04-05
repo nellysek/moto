@@ -9,13 +9,12 @@
  */
 
 #include "header.h"
-#include "motor_controls.c"
-#include "tools.c"
+#include <stdio.h>
 
 //These definitions will go into a separate file later on.
 #define STOP 0x00
 #define STOP_ID 0x00
-#define START 0x40
+#define START 0x40 
 #define START_ID 0x01
 #define CONTROL_ID 0x02
 #define SPECIAL_COMMAND_ID 0x03

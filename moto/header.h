@@ -9,6 +9,8 @@
  */
 
 #include <stdio.h>
+#include "motor_controls.c"
+#include "tools.c"
 
 //Big endian control message
 typedef struct control_message{
