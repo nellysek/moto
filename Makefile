@@ -32,11 +32,16 @@ USB_PORT=/dev/ttyACM0
 # the speed that corresponds to your arduino (normally 16MHz)
 F_CPU=16000000
 #F_CPU=8000000
-		
-LDFLAGS=-Wl,-Map=$(PROG).map,--cref -mmcu=$(MMCU) -Iinclude -lm -Llib -l$(LIB)
-AVRDUDE = avrdude -p $(MMCU) -P $(USB_PORT) -c $(STK) -b $(BAUD) -F -u -U flash:w:$(PROG).rom
 
-PROG=main
+mega:
+	MMCU=atmega2560 && STK=stk500v2 && BAUD=115200 && LIB=coremega && $(MAKE) install
+	
+uno:
+	MMCU=atmega328p &&	STK=stk500v1 && BAUD=57600 && LIB=coreuno && $(MAKE) install
+
+
+
+PROG=drone
 SRC=src/*.c
 OBJ=bin/*.o
 
@@ -45,42 +50,27 @@ OBJ=bin/*.o
 
 $(OBJ): $(SRC)
 	cd bin && \
-	avr-gcc -c -g -Os -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DF_CPU=$(F_CPU) -Wall -Wstrict-prototypes -Wa,-ahlms=$(PROG).lst -fno-exceptions -I../include ../$(SRC)
+	avr-gcc -c -g -Os -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DF_CPU=$(F_CPU) -Wall -Wstrict-prototypes -Wa,-ahlms=$(PROG).lst \
+		-fno-exceptions -I../include ../$(SRC)
 
 #-DENABLE_PWM
 #-DARDUINO=22
 
 $(PROG): MMCU=atmega328p
-		STK=stk500v1
-		BAUD=57600
-		LIB=coreuno.a
+		LIB=coreuno
 $(PROG): $(OBJ)
-	avr-gcc $(OBJ) lib/lib$(LIB) $(LDFLAGS) -o bin/$(PROG).x
+	avr-gcc $(OBJ) lib/lib$(LIB).a -Wl,-Map=$(PROG).map,--cref -mmcu=$(MMCU) -Iinclude -lm -Llib \ 
+		-fno-exceptions  -ffunction-sections -fdata-sections -l$(LIB) -o bin/$(PROG).elf
 	@ echo "Test passed"
 
-install: $(OBJ)
-	avr-gcc $(OBJ) lib/$(LIB) $(LDFLAGS) -o $(PROG).elf
-	avr-objcopy -O srec $(PROG).elf $(PROG).rom
-	checksize $(PROG).elf
-	$(AVRDUDE)
+install: $(PROG)
+	cd bin && avr-objcopy -O srec $(PROG).elf $(PROG).rom
+#	checksize $(PROG).elf
+	avrdude -p $(MMCU) -P $(USB_PORT) -c $(STK) -b $(BAUD) -F -u -U flash:w:$(PROG).rom
 
-mega: MMCU=atmega2560
-		STK=stk500v2
-		BAUD=115200
-		LIB=libcoremega.a
-mega: install
+#mega: install
 
-uno: MMCU=atmega328p
-		STK=stk500v1
-		BAUD=57600
-		LIB=coreuno.a
 uno: install
-
-due: MMCU=atmega328p
-		STK=stk500v1
-		BAUD=57600
-		LIB=coreuno.a
-due: install
 
 pc:
 	gcc -DPC $(SRC) -o bin/$(PROG)
