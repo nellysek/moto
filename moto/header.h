@@ -38,8 +38,11 @@ typedef struct control_message{
 
 
 //Tools
-unsigned char bitfieldToChar(msg_pointer mp);
-msg intToBitfield(unsigned int* ip);
+
+//The following two (commented) functions have been replaced
+//by macros in tools.c
+/* unsigned char bitfieldToChar(msg_pointer mp); */
+/* msg intToBitfield(unsigned int* ip); */
 void printMsg(msg_pointer mp);
 msg scanDecMsgSTDIN();
 msg scanHexMsgSTDIN();
