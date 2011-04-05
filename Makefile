@@ -33,47 +33,51 @@ USB_PORT=/dev/ttyACM0
 F_CPU=16000000
 #F_CPU=8000000
 
-mega:
-	MMCU=atmega2560 && STK=stk500v2 && BAUD=115200 && LIB=coremega && $(MAKE) install
-	
-uno:
-	MMCU=atmega328p &&	STK=stk500v1 && BAUD=57600 && LIB=coreuno && $(MAKE) install
-
-
-
-PROG=drone
+PROG=test
 SRC=src/*.c
 OBJ=bin/*.o
+
+mega: MMCU=atmega2560
+mega: STK=stk500v2
+mega: BAUD=115200
+mega: LIB=coremega
+
+uno: MMCU=atmega328p
+uno: STK=stk500v1
+uno: BAUD=115200
+uno: LIB=coreuno
 
 #	echo '#include "WProgram.h"' > $(TARGET).c
 #	cat $(PROG).c >> $(TARGET).c
 
 $(OBJ): $(SRC)
 	cd bin && \
-	avr-gcc -c -g -Os -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DF_CPU=$(F_CPU) -Wall -Wstrict-prototypes -Wa,-ahlms=$(PROG).lst \
-		-fno-exceptions -I../include ../$(SRC)
+	avr-gcc -c -g -Os -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DARDUINO=22 -DF_CPU=$(F_CPU) -Wall -Wstrict-prototypes \
+		-Wa,-ahlms=$(PROG).lst -fno-exceptions -I../include ../$(SRC)
 
 #-DENABLE_PWM
-#-DARDUINO=22
 
 $(PROG): MMCU=atmega328p
-		LIB=coreuno
+$(PROG): LIB=coreuno
 $(PROG): $(OBJ)
-	avr-gcc $(OBJ) lib/lib$(LIB).a -Wl,-Map=$(PROG).map,--cref -mmcu=$(MMCU) -Iinclude -lm -Llib \ 
-		-fno-exceptions  -ffunction-sections -fdata-sections -l$(LIB) -o bin/$(PROG).elf
+	avr-gcc $(OBJ) lib/lib$(LIB).a -Wl,-Map=$(PROG).map,--cref -mmcu=$(MMCU) -DARDUINO=22 -Iinclude -lm -Llib \
+		-fno-exceptions  -ffunction-sections -fdata-sections -l$(LIB) -o bin/$(PROG).x
 	@ echo "Test passed"
 
-install: $(PROG)
+install: $(OBJ)
+	avr-gcc $(OBJ) lib/lib$(LIB).a -Wl,-Map=$(PROG).map,--cref -mmcu=$(MMCU) -Iinclude -lm -Llib \
+		-fno-exceptions  -ffunction-sections -fdata-sections -l$(LIB) -o bin/$(PROG).elf
 	cd bin && avr-objcopy -O srec $(PROG).elf $(PROG).rom
 #	checksize $(PROG).elf
-	avrdude -p $(MMCU) -P $(USB_PORT) -c $(STK) -b $(BAUD) -F -u -U flash:w:$(PROG).rom
+	avrdude -p $(MMCU) -P $(USB_PORT) -c $(STK) -b $(BAUD) -F -u -U flash:w:bin/$(PROG).rom
 
-#mega: install
 
-uno: install
+mega: clean install
 
-pc:
-	gcc -DPC $(SRC) -o bin/$(PROG)
+uno: clean install
+
+pc: clean
+	gcc -DPC $(SRC) -o bin/$(PROG).x
 
 clean:
 	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.x
