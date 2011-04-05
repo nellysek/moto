@@ -51,7 +51,7 @@ $(EXAMPLE_MAKEFILE): $(EXAMPLE_MAKEFILE).in
 	cat $(EXAMPLE_MAKEFILE).in | sed -e "s,__INSTALL_PATH__,$(INSTALL_PATH),g" -e "s,__LIBARDUINO_MAKEFILE__,$(LIBARDUINO_MAKEFILE),g" > $(EXAMPLE_MAKEFILE)
 
 
-install: $(LIB)	
+install:
 	@if [ -d $(INSTALL_PATH) ]; then echo " " && echo "*** $(INSTALL_PATH) exists, please delete the folder and try again... ***" && echo " " ; exit 1; fi;
 
 	@echo "[+] Creating $(INSTALL_PATH)...";
@@ -99,3 +99,15 @@ dist:
 	tar cvf  $(TAR_FILENAME).tar src $(INCL) Makefile $(LIBARDUINO_MAKEFILE).in $(EXAMPLE_MAKEFILE).in  examples/*.c  bin/checksize
 	gzip $(TAR_FILENAME).tar
 	@echo "Done..."
+
+undist:
+	make clean
+	if [ -e libarduino.tar.gz ]; then \
+	echo "[*] Extracting libarduino.tar.gz"; \
+	tar xvfz libarduino.tar.gz --exclude Makefile; \
+	else \
+	echo "[-] libarduino.tar.gz not found, please specify a filename to extract: "; \
+	read FILE; \
+	echo "[*] Extracting $FILE"; \
+	tar xvfz $FILE --exclude Makefile; \
+	fi

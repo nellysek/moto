@@ -15,7 +15,7 @@ include __INSTALL_PATH__/__LIBARDUINO_MAKEFILE__
 
 clean:
 	-rm -f *.o *.elf *.map
-	-rm -f $(PROG)
+	-rm -f ($PROG)
 
 
 
