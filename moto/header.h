@@ -17,8 +17,8 @@ typedef struct control_message{
   //also, endianess may be different on arduino
   unsigned char rear :1;
   unsigned char front :1;
-  unsigned char right :1;
   unsigned char left :1;
+  unsigned char right :1;
   unsigned char panic :1;
   unsigned char increase :1;
   unsigned char ID :2;
@@ -29,8 +29,8 @@ typedef struct control_message{
 /*   unsigned char ID :2; */
 /*   unsigned char increase :1; */
 /*   unsigned char panic :1; */
-/*   unsigned char left :1; */
 /*   unsigned char right :1; */
+/*   unsigned char left :1; */
 /*   unsigned char front :1; */
 /*   unsigned char rear :1; */
 
