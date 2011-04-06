@@ -8,15 +8,18 @@
  *
  */
 
+#define INT_TO_BITFIELD(a) *(msg_pointer)a
+#define BITFIELD_TO_CHAR(a) *(unsigned char*)a
 
-//TODO: Change the following two functions to macros instead.
-unsigned char bitfieldToChar(msg_pointer mp){
-  return *(unsigned char*)mp;
-}
+//NOTE: The following two (commented) functions have
+//       been changed to macros instead.
+/* unsigned char bitfieldToChar(msg_pointer mp){ */
+/*   return *(unsigned char*)mp; */
+/* } */
 
-msg intToBitfield(unsigned int* ip){
-  return *(msg_pointer)ip;
-}
+/* msg intToBitfield(unsigned int* ip){ */
+/*   return *(msg_pointer)ip; */
+/* } */
 
 /**
  * Functions:    void scanDecMsgSTDIN()
@@ -32,14 +35,14 @@ msg scanDecMsgSTDIN(){
   unsigned int input;
   printf("Enter the message in Decimal: ");
   scanf("%d", &input);
-  return intToBitfield(&input);
+  return INT_TO_BITFIELD(&input);
 }
 
 msg scanHexMsgSTDIN(){
   unsigned int input;
   printf("Enter the message in hexadecimal: ");
   scanf("%x", &input);
-  return intToBitfield(&input);
+  return INT_TO_BITFIELD(&input);
 }
 
 void printMsg(msg_pointer mp){
@@ -55,8 +58,8 @@ void printMsg(msg_pointer mp){
 
   printf("\nSize of bitfield: %ld\n", sizeof(*mp));
   printf("Hexadecimal representation: %x\n",
-	 bitfieldToChar(mp));
+	 BITFIELD_TO_CHAR(mp));
   printf("Decimal representation: %d\n",
-	 bitfieldToChar(mp));
+	 BITFIELD_TO_CHAR(mp));
   printf("***********************************\n");
 }

@@ -82,9 +82,9 @@ void controlMotors(msg_pointer mp){
 void specialMotorCommand(msg_pointer mp){
   printf("Special Motor Control Message!\n");
 
-  if(bitfieldToChar(mp) == GO_FORWARD)
+  if(BITFIELD_TO_CHAR(mp) == GO_FORWARD)
     goForward();
-  if(bitfieldToChar(mp) == GO_BACKWARD)
+  if(BITFIELD_TO_CHAR(mp) == GO_BACKWARD)
     goBackward();
   
   return;

@@ -17,8 +17,8 @@ typedef struct control_message{
   //also, endianess may be different on arduino
   unsigned char rear :1;
   unsigned char front :1;
-  unsigned char right :1;
   unsigned char left :1;
+  unsigned char right :1;
   unsigned char panic :1;
   unsigned char increase :1;
   unsigned char ID :2;
@@ -29,8 +29,8 @@ typedef struct control_message{
 /*   unsigned char ID :2; */
 /*   unsigned char increase :1; */
 /*   unsigned char panic :1; */
-/*   unsigned char left :1; */
 /*   unsigned char right :1; */
+/*   unsigned char left :1; */
 /*   unsigned char front :1; */
 /*   unsigned char rear :1; */
 
@@ -38,8 +38,11 @@ typedef struct control_message{
 
 
 //Tools
-unsigned char bitfieldToChar(msg_pointer mp);
-msg intToBitfield(unsigned int* ip);
+
+//The following two (commented) functions have been replaced
+//by macros in tools.c
+/* unsigned char bitfieldToChar(msg_pointer mp); */
+/* msg intToBitfield(unsigned int* ip); */
 void printMsg(msg_pointer mp);
 msg scanDecMsgSTDIN();
 msg scanHexMsgSTDIN();
