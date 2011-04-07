@@ -1,14 +1,11 @@
-#include "motorcontrol.c"
+#define LEFT_MOTOR 6
+#define RIGHT_MOTOR 3
+#define FRONT_MOTOR 4
+#define REAR_MOTOR 5
 
-unsigned char startMotors();
-
-unsigned char stopMotors();
-
+void startMotors();
+void stopMotors();
 unsigned char increaseMotorPulse(unsigned char motor, unsigned char pulse);
-
-unsigned char increaseMotorPulsePanic(unsigned char motor, unsigned char pulse);
-
+unsigned char increaseMotorPulseX2(unsigned char motor, unsigned char pulse);
 unsigned char decreaseMotorPulse(unsigned char motor, unsigned char pulse);
-
-unsigned char decreaseMotorPulsePanic(unsigned char motor, unsigned char pulse);
-
+unsigned char decreaseMotorPulseX2(unsigned char motor, unsigned char pulse);
