@@ -1,9 +1,5 @@
 #include "motorcontrol.h"
 
-unsigned char leftMotor;
-unsigned char rightMotor;
-unsigned char frontMotor;
-unsigned char rearMotor;
 unsigned char leftPulse = 0;
 unsigned char rightPulse = 0;
 unsigned char frontPulse = 0;
@@ -14,10 +10,10 @@ void startMotors() {
     rightPulse = 62;
     frontPulse = 62;
     rearPulse = 62;
-    analogWrite(lefMotor, leftPulse);
-    analogWrite(rightMotor, rightPulse);
-    analogWrite(frontMotor, frontPulse);
-    analogWrite(rearMotor, rearPulse);
+    analogWrite(LEFT_MOTOR, leftPulse);
+    analogWrite(RIGHT_MOTOR, rightPulse);
+    analogWrite(FRONT_MOTOR, frontPulse);
+    analogWrite(REAR_MOTOR, rearPulse);
 }
 
 void stopMotors() {
@@ -25,10 +21,10 @@ void stopMotors() {
     rightPulse = 0;
     frontPulse = 0;
     rearPulse = 0;
-    analogWrite(lefMotor, leftPulse);
-    analogWrite(rightMotor, rightPulse);
-    analogWrite(frontMotor, frontPulse);
-    analogWrite(rearMotor, rearPulse);
+    analogWrite(LEFT_MOTOR, leftPulse);
+    analogWrite(RIGHT_MOTOR, rightPulse);
+    analogWrite(FRONT_MOTOR, frontPulse);
+    analogWrite(REAR_MOTOR, rearPulse);
 }
 
 unsigned char increaseMotorPulse(unsigned char motor, unsigned char pulse) {
