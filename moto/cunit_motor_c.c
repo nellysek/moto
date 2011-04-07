@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "CUnit/CUnit.h"
+#include "motorcontrol.h"
 
 /* compile with something like this:  gcc function.c -o finction -lcunit */
 
@@ -18,6 +19,12 @@ void test_plus_one(void)
     CU_ASSERT(plus_one(-10) == 0);
     CU_ASSERT(plus_one(-1) == 0);
     CU_ASSERT(plus_one(5) == 6);
+}
+
+void test_increaseMotorPulse(void){
+
+    CU_ASSERT(increaseMotorPulse(1,55)==58);
+    CU_ASSERT(increaseMotorPulse(1,255)==258);
 }
 
 
@@ -43,15 +50,26 @@ CU_ErrorCode ec = CU_initialize_registry();
     }
     
 /***************************************************************************/
-    CU_pTest pT = CU_add_test(pS, "TestPlusOne", test_plus_one);
+    //CU_pTest pT = 
+    CU_add_test(pS, "TestPlusOne", test_plus_one);
     if(CU_get_error() == CUE_SUCCESS){
                 fprintf(stdout, "Test Added Successfully!\n");
-                CU_console_run_tests();
+    }
+    else{
+        fprintf(stdout, "Failed to add test to suite");
+        return;
+    }
+    /* motor control test */
+    //CU_pTest mP = 
+    CU_add_test(pS, "TestIncreaseMotorPulse", test_increaseMotorPulse);
+    if(CU_get_error() == CUE_SUCCESS){
+                fprintf(stdout, "Test Added Successfully!\n");
     }
     else{
         fprintf(stdout, "Failed to add test to suite");
         return;
     }
 /***************************************************************************/
+    CU_console_run_tests();
     CU_cleanup_registry();
 }
