@@ -1,3 +1,5 @@
+/*Created by Magnus Bergqvist*/
+
 #include <stdio.h>
 #include "CUnit/CUnit.h"
 #include "motorcontrol.h"
