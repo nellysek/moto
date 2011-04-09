@@ -5,7 +5,7 @@
 int stop(void);
 
 int stop() {
-	char stop = 0;
+	unsigned char stop = 0;
 
 	printf("Stop => to '0'\n");
 
