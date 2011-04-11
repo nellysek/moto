@@ -18,7 +18,7 @@ int stop() {
         return 1;
 }
 
-int main(){
+/*int main(){
      stop();
 return 0;
-}
+}*/
