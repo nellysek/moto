@@ -26,26 +26,29 @@ extern unsigned char frontMotor;
 extern unsigned char rearMotor;
 
 /*Motor pulse modification*/
-void startMotors(void);
-void stopMotors(void);
-void goForward(void);
-void goBackward(void);
-void increaseLeftNormal(void);
-void increaseRightNormal(void);
-void increaseFrontNormal(void);
-void increaseRearNormal(void);
-void increaseLeftPanic(void);
-void increaseRightPanic(void);
-void increaseFrontPanic(void);
-void increaseRearPanic(void);
+void _moto_startMotors(void);
+void _moto_stopMotors(void);
+void _moto_goForward(void);
+void _moto_goBackward(void);
+void _moto_strafeRight(void);
+void _moto_strafeLeft(void);
 
-void decreaseLeftNormal(void);
-void decreaseRightNormal(void);
-void decreaseFrontNormal(void);
-void decreaseRearNormal(void);
-void decreaseLeftPanic(void);
-void decreaseRightPanic(void);
-void decreaseFrontPanic(void);
-void decreaseRearPanic(void);
+void _moto_increaseLeftNormal(void);
+void _moto_increaseRightNormal(void);
+void _moto_increaseFrontNormal(void);
+void _moto_increaseRearNormal(void);
+void _moto_increaseLeftPanic(void);
+void _moto_increaseRightPanic(void);
+void _moto_increaseFrontPanic(void);
+void _moto_increaseRearPanic(void);
+
+void _moto_decreaseLeftNormal(void);
+void _moto_decreaseRightNormal(void);
+void _moto_decreaseFrontNormal(void);
+void _moto_decreaseRearNormal(void);
+void _moto_decreaseLeftPanic(void);
+void _moto_decreaseRightPanic(void);
+void _moto_decreaseFrontPanic(void);
+void _moto_decreaseRearPanic(void);
 
 void printMotorStatus(void);

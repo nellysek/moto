@@ -24,7 +24,7 @@ unsigned char frontMotor;
 unsigned char rearMotor;
 
 /**
- * Function:    void startMotors()
+ * Function:    void _moto_startMotors()
  * Author(s):    Kristofer Hansson Aspman
  *
  * Description: Sets the pulse width to a state where
@@ -32,7 +32,7 @@ unsigned char rearMotor;
  *              drone does not lift off.
  *
  */
-void startMotors(void){
+void _moto_startMotors(void){
 #ifdef ARDUINO
   Serial.print("Starting all motors\n");
 #elif defined PC
@@ -45,14 +45,14 @@ void startMotors(void){
 }
 
 /**
- * Function:    void stopMotors()
+ * Function:    void _moto_stopMotors()
  * Author(s):    Kristofer Hansson Aspman
  *
  * Description: Stops all motors, i.e. sets the
  *              pulse width to zero.
  *
  */
-void stopMotors(void){
+void _moto_stopMotors(void){
 #ifdef ARDUINO
   Serial.print("Stopping all motors\n");
 #elif defined PC
@@ -66,7 +66,7 @@ void stopMotors(void){
 }
 
 /**
- * Function:    void goForward()
+ * Function:    void _moto_goForward()
  * Author(s):    Kristofer Hansson Aspman
  *
  * Description: Increases the pulse width of
@@ -76,22 +76,15 @@ void stopMotors(void){
  *              forward.
  *
  */
-void goForward(void){
-#ifdef ARDUINO
-  Serial.print("Increasing rear motor pulse\n");
-  Serial.print("Decreasing front motor pulse\n");
-#elif defined PC
-  printf("Increasing rear motor pulse\n");
-  printf("Decreasing front motor pulse\n");
-#endif
-  increaseRearNormal();
-  decreaseFrontNormal();
+void _moto_goForward(void){
+  _moto_increaseRearNormal();
+  _moto_decreaseFrontNormal();
   return;
 
 }
 
 /**
- * Function:    void goBackward()
+ * Function:    void _moto_goBackward()
  * Author(s):   Kristofer Hansson Aspman
  *
  * Description: Decreases the pulse width of
@@ -101,30 +94,48 @@ void goForward(void){
  *              backward.
  *
  */
-void goBackward(void){
-#ifdef ARDUINO
-  Serial.print("Increasing front motor pulse\n");
-  Serial.print("Decreasing rear motor pulse\n");
-#elif defined PC
-  printf("Increasing front motor pulse\n");
-  printf("Decreasing rear motor pulse\n");
-#endif
-  decreaseRearNormal();
-  increaseFrontNormal();
-
+void _moto_goBackward(void){
+  _moto_decreaseRearNormal();
+  _moto_increaseFrontNormal();
   return;
 
 }
 
 /**
- * Functions:   increaseRightNormal()
- *              increaseLeftNormal()
- *              increaseFrontNormal()
- *              increaseRearNormal()
- *              increaseRightPanic()
- *              increaseLeftPanic()
- *              increaseFrontPanic()
- *              increaseRearPanic()
+ * Functions:   _moto_strafeRight()
+ *              _moto_strafeLeft()
+ *
+ * Author(s):   Kristofer Hansson Aspman
+ *
+ * Description: Increases either right or
+ *              left motor and decreases
+ *              the other in order to make
+ *              the drone fly sideways to
+ *              either left or right.
+ *              
+ */
+void _moto_strafeRight(void){
+  _moto_decreaseRightNormal();
+  _moto_increaseLeftNormal();
+  return;
+
+}
+void _moto_strafeLeft(void){
+  _moto_decreaseLeftNormal();
+  _moto_increaseRightNormal();
+  return;
+
+}
+
+/**
+ * Functions:   _moto_increaseRightNormal()
+ *              _moto_increaseLeftNormal()
+ *              _moto_increaseFrontNormal()
+ *              _moto_increaseRearNormal()
+ *              _moto_increaseRightPanic()
+ *              _moto_increaseLeftPanic()
+ *              _moto_increaseFrontPanic()
+ *              _moto_increaseRearPanic()
  * Author(s):   Kristofer Hansson Aspman
  *
  * Description: Increases the pulse width of
@@ -135,7 +146,7 @@ void goBackward(void){
  *              panic increment.
  *
  */
-void increaseLeftNormal(void){
+void _moto_increaseLeftNormal(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Increasing left motor pulse\n");
@@ -144,7 +155,7 @@ void increaseLeftNormal(void){
 
 }
 
-void increaseRightNormal(void){
+void _moto_increaseRightNormal(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Increasing right motor pulse\n");
@@ -152,7 +163,7 @@ void increaseRightNormal(void){
 #endif
 }
 
-void increaseFrontNormal(void){
+void _moto_increaseFrontNormal(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Increasing Front motor pulse\n");
@@ -160,7 +171,7 @@ void increaseFrontNormal(void){
 #endif
 }
 
-void increaseRearNormal(void){
+void _moto_increaseRearNormal(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Increasing rear motor pulse\n");
@@ -168,7 +179,7 @@ void increaseRearNormal(void){
 #endif
 }
 
-void increaseLeftPanic(void){
+void _moto_increaseLeftPanic(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Increasing left motor pulse in PANIC!\n");
@@ -177,7 +188,7 @@ void increaseLeftPanic(void){
 
 }
 
-void increaseRightPanic(void){
+void _moto_increaseRightPanic(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Increasing right motor pulse in PANIC!\n");
@@ -185,7 +196,7 @@ void increaseRightPanic(void){
 #endif
 }
 
-void increaseFrontPanic(void){
+void _moto_increaseFrontPanic(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Increasing Front motor pulse in PANIC!\n");
@@ -193,7 +204,7 @@ void increaseFrontPanic(void){
 #endif
 }
 
-void increaseRearPanic(void){
+void _moto_increaseRearPanic(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Increasing rear motor pulse in PANIC!\n");
@@ -202,14 +213,14 @@ void increaseRearPanic(void){
 }
 
 /**
- * Functions:   decreaseRightNormal()
- *              decreaseLeftNormal()
- *              decreaseFrontNormal()
- *              decreaseRearNormal()
- *              decreaseRightPanic()
- *              decreaseLeftPanic()
- *              decreaseFrontPanic()
- *              decreaseRearPanic()
+ * Functions:   _moto_decreaseRightNormal()
+ *              _moto_decreaseLeftNormal()
+ *              _moto_decreaseFrontNormal()
+ *              _moto_decreaseRearNormal()
+ *              _moto_decreaseRightPanic()
+ *              _moto_decreaseLeftPanic()
+ *              _moto_decreaseFrontPanic()
+ *              _moto_decreaseRearPanic()
  * Author(s):   Kristofer Hansson Aspman
  *
  * Description: Decreases the pulse width of
@@ -221,7 +232,7 @@ void increaseRearPanic(void){
  *
  */
 
-void decreaseRightNormal(void){
+void _moto_decreaseRightNormal(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Decreasing right motor pulse\n");
@@ -229,7 +240,7 @@ void decreaseRightNormal(void){
 #endif
 }
 
-void decreaseLeftNormal(void){
+void _moto_decreaseLeftNormal(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Decreasing left motor pulse\n");
@@ -237,7 +248,7 @@ void decreaseLeftNormal(void){
 #endif
 }
 
-void decreaseFrontNormal(void){
+void _moto_decreaseFrontNormal(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Decreasing Front motor pulse\n");
@@ -245,7 +256,7 @@ void decreaseFrontNormal(void){
 #endif
 }
 
-void decreaseRearNormal(void){
+void _moto_decreaseRearNormal(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Decreasing rear motor pulse\n");
@@ -253,7 +264,7 @@ void decreaseRearNormal(void){
 #endif
 }
 
-void decreaseLeftPanic(void){
+void _moto_decreaseLeftPanic(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Decreasing left motor pulse in PANIC!\n");
@@ -261,7 +272,7 @@ void decreaseLeftPanic(void){
 #endif
 }
 
-void decreaseRightPanic(void){
+void _moto_decreaseRightPanic(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Decreasing right motor pulse in PANIC!\n");
@@ -269,7 +280,7 @@ void decreaseRightPanic(void){
 #endif
 }
 
-void decreaseFrontPanic(void){
+void _moto_decreaseFrontPanic(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Decreasing Front motor pulse in PANIC!\n");
@@ -277,7 +288,7 @@ void decreaseFrontPanic(void){
 #endif
 }
 
-void decreaseRearPanic(void){
+void _moto_decreaseRearPanic(void){
 #ifdef ARDUINO 
 #elif defined PC
   printf("Decreasing rear motor pulse in PANIC!\n");
