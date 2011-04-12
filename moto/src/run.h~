@@ -1,0 +1,14 @@
+#ifdef ARDUINO
+   #include "WProgram.h"
+#elif defined PC
+   #include <stdio.h>
+#endif
+
+#include "message.h"
+#include "motor_controls.h"
+#include "parser.h"
+msg binary;
+msg_pointer mp;
+
+int moto_init(void);
+int moto_run(void);
