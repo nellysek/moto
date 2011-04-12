@@ -1,4 +1,4 @@
-/*Created by Magnus Bergqvist*/ /*Extended by Bishare Sufi*/
+/*Created by Magnus Bergqvist*/ /*Extent by Bishare Sufi*/
 /* compile with something like this:
     gcc cunit_moto_driver_functions.c ../src/moto_driver_functions.c -DPC 
     -o cunit_moto_driver_functions -lcunit
@@ -30,7 +30,7 @@ void test_moto_stopMotors(void){
     CU_ASSERT(rearPulse==0);
 }
 
-/*added by Bishare Sufi*/
+/*added motor tests asserts by Bishare Sufi*/
 
 void test_moto_hover(void){
     
@@ -74,6 +74,66 @@ void test_moto_strafeLeft(void){
 
 }
 
+void test_moto_rotateLeft(void){
+
+     moto_rotateLeft();
+     CU_ASSERT(leftPulse == 92);
+     CU_ASSERT(rightPulse == 92);
+     CU_ASSERT(frontPulse == 88);
+     CU_ASSERT(rearPulse == 88);
+
+}
+
+void test_moto_rotateRight(void){
+
+     moto_rotateRight();
+     CU_ASSERT(leftPulse == 90);
+     CU_ASSERT(rightPulse == 90);
+     CU_ASSERT(frontPulse == 90);
+     CU_ASSERT(rearPulse == 90);
+
+}
+
+void test_moto_increaseAllNormal(void){
+
+     moto_increaseAllNormal();
+     CU_ASSERT(rightPulse == 92);
+     CU_ASSERT(leftPulse == 92);
+     CU_ASSERT(frontPulse == 92);
+     CU_ASSERT(rearPulse == 92);
+
+}
+
+void test_moto_increaseAllPanic(void){
+
+     moto_increaseAllPanic();
+     CU_ASSERT(rightPulse == 96);
+     CU_ASSERT(leftPulse == 96);
+     CU_ASSERT(frontPulse == 96);
+     CU_ASSERT(rearPulse == 96);
+
+}
+
+void test_moto_decreaseAllNormal(void){
+
+     moto_decreaseAllNormal();
+     CU_ASSERT(rightPulse == 94);
+     CU_ASSERT(leftPulse == 94);
+     CU_ASSERT(frontPulse == 94);
+     CU_ASSERT(rearPulse == 94);
+
+}
+
+void test_moto_decreaseAllPanic(void){
+
+     moto_decreaseAllPanic();
+     CU_ASSERT(rightPulse == 90);
+     CU_ASSERT(leftPulse == 90);
+     CU_ASSERT(frontPulse == 90);
+     CU_ASSERT(rearPulse == 90);
+
+}
+
 
 /*check_add_ok() gives a print_out on the screen when a test suite or a test
 has been created, the char** passed to this function should always be in the 
@@ -108,31 +168,48 @@ int main(int argc){
     CU_pSuite start_stop = CU_add_suite("start_stop_motors",NULL,NULL);    
     check_add_ok("Suite start_stop_motors");
 
-    CU_add_test(start_stop, "test_moto_startMotors ", test_moto_startMotors);
+    CU_add_test(start_stop, "Test start motors ", test_moto_startMotors);
     check_add_ok("Test test_moto_startMotors");
     
-    CU_add_test(start_stop, "test_moto_stopMotors ", test_moto_stopMotors);
+    CU_add_test(start_stop, "Test stop motors ", test_moto_stopMotors);
     check_add_ok("Test test_moto_stopMotors");
 
-/* added hover, go forward, backward, strafe_Right/Left motor tests by Bishare */
+/*added motor tests by Bishare Sufi all passed*/
 
-    CU_add_test(start_stop, "test_moto_hover ", test_moto_hover);
+    CU_add_test(start_stop, "Test moto hover ", test_moto_hover);
     check_add_ok("Test test_moto_hover"); 
 
-    CU_add_test(start_stop, "test go forward ", test_moto_goForward);
+    CU_add_test(start_stop, "Test go forward ", test_moto_goForward);
     check_add_ok("Test test_go_forward");
 
-    CU_add_test(start_stop, "test go backward ", test_moto_goBackward);
+    CU_add_test(start_stop, "Test go backward ", test_moto_goBackward);
     check_add_ok("Test test_go_backward");
 
-    CU_add_test(start_stop, "test strafeRight ", test_moto_strafeRight);
+    CU_add_test(start_stop, "Test strafeRight ", test_moto_strafeRight);
     check_add_ok("Test test_strafeRight");
     
-    CU_add_test(start_stop, "test strafeLeft ", test_moto_strafeLeft);
+    CU_add_test(start_stop, "Test strafeLeft ", test_moto_strafeLeft);
     check_add_ok("Test test_strafeLeft");
-    
 
+    CU_add_test(start_stop, "Test rotateLeft ", test_moto_rotateLeft);
+    check_add_ok("Test test_rotate_left");
+
+    CU_add_test(start_stop, "Test rotateRight ", test_moto_rotateRight);
+    check_add_ok("Test test_rotate_right");
+    
+    CU_add_test(start_stop, "Test increase all normal ", test_moto_increaseAllNormal);
+    check_add_ok("Test test_increase_all_normal");
+
+    CU_add_test(start_stop, "Test increase all panic ", test_moto_increaseAllPanic);
+    check_add_ok("Test test_increase_all_panic");
+
+    CU_add_test(start_stop, "Test decrease all normal ", test_moto_decreaseAllNormal);
+    check_add_ok("Test test_decrease_all_normal");
+
+    CU_add_test(start_stop, "Test decrease all panic ", test_moto_decreaseAllPanic);
+    check_add_ok("Test test_decrease_all_panic");
 
     CU_console_run_tests();
     CU_cleanup_registry();
+
 }
