@@ -21,8 +21,14 @@
 #define MSG_INCREASE_MASK	0x20
 
 //MESSAGE STATES
-# define  START_MOTOR 0x40
-# define  STOP_MOTOR 0x0
+# define START_MOTOR 0x40
+# define START_ID 0x01
+# define STOP_MOTOR 0x0
+# define STOP_ID 0x00
+# define CONTROL_ID 0x02
+# define SPECIAL_COMMAND_ID 0x03
+
+# define BAD_MESSAGE 0xf // when bits are not within the 0-255 range
 
 
 # define  INCREASE_REAR_MOTOR 0xA1
@@ -38,7 +44,7 @@
 # define  DECREASE_RIGHT_INCREASE_LEFT 0xEC
 # define  DECREASE_LEFT_INCREASE_RIGHT 0xCC
 
-# define  FORWARD 
+# define  FORWARD  0xE3
 # define  BACKWARD 0xC3
 # define  TURN_RIGHT 0xEC
 # define  TURN_LEFT 0xCE

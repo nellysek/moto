@@ -18,6 +18,7 @@
 #include "moto_msg_manipulation.h"
 #include "moto_msg_handler.h"
 #include "moto_driver_functions.h"
+#include "moto_state_definitions.h"
 
 //These definitions will go into a separate file later on.
 #define STOP 0x00
@@ -167,9 +168,9 @@ void specialMotorCommand(msg_pointer mp){
   printf("Special Motor Control Message!\n");
 #endif
 
-  if(BITFIELD_TO_CHAR(mp) == GO_FORWARD)
+  if(BITFIELD_TO_CHAR(mp) == FORWARD)
     goForward();
-  if(BITFIELD_TO_CHAR(mp) == GO_BACKWARD)
+  if(BITFIELD_TO_CHAR(mp) == BACKWARD)
     goBackward();
   
   return;
