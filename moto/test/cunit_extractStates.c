@@ -6,10 +6,19 @@
 /* run cunit with gcc cunit_extractStates.c ../src/exract_states.c -DPC -o cunit_extractStates  -lcunit */   /* ./cunit_extractStates */
 
 void test_motors(void){
-CU_ASSERT(generate_value_Con_motor(FORWARD) == FORWARD); /*asserts for generate fun */
+
+    /* generate_value_Con_motor(motor);
+     CU_ASSERT(FORWARD) == FORWARD);
+     CU_ASSERT(BACKWARD) == BACKWARD);
+     CU_ASSERT(TURN_LEFT) == TURN_LEFT);
+     CU_ASSERT(TURN_RIGHT) == TURN_RIGHT); */
+
+/*asserts for generate fun */
+CU_ASSERT(generate_value_Con_motor(FORWARD) == FORWARD);
 CU_ASSERT(generate_value_Con_motor(BACKWARD) == BACKWARD);
 CU_ASSERT(generate_value_Con_motor(TURN_LEFT) == TURN_LEFT);
 CU_ASSERT(generate_value_Con_motor(TURN_RIGHT) == TURN_RIGHT);
+
 }
 
 void test_check(char* msg){
