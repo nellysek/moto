@@ -217,76 +217,9 @@ void test_moto_decreaseAllPanic(void){
     frontPulse = MIN_PULSE_FRONT + (PANIC_STEP * 2);
     rearPulse = MIN_PULSE_REAR + (PANIC_STEP * 2);
      
-<<<<<<< HEAD
 }
 
-void test_moto_decreaseRightNormal(void){
 
-     moto_decreaseRightNormal();
-     CU_ASSERT(rightPulse == 94);
-
-}
-
-void test_moto_decreaseFrontNormal(void){
-
-     moto_decreaseFrontNormal();
-     CU_ASSERT(frontPulse == 94);
-
-}
-
-void test_moto_decreaseRearNormal(void){
-
-     moto_decreaseRearNormal();
-     CU_ASSERT(rearPulse == 94);
-
-}
-
-void test_moto_decreaseLeftPanic(void){
-
-     moto_decreaseLeftPanic();
-     CU_ASSERT(leftPulse == 90);
-
-}
-
-void test_moto_decreaseRightPanic(void){
-
-     moto_decreaseRightPanic();
-     CU_ASSERT(rightPulse == 90);
-
-}
-
-void test_moto_decreaseFrontPanic(void){
-
-     moto_decreaseFrontPanic();
-     CU_ASSERT(frontPulse == 90);
-
-}
-
-void test_moto_decreaseRearPanic(void){
-
-     moto_decreaseRearPanic();
-     CU_ASSERT(rearPulse == 90);
-
-}
-
-void test_printMotorStatus(void){
-
-     printMotorStatus();
-     CU_ASSERT(leftPulse == 90);
-     CU_ASSERT(rightPulse == 90);
-     CU_ASSERT(frontPulse == 90);
-     CU_ASSERT(rearPulse == 90);
-
-}
-
-void test_sendMsg(void){
-
-     sendMsg();
-     CU_ASSERT(leftPulse == 90);
-     CU_ASSERT(rightPulse == 90);
-     CU_ASSERT(frontPulse == 90);
-     CU_ASSERT(rearPulse == 90);
-=======
     temp_copy();
           
     moto_decreaseAllPanic();
@@ -308,7 +241,6 @@ void test_sendMsg(void){
     CU_ASSERT(leftPulse == MIN_PULSE_LEFT);
     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
     CU_ASSERT(rearPulse == MIN_PULSE_REAR);
->>>>>>> a879697fdf8dee003edb380eadc6d1762f3be787
 
 }
 
