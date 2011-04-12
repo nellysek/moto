@@ -1,12 +1,12 @@
 #include <stdio.h>
+#include "extract_states.h"
 /* state positions in bits*//*00000000*/
 /* @uthor Bishare Sufi*/
 /* unsigned char 1 byte = 8 bits the size of the message
 using hexa*/
 /* code for generating and extracting states */
-
-#include <stdio.h>
 /*state definition*/
+
 #define HOVER 0xC0
 #define FORWARD 0xE3
 #define TURN_RIGHT 0xEC
