@@ -31,8 +31,13 @@ F_CPU=16000000
 VERS="Arduino Portable Makefile [APM] version 1.2, dated 10-04-2011"
 
 PROG=test
-SRC=src/*.c
+TESTNAME=test_suite
+SRC=src/*.c  #test/cunit_stubs.c
+SRC2=include/*.cpp
+SRC3=test/cunit_stubs.c
+CUNIT_SRC=test/cunit_master_test_suite.c test/cunit_moto_msg_handler.h test/cunit_moto_msg_handler.c test/cunit_stubs.c
 OBJ=bin/*.o
+
 
 mega: MMCU=atmega2560
 mega: STK=stk500v2
@@ -55,7 +60,7 @@ test: EXT=x
 $(OBJ): $(SRC)
 
 	@ cd bin && \
-	avr-g++ -c -g -Os -w -fno-exceptions -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DARDUINO_DBG=22 -DF_CPU=$(F_CPU) -DARDUINO_DBG=22 -I../../include ../$(SRC)
+	avr-g++ -c -g -Os -w -fno-exceptions -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DARDUINO_DBG=22 -DF_CPU=$(F_CPU) -DARDUINO_DBG=22 -I../../include ../$(SRC) ../$(SRC2)
 	@ echo "Object files created"
 
 compile:
@@ -69,6 +74,9 @@ compile:
 test: clean $(OBJ) compile
 	@ echo "Test passed"
 
+testsuite: clean
+	gcc -DPC -DMASTER_TEST_SUITE $(CUNIT_SRC) $(SRC) -o bin/$(TESTNAME).x -lcunit
+
 install: $(OBJ) compile
 	@ cd bin && avr-objcopy -O srec $(PROG).elf $(PROG).rom
 #	checksize $(PROG).elf
@@ -80,7 +88,7 @@ mega: clean install
 uno: clean install
 
 pc: clean
-	gcc -DPC $(SRC) -o bin/$(PROG).x
+	gcc -DPC $(SRC) $(SRC3) -o bin/$(PROG).x
 
 clean:
 	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.x

@@ -1,52 +1,74 @@
-/*! @author Kristofer Hansson Aspman
+/*! @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
  * @file moto_interface.c
- * @version v0.01
+ * @version v0.02
  * @date 2011-04-10
- * @brief Contains the implementations of moto_init and moto_run
+ * @history 2011-04-26 - Major cleanup and restructuring of the code\n
+                        (Magnus, Björn, Kristofer)
+            2011-04-10 - Created first version
+                        (Magnus, Björn, Kristofer)
+ * @brief Contains the implementations of moto_init and moto_run.\n
+          Global variables set are: binary, mp, inputFromProto
  */
 
-#ifdef ARDUINO_DBG
-	#define ARDUINO
-#endif
-
-#ifdef ARDUINO
-   #include "WProgram.h"
-#elif defined PC
-   #include <stdio.h>
-#endif
-
+#include <stdint.h>
 /* #include "proto_mov_motor.h" */
 #include "moto_interface.h"
 #include "moto_msg_manipulation.h"
 #include "moto_driver_functions.h"
 #include "moto_msg_handler.h"
 
+#ifdef ARDUINO_DBG
+	#define ARDUINO
+#endif
+
+#ifdef ARDUINO
+    #include "../include/Servo.h"
+    #include "WProgram.h"
+#elif defined PC
+    #include <stdio.h>
+    #include "../test/cunit_stubs.h"
+#endif
+
 msg binary;
 msg_pointer mp;
-unsigned char inputFromProto; 
+uint8_t inputFromProto; 
 
 #ifdef ARDUINO
 /* Pins for testing */
 int ledPin = 13;
+/* Servo "objects" definitions for the ESCs */
+Servo escRight;
+Servo escLeft;
+Servo escFront;
+Servo escRear;
 #endif
 
-/*! @author Kristofer Hansson Aspman
+/*! @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
  * @brief The init function requested by the CFG. It is
           called when the drone boots up.
- * @version v0.01
+ * @version v0.02
  * @date 2011-04-10
  * @param none
  * @return int (0 if correctly carried out)
  */
 int moto_init(void){
-  moto_cyclesSinceLastMsg = 0;
-  mp = &binary;
 #ifdef ARDUINO
-  pinMode(ledPin, OUTPUT);
-  Serial.begin(9600); 
+    escRight.attach(9);
+    escLeft.attach(9);
+    escFront.attach(9);
+    escRear.attach(9);
+    escRight.writeMicroseconds(STOP_PULSE);
+    escLeft.writeMicroseconds(STOP_PULSE);
+    escFront.writeMicroseconds(STOP_PULSE);
+    escRear.writeMicroseconds(STOP_PULSE);
+    pinMode(ledPin, OUTPUT);
+    Serial.begin(9600); 
 #elif defined PC
         //------------------------------------------------------missing
 #endif
+
+  moto_cyclesSinceLastMsg = 0;
+  mp = &binary;
   return 0;
 }
 
