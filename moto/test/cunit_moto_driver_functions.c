@@ -249,20 +249,20 @@ void test_moto_decreaseRearPanic(void){
 void test_printMotorStatus(void){
 
      printMotorStatus();
-    // CU_ASSERT(printf(leftPulse) == 90);
-     CU_ASSERT(printf(rightPulse,leftPulse) == 90);
-    // CU_ASSERT(printf(frontPulse) == 90);
-     CU_ASSERT(printf(frontPulse,rearPulse) == 90);
+     CU_ASSERT(leftPulse == 90);
+     CU_ASSERT(rightPulse == 90);
+     CU_ASSERT(frontPulse == 90);
+     CU_ASSERT(rearPulse == 90);
 
 }
 
 void test_sendMsg(void){
 
      sendMsg();
-     CU_ASSERT(currentPulse(rightPulse) == 90);
-     CU_ASSERT(currentPulse(leftPulse) == 90);
-     CU_ASSERT(currentPulse(frontPulse) == 90);
-     CU_ASSERT(currentPulse(rearPulse) == 90);
+     CU_ASSERT(leftPulse == 90);
+     CU_ASSERT(rightPulse == 90);
+     CU_ASSERT(frontPulse == 90);
+     CU_ASSERT(rearPulse == 90);
 
 }
 
