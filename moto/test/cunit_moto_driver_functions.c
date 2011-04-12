@@ -134,6 +134,138 @@ void test_moto_decreaseAllPanic(void){
 
 }
 
+void test_moto_increaseLeftNormal(void){
+ 
+     moto_increaseLeftNormal();
+     CU_ASSERT(leftPulse == 92);
+
+}
+
+void test_moto_increaseRightNormal(void){
+
+     moto_increaseRightNormal();
+     CU_ASSERT(rightPulse == 92);
+
+}
+
+void test_moto_increaseFrontNormal(void){
+
+     moto_increaseFrontNormal();
+     CU_ASSERT(frontPulse == 92);
+
+}
+
+void test_moto_increaseRearNormal(void){
+
+     moto_increaseRearNormal();
+     CU_ASSERT(rearPulse == 92);
+
+}
+
+void test_moto_increaseLeftPanic(void){
+
+     moto_increaseLeftPanic();
+     CU_ASSERT(leftPulse == 96);
+
+}
+
+void test_moto_increaseRightPanic(void){
+
+     moto_increaseRightPanic();
+     CU_ASSERT(rightPulse == 96);
+
+}
+
+void test_moto_increaseFrontPanic(void){
+
+     moto_increaseFrontPanic();
+     CU_ASSERT(frontPulse == 96);
+
+}
+
+void test_moto_increaseRearPanic(void){
+
+     moto_increaseRearPanic();
+     CU_ASSERT(rearPulse == 96);
+
+}
+
+void test_moto_decreaseLeftNormal(void){
+
+     moto_decreaseLeftNormal();
+     CU_ASSERT(leftPulse == 94);
+     
+}
+
+void test_moto_decreaseRightNormal(void){
+
+     moto_decreaseRightNormal();
+     CU_ASSERT(rightPulse == 94);
+
+}
+
+void test_moto_decreaseFrontNormal(void){
+
+     moto_decreaseFrontNormal();
+     CU_ASSERT(frontPulse == 94);
+
+}
+
+void test_moto_decreaseRearNormal(void){
+
+     moto_decreaseRearNormal();
+     CU_ASSERT(rearPulse == 94);
+
+}
+
+void test_moto_decreaseLeftPanic(void){
+
+     moto_decreaseLeftPanic();
+     CU_ASSERT(leftPulse == 90);
+
+}
+
+void test_moto_decreaseRightPanic(void){
+
+     moto_decreaseRightPanic();
+     CU_ASSERT(rightPulse == 90);
+
+}
+
+void test_moto_decreaseFrontPanic(void){
+
+     moto_decreaseFrontPanic();
+     CU_ASSERT(frontPulse == 90);
+
+}
+
+void test_moto_decreaseRearPanic(void){
+
+     moto_decreaseRearPanic();
+     CU_ASSERT(rearPulse == 90);
+
+}
+
+void test_printMotorStatus(void){
+
+     printMotorStatus();
+    // CU_ASSERT(printf(leftPulse) == 90);
+     CU_ASSERT(printf(rightPulse,leftPulse) == 90);
+    // CU_ASSERT(printf(frontPulse) == 90);
+     CU_ASSERT(printf(frontPulse,rearPulse) == 90);
+
+}
+
+void test_sendMsg(void){
+
+     sendMsg();
+     CU_ASSERT(currentPulse(rightPulse) == 90);
+     CU_ASSERT(currentPulse(leftPulse) == 90);
+     CU_ASSERT(currentPulse(frontPulse) == 90);
+     CU_ASSERT(currentPulse(rearPulse) == 90);
+
+}
+
 
 /*check_add_ok() gives a print_out on the screen when a test suite or a test
 has been created, the char** passed to this function should always be in the 
@@ -174,7 +306,7 @@ int main(int argc){
     CU_add_test(start_stop, "Test stop motors ", test_moto_stopMotors);
     check_add_ok("Test test_moto_stopMotors");
 
-/*added motor tests by Bishare Sufi all passed*/
+/*added motor tests by Bishare Sufi*/
 
     CU_add_test(start_stop, "Test moto hover ", test_moto_hover);
     check_add_ok("Test test_moto_hover"); 
@@ -208,6 +340,60 @@ int main(int argc){
 
     CU_add_test(start_stop, "Test decrease all panic ", test_moto_decreaseAllPanic);
     check_add_ok("Test test_decrease_all_panic");
+
+    CU_add_test(start_stop, "Test increaseLeftNormal ", test_moto_increaseLeftNormal);
+    check_add_ok("Test test_increase_left_normal");
+
+    CU_add_test(start_stop,"Test increaseRightNormal",test_moto_increaseRightNormal);
+    check_add_ok("Test test_increase_right_normal");
+
+    CU_add_test(start_stop,"Test increaseFrontNormal",test_moto_increaseFrontNormal);
+    check_add_ok("Test test_increase_front_normal");
+
+    CU_add_test(start_stop,"Test increaseRearNormal ", test_moto_increaseRearNormal);
+    check_add_ok("Test test_increase_rear_normal"); 
+
+    CU_add_test(start_stop, "Test increaseLeftPanic ", test_moto_increaseLeftPanic);
+    check_add_ok("Test test_increase_left_panic");
+
+    CU_add_test(start_stop, "Test increaseRightPanic ", test_moto_increaseRightPanic);
+    check_add_ok("Test test_increase_right_panic");
+
+    CU_add_test(start_stop, "Test increaseFrontPanic ", test_moto_increaseFrontPanic);
+    check_add_ok("Test test_increase_front_panic");
+
+    CU_add_test(start_stop, "Test increaseRearPanic ", test_moto_increaseRearPanic);
+    check_add_ok("Test test_increase_rear_panic");   
+
+    CU_add_test(start_stop, "Test decreaseLeftNormal ", test_moto_decreaseLeftNormal);
+    check_add_ok("Test test_decrease_left_normal");
+
+    CU_add_test(start_stop, "Test decreaseRightNormal ", test_moto_decreaseRightNormal);
+    check_add_ok("Test test_decrease_right_normal");
+
+    CU_add_test(start_stop, "Test decreaseFrontNormal ", test_moto_decreaseFrontNormal);
+    check_add_ok("Test test_decrease_front_normal");
+
+    CU_add_test(start_stop, "Test decreaseRearNormal ", test_moto_decreaseRearNormal);
+    check_add_ok("Test test_decrease_rear_normal");
+
+    CU_add_test(start_stop, "Test decreaseLeftPanic ", test_moto_decreaseLeftPanic);
+    check_add_ok("Test test_decrease_left_panic");
+
+    CU_add_test(start_stop, "Test decreaseRightPanic ", test_moto_decreaseRightPanic);
+    check_add_ok("Test test_decrease_right_panic");
+
+    CU_add_test(start_stop, "Test decreaseFrontPanic ", test_moto_decreaseFrontPanic);
+    check_add_ok("Test test_decrease_front_panic");
+
+    CU_add_test(start_stop, "Test decreaseRearPanic ", test_moto_decreaseRearPanic);
+    check_add_ok("Test test_decrease_rear_panic");
+
+    CU_add_test(start_stop, "Test printMotorStatus ", test_printMotorStatus);
+    check_add_ok("Test test_print_motor_status");
+
+    CU_add_test(start_stop, "Test sendMsg ", test_sendMsg);
+    check_add_ok("Test test_send_MSG");
 
     CU_console_run_tests();
     CU_cleanup_registry();
