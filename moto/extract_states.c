@@ -90,7 +90,7 @@ void extract(unsigned char st){
 	printf("\n");
 }
 
-
+/*
 int main(void){
 
 	unsigned char st;
@@ -138,8 +138,8 @@ int main(void){
 	extract(st); // extract the value
 
 
-	/*st = generate_value_Pan_motor(PANIC_STATE | TURN_LEFT);// generate value
-	extract(st); // extract the value*/
+	//st = generate_value_Pan_motor(PANIC_STATE | TURN_LEFT);// generate value
+	//extract(st); // extract the value
         st = generate_value_Pan_motor(LEFT_MOTOR | INCREASE_MOTOR);// generate value
 	extract(st); // extract the value
         st = generate_value_Pan_motor(RIGHT_MOTOR | DECREASE_MOTOR);// generate value
@@ -148,12 +148,12 @@ int main(void){
 	extract(st); // extract the value
         st = generate_value_Pan_motor(RIGHT_MOTOR | INCREASE_MOTOR);// generate value
 	extract(st); // extract the value
-        /*st = generate_value_Pan_motor(TURN_RIGHT);// generate value
-        extract(st);// exract te value*/
+        //st = generate_value_Pan_motor(TURN_RIGHT);// generate value
+        //extract(st);// exract te value
 
 
-	/*st = generate_value_Pan_motor(FORWARD);// generate value
-        extract(st); // extract the value*/
+	//st = generate_value_Pan_motor(FORWARD);// generate value
+        //extract(st); // extract the value
         st = generate_value_Pan_motor(FRONT_MOTOR | INCREASE_MOTOR);// generate value
 	extract(st); // extract the value
         st = generate_value_Pan_motor(REAR_MOTOR | DECREASE_MOTOR);// generate value
@@ -162,9 +162,9 @@ int main(void){
         extract(st); // extract the value
         st = generate_value_Pan_motor(REAR_MOTOR | INCREASE_MOTOR);// generate value
 	extract(st); // extract the value
-       /* st = generate_value_Pan_motor(BACKWARD);
-        extract(st);// extract the value */
+       // st = generate_value_Pan_motor(BACKWARD);
+       // extract(st);// extract the value 
   
-}
+}*/
 
 
