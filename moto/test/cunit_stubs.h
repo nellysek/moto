@@ -17,16 +17,3 @@ unsigned int readMicroseconds(void);
 unsigned char attach(unsigned char pin);
 void analogWrite(int motor, uint16_t pulse);
 
-
-
-/* Following out commented methods are just here to remind me to implement
- * them later
- */
- 
-/*calib_motorFront(int value);
-
-calib_motorBack(int value);
-
-calib_motorLeft(int value);
-
-calib_motorRight(int value);*/

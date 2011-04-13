@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include "CUnit/CUnit.h"
 #include "cunit_stubs.h" /* test stubs to replace arduino functions */
+#include "cunit_master_test_suite.h"
 
 #include "../src/moto_driver_functions.h"
 /* 
@@ -243,6 +244,7 @@ void test_moto_decreaseAllPanic(void){
 
 }
 
+<<<<<<< HEAD
 /* @uthor Bishare Sufi */
 /* this code has been improved once */
 
@@ -454,6 +456,9 @@ void test_moto_rotateRight(void){
 
 }
 
+=======
+#ifndef MASTER_TEST_SUITE
+>>>>>>> b18dbc93f88e6dbf0819dc3d1e955caa1c831169
 /*
  * check_add_ok() gives a print_out on the screen when a test suite or a test
  * has been created, the char** passed to this function should always be in
@@ -566,3 +571,4 @@ int main(int argc){
     //CU_list_tests_to_file(); /* print out to xml-file */
     CU_cleanup_registry(); /* a call to a self explanatory function name ;)*/
 }
+#endif /* #ifndef MASTER_TEST_SUITE */

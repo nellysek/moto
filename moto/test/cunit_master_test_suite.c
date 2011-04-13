@@ -1,7 +1,9 @@
 #ifdef MASTER_TEST_SUITE
 
+#include <stdio.h>
 #include "CUnit/CUnit.h"
 #include "cunit_moto_msg_handler.h"
+#include "cunit_master_test_suite.h"
 
 /*check_add_ok() gives a print_out on the screen when a test suite or a test
 has been created, the char** passed to this function should always be in the 
@@ -31,8 +33,7 @@ int main(int argc){
 
 /***************************************************************************/
 
-/* add start stop motor tests */
-
+    /* msg_handler tests */
     CU_pSuite msg_handler = CU_add_suite("msg_handler",NULL,NULL);    
     check_add_ok("suite msg_handler");
 

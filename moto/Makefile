@@ -35,7 +35,7 @@ TESTNAME=test_suite
 SRC=src/*.c  #test/cunit_stubs.c
 SRC2=include/*.cpp
 SRC3=test/cunit_stubs.c
-CUNIT_SRC=test/cunit_master_test_suite.c test/cunit_moto_msg_handler.h test/cunit_moto_msg_handler.c test/cunit_stubs.c
+CUNIT_SRC=test/cunit_master_test_suite.c test/cunit_moto_msg_handler.h test/cunit_moto_msg_handler.c test/cunit_stubs.c test/cunit_moto_driver_functions.c
 OBJ=bin/*.o
 
 
