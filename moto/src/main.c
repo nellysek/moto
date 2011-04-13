@@ -3,5 +3,6 @@
 int main(void){
 
   moto_init();
+  moto_run();
 
 }

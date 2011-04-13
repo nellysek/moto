@@ -29,19 +29,16 @@ int ledPin = 13;
 int moto_init(void){
   mp = &binary;
 #ifdef ARDUINO
-  Serial.println("Exited Loop");
   pinMode(ledPin, OUTPUT);
   Serial.begin(9600); 
 #elif defined PC
 #endif
-
   return 0;
 }
 
 int moto_run(void){
 #ifdef ARDUINO
   binary = scanHexMsgSTDIN();
-  //  delay(200);
   examineID(mp);
   
   if(leftMotor > 0 && rightMotor > 0 && frontMotor > 0 && rearMotor > 0){
@@ -52,13 +49,11 @@ int moto_run(void){
   
   printMsg(mp);
   printMotorStatus();
-  //  delay(5000);
 #elif defined PC
     binary = scanHexMsgSTDIN();
     examineID(mp);
     printMsg(mp);
     printMotorStatus();
-
 #endif
   return 0;
 }
