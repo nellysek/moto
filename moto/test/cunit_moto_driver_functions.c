@@ -244,7 +244,6 @@ void test_moto_decreaseAllPanic(void){
 
 }
 
-<<<<<<< HEAD
 /* @uthor Bishare Sufi */
 /* this code has been improved once */
 
@@ -263,7 +262,8 @@ void test_moto_hover(void){
 
 void test_moto_goForward(void){
 
-/* this function seems the most tolerable to the test */
+/* this function seems the most tolerable to the test 
+   go forward function test */
      
      temp_copy();
      moto_goForward();
@@ -354,7 +354,8 @@ void test_moto_goForward(void){
 
 void test_moto_goBackward(void){
 
- /* this one is less tolerable, than the previously one */
+ /* this one is less tolerable, than the previously one 
+    go backward function test */
   
      
      temp_copy();
@@ -460,9 +461,8 @@ void test_moto_rotateRight(void){
 
 }
 
-=======
 #ifndef MASTER_TEST_SUITE
->>>>>>> b18dbc93f88e6dbf0819dc3d1e955caa1c831169
+
 /*
  * check_add_ok() gives a print_out on the screen when a test suite or a test
  * has been created, the char** passed to this function should always be in
@@ -554,7 +554,7 @@ int main(int argc){
         test_moto_strafeRight);
     check_add_ok("Test test_moto_strafeRight");
 
-/* add appropriate test functions to the suite */
+/* added appropriate test functions to the suite */
 
     CU_add_test(increase_decrease_all, "test_moto_strafeLeft",
         test_moto_strafeLeft);
