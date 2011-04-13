@@ -408,6 +408,8 @@ void test_moto_strafeLeft(void){
 }
 
 void test_moto_rotateLeft(void){
+
+     /* rotate to the left normal steps */
      
      temp_copy();
      moto_rotateLeft();
@@ -434,6 +436,8 @@ void test_moto_rotateRight(void){
 
      /* it seems like the size of the value doesn't affect the
         result of the test */
+     /* rotate to the right normal steps is possible to
+        alter the pulse according to the min and max pulses*/
 
      temp_copy();
      moto_rotateRight();
@@ -549,6 +553,8 @@ int main(int argc){
     CU_add_test(increase_decrease_all, "test_moto_strafeRight",
         test_moto_strafeRight);
     check_add_ok("Test test_moto_strafeRight");
+
+/* add appropriate test functions to the suite */
 
     CU_add_test(increase_decrease_all, "test_moto_strafeLeft",
         test_moto_strafeLeft);
