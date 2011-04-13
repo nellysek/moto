@@ -15,15 +15,6 @@ msg_pointer mp;
 #ifdef ARDUINO
 //Pins for testing
 int ledPin = 13;
-
-/* void setup(){ */
-/* } */
-
-/* void loop(){ */
-/*   Serial.println("Inside loop, before"); */
-/*   moto_run(); */
-/*   Serial.println("Inside loop"); */
-/* } */
 #endif
 
 int moto_init(void){
