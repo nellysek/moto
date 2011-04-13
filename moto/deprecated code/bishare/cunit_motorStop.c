@@ -3,10 +3,11 @@
 #include "CUnit/CUnit.h"
 #include "../src/motor_stop.h"
 
-/* run cunit with gcc cunit_motorStop.c ../src/motor_stop.c -DPC -o cunit_motorStop 
--lcunit */   /* ./cunit_motorStop */
+/* run cunit with gcc cunit_motorStop.c ../src/motor_stop.c -DPC -o 
+cunit_motorStop -lcunit */   /* ./cunit_motorStop */
+
 void test_motor(void){
-CU_ASSERT(stop() == 1); /* one assert test for stop fun */
+CU_ASSERT(stop() == 1); /* one assert test for stop function */
 }
 
 void test_check(char* msg){

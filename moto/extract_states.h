@@ -20,5 +20,5 @@ unsigned char generate_value_Con_motor(unsigned char motor);
 unsigned char generate_value_Pan_motor(unsigned char motor);
 
 
-
+/*int extract(unsigned char st);*/
 

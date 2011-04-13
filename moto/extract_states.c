@@ -3,7 +3,7 @@
 /* state positions in bits*//*00000000*/
 /* @uthor Bishare Sufi*/
 /* unsigned char 1 byte = 8 bits the size of the message
-using hexadecimal*/
+using hexa*/
 /* code for generating and extracting states */
 /*state definition*/
 
