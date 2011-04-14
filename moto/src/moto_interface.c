@@ -26,7 +26,7 @@
     #include "WProgram.h"
 #elif defined PC
     #include <stdio.h>
-    #include "../test/cunit_stubs.h"
+    #include "moto_stubs.h"
 #endif
 
 msg binary;
@@ -53,16 +53,16 @@ Servo escRear;
  */
 int moto_init(void){
 #ifdef ARDUINO
-    escRight.attach(9);
-    escLeft.attach(9);
-    escFront.attach(9);
-    escRear.attach(9);
+    Serial.begin(9600); 
+    escRight.attach(RIGHT_MOTOR);
+    escLeft.attach(LEFT_MOTOR);
+    escFront.attach(FRONT_MOTOR);
+    escRear.attach(REAR_MOTOR);
     escRight.writeMicroseconds(STOP_PULSE);
     escLeft.writeMicroseconds(STOP_PULSE);
     escFront.writeMicroseconds(STOP_PULSE);
     escRear.writeMicroseconds(STOP_PULSE);
     pinMode(ledPin, OUTPUT);
-    Serial.begin(9600); 
 #elif defined PC
         //------------------------------------------------------missing
 #endif
@@ -87,11 +87,6 @@ int moto_run(void){
     /* inputFromProto = read_motor(); */
     /* binary = INT_TO_BITFIELD(&inputFromProto); */
     binary = scanHexMsgSTDIN();
-
-#if defined ARDUINO_DBG
-    binary = scanHexMsgSTDIN();
-#endif
-
     if(BITFIELD_TO_CHAR(mp) == 0xf1)
     {
 #ifdef ARDUINO_DBG

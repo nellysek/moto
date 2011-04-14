@@ -34,7 +34,7 @@ PROG=test
 TESTNAME=test_suite
 SRC=src/*.c  #test/cunit_stubs.c
 SRC2=include/*.cpp
-SRC3=test/cunit_stubs.c
+#SRC3=test/cunit_stubs.c
 CUNIT_SRC=test/cunit_master_test_suite.c test/cunit_moto_msg_handler.h test/cunit_moto_msg_handler.c test/cunit_stubs.c test/cunit_moto_driver_functions.c
 OBJ=bin/*.o
 
@@ -75,7 +75,7 @@ test: clean $(OBJ) compile
 	@ echo "Test passed"
 
 testsuite: clean
-	gcc -DPC -DMASTER_TEST_SUITE $(CUNIT_SRC) $(SRC) -o bin/$(TESTNAME).x -lcunit
+	gcc -DPC -DMASTER_TEST_SUITE $(CUNIT_SRC) $(SRC) -o bin/$(TESTNAME).o -lcunit
 
 install: $(OBJ) compile
 	@ cd bin && avr-objcopy -O srec $(PROG).elf $(PROG).rom
@@ -88,10 +88,10 @@ mega: clean install
 uno: clean install
 
 pc: clean
-	gcc -DPC $(SRC) $(SRC3) -o bin/$(PROG).x
+	gcc -DPC $(SRC) -o bin/$(PROG).o # $(SRC3) 
 
 clean:
-	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.x
+	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.o
 	@ echo "Project cleaned"
 	
 version:

@@ -69,14 +69,18 @@ int examineID(msg_pointer mp){
 *	Description:	Optimized last one
 */
 
-void controlMotors(msg_pointer mp){
+/* changed this one to old since it's not followig the architecture 
+ * and the other one is easier to modify and work with
+ */
+
+void OLD_controlMotors(msg_pointer mp){
 	#ifdef ARDUINO_DBG
 		Serial.print("Standard Motor Control Message!\n");
 	#elif defined PC 
 		printf("Standard Motor Control Message!\n");
 	#endif
 
-	if(mp->left)		moto_left_motor(mp->increase,mp->panic);
+	if(mp->left)    moto_left_motor(mp->increase,mp->panic);
 	if(mp->right)	moto_right_motor(mp->increase,mp->panic);
 	if(mp->front)	moto_front_motor(mp->increase,mp->panic);
 	if(mp->rear)	moto_rear_motor(mp->increase,mp->panic);
@@ -85,7 +89,7 @@ void controlMotors(msg_pointer mp){
   /* This has been renamed to OLDxxxx to prevent duplication */
   /*  The new one Implemented up here */
 
-void OLD_controlMotors(msg_pointer mp){
+void controlMotors(msg_pointer mp){
 #ifdef ARDUINO_DBG
     Serial.print("Standard Motor Control Message!\n");
 #elif defined PC 
@@ -235,16 +239,18 @@ msg scanHexMsgSTDIN(void){
 #ifdef ARDUINO_DBG
 uint8_t serReadUnsignedChar(void)
 {
-    int i, numberOfAvailableInputs;
+    int8_t i;
+    int8_t numberOfAvailableInputs;
     uint8_t returnValue;
 
     /* Array to hold input bytes*/
     char inputBytes [7];                     
     char * inputBytesPtr = &inputBytes[0];
-
+    delay(3000);
     /* Check to see if there are any serial input*/
     if (Serial.available()>0)                
     {
+        Serial.println("serial available");
         /* Delay for terminal to finish transmitted, 5ms work great*/
         /* for 9600 baud (increase this number for slower baud)*/
         delay(5);                              
