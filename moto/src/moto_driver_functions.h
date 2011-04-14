@@ -18,12 +18,15 @@
 #define PANIC_INCREMENT 4
 #define NORMAL_DECREMENT -2
 #define PANIC_DECREMENT -4
+#define LEFT_MOTOR 6
+#define RIGHT_MOTOR 3
+#define FRONT_MOTOR 4
+#define REAR_MOTOR 5
 
-
-extern unsigned char rightMotor;
-extern unsigned char leftMotor;
-extern unsigned char frontMotor;
-extern unsigned char rearMotor;
+extern unsigned char rightPulse;
+extern unsigned char leftPulse;
+extern unsigned char frontPulse;
+extern unsigned char rearPulse;
 
 /*Motor pulse modification*/
 void _moto_startMotors(void);
