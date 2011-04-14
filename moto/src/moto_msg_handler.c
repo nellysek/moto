@@ -32,19 +32,19 @@
 /* #define GO_FORWARD 0xe3 // 1110 0011 */
 /* #define GO_BACKWARD 0xc3 // 1100 0011 */
 
-void examineID(msg_pointer mp){
+int examineID(msg_pointer mp){
 #ifdef ARDUINO
   Serial.print("ID is ");
   Serial.println(mp->ID, DEC);
   if (BITFIELD_TO_CHAR(mp) == BAD_MESSAGE){
     Serial.println("Bad message!");
-    return;
+    return 1;
   }
 #elif defined PC
   printf("ID is %d\n", mp->ID);
   if (BITFIELD_TO_CHAR(mp) == BAD_MESSAGE){
     printf("Bad message!\n");
-    return;
+    return 1;
   }
 #endif
 
@@ -64,7 +64,7 @@ void examineID(msg_pointer mp){
     break;
   }
 
-  return;
+  return 0;
 }
 
 void controlMotors(msg_pointer mp){

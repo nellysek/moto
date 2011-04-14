@@ -15,7 +15,7 @@
 #endif
 
 //Parser functions
-void examineID(msg_pointer mp);
+int examineID(msg_pointer mp);
 void controlMotors(msg_pointer mp);
 void specialMotorCommand(msg_pointer mp);
 msg scanHexMsgSTDIN(void);
