@@ -1,9 +1,9 @@
 /*@uthor Bishare_sufi*/
 #include <stdio.h>
 #include "CUnit/CUnit.h"
-#include "../src/motor_stop.h"
+#include "motor_stop.h"
 
-/* run cunit with gcc cunit_motorStop.c ../src/motor_stop.c -DPC -o 
+/* run cunit with gcc cunit_motorStop.c -o 
 cunit_motorStop -lcunit */   /* ./cunit_motorStop */
 
 void test_motor(void){
