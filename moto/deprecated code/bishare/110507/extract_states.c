@@ -3,10 +3,11 @@
 /* state positions in bits*//*00000000*/
 /* @uthor Bishare Sufi*/
 /* unsigned char 1 byte = 8 bits the size of the message
-using hexadecimal*/
+   using hexadecimal*/
 /* code for generating and extracting states */
-/* this code was created in the first sprint of the project, it is not used for 
-the project, because the group had different solutions and picked up one of them */  
+/* this code was created in the first sprint of the project, it is not used 
+   for the project, because the group had different solutions and picked up one 
+   of them */  
 
 #define HOVER 0xC0
 #define FORWARD 0xE3
@@ -23,24 +24,28 @@ the project, because the group had different solutions and picked up one of them
 #define REAR_MOTOR 0x1
 #define STOP_STATE 0x0
 
-unsigned char generate_value_Inc_motor(unsigned char motor){ // increase the speed
-   return motor | INCREASE_MOTOR; // | = motor together with INCREASE_MOTOR
+/* increase motor power function */
+unsigned char generate_value_Inc_motor(unsigned char motor){
+   return motor | INCREASE_MOTOR; /*motor together with INCREASE_MOTOR*/
 }
 
-unsigned char generate_value_Dec_motor(unsigned char motor){//decrease the speed
-   return motor | DECREASE_MOTOR; // | = motor together with DECREASE_MOTOR
+/* decrease motor power function */
+unsigned char generate_value_Dec_motor(unsigned char motor){
+   return motor | DECREASE_MOTOR; /*motor together with DECREASE_MOTOR*/
 }
 
+/* control motor function */
 unsigned char generate_value_Con_motor(unsigned char motor){
    return motor;
 }
 
-unsigned char generate_value_Pan_motor(unsigned char motor){//panic the speed
-   return motor | PANIC_STATE; // | = motor together with PANIC_MOTOR
+/* panic motor function */
+unsigned char generate_value_Pan_motor(unsigned char motor){
+   return motor | PANIC_STATE; /*motor together with PANIC_MOTOR*/
 }
 
 void extract(unsigned char st){
-        if(st == START_STATE){ // constant state 
+        if(st == START_STATE){ /*constant state*/ 
 		printf("Start State");
 	}
         else if(st == FORWARD){ 
@@ -89,81 +94,79 @@ void extract(unsigned char st){
 	printf("\n");
 }
 
-
 int main(void){
 
 	unsigned char st;
 
-	st = generate_value_Inc_motor(LEFT_MOTOR);// generate value
-	extract(st); // extract the value
-        st = generate_value_Inc_motor(RIGHT_MOTOR);// generate value
-	extract(st); // extract the value
-        st=generate_value_Inc_motor(LEFT_MOTOR | RIGHT_MOTOR);// here is the 
-	extract(st); // same, but | this means both together
+	st = generate_value_Inc_motor(LEFT_MOTOR);/* set state */
+	extract(st); /* extract state */
+        st = generate_value_Inc_motor(RIGHT_MOTOR);
+	extract(st);
+        st=generate_value_Inc_motor(LEFT_MOTOR | RIGHT_MOTOR);
+	extract(st); /* here is the same, but both together */
 
 
-	st = generate_value_Inc_motor(FRONT_MOTOR);// generate value
-	extract(st); // extract the value
-        st = generate_value_Inc_motor(REAR_MOTOR);// generate value
-	extract(st); // extract the value
-        st=generate_value_Inc_motor(FRONT_MOTOR | REAR_MOTOR);// here is the 
-	extract(st); // same, but | this means both together
+	st = generate_value_Inc_motor(FRONT_MOTOR);
+	extract(st); 
+        st = generate_value_Inc_motor(REAR_MOTOR);
+	extract(st); 
+        st=generate_value_Inc_motor(FRONT_MOTOR | REAR_MOTOR);
+	extract(st); 
 
 
-        st = generate_value_Dec_motor(LEFT_MOTOR);// generate value
-	extract(st); // extract the value
-        st = generate_value_Dec_motor(RIGHT_MOTOR);// generate value
-	extract(st); // extract the value
-        st =generate_value_Dec_motor(LEFT_MOTOR | RIGHT_MOTOR);// here is the 
-	extract(st); // same, but | this means both together
+        st = generate_value_Dec_motor(LEFT_MOTOR); /* set state */
+	extract(st); /* get state */
+        st = generate_value_Dec_motor(RIGHT_MOTOR);
+	extract(st); 
+        st =generate_value_Dec_motor(LEFT_MOTOR | RIGHT_MOTOR);
+	extract(st); /* here is the same, but both together */
 
 
-        st = generate_value_Dec_motor(FRONT_MOTOR);// generate value
-	extract(st); // extract the value
-        st = generate_value_Dec_motor(REAR_MOTOR);// generate value
-	extract(st); // extract the value
-        st =generate_value_Dec_motor(FRONT_MOTOR | REAR_MOTOR);// here is the 
-	extract(st); // same, but | this means both together
+        st = generate_value_Dec_motor(FRONT_MOTOR);
+	extract(st); 
+        st = generate_value_Dec_motor(REAR_MOTOR);
+	extract(st); 
+        st =generate_value_Dec_motor(FRONT_MOTOR | REAR_MOTOR); 
+	extract(st);
 
 
+        st = generate_value_Con_motor(FORWARD); /* set state */
+	extract(st); /* get state */
+        st = generate_value_Con_motor(BACKWARD);
+	extract(st); 
+        st = generate_value_Con_motor(TURN_LEFT);
+	extract(st); 
+        st = generate_value_Con_motor(TURN_RIGHT);
+	extract(st); 
 
-        st = generate_value_Con_motor(FORWARD);// generate value
-	extract(st); // extract the value
-        st = generate_value_Con_motor(BACKWARD);// generate value
-	extract(st); // extract the value
-        st = generate_value_Con_motor(TURN_LEFT);// generate value
-	extract(st); // extract the value
-        st = generate_value_Con_motor(TURN_RIGHT);// generate value
-	extract(st); // extract the value
 
-
-	st = generate_value_Pan_motor(LEFT_MOTOR);// generate value
-	extract(st); // extract the value
-        st = generate_value_Pan_motor(RIGHT_MOTOR);// generate value
-	extract(st); // extract the value
-        st = generate_value_Pan_motor(LEFT_MOTOR | RIGHT_MOTOR);// generate value
-	extract(st); // extract the value
-        st = generate_value_Pan_motor(FRONT_MOTOR);// generate value
-	extract(st); // extract the value
-        st = generate_value_Pan_motor(REAR_MOTOR);// generate value
-        extract(st);// exract the value
-        st = generate_value_Pan_motor(FRONT_MOTOR | REAR_MOTOR);// generate value
-	extract(st); // extract the value
+	st = generate_value_Pan_motor(LEFT_MOTOR); /* set state */
+	extract(st); /* extract state */
+        st = generate_value_Pan_motor(RIGHT_MOTOR);
+	extract(st); 
+        st = generate_value_Pan_motor(LEFT_MOTOR | RIGHT_MOTOR);
+	extract(st); 
+        st = generate_value_Pan_motor(FRONT_MOTOR);
+	extract(st);
+        st = generate_value_Pan_motor(REAR_MOTOR);
+        extract(st);
+        st = generate_value_Pan_motor(FRONT_MOTOR | REAR_MOTOR);
+	extract(st); 
         
 
 
-	st = generate_value_Pan_motor(LEFT_MOTOR | INCREASE_MOTOR);// generate value
-        extract(st); // extract the value
-        st = generate_value_Pan_motor(RIGHT_MOTOR | INCREASE_MOTOR);// generate value
-	extract(st); // extract the value
-        st = generate_value_Pan_motor(LEFT_MOTOR | RIGHT_MOTOR | INCREASE_MOTOR);// generate value
-	extract(st); // extract the value
-        st = generate_value_Pan_motor(FRONT_MOTOR | INCREASE_MOTOR);// generate value
-        extract(st); // extract the value
-        st = generate_value_Pan_motor(REAR_MOTOR | INCREASE_MOTOR);// generate value
-	extract(st); // extract the value
-        st = generate_value_Pan_motor(FRONT_MOTOR | REAR_MOTOR | INCREASE_MOTOR);//generate value
-        extract(st);// extract the value 
+	st = generate_value_Pan_motor(LEFT_MOTOR | INCREASE_MOTOR);
+        extract(st); 
+        st = generate_value_Pan_motor(RIGHT_MOTOR | INCREASE_MOTOR);
+	extract(st); 
+        st = generate_value_Pan_motor(LEFT_MOTOR | RIGHT_MOTOR | INCREASE_MOTOR);
+	extract(st); 
+        st = generate_value_Pan_motor(FRONT_MOTOR | INCREASE_MOTOR);
+        extract(st); 
+        st = generate_value_Pan_motor(REAR_MOTOR | INCREASE_MOTOR);
+	extract(st); 
+        st = generate_value_Pan_motor(FRONT_MOTOR | REAR_MOTOR | INCREASE_MOTOR);
+        extract(st); /* here is the same, but get both together */
   
 }
 

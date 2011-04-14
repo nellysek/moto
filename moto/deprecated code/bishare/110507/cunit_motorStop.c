@@ -4,7 +4,8 @@
 #include "motor_stop.h"
 
 /* run cunit with gcc cunit_motorStop.c -o 
-cunit_motorStop -lcunit */   /* ./cunit_motorStop */
+   cunit_motorStop -lcunit */   /* ./cunit_motorStop */
+/* when you compile this comment the main in motor_stop.c */
 
 void test_motor(void){
 CU_ASSERT(stop() == 1); /* one assert test for stop function */

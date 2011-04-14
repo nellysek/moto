@@ -4,15 +4,15 @@
 #include "extract_states.h"
 
 /* run cunit with gcc cunit_extractStates.c exract_states.c -o 
-cunit_extractStates  -lcunit */   /* ./cunit_extractStates */
+   cunit_extractStates  -lcunit */   /* ./cunit_extractStates */
 /* when you compile this comment the main in extract_states.c */
 
 void test_motors(void){
 
-/*asserts for generate function */
+/* asserts for generate function */
 /* I just wanted to check if it was possible to test my own code */
-/*asserts for 
-  generate function I just check if the code is reacting as expected*/
+/* asserts for 
+   generate function I just check if the code is reacting as expected*/
 
 CU_ASSERT(generate_value_Con_motor(FORWARD) == FORWARD); 
 CU_ASSERT(generate_value_Con_motor(BACKWARD) == BACKWARD);
