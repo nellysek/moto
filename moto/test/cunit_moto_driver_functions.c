@@ -1,55 +1,34 @@
-/*Created by Magnus Bergqvist*/sleep 
-/* compile with something like this:  gcc function.c -o function -lcunit */
+/*Created by Magnus Bergqvist*/
+/* compile with something like this:
+    gcc cunit_moto_driver_functions.c ../src/moto_driver_functions.c -DPC 
+    -o cunit_moto_driver_functions -lcunit
+*/
 
 #include <stdio.h>
 #include "CUnit/CUnit.h"
-#include "motorcontrol.h"
-
-/*plus_one is just a test function to use while building up the test suite*/
-int plus_one(int num){
-    if(num+1 > 0){
-        return num+1;
-    }
-    else{
-        return 0;
-    }
-}
+#include "../src/moto_driver_functions.h"
+/*this is where right- left- front- and rearPulse comes from as extern
+unsigned chars, originating from the tested .c-file*/
 
 /*test_increaseMotorPulse checks so that expected results are returned, even
 when it comes to the higher and lower limits of the spectra*/
-void test_increaseMotorPulse(void){
-    CU_ASSERT(increaseMotorPulse(1,0)==3);
-    CU_ASSERT(increaseMotorPulse(1,55)==58);
-    CU_ASSERT(increaseMotorPulse(1,252)==255);
-    CU_ASSERT(increaseMotorPulse(1,254)==255);
-    CU_ASSERT(increaseMotorPulse(1,255)==255);
+void test_moto_startMotors(void){
+
+    _moto_startMotors();
+    CU_ASSERT(rightPulse==40);
+    CU_ASSERT(leftPulse==40);
+    CU_ASSERT(frontPulse==40);
+    CU_ASSERT(rearPulse==40);
 }
 
-void test_increaseMotorPulseX2(void){
-    CU_ASSERT(increaseMotorPulseX2(1,0)==6);
-    CU_ASSERT(increaseMotorPulseX2(1,55)==61);
-    CU_ASSERT(increaseMotorPulseX2(1,249)==255);
-    CU_ASSERT(increaseMotorPulseX2(1,254)==255);
-    CU_ASSERT(increaseMotorPulseX2(1,255)==255);
+void test_moto_stopMotors(void){
+
+    _moto_stopMotors();
+    CU_ASSERT(rightPulse==0);
+    CU_ASSERT(leftPulse==0);
+    CU_ASSERT(frontPulse==0);
+    CU_ASSERT(rearPulse==0);
 }
-
-void test_decreaseMotorPulse(void){
-    CU_ASSERT(decreaseMotorPulse(1,0)==3);
-    CU_ASSERT(decreaseMotorPulse(1,3)==3);
-    CU_ASSERT(decreaseMotorPulse(1,2)==3);
-    CU_ASSERT(decreaseMotorPulse(1,55)==52);
-    CU_ASSERT(decreaseMotorPulse(1,255)==252);
-}
-
-void test_decreaseMotorPulseX2(void){
-    CU_ASSERT(decreaseMotorPulseX2(1,0)==3);
-    CU_ASSERT(decreaseMotorPulseX2(1,6)==3);
-    CU_ASSERT(decreaseMotorPulseX2(1,2)==3);
-    CU_ASSERT(decreaseMotorPulseX2(1,55)==49);
-    CU_ASSERT(decreaseMotorPulseX2(1,255)==249);
-}
-
-
 
 /*check_add_ok() gives a print_out on the screen when a test suite or a test
 has been created, the char** passed to this function should always be in the 
@@ -63,7 +42,6 @@ void check_add_ok(char* msg){
     }
     else{
         fprintf(stdout, "failed to create %s\n",msg);
-        break;
     }
 }
 
@@ -80,32 +58,19 @@ int main(int argc){
     }   
 
 /***************************************************************************/
-/* add motor control increase tests */
+/* add start stop motor tests */
 
-    CU_pSuite increase = CU_add_suite("increase_motor",NULL,NULL);    
-    check_add_ok("suite increase motor");
+    CU_pSuite start_stop = CU_add_suite("start_stop_motors",NULL,NULL);    
+    check_add_ok("suite start_stop_motors");
 
-    CU_add_test(increase, "TestIncreaseMotorPulse", test_increaseMotorPulse);
-    check_add_ok("test TestIncreaseMotorPulse");
+    CU_add_test(start_stop, "test_moto_startMotors", test_moto_startMotors);
+    check_add_ok("test test_moto_startMotors");
     
-    CU_add_test(increase, "TestIncreaseMotorPulseX2",
-        test_increaseMotorPulseX2);
-    check_add_ok("test TestIncreaseMotorPulseX2");
+    CU_add_test(start_stop, "test_moto_stopMotors",
+        test_moto_stopMotors);
+    check_add_ok("test test_moto_stopMotors");
     
-/***************************************************************************/
-/* add motor control decrease tests*/
 
-    CU_pSuite decrease = CU_add_suite("decrease_motor",NULL,NULL);    
-    check_add_ok("suite decrease motor");
-
-    CU_add_test(decrease, "TestDecreaseMotorPulse", test_decreaseMotorPulse);
-    check_add_ok("test TestDecreaseMotorPulse");
-    
-    CU_add_test(decrease, "TestDecreaseMotorPulseX2",
-        test_decreaseMotorPulseX2);
-    check_add_ok("test TestDecreaseMotorPulseX2");
-    
-/***************************************************************************/
 
     CU_console_run_tests();
     CU_cleanup_registry();
