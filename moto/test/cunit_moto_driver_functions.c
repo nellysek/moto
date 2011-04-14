@@ -3,7 +3,7 @@
  * @brief cunit tests for moto_driver_functions.c
  * @date 2011-04-25
  * @author Magnus Bergqvist
- * extent by @Bishare Sufi
+ * @extent by Bishare Sufi
  * @version 5
  * @history 2011-04-07 - created first draft \n
             2011-04-15 - adjusted it for new moto_driver_functions.c \n
