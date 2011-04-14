@@ -775,10 +775,10 @@ void test_moto_rotateRight(void){
      CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
      CU_ASSERT(rearPulse == rearP + NORMAL_STEP);
 
-     leftPulse == MIN_PULSE_LEFT + (NORMAL_STEP * 1400);
-     rightPulse == MIN_PULSE_RIGHT + (NORMAL_STEP * 1400);
-     frontPulse == MAX_PULSE_FRONT - (NORMAL_STEP * 1400);
-     rearPulse == MAX_PULSE_REAR - (NORMAL_STEP * 1400);
+     leftPulse == MIN_PULSE_LEFT + (NORMAL_STEP * 800);
+     rightPulse == MIN_PULSE_RIGHT + (NORMAL_STEP * 800);
+     frontPulse == MAX_PULSE_FRONT - (NORMAL_STEP * 800);
+     rearPulse == MAX_PULSE_REAR - (NORMAL_STEP * 800);
 
      temp_copy();
      moto_rotateRight();
