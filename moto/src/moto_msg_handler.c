@@ -51,10 +51,10 @@ int examineID(msg_pointer mp){
   switch(mp->ID){
 
   case START_ID:
-    _moto_startMotors();
+    moto_startMotors();
     break;
   case STOP_ID:
-    _moto_stopMotors();
+    moto_stopMotors();
     break;
   case CONTROL_ID:
     controlMotors(mp);
@@ -78,52 +78,52 @@ void controlMotors(msg_pointer mp){
   //i.e. panic mode not set.
   if (mp->increase == 1 && mp->panic == 0){
     if(mp->left == 1)
-      _moto_increaseLeftNormal();
+      moto_increaseLeftNormal();
     if(mp->right == 1)
-      _moto_increaseRightNormal();
+      moto_increaseRightNormal();
     if(mp->front == 1)
-      _moto_increaseFrontNormal();
+      moto_increaseFrontNormal();
     if(mp->rear == 1)
-      _moto_increaseRearNormal();
+      moto_increaseRearNormal();
   }
 
   //Panic increase of the motors
   //i.e. panic mode set.
   if (mp->increase == 1 && mp->panic == 1){
     if(mp->left == 1)
-      _moto_increaseLeftPanic();
+      moto_increaseLeftPanic();
     if(mp->right == 1)
-      _moto_increaseRightPanic();
+      moto_increaseRightPanic();
     if(mp->front == 1)
-      _moto_increaseFrontPanic();
+      moto_increaseFrontPanic();
     if(mp->rear == 1)
-      _moto_increaseRearPanic();
+      moto_increaseRearPanic();
   }
   
   //Normal decrease of the motors
   //i.e. panic mode not set.
   if (mp->increase == 0 && mp->panic == 0){
     if(mp->left == 1)
-      _moto_decreaseLeftNormal();
+      moto_decreaseLeftNormal();
     if(mp->right == 1)
-      _moto_decreaseRightNormal();
+      moto_decreaseRightNormal();
     if(mp->front == 1)
-      _moto_decreaseFrontNormal();
+      moto_decreaseFrontNormal();
     if(mp->rear == 1)
-      _moto_decreaseRearNormal();
+      moto_decreaseRearNormal();
   }
   
   //Panic decrease of the motors
   //i.e. panic mode set.
   if (mp->increase == 0 && mp->panic == 1){
     if(mp->left == 1)
-      _moto_decreaseLeftPanic();
+      moto_decreaseLeftPanic();
     if(mp->right == 1)
-      _moto_decreaseRightPanic();
+      moto_decreaseRightPanic();
     if(mp->front == 1)
-      _moto_decreaseFrontPanic();
+      moto_decreaseFrontPanic();
     if(mp->rear == 1)
-      _moto_decreaseRearPanic();
+      moto_decreaseRearPanic();
   }
   return;
 }
@@ -137,20 +137,20 @@ void specialMotorCommand(msg_pointer mp){
 
   switch(BITFIELD_TO_CHAR(mp)){
   case FORWARD:
-    _moto_goForward();
+    moto_goForward();
     break;
   case BACKWARD:
-    _moto_goBackward();
+    moto_goBackward();
     break;
   case TURN_LEFT:
     break;
   case TURN_RIGHT:
     break;
   case STRAFE_LEFT:
-    _moto_strafeLeft();
+    moto_strafeLeft();
     break;
   case STRAFE_RIGHT:
-    _moto_strafeRight();
+    moto_strafeRight();
     break;
   }
 

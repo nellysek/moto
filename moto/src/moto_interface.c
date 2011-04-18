@@ -32,7 +32,7 @@ int moto_run(void){
   binary = scanHexMsgSTDIN();
   examineID(mp);
   
-  if(leftMotor > 0 && rightMotor > 0 && frontMotor > 0 && rearMotor > 0){
+  if(leftPulse > 0 && rightPulse > 0 && frontPulse > 0 && rearPulse > 0){
     digitalWrite(13, HIGH);  
   }
   else
