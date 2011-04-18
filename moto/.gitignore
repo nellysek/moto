@@ -6,6 +6,7 @@
 src/main.c
 .gitignore~
 Makefile~
+README~
 ../Makefile
 ../Makefile-template
 ../src/blink.c
