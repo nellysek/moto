@@ -59,7 +59,7 @@ PRINTER("Starting all motors\n");
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
 #elif defined PC
-    printf("Starting all motors\n");
+    PRINTER("Starting all motors\n");
 #endif 
 }
 
