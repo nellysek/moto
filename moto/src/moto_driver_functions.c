@@ -34,11 +34,24 @@ unsigned char rearPulse;
  *              drone does not lift off.
  *
  */
+ 
+ 
+/*to be implemented.......maybe??*/
+#ifdef ARDUINO
+#define PRINTER(a)     Serial.print(a);
+#elif defined PC
+#define PRINTER(a)     printf(a);
+#endif 
+
+ 
 void moto_startMotors(void){
     leftPulse = 40;
     rightPulse = 40;
     frontPulse = 40;
     rearPulse = 40;
+    
+PRINTER("Starting all motors\n");
+
 #ifdef ARDUINO
     Serial.print("Starting all motors\n");
     analogWrite(RIGHT_MOTOR, rightPulse);
