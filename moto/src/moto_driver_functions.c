@@ -12,8 +12,8 @@
 #ifdef ARDUINO
     #include "WProgram.h"
 #elif defined PC
-    #include "../test/cunit_stubs.h"  //Glöm för fan inte denna!!!!!!!!!!!!!!
     #include <stdio.h>
+    #include "../test/cunit_stubs.h"
 #endif
 
 #include "moto_driver_functions.h"
@@ -25,6 +25,7 @@ unsigned char leftPulse;
 unsigned char frontPulse;
 unsigned char rearPulse;
 
+
 /**
  * Function:    void moto_startMotors()
  * Author(s):   Kristofer Hansson Aspman,
@@ -35,31 +36,21 @@ unsigned char rearPulse;
  *              drone does not lift off.
  *
  */
- 
- 
-/*to be implemented.......maybe??*/
-/*#ifdef ARDUINO
-#define PRINTER(a)     Serial.print(a);
-#elif defined PC
-#define PRINTER(a)     printf(a);
-#endif */
-
- 
 void moto_startMotors(void){
+#ifdef ARDUINO
+    Serial.print("Starting all motors\n");
+#elif defined PC
+    printf("\nStarting all motors\n");
+#endif 
+
     leftPulse = 40;
     rightPulse = 40;
     frontPulse = 40;
     rearPulse = 40;
-
-#ifdef ARDUINO
-    Serial.print("Starting all motors\n");
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
-#elif defined PC
-    printf("Starting all motors\n");
-#endif 
 }
 
 /**
@@ -72,46 +63,21 @@ void moto_startMotors(void){
  *
  */
 void moto_stopMotors(void){
+#ifdef ARDUINO
+    Serial.print("Stopping all motors\n");
+#elif defined PC
+    printf("\nStopping all motors\n");
+#endif
+
     rightPulse = 0;
     leftPulse = 0;
     frontPulse = 0;
     rearPulse = 0;
-#ifdef ARDUINO
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
-    Serial.print("Stopping all motors\n");
-#elif defined PC
-    printf("Stopping all motors\n");
-#endif
 }
-/**
- * Function:    void moto_hover()
- * Author(s):   Kristofer Hansson Aspman,
- *              Björn Eriksson
- *
- * Description: Sets all motors to the same pulse width
- *              where to drone shall stay in hover state
- *
- */
-void moto_hover(void){
-    rightPulse =90;
-    leftPulse = 90;
-    frontPulse = 90;
-    rearPulse = 90;
-#ifdef ARDUINO
-    analogWrite(RIGHT_MOTOR, rightPulse);
-    analogWrite(LEFT_MOTOR, leftPulse);
-    analogWrite(FRONT_MOTOR, frontPulse);
-    analogWrite(REAR_MOTOR, rearPulse);
-#elif defined PC
-    printf("Hovering\n");
-#endif    
-}
-
-
-
 
 /**
  * Function:    void moto_goForward()
@@ -175,37 +141,6 @@ void moto_strafeLeft(void){
     moto_increaseRightNormal();
     return;
 }
-
-/**
- * Functions:   moto_rotateLeft()
- *              moto_rotateRight()
- *
- * Author(s):   Kristofer Hansson Aspman,
- *              Björn Eriksson
- *
- * Description: Increases either right and
- *              left or front and rear
-*               motor and decreases
- *              the other in order to make
- *              the drone turn either righ or left.
- *              
- */
-
-void moto_rotateLeft(void){
-    moto_increaseLeftNormal();
-    moto_increaseRightNormal();
-    moto_decreaseFrontNormal();
-    moto_decreaseRearNormal();
-    return;
-}
-
-void moto_rotateRight(void){
-    moto_decreaseLeftNormal();
-    moto_decreaseRightNormal();
-    moto_increaseFrontNormal();
-    moto_increaseRearNormal();
-    return;
-}
 /**
  * Functions:   moto_increaseAll()
  *              moto_increaseAllPanic()
@@ -222,33 +157,39 @@ void moto_rotateRight(void){
  */
 
 void moto_increaseAllNormal(void){
-    rightPulse += NORMAL_INCREMENT;
-    leftPulse += NORMAL_INCREMENT;
-    frontPulse += NORMAL_INCREMENT;
-    rearPulse += NORMAL_INCREMENT;
 #ifdef ARDUINO
+    Serial.print("increases all motors\n");
+#elif defined PC
+    printf("\nincreases all motors\n");
+#endif
+    rightPulse = rightMotorCalibIncrease(rightPulse, NORMAL_INCREMENT);
+    leftPulse = leftMotorCalibIncrease(leftPulse, NORMAL_INCREMENT);
+    frontPulse = frontMotorCalibIncrease(frontPulse, NORMAL_INCREMENT);
+    rearPulse = rearMotorCalibIncrease(rearPulse, NORMAL_INCREMENT);
+    //rightPulse += NORMAL_INCREMENT;
+    //leftPulse += NORMAL_INCREMENT;
+    //frontPulse += NORMAL_INCREMENT;
+    //rearPulse += NORMAL_INCREMENT;
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
-#elif defined PC
-    printf("increases all motors\n");
-#endif
 }
 
 void moto_increaseAllPanic(void){
+#ifdef ARDUINO
+    Serial.print("increases all motors\n");
+#elif defined PC
+    printf("\nincreases all motors\n");
+#endif
     rightPulse += PANIC_INCREMENT;
     leftPulse += PANIC_INCREMENT;
     frontPulse += PANIC_INCREMENT;
     rearPulse += PANIC_INCREMENT;
-#ifdef ARDUINO
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
-#elif defined PC
-    printf("increases all motors\n");
-#endif
 }
 /**
  * Functions:   moto_decreaseAll()
@@ -266,33 +207,35 @@ void moto_increaseAllPanic(void){
  */
 
 void moto_decreaseAllNormal(void){
+#ifdef ARDUINO
+
+#elif defined PC
+    printf("\ndecreases all motors\n");
+#endif
     rightPulse += NORMAL_DECREMENT;
     leftPulse += NORMAL_DECREMENT;
     frontPulse += NORMAL_DECREMENT;
     rearPulse += NORMAL_DECREMENT;
-#ifdef ARDUINO
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
-#elif defined PC
-    printf("increases all motors\n");
-#endif
 }
 
 void moto_decreaseAllPanic(void){
+#ifdef ARDUINO
+    Serial.print("decreases all motors\n");
+#elif defined PC
+    printf("\ndecreases all motors\n");
+#endif
     rightPulse += PANIC_DECREMENT;
     leftPulse += PANIC_DECREMENT;
     frontPulse += PANIC_DECREMENT;
     rearPulse += PANIC_DECREMENT;
-#ifdef ARDUINO
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
-#elif defined PC
-    printf("increases all motors\n");
-#endif
 }
 /**
  * Functions:   moto_increaseRightNormal()
@@ -519,4 +462,102 @@ void printMotorStatus(void){
     printf("****************************\n");
     /* PC code end */
 #endif
+}
+
+/**
+ * Functions:    rightMotorCalibIncrease()
+ *               rightMotorCalibDecrease()
+ *               leftMotorCalibIncrease()
+ *               leftMotorCalibDecrease()
+ *               frontMotorCalibIncrease()
+ *               frontMotorCalibDecrease()
+ *               rearMotorCalibIncrease()
+ *               rearMotorCalibDecrease()
+ * Author(s):    Magnus Bergqvist
+ *
+ * Description:  Functions contains the logic
+ *               that determines and returns
+ *               a valid input value to the motors.
+ *               Returned values are calibrated for
+ *               the functions corresponding motor.
+ */
+ 
+unsigned char rightMotorCalibIncrease(unsigned char currentPulse,
+                                        unsigned char increment){
+    if((currentPulse + increment) > 255){
+        return 255;
+    }
+    else{
+        return (currentPulse + increment);
+    }
+}
+
+unsigned char rightMotorCalibDecrease(unsigned char currentPulse,
+                                        unsigned char decrement){
+        if((currentPulse + decrement) < 40){
+        return 40;
+    }
+    else{
+        return (currentPulse + decrement);
+    }
+}
+
+unsigned char leftMotorCalibIncrease(unsigned char currentPulse,
+                                        unsigned char increment){
+    if((currentPulse + increment) > 255){
+        return 255;
+    }
+    else{
+        return (currentPulse + increment);
+    }
+}
+
+unsigned char leftMotorCalibDecrease(unsigned char currentPulse,
+                                        unsigned char decrement){
+        if((currentPulse + decrement) < 40){
+        return 40;
+    }
+    else{
+        return (currentPulse + decrement);
+    }
+}
+
+unsigned char frontMotorCalibIncrease(unsigned char currentPulse,
+                                        unsigned char increment){
+    if((currentPulse + increment) > 255){
+        return 255;
+    }
+    else{
+        return (currentPulse + increment);
+    }
+}
+
+unsigned char frontMotorCalibDecrease(unsigned char currentPulse,
+                                        unsigned char decrement){
+        if((currentPulse + decrement) < 40){
+        return 40;
+    }
+    else{
+        return (currentPulse + decrement);
+    }
+}
+
+unsigned char rearMotorCalibIncrease(unsigned char currentPulse,
+                                        unsigned char increment){
+    if((currentPulse + increment) > 255){
+        return 255;
+    }
+    else{
+        return (currentPulse + increment);
+    }
+}
+
+unsigned char rearMotorCalibDecrease(unsigned char currentPulse,
+                                        unsigned char decrement){
+        if((currentPulse + decrement) < 40){
+        return 40;
+    }
+    else{
+        return (currentPulse + decrement);
+    }
 }

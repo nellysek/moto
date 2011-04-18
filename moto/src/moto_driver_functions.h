@@ -12,7 +12,6 @@
    #include "WProgram.h"
 #elif defined PC
    #include <stdio.h>
-   #include "../test/cunit_stubs.h"
 #endif
 
 #define NORMAL_INCREMENT 2
@@ -33,13 +32,10 @@ extern unsigned char rearPulse;
 /*Motor pulse modification*/
 void moto_startMotors(void);
 void moto_stopMotors(void);
-void moto_hover(void);
 void moto_goForward(void);
 void moto_goBackward(void);
 void moto_strafeRight(void);
 void moto_strafeLeft(void);
-void moto_rotateLeft(void);
-void moto_rotateRight(void)
 
 void moto_increaseAllNormal(void);
 void moto_increaseAllPanic(void);
@@ -66,3 +62,22 @@ void moto_decreaseFrontPanic(void);
 void moto_decreaseRearPanic(void);
 
 void printMotorStatus(void);
+
+/* Just to get som kind of f*cking structure, functions to be discussed */
+unsigned char rightMotorCalibIncrease(unsigned char currentPulse,
+                                        unsigned char increment);
+unsigned char rightMotorCalibDecrease(unsigned char currentPulse,
+                                        unsigned char decrement);
+unsigned char leftMotorCalibIncrease(unsigned char currentPulse,
+                                        unsigned char increment);
+unsigned char leftMotorCalibDecrease(unsigned char currentPulse,
+                                        unsigned char decrement);
+unsigned char frontMotorCalibIncrease(unsigned char currentPulse,
+                                        unsigned char increment);
+unsigned char frontMotorCalibDecrease(unsigned char currentPulse,
+                                        unsigned char decrement);
+unsigned char rearMotorCalibIncrease(unsigned char currentPulse,
+                                        unsigned char increment);
+unsigned char rearMotorCalibDecrease(unsigned char currentPulse,
+                                        unsigned char decrement);
+                                                                                
