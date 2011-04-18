@@ -32,6 +32,7 @@ extern unsigned char rearPulse;
 /*Motor pulse modification*/
 void moto_startMotors(void);
 void moto_stopMotors(void);
+void moto_hover(void);
 void moto_goForward(void);
 void moto_goBackward(void);
 void moto_strafeRight(void);
