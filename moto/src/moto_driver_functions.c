@@ -74,6 +74,32 @@ void moto_stopMotors(void){
     printf("Stopping all motors\n");
 #endif
 }
+/**
+ * Function:    void moto_hover()
+ * Author(s):   Kristofer Hansson Aspman,
+ *              Björn Eriksson
+ *
+ * Description: Sets all motors to the same pulse width
+ *              where to drone shall stay in hover state
+ *
+ */
+void moto_hover(void){
+    rightPulse =90;
+    leftPulse = 90;
+    frontPulse = 90;
+    rearPulse = 90;
+#ifdef ARDUINO
+    analogWrite(RIGHT_MOTOR, rightPulse);
+    analogWrite(LEFT_MOTOR, leftPulse);
+    analogWrite(FRONT_MOTOR, frontPulse);
+    analogWrite(REAR_MOTOR, rearPulse);
+#elif defined PC
+    printf("Hovering\n");
+#endif    
+}
+
+
+
 
 /**
  * Function:    void moto_goForward()
