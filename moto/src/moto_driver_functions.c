@@ -163,6 +163,37 @@ void moto_strafeLeft(void){
     moto_increaseRightNormal();
     return;
 }
+
+/**
+ * Functions:   moto_rotateLeft()
+ *              moto_rotateRight()
+ *
+ * Author(s):   Kristofer Hansson Aspman,
+ *              Björn Eriksson
+ *
+ * Description: Increases either right and
+ *              left or front and rear
+*               motor and decreases
+ *              the other in order to make
+ *              the drone turn either righ or left.
+ *              
+ */
+
+void moto_rotateLeft(void){
+    moto_increaseLeftNormal();
+    moto_increaseRightNormal();
+    moto_decreaseFrontNormal();
+    moto_decreaseRearNormal();
+    return;
+}
+
+void moto_rotateRight(void){
+    moto_decreaseLeftNormal();
+    moto_decreaseRightNormal();
+    moto_increaseFrontNormal();
+    moto_increaseRearNormal();
+    return;
+}
 /**
  * Functions:   moto_increaseAll()
  *              moto_increaseAllPanic()

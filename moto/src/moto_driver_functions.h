@@ -37,6 +37,8 @@ void moto_goForward(void);
 void moto_goBackward(void);
 void moto_strafeRight(void);
 void moto_strafeLeft(void);
+void moto_rotateLeft(void);
+void moto_rotateRight(void)
 
 void moto_increaseAllNormal(void);
 void moto_increaseAllPanic(void);
