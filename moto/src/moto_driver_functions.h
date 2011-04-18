@@ -12,6 +12,7 @@
    #include "WProgram.h"
 #elif defined PC
    #include <stdio.h>
+   #include "../test/cunit_stubs.h"
 #endif
 
 #define NORMAL_INCREMENT 2
