@@ -12,6 +12,7 @@
 #ifdef ARDUINO
     #include "WProgram.h"
 #elif defined PC
+    #include "../test/cunit_stubs.h"  //Glöm för fan inte denna!!!!!!!!!!!!!!
     #include <stdio.h>
 #endif
 
@@ -37,11 +38,11 @@ unsigned char rearPulse;
  
  
 /*to be implemented.......maybe??*/
-#ifdef ARDUINO
+/*#ifdef ARDUINO
 #define PRINTER(a)     Serial.print(a);
 #elif defined PC
 #define PRINTER(a)     printf(a);
-#endif 
+#endif */
 
  
 void moto_startMotors(void){
@@ -49,8 +50,6 @@ void moto_startMotors(void){
     rightPulse = 40;
     frontPulse = 40;
     rearPulse = 40;
-    
-PRINTER("Starting all motors\n");
 
 #ifdef ARDUINO
     Serial.print("Starting all motors\n");
@@ -59,7 +58,7 @@ PRINTER("Starting all motors\n");
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
 #elif defined PC
-    PRINTER("Starting all motors\n");
+    printf("Starting all motors\n");
 #endif 
 }
 
