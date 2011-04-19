@@ -1,4 +1,4 @@
-/**
+/** 
  * Module:       motor_controls.c
  * Author(s):    Kristofer Hansson Aspman,
  *               Björn Eriksson
