@@ -55,7 +55,7 @@ test: EXT=x
 $(OBJ): $(SRC)
 
 	@ cd bin && \
-	avr-g++ -c -g -Os -w -fno-exceptions -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DARDUINO=22 -DF_CPU=$(F_CPU) -DARDUINO=22 -I../../include ../$(SRC)
+	avr-g++ -c -g -Os -w -fno-exceptions -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DARDUINO_DBG=22 -DF_CPU=$(F_CPU) -DARDUINO_DBG=22 -I../../include ../$(SRC)
 	@ echo "Object files created"
 
 compile:
@@ -80,7 +80,7 @@ mega: clean install
 uno: clean install
 
 pc: clean
-	gcc -DPC $(SRC) -o bin/$(PROG).x
+	gcc -DPC_DBG $(SRC) -o bin/$(PROG).x
 
 clean:
 	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.x

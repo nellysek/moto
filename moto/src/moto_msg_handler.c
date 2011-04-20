@@ -1,17 +1,19 @@
-/**
- * Module:       moto_msg_handler.c
- * Author(s):    Kristofer Hansson Aspman
- *               Reza Moussavi
- *
- * Description:  Contains the functions that
- *               sets the pulse width of the
- *               different motors.
- *
+/*! @author Kristofer Hansson Aspman, Reza Moussavi
+ * @file moto_msg_handler.c
+ * @version v0.01
+ * @date 2011-04-14
+ * @brief Contains the functions that
+ *        sets the pulse width of the
+ *        different motors.
  */
+
+#ifdef ARDUINO_DBG
+	#define ARDUINO
+#endif
 
 #ifdef ARDUINO
    #include "WProgram.h"
-#elif defined PC
+#elif defined PC_DBG
    #include <stdio.h>
 #endif
 
@@ -33,20 +35,23 @@
 /* #define GO_BACKWARD 0xc3 // 1100 0011 */
 
 int examineID(msg_pointer mp){
-#ifdef ARDUINO
+#ifdef ARDUINO_DBG
   Serial.print("ID is ");
   Serial.println(mp->ID, DEC);
   if (BITFIELD_TO_CHAR(mp) == BAD_MESSAGE){
     Serial.println("Bad message!");
     return 1;
   }
-#elif defined PC
+#elif defined PC_DBG
   printf("ID is %d\n", mp->ID);
   if (BITFIELD_TO_CHAR(mp) == BAD_MESSAGE){
     printf("Bad message!\n");
     return 1;
   }
 #endif
+  if (BITFIELD_TO_CHAR(mp) == BAD_MESSAGE){
+    return 1;
+  }
 
   switch(mp->ID){
 
@@ -68,9 +73,9 @@ int examineID(msg_pointer mp){
 }
 
 void controlMotors(msg_pointer mp){
-#ifdef ARDUINO
+#ifdef ARDUINO_DBG
   Serial.print("Standard Motor Control Message!\n");
-#elif defined PC  
+#elif defined PC_DBG 
   printf("Standard Motor Control Message!\n");
 #endif
 
@@ -129,9 +134,9 @@ void controlMotors(msg_pointer mp){
 }
 
 void specialMotorCommand(msg_pointer mp){
-#ifdef ARDUINO
+#ifdef ARDUINO_DBG
   Serial.print("Special Motor Control Message!\n");
-#elif defined PC
+#elif defined PC_DBG
   printf("Special Motor Control Message!\n");
 #endif
 
@@ -174,7 +179,7 @@ void specialMotorCommand(msg_pointer mp){
 
 msg scanHexMsgSTDIN(void){
 
-#ifdef ARDUINO
+#ifdef ARDUINO_DBG
     unsigned char input;
     Serial.println("Enter the message in hexadecimal!");
   
@@ -188,7 +193,7 @@ msg scanHexMsgSTDIN(void){
     else
       return INT_TO_BITFIELD(0xf); //returns BAD_MSG
 
-#elif defined PC
+#elif defined PC_DBG
     unsigned int input;
     printf("Enter the message in hexadecimal: ");
     scanf("%x", &input);
@@ -212,8 +217,7 @@ msg scanHexMsgSTDIN(void){
  * Inspired by reply number 3 in this thread:
  * http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1191880368
  */
-
-#ifdef ARDUINO
+#ifdef ARDUINO_DBG
 unsigned char serReadUnsignedChar(void)
 {
   int i, numberOfAvailableInputs;
