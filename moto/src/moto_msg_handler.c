@@ -1,14 +1,13 @@
-/**
- * Module:       moto_msg_handler.c
- * Author(s):    Kristofer Hansson Aspman
- *               Reza Moussavi
- *
- * Description:  Contains the functions that
- *               sets the pulse width of the
- *               different motors.
- *
+/*! @author Kristofer Hansson Aspman, Reza Moussavi
+ * @file moto_msg_handler.c
+ * @version v0.01
+ * @date 2011-04-14
+ * @brief Contains the functions that
+ *        sets the pulse width of the
+ *        different motors.
  */
- #ifdef ARDUINO_DBG
+
+#ifdef ARDUINO_DBG
 	#define ARDUINO
 #endif
 
