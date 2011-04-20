@@ -3,7 +3,7 @@
 #endif
 #ifdef ARDUINO
    #include "WProgram.h"
-#elif defined PC_DBG
+#elif defined PC
    #include <stdio.h>
 #endif
 

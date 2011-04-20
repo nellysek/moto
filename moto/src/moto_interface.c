@@ -11,7 +11,7 @@
 
 #ifdef ARDUINO
    #include "WProgram.h"
-#elif defined PC_DBG
+#elif defined PC
    #include <stdio.h>
 #endif
 
@@ -41,7 +41,7 @@ int moto_init(void){
 #ifdef ARDUINO
   pinMode(ledPin, OUTPUT);
   Serial.begin(9600); 
-#elif defined PC_DBG
+#elif defined PC
         //------------------------------------------------------missing
 #endif
   return 0;
@@ -70,7 +70,7 @@ int moto_run(void){
   /* else */
   /*   digitalWrite(13, LOW); */
 
-#elif defined PC_DBG
+#elif defined PC
     binary = scanHexMsgSTDIN();
     examineID(mp);
     printMsg(mp);
