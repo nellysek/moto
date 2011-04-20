@@ -7,10 +7,12 @@
  *               by tools.c, motor_control.c and parser.c.
  *
  */
-
+#ifdef ARDUINO_DBG
+    #define ARDUINO
+#endif
 #ifdef ARDUINO
    #include "WProgram.h"
-#elif defined PC
+#elif defined PC_DBG
    #include <stdio.h>
 #endif
 
@@ -19,6 +21,6 @@ int examineID(msg_pointer mp);
 void controlMotors(msg_pointer mp);
 void specialMotorCommand(msg_pointer mp);
 msg scanHexMsgSTDIN(void);
-#ifdef ARDUINO
+#ifdef ARDUINO_DBG
 unsigned char serReadUnsignedChar(void);
 #endif

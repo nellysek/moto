@@ -1,6 +1,10 @@
+#ifdef ARDUINO_DBG
+	#define ARDUINO
+#endif
+
 #ifdef ARDUINO
    #include "WProgram.h"
-#elif defined PC
+#elif defined PC_DBG
    #include <stdio.h>
 #endif
 
@@ -22,16 +26,17 @@ int moto_init(void){
 #ifdef ARDUINO
   pinMode(ledPin, OUTPUT);
   Serial.begin(9600); 
-#elif defined PC
+#elif defined PC_DBG
+        //------------------------------------------------------missing
 #endif
   return 0;
 }
 
 int moto_run(void){
-#ifdef ARDUINO
+#ifdef ARDUINO_DBG
   binary = scanHexMsgSTDIN();
   examineID(mp);
-  
+
   if(leftPulse > 0 && rightPulse > 0 && frontPulse > 0 && rearPulse > 0){
     digitalWrite(13, HIGH);  
   }
@@ -40,7 +45,7 @@ int moto_run(void){
   
   printMsg(mp);
   printMotorStatus();
-#elif defined PC
+#elif defined PC_DBG
     binary = scanHexMsgSTDIN();
     examineID(mp);
     printMsg(mp);

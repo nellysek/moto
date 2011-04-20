@@ -6,17 +6,20 @@
  *               for handling the messages.
  *
  */
+ #ifdef ARDUINO_DBG
+	#define ARDUINO
+#endif
 
 #ifdef ARDUINO
    #include "WProgram.h"
-#elif defined PC
+#elif defined PC_DBG
    #include <stdio.h>
 #endif
 
 #include "moto_msg_manipulation.h"
 
 void printMsg(msg_pointer mp){
-#ifdef ARDUINO
+#ifdef ARDUINO_DBG
   Serial.println("***********************************\n");
   Serial.println("         Message Information\n");
   Serial.println("\nBits are:\n");
@@ -45,7 +48,7 @@ void printMsg(msg_pointer mp){
 
   Serial.println("***********************************");
 
-#elif defined PC //PC Code
+#elif defined PC_DBG//PC Code
   printf("***********************************\n");
   printf("         Message Information\n");
   printf("\nBits are:\n-ID: %d\n-Incr: %d\n-Panic: %d\n",
