@@ -57,7 +57,7 @@ int moto_init(void){
  */
 int moto_run(void){
 #ifdef ARDUINO
-  binary = INT_TO_BITFIELD(serReadUnsignedChar());
+  binary = INT_TO_BITFIELD(0xa3);
   examineID(mp);
 #endif
 #ifdef ARDUINO_DBG
