@@ -7,6 +7,8 @@
  *               by tools.c, motor_control.c and parser.c.
  *
  */
+#include <stdint.h>
+
 #ifdef ARDUINO_DBG
     #define ARDUINO
 #endif
@@ -22,5 +24,5 @@ void controlMotors(msg_pointer mp);
 void specialMotorCommand(msg_pointer mp);
 msg scanHexMsgSTDIN(void);
 #ifdef ARDUINO_DBG
-unsigned char serReadUnsignedChar(void);
+uint8_t serReadUnsignedChar(void);
 #endif

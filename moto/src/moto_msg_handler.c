@@ -7,6 +7,7 @@
  *        different motors.
  */
 
+#include <stdint.h>
 #ifdef ARDUINO_DBG
 	#define ARDUINO
 #endif
@@ -180,7 +181,7 @@ void specialMotorCommand(msg_pointer mp){
 msg scanHexMsgSTDIN(void){
 
 #ifdef ARDUINO_DBG
-    unsigned char input;
+    uint8_t input;
     Serial.println("Enter the message in hexadecimal!");
   
     input = serReadUnsignedChar();
@@ -202,13 +203,13 @@ msg scanHexMsgSTDIN(void){
 }
 
 /**
- * Function:     unsigned char serReadUnsignedChar()
+ * Function:     uint8_t serReadUnsignedChar()
  * Author(s):    Kristofer Hansson Aspman
  *
  * Description: Reads and stores what's currently in
  *              Serial.available() in an array.
  *              If there is something in the serial in
- *              then this is converted to an unsigned char
+ *              then this is converted to an uint8_t
  *              with the help of sscanf() and returned.
  *              Otherwise 0xf is returned which is
  *              considered a bad message.
@@ -218,10 +219,10 @@ msg scanHexMsgSTDIN(void){
  * http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1191880368
  */
 #ifdef ARDUINO_DBG
-unsigned char serReadUnsignedChar(void)
+uint8_t serReadUnsignedChar(void)
 {
   int i, numberOfAvailableInputs;
-  unsigned char returnValue;
+  uint8_t returnValue;
   char inputBytes [7];                     // Array to hold input bytes
   char * inputBytesPtr = &inputBytes[0];
   

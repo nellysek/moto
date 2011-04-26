@@ -3,6 +3,8 @@
 *  
 */
 
+#include <stdint.h>
+
 //Dont put any lines of code before this line
 #ifndef _STATE_DEFINITIONS_H_
 #define _STATE_DEFINITIONS_H_
@@ -68,13 +70,13 @@
 
 struct bits_type
 {
-	unsigned char ID :2;
-	unsigned char INCREASE :1;
-	unsigned char PANIC :1;
-	unsigned char RIGHT :1;
-	unsigned char LEFT :1;
-	unsigned char FRONT :1;
-	unsigned char REAR :1;
+	uint8_t ID :2;
+	uint8_t INCREASE :1;
+	uint8_t PANIC :1;
+	uint8_t RIGHT :1;
+	uint8_t LEFT :1;
+	uint8_t FRONT :1;
+	uint8_t REAR :1;
 };
 
 // Dont put any code after this line

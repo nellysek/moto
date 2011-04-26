@@ -10,7 +10,10 @@
  *
  */
  
- #ifdef ARDUINO_DBG
+#include "moto_driver_functions.h"
+#include <stdint.h>
+
+#ifdef ARDUINO_DBG
 	#define ARDUINO
 #endif
 
@@ -36,9 +39,6 @@
     #define PRINTOUT_2(a, b) printf(a, b)
     #define PRINTOUT_3(a, b, c) printf(a, b, c)
 #endif
-
-#include "moto_driver_functions.h"
-#include <stdint.h>
 
 /* These are the variables keeping track of the  */
 /* current state (pulse width) of each motor. */

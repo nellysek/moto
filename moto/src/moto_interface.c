@@ -4,7 +4,7 @@
  * @date 2011-04-10
  * @brief Contains the implementations of moto_init and moto_run
  */
-
+#include <stdint.h>
 #ifdef ARDUINO_DBG
 	#define ARDUINO
 #endif
@@ -23,7 +23,7 @@
 
 msg binary;
 msg_pointer mp;
-unsigned char inputFromProto; 
+uint8_t inputFromProto; 
 
 #ifdef ARDUINO
 /* Pins for testing */
