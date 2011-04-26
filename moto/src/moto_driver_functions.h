@@ -1,6 +1,7 @@
 /**
  * Module:       motor_control.h
  * Author(s):    Kristofer Hansson Aspman
+ *               Magnus Bergqvist
  *
  * Description:  The typedef of the bitfield struct and
  *               all the prototypes for the functions used
@@ -18,16 +19,46 @@
 #endif
 #include <stdint.h>
 
-#define NORMAL_INCREMENT 2
-#define PANIC_INCREMENT 4
-#define NORMAL_DECREMENT -2
-#define PANIC_DECREMENT -4
+#define NORMAL_STEP 1
+#define PANIC_STEP 2
+/* ETT FÖRSLAG TILL ÄNDRING AV KONSTANTER *////////////////////////////
+// #define NORMAL_INCREMENT 2
+// #define PANIC_INCREMENT 4
+// #define NORMAL_DECREMENT -2
+// #define PANIC_DECREMENT -4
 /* defines which "pin" in the arduino, to be changed further on */
 #define LEFT_MOTOR 6
 #define RIGHT_MOTOR 3
 #define FRONT_MOTOR 4
 #define REAR_MOTOR 5
 
+<<<<<<< .merge_file_AaeZvb
+=======
+
+/* defines maximum and minimum pulse width in µs for every motor */
+
+#define MIN_PULSE_FRONT 1000
+#define MAX_PULSE_FRONT 2000
+#define MIN_PULSE_REAR 1000
+#define MAX_PULSE_REAR 2000
+#define MIN_PULSE_LEFT 1000
+#define MAX_PULSE_LEFT 2000
+#define MIN_PULSE_RIGHT 1000
+#define MAX_PULSE_RIGHT 2000
+
+#define IDLE_SPEED 1100
+#define STOP_PULSE 1000
+
+
+/* defines hover speed pulse width in µs for every motor */
+/* TO BE DISCUSSED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   Should maybe use the same as MIN_PULSE_xxxx??
+#define HOVER_PULSE_RIGHT 1200
+#define HOVER_PULSE_LEFT 1200
+#define HOVER_PULSE_FRONT 1200
+#define HOVER_PULSE_REAR 1200 */
+
+>>>>>>> .merge_file_SqXRJb
 extern uint16_t rightPulse;
 extern uint16_t leftPulse;
 extern uint16_t frontPulse;
@@ -71,6 +102,18 @@ void moto_decreaseRearPanic(void);
 
 void printMotorStatus(void);
 
+<<<<<<< .merge_file_AaeZvb
+=======
+uint16_t rightMotorLimitIncrease(uint16_t currentPulse, uint16_t increment);
+uint16_t rightMotorLimitDecrease(uint16_t currentPulse, uint16_t decrement);
+uint16_t leftMotorLimitIncrease(uint16_t currentPulse, uint16_t increment);
+uint16_t leftMotorLimitDecrease(uint16_t currentPulse, uint16_t decrement);
+uint16_t frontMotorLimitIncrease(uint16_t currentPulse, uint16_t increment);
+uint16_t frontMotorLimitDecrease(uint16_t currentPulse, uint16_t decrement);
+uint16_t rearMotorLimitIncrease(uint16_t currentPulse, uint16_t increment);
+uint16_t rearMotorLimitDecrease(uint16_t currentPulse, uint16_t decrement);
+
+>>>>>>> .merge_file_SqXRJb
 struct pulses{
     uint16_t right;
     uint16_t left;
