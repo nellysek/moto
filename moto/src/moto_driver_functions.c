@@ -11,11 +11,7 @@
  */
  
  #ifdef ARDUINO_DBG
-<<<<<<< .merge_file_pZTNg8
-	#define ARDUNO
-=======
 	#define ARDUINO
->>>>>>> .merge_file_4BJ4Z7
 #endif
 
 #ifdef ARDUINO
@@ -62,34 +58,16 @@ uint16_t rearPulse;
  *
  */
 void moto_startMotors(void){
-<<<<<<< .merge_file_pZTNg8
-    leftPulse = 40;
-    rightPulse = 40;
-    frontPulse = 40;
-    rearPulse = 40;
-#ifdef ARDUINO_DBG
-    Serial.print("Starting all motors\n");
-#elif defined PC
-    printf("Starting all motors\n");
-#endif 
-
-#ifdef ARDUINO
-=======
     leftPulse = IDLE_SPEED;
     rightPulse = IDLE_SPEED;
     frontPulse = IDLE_SPEED;
     rearPulse = IDLE_SPEED;
->>>>>>> .merge_file_4BJ4Z7
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
-<<<<<<< .merge_file_pZTNg8
-#endif
-=======
 
     PRINTOUT_1("Starting all motors\n");
->>>>>>> .merge_file_4BJ4Z7
 }
 
 /**
@@ -102,24 +80,6 @@ void moto_startMotors(void){
  *
  */
 void moto_stopMotors(void){
-<<<<<<< .merge_file_pZTNg8
-    rightPulse = 0;
-    leftPulse = 0;
-    frontPulse = 0;
-    rearPulse = 0;
-#ifdef ARDUINO_BDG
-    Serial.print("Stopping all motors\n");
-#elif defined PC
-    printf("Stopping all motors\n");
-#endif
-
-#ifdef ARDUINO
-analogWrite(RIGHT_MOTOR, rightPulse);
-    analogWrite(LEFT_MOTOR, leftPulse);
-    analogWrite(FRONT_MOTOR, frontPulse);
-    analogWrite(REAR_MOTOR, rearPulse);
-#endif
-=======
     rightPulse = STOP_PULSE;
     leftPulse = STOP_PULSE;
     frontPulse = STOP_PULSE;
@@ -130,7 +90,6 @@ analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(REAR_MOTOR, rearPulse);
     
     PRINTOUT_1("Stopping all motors\n");
->>>>>>> .merge_file_4BJ4Z7
 }
 /**
  * Function:    void moto_hover()
@@ -142,19 +101,10 @@ analogWrite(RIGHT_MOTOR, rightPulse);
  *
  */
 void moto_hover(void){
-<<<<<<< .merge_file_pZTNg8
-    rightPulse =90;
-    leftPulse = 90;
-    frontPulse = 90;
-    rearPulse = 90;
-
-#ifdef ARDUINO
-=======
     rightPulse =1200;
     leftPulse = 1200;
     frontPulse = 1200;
     rearPulse = 1200;
->>>>>>> .merge_file_4BJ4Z7
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
@@ -276,19 +226,10 @@ void moto_rotateRight(void){
  */
 
 void moto_increaseAllNormal(void){
-<<<<<<< .merge_file_pZTNg8
-    rightPulse += NORMAL_INCREMENT;
-    leftPulse += NORMAL_INCREMENT;
-    frontPulse += NORMAL_INCREMENT;
-    rearPulse += NORMAL_INCREMENT;
-
-#ifdef ARDUINO
-=======
     rightPulse = rightMotorLimitIncrease(rightPulse, NORMAL_STEP);
     leftPulse = leftMotorLimitIncrease(leftPulse, NORMAL_STEP);
     frontPulse = frontMotorLimitIncrease(frontPulse, NORMAL_STEP);
     rearPulse = rearMotorLimitIncrease(rearPulse, NORMAL_STEP);
->>>>>>> .merge_file_4BJ4Z7
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
@@ -298,19 +239,10 @@ void moto_increaseAllNormal(void){
 }
 
 void moto_increaseAllPanic(void){
-<<<<<<< .merge_file_pZTNg8
-    rightPulse += PANIC_INCREMENT;
-    leftPulse += PANIC_INCREMENT;
-    frontPulse += PANIC_INCREMENT;
-    rearPulse += PANIC_INCREMENT;
-
-#ifdef ARDUINO
-=======
     rightPulse = rightMotorLimitIncrease(rightPulse, PANIC_STEP);
     leftPulse = leftMotorLimitIncrease(leftPulse, PANIC_STEP);
     frontPulse = frontMotorLimitIncrease(frontPulse, PANIC_STEP);
     rearPulse = rearMotorLimitIncrease(rearPulse, PANIC_STEP);
->>>>>>> .merge_file_4BJ4Z7
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
@@ -335,19 +267,10 @@ void moto_increaseAllPanic(void){
  */
 
 void moto_decreaseAllNormal(void){
-<<<<<<< .merge_file_pZTNg8
-    rightPulse += NORMAL_DECREMENT;
-    leftPulse += NORMAL_DECREMENT;
-    frontPulse += NORMAL_DECREMENT;
-    rearPulse += NORMAL_DECREMENT;
-
-#ifdef ARDUINO
-=======
     rightPulse = rightMotorLimitDecrease(rightPulse, NORMAL_STEP);
     leftPulse = leftMotorLimitDecrease(leftPulse, NORMAL_STEP);
     frontPulse = frontMotorLimitDecrease(frontPulse, NORMAL_STEP);
     rearPulse = rearMotorLimitDecrease(rearPulse, NORMAL_STEP);
->>>>>>> .merge_file_4BJ4Z7
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
@@ -357,19 +280,10 @@ void moto_decreaseAllNormal(void){
 }
 
 void moto_decreaseAllPanic(void){
-<<<<<<< .merge_file_pZTNg8
-    rightPulse += PANIC_DECREMENT;
-    leftPulse += PANIC_DECREMENT;
-    frontPulse += PANIC_DECREMENT;
-    rearPulse += PANIC_DECREMENT;
-
-#ifdef ARDUINO
-=======
     rightPulse = rightMotorLimitDecrease(rightPulse, PANIC_STEP);
     leftPulse = leftMotorLimitDecrease(leftPulse, PANIC_STEP);
     frontPulse = frontMotorLimitDecrease(frontPulse, PANIC_STEP);
     rearPulse = rearMotorLimitDecrease(rearPulse, PANIC_STEP);
->>>>>>> .merge_file_4BJ4Z7
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
@@ -401,13 +315,7 @@ void moto_decreaseAllPanic(void){
  */
     
 void moto_increaseLeftNormal(void){
-<<<<<<< .merge_file_pZTNg8
-    leftPulse += NORMAL_INCREMENT;
-
-#ifdef ARDUINO 
-=======
     leftPulse = leftMotorLimitIncrease(leftPulse, NORMAL_STEP);
->>>>>>> .merge_file_4BJ4Z7
     analogWrite(LEFT_MOTOR, leftPulse);
 
     PRINTOUT_1("Increasing left motor pulse\n");
@@ -584,8 +492,6 @@ void sendMsg(void){
     /* send(currentPulse);  not sure how the send funcrion till look like */
 }
 
-<<<<<<< .merge_file_pZTNg8
-=======
 /**
  * Functions:    rightMotorLimitIncrease()
  *               rightMotorLimitDecrease()
@@ -683,4 +589,3 @@ uint16_t rearMotorLimitDecrease(uint16_t currentPulse,
         return MIN_PULSE_REAR;
     }
 }
->>>>>>> .merge_file_4BJ4Z7

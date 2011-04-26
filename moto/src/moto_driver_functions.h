@@ -32,8 +32,6 @@
 #define FRONT_MOTOR 4
 #define REAR_MOTOR 5
 
-<<<<<<< .merge_file_AaeZvb
-=======
 
 /* defines maximum and minimum pulse width in µs for every motor */
 
@@ -58,7 +56,6 @@
 #define HOVER_PULSE_FRONT 1200
 #define HOVER_PULSE_REAR 1200 */
 
->>>>>>> .merge_file_SqXRJb
 extern uint16_t rightPulse;
 extern uint16_t leftPulse;
 extern uint16_t frontPulse;
@@ -102,8 +99,6 @@ void moto_decreaseRearPanic(void);
 
 void printMotorStatus(void);
 
-<<<<<<< .merge_file_AaeZvb
-=======
 uint16_t rightMotorLimitIncrease(uint16_t currentPulse, uint16_t increment);
 uint16_t rightMotorLimitDecrease(uint16_t currentPulse, uint16_t decrement);
 uint16_t leftMotorLimitIncrease(uint16_t currentPulse, uint16_t increment);
@@ -113,7 +108,6 @@ uint16_t frontMotorLimitDecrease(uint16_t currentPulse, uint16_t decrement);
 uint16_t rearMotorLimitIncrease(uint16_t currentPulse, uint16_t increment);
 uint16_t rearMotorLimitDecrease(uint16_t currentPulse, uint16_t decrement);
 
->>>>>>> .merge_file_SqXRJb
 struct pulses{
     uint16_t right;
     uint16_t left;
