@@ -15,9 +15,7 @@
    #include <stdio.h>
 #endif
 
-//#include "
-
-#include "proto_mov_motor.h"
+/* #include "proto_mov_motor.h" */
 #include "moto_interface.h"
 #include "moto_msg_manipulation.h"
 #include "moto_driver_functions.h"
@@ -62,8 +60,11 @@ int moto_init(void){
  */
 int moto_run(void){
     moto_cyclesSinceLastMsg++;
-    inputFromProto = read_motor();
-    binary = INT_TO_BITFIELD(&inputFromProto);
+    /* Uncomment to use together with protocol group */
+    /* Also uncomment the include file at the top of the file */
+    /* inputFromProto = read_motor(); */
+    /* binary = INT_TO_BITFIELD(&inputFromProto); */
+    binary = scanHexMsgSTDIN();
 
 #if defined ARDUINO_DBG
     binary = scanHexMsgSTDIN();
