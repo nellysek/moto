@@ -5,14 +5,17 @@
  * @brief Contains the implementations of moto_init and moto_run
  */
 #include <stdint.h>
+
 #ifdef ARDUINO_DBG
 	#define ARDUINO
 #endif
 
 #ifdef ARDUINO
-   #include "WProgram.h"
+    #include "../include/Servo.h"
+    #include "WProgram.h"
 #elif defined PC
-   #include <stdio.h>
+    #include <stdio.h>
+    #include "../test/cunit_stubs.h"
 #endif
 
 /* #include "proto_mov_motor.h" */
@@ -28,6 +31,11 @@ uint8_t inputFromProto;
 #ifdef ARDUINO
 /* Pins for testing */
 int ledPin = 13;
+/* Servo "objects" definitions for the ESCs */
+Servo escRight;
+Servo escLeft;
+Servo escFront;
+Servo escRear;
 #endif
 
 /*! @author Kristofer Hansson Aspman
@@ -39,14 +47,23 @@ int ledPin = 13;
  * @return int (0 if correctly carried out)
  */
 int moto_init(void){
-  moto_cyclesSinceLastMsg = 0;
-  mp = &binary;
 #ifdef ARDUINO
-  pinMode(ledPin, OUTPUT);
-  Serial.begin(9600); 
+    escRight.attach(9);
+    escLeft.attach(9);
+    escFront.attach(9);
+    escRear.attach(9);
+    escRight.writeMicroseconds(STOP_PULSE);
+    escLeft.writeMicroseconds(STOP_PULSE);
+    escFront.writeMicroseconds(STOP_PULSE);
+    escRear.writeMicroseconds(STOP_PULSE);
+    pinMode(ledPin, OUTPUT);
+    Serial.begin(9600); 
 #elif defined PC
         //------------------------------------------------------missing
 #endif
+
+  moto_cyclesSinceLastMsg = 0;
+  mp = &binary;
   return 0;
 }
 

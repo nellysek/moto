@@ -12,6 +12,7 @@
  
 #include "moto_driver_functions.h"
 #include <stdint.h>
+#include "moto_interface.h"
 
 #ifdef ARDUINO_DBG
 	#define ARDUINO
@@ -19,6 +20,7 @@
 
 #ifdef ARDUINO
     #include "WProgram.h"
+    #include "../include/Servo.h"
 #elif defined PC
     #include <stdio.h>
     #include"../test/cunit_stubs.h"
@@ -62,10 +64,17 @@ void moto_startMotors(void){
     rightPulse = IDLE_SPEED;
     frontPulse = IDLE_SPEED;
     rearPulse = IDLE_SPEED;
+#ifdef ARDUINO 
+    escRight.writeMicroseconds(rightPulse);
+    escLeft.writeMicroseconds(leftPulse);
+    escFront.writeMicroseconds(frontPulse);
+    escRear.writeMicroseconds(rearPulse);
+#elif defined PC
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
+#endif
 
     PRINTOUT_1("Starting all motors\n");
 }
@@ -84,10 +93,17 @@ void moto_stopMotors(void){
     leftPulse = STOP_PULSE;
     frontPulse = STOP_PULSE;
     rearPulse = STOP_PULSE;
+#ifdef ARDUINO 
+    escRight.writeMicroseconds(rightPulse);
+    escLeft.writeMicroseconds(leftPulse);
+    escFront.writeMicroseconds(frontPulse);
+    escRear.writeMicroseconds(rearPulse);
+#elif defined PC
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
+#endif
     
     PRINTOUT_1("Stopping all motors\n");
 }
@@ -101,14 +117,21 @@ void moto_stopMotors(void){
  *
  */
 void moto_hover(void){
-    rightPulse =1200;
-    leftPulse = 1200;
-    frontPulse = 1200;
-    rearPulse = 1200;
+    rightPulse = HOVER_PULSE_RIGHT;
+    leftPulse = HOVER_PULSE_LEFT;
+    frontPulse = HOVER_PULSE_FRONT;
+    rearPulse = HOVER_PULSE_REAR;
+#ifdef ARDUINO 
+    escRight.writeMicroseconds(rightPulse);
+    escLeft.writeMicroseconds(leftPulse);
+    escFront.writeMicroseconds(frontPulse);
+    escRear.writeMicroseconds(rearPulse);
+#elif defined PC
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
+#endif
 
     PRINTOUT_1("Hovering\n");    
 }
@@ -230,10 +253,17 @@ void moto_increaseAllNormal(void){
     leftPulse = leftMotorLimitIncrease(leftPulse, NORMAL_STEP);
     frontPulse = frontMotorLimitIncrease(frontPulse, NORMAL_STEP);
     rearPulse = rearMotorLimitIncrease(rearPulse, NORMAL_STEP);
+#ifdef ARDUINO 
+    escRight.writeMicroseconds(rightPulse);
+    escLeft.writeMicroseconds(leftPulse);
+    escFront.writeMicroseconds(frontPulse);
+    escRear.writeMicroseconds(rearPulse);
+#elif defined PC
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
+#endif
 
     PRINTOUT_1("increases all motors\n");
 }
@@ -243,10 +273,17 @@ void moto_increaseAllPanic(void){
     leftPulse = leftMotorLimitIncrease(leftPulse, PANIC_STEP);
     frontPulse = frontMotorLimitIncrease(frontPulse, PANIC_STEP);
     rearPulse = rearMotorLimitIncrease(rearPulse, PANIC_STEP);
+#ifdef ARDUINO 
+    escRight.writeMicroseconds(rightPulse);
+    escLeft.writeMicroseconds(leftPulse);
+    escFront.writeMicroseconds(frontPulse);
+    escRear.writeMicroseconds(rearPulse);
+#elif defined PC
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
+#endif
 
     PRINTOUT_1("increases all motors\n");
 }
@@ -271,10 +308,17 @@ void moto_decreaseAllNormal(void){
     leftPulse = leftMotorLimitDecrease(leftPulse, NORMAL_STEP);
     frontPulse = frontMotorLimitDecrease(frontPulse, NORMAL_STEP);
     rearPulse = rearMotorLimitDecrease(rearPulse, NORMAL_STEP);
+#ifdef ARDUINO 
+    escRight.writeMicroseconds(rightPulse);
+    escLeft.writeMicroseconds(leftPulse);
+    escFront.writeMicroseconds(frontPulse);
+    escRear.writeMicroseconds(rearPulse);
+#elif defined PC
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
+#endif
 
     PRINTOUT_1("decreases all motors\n");
 }
@@ -284,10 +328,17 @@ void moto_decreaseAllPanic(void){
     leftPulse = leftMotorLimitDecrease(leftPulse, PANIC_STEP);
     frontPulse = frontMotorLimitDecrease(frontPulse, PANIC_STEP);
     rearPulse = rearMotorLimitDecrease(rearPulse, PANIC_STEP);
+#ifdef ARDUINO 
+    escRight.writeMicroseconds(rightPulse);
+    escLeft.writeMicroseconds(leftPulse);
+    escFront.writeMicroseconds(frontPulse);
+    escRear.writeMicroseconds(rearPulse);
+#elif defined PC
     analogWrite(RIGHT_MOTOR, rightPulse);
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
+#endif
 
     PRINTOUT_1("decreases all motors\n");
 }
@@ -316,57 +367,82 @@ void moto_decreaseAllPanic(void){
     
 void moto_increaseLeftNormal(void){
     leftPulse = leftMotorLimitIncrease(leftPulse, NORMAL_STEP);
+#ifdef ARDUINO
+    escLeft.writeMicroseconds(leftPulse);
+#elif defined PC
     analogWrite(LEFT_MOTOR, leftPulse);
-
+#endif
     PRINTOUT_1("Increasing left motor pulse\n");
 }
 
 void moto_increaseRightNormal(void){
     rightPulse = rightMotorLimitIncrease(rightPulse, NORMAL_STEP);
+#ifdef ARDUINO
+    escRight.writeMicroseconds(rightPulse);
+#elif defined PC
     analogWrite(RIGHT_MOTOR, rightPulse);
-
+#endif
     PRINTOUT_1("Increasing right motor pulse\n");
 }
 
 void moto_increaseFrontNormal(void){
     frontPulse = frontMotorLimitIncrease(frontPulse, NORMAL_STEP);
+#ifdef ARDUINO
+    escFront.writeMicroseconds(frontPulse);
+#elif defined PC
     analogWrite(FRONT_MOTOR, frontPulse);
-
+#endif
     PRINTOUT_1("Increasing Front motor pulse\n");
 }
 
 void moto_increaseRearNormal(void){
     rearPulse = rearMotorLimitIncrease(rearPulse, NORMAL_STEP);
+#ifdef ARDUINO
+    escRear.writeMicroseconds(rearPulse);
+#elif defined PC
     analogWrite(REAR_MOTOR, rearPulse);
-
+#endif
     PRINTOUT_1("Increasing rear motor pulse\n");
 }
 
 void moto_increaseLeftPanic(void){
     leftPulse = leftMotorLimitIncrease(leftPulse, PANIC_STEP);
+#ifdef ARDUINO
+    escLeft.writeMicroseconds(leftPulse);
+#elif defined PC
     analogWrite(LEFT_MOTOR, leftPulse);
-
+#endif
     PRINTOUT_1("Increasing left motor pulse in PANIC!\n");
 }
 
 void moto_increaseRightPanic(void){
     rightPulse = rightMotorLimitIncrease(rightPulse, PANIC_STEP);
+#ifdef ARDUINO
+    escRight.writeMicroseconds(rightPulse);
+#elif defined PC
     analogWrite(RIGHT_MOTOR, rightPulse);
-
+#endif
     PRINTOUT_1("Increasing right motor pulse in PANIC!\n");
 }
 
 void moto_increaseFrontPanic(void){
     frontPulse = frontMotorLimitIncrease(frontPulse, PANIC_STEP);
+#ifdef ARDUINO
+    escFront.writeMicroseconds(frontPulse);
+#elif defined PC
     analogWrite(FRONT_MOTOR, frontPulse);
+#endif
 
     PRINTOUT_1("Increasing Front motor pulse in PANIC!\n");
 }
 
 void moto_increaseRearPanic(void){
     rearPulse = rearMotorLimitIncrease(rearPulse, PANIC_STEP);
+#ifdef ARDUINO
+    escRear.writeMicroseconds(rearPulse);
+#elif defined PC
     analogWrite(REAR_MOTOR, rearPulse);
-
+#endif
     PRINTOUT_1("Increasing rear motor pulse in PANIC!\n");
 }
 
@@ -393,57 +469,83 @@ void moto_increaseRearPanic(void){
 
 void moto_decreaseRightNormal(void){
     rightPulse = rightMotorLimitDecrease(rightPulse, NORMAL_STEP);
+#ifdef ARDUINO
+    escRight.writeMicroseconds(rightPulse);
+#elif defined PC
     analogWrite(RIGHT_MOTOR, rightPulse);
-
+#endif
     PRINTOUT_1("Decreasing right motor pulse\n");
 }
 
 void moto_decreaseLeftNormal(void){
     leftPulse = leftMotorLimitDecrease(leftPulse, NORMAL_STEP);
+#ifdef ARDUINO
+    escLeft.writeMicroseconds(leftPulse);
+#elif defined PC
     analogWrite(LEFT_MOTOR, leftPulse);
-
+#endif
     PRINTOUT_1("Decreasing left motor pulse\n");
 }
 
 void moto_decreaseFrontNormal(void){
     frontPulse = frontMotorLimitDecrease(frontPulse, NORMAL_STEP);
+#ifdef ARDUINO
+    escFront.writeMicroseconds(frontPulse);
+#elif defined PC
     analogWrite(FRONT_MOTOR, frontPulse);
+#endif
 
     PRINTOUT_1("Decreasing Front motor pulse\n");
 }
 
 void moto_decreaseRearNormal(void){
     rearPulse = rearMotorLimitDecrease(rearPulse, NORMAL_STEP);
+#ifdef ARDUINO
+    escRear.writeMicroseconds(rearPulse);
+#elif defined PC
     analogWrite(REAR_MOTOR, rearPulse);
-
+#endif
     PRINTOUT_1("Decreasing rear motor pulse\n");
 }
 
 void moto_decreaseLeftPanic(void){
     leftPulse = leftMotorLimitDecrease(leftPulse, PANIC_STEP);
+#ifdef ARDUINO
+    escLeft.writeMicroseconds(leftPulse);
+#elif defined PC
     analogWrite(LEFT_MOTOR, leftPulse);
-
+#endif
     PRINTOUT_1("Decreasing left motor pulse in PANIC!\n");
 }
 
 void moto_decreaseRightPanic(void){
     rightPulse = rightMotorLimitDecrease(rightPulse, PANIC_STEP);
+#ifdef ARDUINO
+    escRight.writeMicroseconds(rightPulse);
+#elif defined PC
     analogWrite(RIGHT_MOTOR, rightPulse);
-
+#endif
     PRINTOUT_1("Decreasing right motor pulse in PANIC!\n");
 }
 
 void moto_decreaseFrontPanic(void){
     frontPulse = frontMotorLimitDecrease(frontPulse, PANIC_STEP);
+#ifdef ARDUINO
+    escFront.writeMicroseconds(frontPulse);
+#elif defined PC
     analogWrite(FRONT_MOTOR, frontPulse);
+#endif
 
     PRINTOUT_1("Decreasing Front motor pulse in PANIC!\n");
 }
 
 void moto_decreaseRearPanic(void){
     rearPulse = rearMotorLimitDecrease(rearPulse, PANIC_STEP);
+#ifdef ARDUINO
+    escRear.writeMicroseconds(rearPulse);
+#elif defined PC
     analogWrite(REAR_MOTOR, rearPulse);
-
+#endif
     PRINTOUT_1("Decreasing rear motor pulse in PANIC!\n");
 }
 

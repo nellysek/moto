@@ -31,7 +31,9 @@ F_CPU=16000000
 VERS="Arduino Portable Makefile [APM] version 1.2, dated 10-04-2011"
 
 PROG=test
-SRC=src/*.c test/cunit_stubs.c
+SRC=src/*.c  #test/cunit_stubs.c
+SRC2=include/*.cpp
+SRC3=test/cunit_stubs.c
 OBJ=bin/*.o
 
 
@@ -56,7 +58,7 @@ test: EXT=x
 $(OBJ): $(SRC)
 
 	@ cd bin && \
-	avr-g++ -c -g -Os -w -fno-exceptions -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DARDUINO_DBG=22 -DF_CPU=$(F_CPU) -DARDUINO_DBG=22 -I../../include ../$(SRC)
+	avr-g++ -c -g -Os -w -fno-exceptions -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DARDUINO_DBG=22 -DF_CPU=$(F_CPU) -DARDUINO_DBG=22 -I../../include ../$(SRC) ../$(SRC2)
 	@ echo "Object files created"
 
 compile:
@@ -81,7 +83,7 @@ mega: clean install
 uno: clean install
 
 pc: clean
-	gcc -DPC $(SRC) -o bin/$(PROG).x
+	gcc -DPC $(SRC) $(SRC3) -o bin/$(PROG).x
 
 clean:
 	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.x
