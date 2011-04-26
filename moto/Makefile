@@ -80,7 +80,7 @@ mega: clean install
 uno: clean install
 
 pc: clean
-	gcc -DPC_DBG $(SRC) -o bin/$(PROG).x
+	gcc -DPC $(SRC) -o bin/$(PROG).x
 
 clean:
 	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.x

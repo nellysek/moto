@@ -12,7 +12,7 @@
 
 #ifdef ARDUINO
    #include "WProgram.h"
-#elif defined PC_DBG
+#elif defined PC
    #include <stdio.h>
 #endif
 
@@ -48,7 +48,7 @@ void printMsg(msg_pointer mp){
 
   Serial.println("***********************************");
 
-#elif defined PC_DBG//PC Code
+#elif defined PC//PC Code
   printf("***********************************\n");
   printf("         Message Information\n");
   printf("\nBits are:\n-ID: %d\n-Incr: %d\n-Panic: %d\n",

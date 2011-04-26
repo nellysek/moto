@@ -15,18 +15,19 @@
 
 #ifdef ARDUINO
     #include "WProgram.h"
-#elif defined PC_DBG
+#elif defined PC
     #include <stdio.h>
 #endif
 
 #include "moto_driver_functions.h"
+#include <stdint.h>
 
 /* These are the variables keeping track of the  */
 /* current state (pulse width) of each motor. */
-unsigned char rightPulse;
-unsigned char leftPulse;
-unsigned char frontPulse;
-unsigned char rearPulse;
+uint16_t rightPulse;
+uint16_t leftPulse;
+uint16_t frontPulse;
+uint16_t rearPulse;
 
 /**
  * Function:    void moto_startMotors()
@@ -45,7 +46,7 @@ void moto_startMotors(void){
     rearPulse = 40;
 #ifdef ARDUINO_DBG
     Serial.print("Starting all motors\n");
-#elif defined PC_DBG
+#elif defined PC
     printf("Starting all motors\n");
 #endif 
 
@@ -73,7 +74,7 @@ void moto_stopMotors(void){
     rearPulse = 0;
 #ifdef ARDUINO_BDG
     Serial.print("Stopping all motors\n");
-#elif defined PC_DBG
+#elif defined PC
     printf("Stopping all motors\n");
 #endif
 
@@ -104,7 +105,7 @@ void moto_hover(void){
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Hovering\n");
 #endif    
 }
@@ -231,7 +232,7 @@ void moto_increaseAllNormal(void){
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("increases all motors\n");
 #endif
 }
@@ -247,7 +248,7 @@ void moto_increaseAllPanic(void){
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("increases all motors\n");
 #endif
 }
@@ -277,7 +278,7 @@ void moto_decreaseAllNormal(void){
     analogWrite(LEFT_MOTOR, leftPulse);
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("increases all motors\n");
 #endif
 }
@@ -323,7 +324,7 @@ void moto_increaseLeftNormal(void){
 
 #ifdef ARDUINO 
     analogWrite(LEFT_MOTOR, leftPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Increasing left motor pulse\n");
 #endif
 
@@ -333,7 +334,7 @@ void moto_increaseRightNormal(void){
     rightPulse += NORMAL_INCREMENT;
 #ifdef ARDUINO 
     analogWrite(RIGHT_MOTOR, rightPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Increasing right motor pulse\n");
 #endif
 }
@@ -342,7 +343,7 @@ void moto_increaseFrontNormal(void){
     frontPulse += NORMAL_INCREMENT;
 #ifdef ARDUINO
     analogWrite(FRONT_MOTOR, frontPulse); 
-#elif defined PC_DBG
+#elif defined PC
     printf("Increasing Front motor pulse\n");
 #endif
 }
@@ -351,7 +352,7 @@ void moto_increaseRearNormal(void){
     rearPulse += NORMAL_INCREMENT;
 #ifdef ARDUINO 
     analogWrite(REAR_MOTOR, rearPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Increasing rear motor pulse\n");
 #endif
 }
@@ -360,7 +361,7 @@ void moto_increaseLeftPanic(void){
     leftPulse += PANIC_INCREMENT;
 #ifdef ARDUINO     
     analogWrite(LEFT_MOTOR, leftPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Increasing left motor pulse in PANIC!\n");
 #endif
 
@@ -370,7 +371,7 @@ void moto_increaseRightPanic(void){
     rightPulse += PANIC_INCREMENT;
 #ifdef ARDUINO 
     analogWrite(RIGHT_MOTOR, rightPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Increasing right motor pulse in PANIC!\n");
 #endif
 }
@@ -379,7 +380,7 @@ void moto_increaseFrontPanic(void){
     frontPulse += PANIC_INCREMENT;
 #ifdef ARDUINO 
     analogWrite(FRONT_MOTOR, frontPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Increasing Front motor pulse in PANIC!\n");
 #endif
 }
@@ -388,7 +389,7 @@ void moto_increaseRearPanic(void){
     rearPulse += PANIC_INCREMENT;
 #ifdef ARDUINO 
     analogWrite(REAR_MOTOR, rearPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Increasing rear motor pulse in PANIC!\n");
 #endif
 }
@@ -418,7 +419,7 @@ void moto_decreaseRightNormal(void){
     rightPulse += NORMAL_DECREMENT;
 #ifdef ARDUINO 
     analogWrite(RIGHT_MOTOR, rightPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Decreasing right motor pulse\n");
 #endif
 }
@@ -427,7 +428,7 @@ void moto_decreaseLeftNormal(void){
     leftPulse += NORMAL_DECREMENT;
 #ifdef ARDUINO     
     analogWrite(LEFT_MOTOR, leftPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Decreasing left motor pulse\n");
 #endif
 }
@@ -436,7 +437,7 @@ void moto_decreaseFrontNormal(void){
     frontPulse += NORMAL_DECREMENT;
 #ifdef ARDUINO 
     analogWrite(FRONT_MOTOR, frontPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Decreasing Front motor pulse\n");
 #endif
 }
@@ -445,7 +446,7 @@ void moto_decreaseRearNormal(void){
     rearPulse += NORMAL_DECREMENT;
 #ifdef ARDUINO 
     analogWrite(REAR_MOTOR, rearPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Decreasing rear motor pulse\n");
 #endif
 }
@@ -454,7 +455,7 @@ void moto_decreaseLeftPanic(void){
     leftPulse += PANIC_DECREMENT;
 #ifdef ARDUINO 
     analogWrite(LEFT_MOTOR, leftPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Decreasing left motor pulse in PANIC!\n");
 #endif
 }
@@ -463,7 +464,7 @@ void moto_decreaseRightPanic(void){
     rightPulse += PANIC_DECREMENT;
 #ifdef ARDUINO 
     analogWrite(RIGHT_MOTOR, rightPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Decreasing right motor pulse in PANIC!\n");
 #endif
 }
@@ -472,7 +473,7 @@ void moto_decreaseFrontPanic(void){
     frontPulse += PANIC_DECREMENT;
 #ifdef ARDUINO 
     analogWrite(FRONT_MOTOR, frontPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Decreasing Front motor pulse in PANIC!\n");
 #endif
 }
@@ -481,7 +482,7 @@ void moto_decreaseRearPanic(void){
     rearPulse += PANIC_DECREMENT;
 #ifdef ARDUINO 
     analogWrite(REAR_MOTOR, rearPulse);
-#elif defined PC_DBG
+#elif defined PC
     printf("Decreasing rear motor pulse in PANIC!\n");
 #endif
 }
@@ -514,7 +515,7 @@ void printMotorStatus(void){
     Serial.println(rearPulse, DEC);
     Serial.println("****************************");
     /* Arduino code end */
-#elif defined PC_DBG
+#elif defined PC
     /* PC code begin */
     printf("****************************\n");
     printf("Current status of the motors\n\n");
@@ -524,3 +525,10 @@ void printMotorStatus(void){
     /* PC code end */
 #endif
 }
+
+void sendMsg(void){
+    struct pulses currentPulse = 
+    {rightPulse, leftPulse, frontPulse, rearPulse};
+    /* send(currentPulse);  not sure how the send funcrion till look like */
+}
+

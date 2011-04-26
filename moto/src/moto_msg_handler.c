@@ -13,7 +13,7 @@
 
 #ifdef ARDUINO
    #include "WProgram.h"
-#elif defined PC_DBG
+#elif defined PC
    #include <stdio.h>
 #endif
 
@@ -42,7 +42,7 @@ int examineID(msg_pointer mp){
     Serial.println("Bad message!");
     return 1;
   }
-#elif defined PC_DBG
+#elif defined PC
   printf("ID is %d\n", mp->ID);
   if (BITFIELD_TO_CHAR(mp) == BAD_MESSAGE){
     printf("Bad message!\n");
@@ -75,7 +75,7 @@ int examineID(msg_pointer mp){
 void controlMotors(msg_pointer mp){
 #ifdef ARDUINO_DBG
   Serial.print("Standard Motor Control Message!\n");
-#elif defined PC_DBG 
+#elif defined PC 
   printf("Standard Motor Control Message!\n");
 #endif
 
@@ -136,7 +136,7 @@ void controlMotors(msg_pointer mp){
 void specialMotorCommand(msg_pointer mp){
 #ifdef ARDUINO_DBG
   Serial.print("Special Motor Control Message!\n");
-#elif defined PC_DBG
+#elif defined PC
   printf("Special Motor Control Message!\n");
 #endif
 
@@ -193,7 +193,7 @@ msg scanHexMsgSTDIN(void){
     else
       return INT_TO_BITFIELD(0xf); //returns BAD_MSG
 
-#elif defined PC_DBG
+#elif defined PC
     unsigned int input;
     printf("Enter the message in hexadecimal: ");
     scanf("%x", &input);
