@@ -1,10 +1,21 @@
-/*! @author Kristofer Hansson Aspman
+/*! @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
  * @file moto_interface.c
- * @version v0.01
+ * @version v0.02
  * @date 2011-04-10
- * @brief Contains the implementations of moto_init and moto_run
+ * @history 2011-04-26 - Major cleanup and restructuring of the code\n
+                        (Magnus, Björn, Kristofer)
+            2011-04-10 - Created first version
+                        (Magnus, Björn, Kristofer)
+ * @brief Contains the implementations of moto_init and moto_run.\n
+          Global variables set are: binary, mp, inputFromProto
  */
+
 #include <stdint.h>
+/* #include "proto_mov_motor.h" */
+#include "moto_interface.h"
+#include "moto_msg_manipulation.h"
+#include "moto_driver_functions.h"
+#include "moto_msg_handler.h"
 
 #ifdef ARDUINO_DBG
 	#define ARDUINO
@@ -17,12 +28,6 @@
     #include <stdio.h>
     #include "../test/cunit_stubs.h"
 #endif
-
-/* #include "proto_mov_motor.h" */
-#include "moto_interface.h"
-#include "moto_msg_manipulation.h"
-#include "moto_driver_functions.h"
-#include "moto_msg_handler.h"
 
 msg binary;
 msg_pointer mp;
@@ -38,10 +43,10 @@ Servo escFront;
 Servo escRear;
 #endif
 
-/*! @author Kristofer Hansson Aspman
+/*! @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
  * @brief The init function requested by the CFG. It is
           called when the drone boots up.
- * @version v0.01
+ * @version v0.02
  * @date 2011-04-10
  * @param none
  * @return int (0 if correctly carried out)
