@@ -31,8 +31,9 @@ F_CPU=16000000
 VERS="Arduino Portable Makefile [APM] version 1.2, dated 10-04-2011"
 
 PROG=test
-SRC=src/*.c
+SRC=src/*.c test/*.c
 OBJ=bin/*.o
+
 
 mega: MMCU=atmega2560
 mega: STK=stk500v2
