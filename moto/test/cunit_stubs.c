@@ -10,6 +10,7 @@
             the software.
  */
 #include <stdio.h>
+#include <stdint.h>
 #include "cunit_stubs.h"
 #include "../src/moto_driver_functions.h"
 
@@ -29,7 +30,7 @@ unsigned char attach(unsigned char pin){
 }
 
 /* analogWrite from arduino standard libraries, used for ordinary pwm out */
-void analogWrite(int motor, unsigned char pulse){
+void analogWrite(int motor, uint16_t pulse){
     
     if(motor == LEFT_MOTOR){
         fprintf(stdout, "\nLEFT_MOTOR received %d\n", pulse);

@@ -10,10 +10,12 @@
             arduino library function that is called within the software
  */
 
+#include <stdint.h>
+
 void writeMicroseconds(unsigned char value);
 unsigned int readMicroseconds(void);
 unsigned char attach(unsigned char pin);
-void analogWrite(int motor, unsigned char pulse);
+void analogWrite(int motor, uint16_t pulse);
 
 
 
