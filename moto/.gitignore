@@ -17,6 +17,7 @@ README~
 *.c~
 *.c#
 *.map
+test/*.x
 
 # Directories
 #################

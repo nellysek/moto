@@ -35,7 +35,7 @@ TESTNAME=test_suite
 SRC=src/*.c  #test/cunit_stubs.c
 SRC2=include/*.cpp
 SRC3=test/cunit_stubs.c
-CUNIT_SRC=test/*.c
+CUNIT_SRC=test/cunit_master_test_suite.c test/cunit_moto_msg_handler.h test/cunit_moto_msg_handler.c test/cunit_stubs.c
 OBJ=bin/*.o
 
 
@@ -75,7 +75,7 @@ test: clean $(OBJ) compile
 	@ echo "Test passed"
 
 testsuite: clean
-	gcc -DPC $(CUNIT_SRC) $(SRC) -o bin/$(TESTNAME).x -lcunit
+	gcc -DPC -DMASTER_TEST_SUITE $(CUNIT_SRC) $(SRC) -o bin/$(TESTNAME).x -lcunit
 
 install: $(OBJ) compile
 	@ cd bin && avr-objcopy -O srec $(PROG).elf $(PROG).rom
