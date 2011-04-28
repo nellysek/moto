@@ -242,6 +242,7 @@ void test_moto_decreaseAllPanic(void){
 
 }
 
+#ifndef MASTER_TEST_SUITE
 /*
  * check_add_ok() gives a print_out on the screen when a test suite or a test
  * has been created, the char** passed to this function should always be in
@@ -320,3 +321,4 @@ int main(int argc){
     //CU_list_tests_to_file(); /* print out to xml-file */
     CU_cleanup_registry(); /* a call to a self explanatory function name ;)*/
 }
+#endif /* #ifndef MASTER_TEST_SUITE */
