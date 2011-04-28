@@ -63,7 +63,29 @@ int examineID(msg_pointer mp){
     return 0;
 }
 
+/*
+*	Function:		controlMotors(msg_pointer)
+*	Author(s):		Reza Moussavi, Rahwa Bahta
+*	Description:	Optimized last one
+*/
+
 void controlMotors(msg_pointer mp){
+	#ifdef ARDUINO_DBG
+		Serial.print("Standard Motor Control Message!\n");
+	#elif defined PC 
+		printf("Standard Motor Control Message!\n");
+	#endif
+
+	if(mp->left)		moto_left_motor(mp->increase,mp->panic);
+	if(mp->right)	moto_right_motor(mp->increase,mp->panic);
+	if(mp->front)	moto_front_motor(mp->increase,mp->panic);
+	if(mp->rear)	moto_rear_motor(mp->increase,mp->panic);
+}
+
+  /* This has been renamed to OLDxxxx to prevent duplication */
+  /*  The new one Implemented up here */
+
+void OLD_controlMotors(msg_pointer mp){
 #ifdef ARDUINO_DBG
     Serial.print("Standard Motor Control Message!\n");
 #elif defined PC 

@@ -49,6 +49,69 @@ uint16_t leftPulse;
 uint16_t frontPulse;
 uint16_t rearPulse;
 
+
+/*
+*	Function:		moto_left_mototr(unsigned char increase,unsigned char panic)
+*	Author(s):		Reza Moussavi, Rahwa Bahta
+*	Description:	To incease/decrease panic/normal the left motor
+*/
+void moto_left_motor(unsigned char increase,unsigned char panic){
+	leftPulse = increase?leftMotorLimitIncrease(leftPulse, panic?PANIC_STEP:NORMAL_STEP):leftMotorLimitDecrease(leftPulse, panic?PANIC_STEP:NORMAL_STEP);
+	#ifdef ARDUINO
+		escLeft.writeMicroseconds(leftPulse);
+	#elif defined PC
+		analogWrite(LEFT_MOTOR, leftPulse);
+	#endif
+		PRINTOUT_1("Increasing left motor pulse\n");
+}
+
+/*
+*	Function:		moto_right_mototr(unsigned char increase,unsigned char panic)
+*	Author(s):		Reza Moussavi, Rahwa Bahta
+*	Description:	To incease/decrease panic/normal the right motor
+*/
+void moto_right_motor(unsigned char increase,unsigned char panic){
+	rightPulse = increase?rightMotorLimitIncrease(rightPulse, panic?PANIC_STEP:NORMAL_STEP):rightMotorLimitDecrease(rightPulse, panic?PANIC_STEP:NORMAL_STEP);
+	#ifdef ARDUINO
+		escRight.writeMicroseconds(rightPulse);
+	#elif defined PC
+		analogWrite(RIGHT_MOTOR, rightPulse);
+	#endif
+		PRINTOUT_1("Increasing right motor pulse\n");
+}
+
+/*
+*	Function:		moto_front_mototr(unsigned char increase,unsigned char panic)
+*	Author(s):		Reza Moussavi, Rahwa Bahta
+*	Description:	To incease/decrease panic/normal the front motor
+*/
+void moto_front_motor(unsigned char increase,unsigned char panic){
+	frontPulse = increase?frontMotorLimitIncrease(frontPulse, panic?PANIC_STEP:NORMAL_STEP):frontMotorLimitDecrease(frontPulse, panic?PANIC_STEP:NORMAL_STEP);
+	#ifdef ARDUINO
+		escFront.writeMicroseconds(frontPulse);
+	#elif defined PC
+		analogWrite(FRONT_MOTOR, frontPulse);
+	#endif
+		PRINTOUT_1("Increasing front motor pulse\n");
+}
+
+/*
+*	Function:		moto_rear_mototr(unsigned char increase,unsigned char panic)
+*	Author(s):		Reza Moussavi, Rahwa Bahta
+*	Description:	To incease/decrease panic/normal the rear motor
+*/
+void moto_rear_motor(unsigned char increase,unsigned char panic){
+	rearPulse = increase?rearMotorLimitIncrease(rearPulse, panic?PANIC_STEP:NORMAL_STEP):rearMotorLimitDecrease(rearPulse, panic?PANIC_STEP:NORMAL_STEP);
+	#ifdef ARDUINO
+		escRear.writeMicroseconds(rearPulse);
+	#elif defined PC
+		analogWrite(REAR_MOTOR, rearPulse);
+	#endif
+		PRINTOUT_1("Increasing rear motor pulse\n");
+}
+
+
+
 /**
  * Function:    void moto_startMotors()
  * Author(s):   Kristofer Hansson Aspman,

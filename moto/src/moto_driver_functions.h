@@ -98,6 +98,11 @@ void moto_decreaseRearPanic(void);
 
 void printMotorStatus(void);
 
+void moto_left_motor(unsigned char,unsigned char);
+void moto_right_motor(unsigned char,unsigned char);
+void moto_front_motor(unsigned char,unsigned char);
+void moto_rear_motor(unsigned char,unsigned char);
+
 uint16_t rightMotorLimitIncrease(uint16_t currentPulse, uint16_t increment);
 uint16_t rightMotorLimitDecrease(uint16_t currentPulse, uint16_t decrement);
 uint16_t leftMotorLimitIncrease(uint16_t currentPulse, uint16_t increment);
