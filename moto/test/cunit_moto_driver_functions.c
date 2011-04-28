@@ -216,8 +216,6 @@ void test_moto_decreaseAllPanic(void){
     leftPulse = MIN_PULSE_LEFT + (PANIC_STEP * 2);
     frontPulse = MIN_PULSE_FRONT + (PANIC_STEP * 2);
     rearPulse = MIN_PULSE_REAR + (PANIC_STEP * 2);
-     
-}
 
 
     temp_copy();

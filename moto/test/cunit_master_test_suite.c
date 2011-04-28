@@ -30,6 +30,7 @@ int main(int argc){
     }   
 
 /***************************************************************************/
+
 /* add start stop motor tests */
 
     CU_pSuite msg_handler = CU_add_suite("msg_handler",NULL,NULL);    
@@ -42,7 +43,41 @@ int main(int argc){
         test_moto_examineID_bad_msg);
     check_add_ok("test test_moto_examineID_bad_msg");
     
+    /* Create a test suite for start_stop functions */
+    CU_pSuite start_stop = CU_add_suite("start_stop_motors",NULL,NULL);    
+    check_add_ok("suite start_stop_motors");
 
+    /* Add appropriate test functions to the start_stop suite */
+    CU_add_test(start_stop, "test_moto_startMotors", test_moto_startMotors);
+    check_add_ok("test test_moto_startMotors");
+    
+    CU_add_test(start_stop, "test_moto_stopMotors",
+        test_moto_stopMotors);
+    check_add_ok("test test_moto_stopMotors");
+    
+    /* Create a test suite for increase/decrease all-functions */
+    CU_pSuite increase_decrease_all = 
+        CU_add_suite("increase_decrese_all",NULL,NULL);
+    check_add_ok("suite increase_decrease_all");
+    
+    /* Add appropriate test functions to the increase_decrease_all suite */
+    CU_add_test(increase_decrease_all, "test_moto_increaseAllNormal",
+        test_moto_increaseAllNormal);
+    check_add_ok("test test_moto_increaseAllNormal");
+    
+    CU_add_test(increase_decrease_all, "test_moto_decreaseAllNormal",
+        test_moto_decreaseAllNormal);
+    check_add_ok("test test_moto_decreaseAllNormal");
+    
+    CU_add_test(increase_decrease_all, "test_moto_increaseAllPanic",
+        test_moto_increaseAllPanic);
+    check_add_ok("test test_moto_increaseAllPanic");
+    
+    CU_add_test(increase_decrease_all, "test_moto_decreaseAllPanic",
+        test_moto_decreaseAllPanic);
+    check_add_ok("test test_moto_decreaseAllPanic");
+    
+/***************************************************************************/
 
     CU_console_run_tests();
     CU_cleanup_registry();
