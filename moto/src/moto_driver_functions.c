@@ -116,6 +116,7 @@ void moto_rear_motor(unsigned char increase,unsigned char panic){
  * Function:    void moto_startMotors()
  * Author(s):   Kristofer Hansson Aspman,
  *              Björn Eriksson
+ *              Magnus Bergqvist
  *
  * Description: Sets the pulse width to a state where
  *              all motors starts spinning but the
@@ -146,6 +147,7 @@ void moto_startMotors(void){
  * Function:    void moto_stopMotors()
  * Author(s):   Kristofer Hansson Aspman,
  *              Björn Eriksson
+ *              Magnus Bergqvist
  *
  * Description: Stops all motors, i.e. sets the
  *              pulse width to zero.
@@ -174,6 +176,7 @@ void moto_stopMotors(void){
  * Function:    void moto_hover()
  * Author(s):   Kristofer Hansson Aspman,
  *              Björn Eriksson
+ *              Magnus Bergqvist
  *
  * Description: Sets all motors to the same pulse width
  *              where to drone shall stay in hover state
@@ -416,6 +419,7 @@ void moto_decreaseAllPanic(void){
  *              moto_increaseRearPanic()
  * Author(s):   Kristofer Hansson Aspman,
  *              Björn Eriksson
+ *              Magnus Bergqvist
  *
  * Description: Increases the pulse width of
  *              the corresponding motor.
@@ -520,6 +524,7 @@ void moto_increaseRearPanic(void){
  *              moto_decreaseRearPanic()
  * Author(s):   Kristofer Hansson Aspman,
  *              Björn Eriksson
+ *              Magnus Bergqvist
  *
  * Description: Decreases the pulse width of
  *              the corresponding motor.
