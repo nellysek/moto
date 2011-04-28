@@ -1,5 +1,6 @@
 #ifdef MASTER_TEST_SUITE
 
+#include <stdio.h>
 #include "CUnit/CUnit.h"
 #include "cunit_moto_msg_handler.h"
 #include "cunit_master_test_suite.h"

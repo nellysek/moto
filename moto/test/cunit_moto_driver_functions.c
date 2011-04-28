@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include "CUnit/CUnit.h"
 #include "cunit_stubs.h" /* test stubs to replace arduino functions */
+#include "cunit_master_test_suite.h"
 
 #include "../src/moto_driver_functions.h"
 /* 
