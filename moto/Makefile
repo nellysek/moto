@@ -31,9 +31,11 @@ F_CPU=16000000
 VERS="Arduino Portable Makefile [APM] version 1.2, dated 10-04-2011"
 
 PROG=test
+TESTNAME=test_suite
 SRC=src/*.c  #test/cunit_stubs.c
 SRC2=include/*.cpp
 SRC3=test/cunit_stubs.c
+CUNIT_SRC=test/*.c
 OBJ=bin/*.o
 
 
@@ -71,6 +73,9 @@ compile:
 
 test: clean $(OBJ) compile
 	@ echo "Test passed"
+
+testsuite: clean
+	gcc -DPC $(CUNIT_SRC) $(SRC) -o bin/$(TESTNAME).x -lcunit
 
 install: $(OBJ) compile
 	@ cd bin && avr-objcopy -O srec $(PROG).elf $(PROG).rom
