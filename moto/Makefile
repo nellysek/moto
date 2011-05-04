@@ -75,7 +75,7 @@ test: clean $(OBJ) compile
 	@ echo "Test passed"
 
 testsuite: clean
-	gcc -DPC -DMASTER_TEST_SUITE $(CUNIT_SRC) $(SRC) -o bin/$(TESTNAME).x -lcunit
+	gcc -DPC -DMASTER_TEST_SUITE $(CUNIT_SRC) $(SRC) -o bin/$(TESTNAME).o -lcunit
 
 install: $(OBJ) compile
 	@ cd bin && avr-objcopy -O srec $(PROG).elf $(PROG).rom
@@ -88,10 +88,10 @@ mega: clean install
 uno: clean install
 
 pc: clean
-	gcc -DPC $(SRC) -o bin/$(PROG).x # $(SRC3) 
+	gcc -DPC $(SRC) -o bin/$(PROG).o # $(SRC3) 
 
 clean:
-	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.x
+	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.o
 	@ echo "Project cleaned"
 	
 version:
