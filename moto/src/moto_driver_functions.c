@@ -23,7 +23,7 @@
     #include "../include/Servo.h"
 #elif defined PC
     #include <stdio.h>
-    #include"cunit_stubs.h"
+    #include"stubs.h"
 #endif
 
 /* 
