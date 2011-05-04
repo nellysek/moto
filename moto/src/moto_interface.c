@@ -26,7 +26,7 @@
     #include "WProgram.h"
 #elif defined PC
     #include <stdio.h>
-    #include "stubs.h"
+    #include "moto_stubs.h"
 #endif
 
 msg binary;
