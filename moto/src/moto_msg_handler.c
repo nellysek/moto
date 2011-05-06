@@ -239,16 +239,18 @@ msg scanHexMsgSTDIN(void){
 #ifdef ARDUINO_DBG
 uint8_t serReadUnsignedChar(void)
 {
-    int i, numberOfAvailableInputs;
+    int8_t i;
+    int8_t numberOfAvailableInputs;
     uint8_t returnValue;
 
     /* Array to hold input bytes*/
     char inputBytes [7];                     
     char * inputBytesPtr = &inputBytes[0];
-
+    delay(3000);
     /* Check to see if there are any serial input*/
     if (Serial.available()>0)                
     {
+        Serial.println("serial available");
         /* Delay for terminal to finish transmitted, 5ms work great*/
         /* for 9600 baud (increase this number for slower baud)*/
         delay(5);                              
