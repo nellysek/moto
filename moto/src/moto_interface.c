@@ -96,19 +96,23 @@ int moto_run(void){
 #endif
       return 0;
     }
-    moto_cyclesSinceLastMsg = 0;
 
+    if(BITFIELD_TO_CHAR(mp) == 0xf)
+    {
+#ifdef ARDUINO_DBG
+      Serial.println("No new message in scanhexmsg");
+#elif defined PC
+      printf("No new message in scanhexmsg\n");
+#endif
+      return 0;
+    }
+
+    moto_cyclesSinceLastMsg = 0;
     examineID(mp);
 
 #ifdef ARDUINO_DBG
   printMsg(mp);
   printMotorStatus();
-
-  /* if(leftPulse > 0 && rightPulse > 0 && frontPulse > 0 && rearPulse > 0){ */
-  /*   digitalWrite(13, HIGH);   */
-  /* } */
-  /* else */
-  /*   digitalWrite(13, LOW); */
 
 #elif defined PC
     printMsg(mp);

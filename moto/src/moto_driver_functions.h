@@ -19,8 +19,8 @@
 #endif
 #include <stdint.h>
 
-#define NORMAL_STEP 1
-#define PANIC_STEP 2
+#define NORMAL_STEP 5
+#define PANIC_STEP 20
 /* ETT FÖRSLAG TILL ÄNDRING AV KONSTANTER *////////////////////////////
 // #define NORMAL_INCREMENT 2
 // #define PANIC_INCREMENT 4
@@ -48,12 +48,11 @@
 #define IDLE_SPEED 1100
 #define STOP_PULSE 1000
 
-
 /* defines hover speed pulse width in µs for every motor */
-#define HOVER_PULSE_RIGHT 1200
-#define HOVER_PULSE_LEFT 1200
-#define HOVER_PULSE_FRONT 1200
-#define HOVER_PULSE_REAR 1200
+#define HOVER_PULSE_RIGHT 1400
+#define HOVER_PULSE_LEFT 1400
+#define HOVER_PULSE_FRONT 1400
+#define HOVER_PULSE_REAR 1400
 
 extern uint16_t rightPulse;
 extern uint16_t leftPulse;

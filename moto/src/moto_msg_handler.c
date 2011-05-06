@@ -33,16 +33,22 @@ int examineID(msg_pointer mp){
         Serial.println("Bad message!");
         return 1;
     }
+    if (BITFIELD_TO_CHAR(mp) > 0xFF){
+        Serial.println("Message value too high, ignoring message!");
+        return 1;
+    }
 #elif defined PC
     printf("ID is %d\n", mp->ID);
     if (BITFIELD_TO_CHAR(mp) == BAD_MESSAGE){
         printf("Bad message!\n");
         return 1;
     }
-#endif
-    if (BITFIELD_TO_CHAR(mp) == BAD_MESSAGE){
+    if (BITFIELD_TO_CHAR(mp) > 0xFF){
+        printf("Message value too high, ignoring message!\n");
         return 1;
     }
+
+#endif
 
     switch(mp->ID){
 
@@ -175,12 +181,26 @@ void specialMotorCommand(msg_pointer mp){
     case STRAFE_RIGHT:
         moto_strafeRight();
         break;
+    case INCREASE_ALL_NORMAL:
+        moto_increaseAllNormal();
+        break;
+    case DECREASE_ALL_NORMAL:
+        moto_decreaseAllNormal();
+        break;
+    case INCREASE_ALL_PANIC:
+        moto_increaseAllPanic();
+        break;
+    case DECREASE_ALL_PANIC:
+        moto_decreaseAllPanic();
+        break;
+    case HOVER:
+        moto_hover();
+        break;
     }
 
   return;
 
 }
-
 
 /**
  * Function:     msg scanHexMsgSTDIN()
