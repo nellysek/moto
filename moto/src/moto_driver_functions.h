@@ -27,10 +27,11 @@
 // #define NORMAL_DECREMENT -2
 // #define PANIC_DECREMENT -4
 /* defines which "pin" in the arduino, to be changed further on */
-#define LEFT_MOTOR 6
-#define RIGHT_MOTOR 3
-#define FRONT_MOTOR 4
-#define REAR_MOTOR 5
+
+#define RIGHT_MOTOR 2
+#define LEFT_MOTOR 3
+#define FRONT_MOTOR 5
+#define REAR_MOTOR 6
 
 
 /* defines maximum and minimum pulse width in µs for every motor */
@@ -49,12 +50,10 @@
 
 
 /* defines hover speed pulse width in µs for every motor */
-/* TO BE DISCUSSED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   Should maybe use the same as MIN_PULSE_xxxx??
 #define HOVER_PULSE_RIGHT 1200
 #define HOVER_PULSE_LEFT 1200
 #define HOVER_PULSE_FRONT 1200
-#define HOVER_PULSE_REAR 1200 */
+#define HOVER_PULSE_REAR 1200
 
 extern uint16_t rightPulse;
 extern uint16_t leftPulse;
@@ -98,6 +97,11 @@ void moto_decreaseFrontPanic(void);
 void moto_decreaseRearPanic(void);
 
 void printMotorStatus(void);
+
+void moto_left_motor(unsigned char,unsigned char);
+void moto_right_motor(unsigned char,unsigned char);
+void moto_front_motor(unsigned char,unsigned char);
+void moto_rear_motor(unsigned char,unsigned char);
 
 uint16_t rightMotorLimitIncrease(uint16_t currentPulse, uint16_t increment);
 uint16_t rightMotorLimitDecrease(uint16_t currentPulse, uint16_t decrement);

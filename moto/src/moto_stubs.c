@@ -11,8 +11,8 @@
  */
 #include <stdio.h>
 #include <stdint.h>
-#include "cunit_stubs.h"
-#include "../src/moto_driver_functions.h"
+#include "moto_stubs.h"
+#include "moto_driver_functions.h"
 
 
 #ifdef MASTER_TEST_SUITE

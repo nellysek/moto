@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 #ifdef ARDUINO_DBG
     #define ARDUINO
 #endif
@@ -8,31 +10,28 @@
 #endif
 
 #define INT_TO_BITFIELD(a) *(msg_pointer)a
-#define BITFIELD_TO_CHAR(a) *(unsigned char*)a
+#define BITFIELD_TO_CHAR(a) *(uint8_t*)a
 
-//Big endian control message
+/*Big endian control message*/
 typedef struct control_message{
-  //unsigned char may not be portable
-  //if that is the case, try just unsigned
-  //also, endianess may be different on arduino
-  unsigned char rear :1;
-  unsigned char front :1;
-  unsigned char left :1;
-  unsigned char right :1;
-  unsigned char panic :1;
-  unsigned char increase :1;
-  unsigned char ID :2;
+  uint8_t rear :1;
+  uint8_t front :1;
+  uint8_t left :1;
+  uint8_t right :1;
+  uint8_t panic :1;
+  uint8_t increase :1;
+  uint8_t ID :2;
 } msg, *msg_pointer;
 
-//Little endian control message
+/*Little endian control message*/
 /* struct control_message{ */
-/*   unsigned char ID :2; */
-/*   unsigned char increase :1; */
-/*   unsigned char panic :1; */
-/*   unsigned char right :1; */
-/*   unsigned char left :1; */
-/*   unsigned char front :1; */
-/*   unsigned char rear :1; */
+/*   uint8_t ID :2; */
+/*   uint8_t increase :1; */
+/*   uint8_t panic :1; */
+/*   uint8_t right :1; */
+/*   uint8_t left :1; */
+/*   uint8_t front :1; */
+/*   uint8_t rear :1; */
 
 /* } msg; */
 

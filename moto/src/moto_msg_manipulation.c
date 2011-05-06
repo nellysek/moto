@@ -58,7 +58,7 @@ void printMsg(msg_pointer mp){
 	 mp->left, mp->right, 
 	 mp->front, mp->rear);
 
-  printf("\nSize of bitfield: %ld\n", sizeof(*mp));
+  printf("\nSize of bitfield: %d\n", sizeof(*mp));
   printf("Hexadecimal representation: %x\n",
 	 BITFIELD_TO_CHAR(mp));
   printf("Decimal representation: %d\n",

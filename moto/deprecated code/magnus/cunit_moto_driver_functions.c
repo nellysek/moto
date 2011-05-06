@@ -3,7 +3,6 @@
  * @brief cunit tests for moto_driver_functions.c
  * @date 2011-04-25
  * @author Magnus Bergqvist
- * extent by Bishare Sufi
  * @version 5
  * @history 2011-04-07 - created first draft \n
             2011-04-15 - adjusted it for new moto_driver_functions.c \n
@@ -19,8 +18,7 @@
 
 #include <stdio.h>
 #include "CUnit/CUnit.h"
-#include "../src/moto_stubs.h" /* test stubs to replace arduino functions */
-#include "cunit_master_test_suite.h"
+#include "cunit_stubs.h" /* test stubs to replace arduino functions */
 
 #include "../src/moto_driver_functions.h"
 /* 
@@ -218,8 +216,7 @@ void test_moto_decreaseAllPanic(void){
     leftPulse = MIN_PULSE_LEFT + (PANIC_STEP * 2);
     frontPulse = MIN_PULSE_FRONT + (PANIC_STEP * 2);
     rearPulse = MIN_PULSE_REAR + (PANIC_STEP * 2);
-
-
+     
     temp_copy();
           
     moto_decreaseAllPanic();
@@ -243,225 +240,6 @@ void test_moto_decreaseAllPanic(void){
     CU_ASSERT(rearPulse == MIN_PULSE_REAR);
 
 }
-
-/* @uthor Bishare Sufi */
-/* this code has been improved once */
-
-
-void test_moto_hover(void){
-
-/* all pulses are in the hover level */
-    
-      moto_hover();
-      CU_ASSERT(rightPulse == HOVER_PULSE_RIGHT);
-      CU_ASSERT(leftPulse == HOVER_PULSE_LEFT);
-      CU_ASSERT(frontPulse == HOVER_PULSE_FRONT);
-      CU_ASSERT(rearPulse == HOVER_PULSE_REAR);
-
-}
-
-void test_moto_goForward(void){
-
-/* this function seems the most tolerable to the test 
-   go forward function test */
-     
-     temp_copy();
-     moto_goForward();
-     CU_ASSERT(frontPulse == frontP - NORMAL_STEP);
-     CU_ASSERT(rearPulse == rearP + NORMAL_STEP);
-
-     frontPulse = MIN_PULSE_FRONT + (NORMAL_STEP * 2);
-     rearPulse = MAX_PULSE_REAR - (NORMAL_STEP * 2);
-
-     temp_copy();
-     moto_goForward();
-     CU_ASSERT(frontPulse == frontP - NORMAL_STEP);
-     CU_ASSERT(rearPulse == rearP + NORMAL_STEP);
-
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-
-
-     temp_copy();
-     moto_goForward();
-
-     frontPulse == MIN_PULSE_FRONT + (NORMAL_STEP * 12);
-     rearPulse == MAX_PULSE_REAR - (NORMAL_STEP * 12);
-  
-     temp_copy();
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-     
-     moto_goForward();
-     CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
-     CU_ASSERT(rearPulse == MAX_PULSE_REAR);
-    
-}
-
-void test_moto_goBackward(void){
-
- /* this one is less tolerable, than the previously one 
-    go backward function test */
-  
-     
-     temp_copy();
-     moto_goBackward();
-     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
-     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
-
-     frontPulse == MAX_PULSE_FRONT - (NORMAL_STEP * 6);
-     rearPulse == MIN_PULSE_REAR + (NORMAL_STEP * 6);
-
-     temp_copy();
-     moto_goBackward();
-     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
-     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
-
-}     
-
-void test_moto_strafeRight(void){
-     
-     temp_copy();
-     moto_strafeRight();
-     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
-     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
-
-     leftPulse == MAX_PULSE_LEFT - (NORMAL_STEP *3);
-     rightPulse == MIN_PULSE_RIGHT + (NORMAL_STEP *3);
-
-     temp_copy();
-     moto_strafeRight();
-     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
-     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
-
-
-}
-
-void test_moto_strafeLeft(void){
-
-     temp_copy();
-     moto_strafeLeft();
-     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
-     CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
-
-     leftPulse == MIN_PULSE_LEFT + (NORMAL_STEP * 5);
-     rightPulse == MAX_PULSE_RIGHT - (NORMAL_STEP * 5);
-
-     temp_copy();
-     moto_strafeLeft();
-     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
-     CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
-
-}
-
-void test_moto_rotateLeft(void){
-
-     /* rotate to the left normal steps */
-     
-     temp_copy();
-     moto_rotateLeft();
-     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
-     CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
-     CU_ASSERT(frontPulse == frontP - NORMAL_STEP);
-     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
-
-     leftPulse == MAX_PULSE_LEFT - (NORMAL_STEP * 4);
-     rightPulse == MAX_PULSE_RIGHT - (NORMAL_STEP * 4);
-     frontPulse == MIN_PULSE_FRONT + (NORMAL_STEP * 4);
-     rearPulse == MIN_PULSE_REAR + (NORMAL_STEP * 4);
-
-     temp_copy();
-     moto_rotateLeft();
-     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
-     CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
-     CU_ASSERT(frontPulse == frontP - NORMAL_STEP);
-     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
-
-}
-
-void test_moto_rotateRight(void){
-
-     /* it seems like the size of the value doesn't affect the
-        result of the test */
-     /* rotate to the right normal steps is possible to
-        alter the pulse according to the min and max pulses*/
-
-     temp_copy();
-     moto_rotateRight();
-     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
-     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
-     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
-     CU_ASSERT(rearPulse == rearP + NORMAL_STEP);
-
-     leftPulse == MIN_PULSE_LEFT + (NORMAL_STEP * 14);
-     rightPulse == MIN_PULSE_RIGHT + (NORMAL_STEP * 14);
-     frontPulse == MAX_PULSE_FRONT - (NORMAL_STEP * 14);
-     rearPulse == MAX_PULSE_REAR - (NORMAL_STEP * 14);
-
-     temp_copy();
-     moto_rotateRight();
-     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
-     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
-     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
-     CU_ASSERT(rearPulse == rearP + NORMAL_STEP);
-
-}
-
-#ifndef MASTER_TEST_SUITE
 
 /*
  * check_add_ok() gives a print_out on the screen when a test suite or a test
@@ -533,42 +311,6 @@ int main(int argc){
     CU_add_test(increase_decrease_all, "test_moto_decreaseAllPanic",
         test_moto_decreaseAllPanic);
     check_add_ok("test test_moto_decreaseAllPanic");
-
-     
-    /* @uthor Bishare Sufi */
-
-    /* add appropriate test functions to the suite */
-
-    CU_add_test(increase_decrease_all, "test_moto_hover", test_moto_hover);
-    check_add_ok("Test test_moto_hover");
-
-    CU_add_test(increase_decrease_all, "test_moto_goForward", 
-        test_moto_goForward);
-    check_add_ok("Test test_moto_goForward");
-
-    CU_add_test(increase_decrease_all, "test_moto_goBackward",
-        test_moto_goBackward);
-    check_add_ok("Test test_moto_goBackward");
-
-    CU_add_test(increase_decrease_all, "test_moto_strafeRight",
-        test_moto_strafeRight);
-    check_add_ok("Test test_moto_strafeRight");
-
-/* added appropriate test functions to the suite */
-
-    CU_add_test(increase_decrease_all, "test_moto_strafeLeft",
-        test_moto_strafeLeft);
-    check_add_ok("Test test_moto_strafeLeft");
-    
-    CU_add_test(increase_decrease_all, "test_moto_ rotateLeft",
-        test_moto_rotateLeft);
-    check_add_ok("Test test_moto_rotateLeft");
-
-    CU_add_test(increase_decrease_all, "test_moto_rotateRight",
-        test_moto_rotateRight);
-    check_add_ok("Test test_moto_rotateRight");
-
-
     
     /*--------------------------------------------------------------------*/
 
@@ -577,4 +319,3 @@ int main(int argc){
     //CU_list_tests_to_file(); /* print out to xml-file */
     CU_cleanup_registry(); /* a call to a self explanatory function name ;)*/
 }
-#endif /* #ifndef MASTER_TEST_SUITE */

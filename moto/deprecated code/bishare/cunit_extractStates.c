@@ -3,17 +3,14 @@
 #include "CUnit/CUnit.h"
 #include "../src/extract_states.h"
 
-/* run cunit with gcc cunit_extractStates.c ../src/exract_states.c -DPC -o cunit_extractStates  -lcunit */   /* ./cunit_extractStates */
+/* run cunit with gcc cunit_extractStates.c ../src/exract_states.c -DPC -o 
+cunit_extractStates  -lcunit */   /* ./cunit_extractStates */
 
 void test_motors(void){
 
-    /* generate_value_Con_motor(motor);
-     CU_ASSERT(FORWARD) == FORWARD);
-     CU_ASSERT(BACKWARD) == BACKWARD);
-     CU_ASSERT(TURN_LEFT) == TURN_LEFT);
-     CU_ASSERT(TURN_RIGHT) == TURN_RIGHT); */
+/*asserts for generate function */
+/* here we test only one function, because this code is not used*/
 
-/*asserts for generate fun */
 CU_ASSERT(generate_value_Con_motor(FORWARD) == FORWARD);
 CU_ASSERT(generate_value_Con_motor(BACKWARD) == BACKWARD);
 CU_ASSERT(generate_value_Con_motor(TURN_LEFT) == TURN_LEFT);
@@ -24,14 +21,13 @@ CU_ASSERT(generate_value_Con_motor(TURN_RIGHT) == TURN_RIGHT);
 void test_check(char* msg){
 if(CU_get_error() == CUE_SUCCESS){
   fprintf(stdout, "Passed successfully!\n", msg);
-}                                                   /* here we test only one function, 
-                                                       because this code is not used*/
+}                                                   
 else{                                               
      fprintf(stdout, "%s failed\n", msg);
 }
 }
 
-/* main function*/
+/* main function for suite test*/
 
 int main(int argc){
 CU_ErrorCode erc = CU_initialize_registry();
