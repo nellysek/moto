@@ -20,7 +20,7 @@
 #include <stdint.h>
 
 #define NORMAL_STEP 5
-#define PANIC_STEP 20
+#define PANIC_STEP 50
 /* ETT FÖRSLAG TILL ÄNDRING AV KONSTANTER *////////////////////////////
 // #define NORMAL_INCREMENT 2
 // #define PANIC_INCREMENT 4
