@@ -758,9 +758,19 @@ uint16_t rearMotorLimitDecrease(uint16_t currentPulse,
     else{
         return MIN_PULSE_REAR;
     }
+    /*
+        if((currentPulse - decrement) > MIN_PULSE_REAR){
+            return map((currentPulse - decrement), MIN_PULSE, MAX_PULSE,
+                                            MIN_PULSE_REAR, MAX_PULSE_REAR);
+        }
+        else{
+            return MIN_PULSE_REAR;
+        }
+    */
 }
 
-uint16_t map(uint16_t actual, uint16_t in_boundary1, uint16_t in_boundary2, uint16_t out_boundary1, uint16_t out_boundary2){
+uint16_t map(uint16_t actual, uint16_t in_boundary1, uint16_t in_boundary2, 
+                            uint16_t out_boundary1, uint16_t out_boundary2){
     
     /*step size depending on inner value spectra 
     compared to outer value spectra*/

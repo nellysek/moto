@@ -45,6 +45,9 @@
 #define MIN_PULSE_RIGHT 1000
 #define MAX_PULSE_RIGHT 2000
 
+#define MAX_PULSE 2000
+#define MIN_PULSE 1000
+
 #define IDLE_SPEED 1100
 #define STOP_PULSE 1000
 
