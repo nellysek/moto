@@ -3,7 +3,7 @@
  * @brief cunit tests for moto_driver_functions.c
  * @date 2011-04-25
  * @author Magnus Bergqvist
- * extent by Bishare Sufi
+ * extent by @Bishare Sufi
  * @version 5
  * @history 2011-04-07 - created first draft \n
             2011-04-15 - adjusted it for new moto_driver_functions.c \n
@@ -206,6 +206,8 @@ void test_moto_increaseAllPanic(void){
 
 void test_moto_decreaseAllPanic(void){
 
+/* decrease all pulses panic step the motors are reacting as expected */
+
     temp_copy();
 
     moto_decreaseAllPanic();
@@ -245,12 +247,16 @@ void test_moto_decreaseAllPanic(void){
 }
 
 /* @uthor Bishare Sufi */
-/* this code has been improved once */
+/* this code has been improved once the old version is in deprecate folder */
+
+/* this code has been improved once the old cunit test
+   for this file is in deprecate folder */
 
 
 void test_moto_hover(void){
 
-/* all pulses are in the hover level */
+      /* all motors are on hover level*/
+     /* the motors are reacting as expected */
     
       moto_hover();
       CU_ASSERT(rightPulse == HOVER_PULSE_RIGHT);
@@ -258,12 +264,110 @@ void test_moto_hover(void){
       CU_ASSERT(frontPulse == HOVER_PULSE_FRONT);
       CU_ASSERT(rearPulse == HOVER_PULSE_REAR);
 
+      rightPulse = MIN_PULSE_RIGHT + (NORMAL_STEP * 30);
+      leftPulse = MIN_PULSE_LEFT + (NORMAL_STEP * 30);
+      frontPulse = MIN_PULSE_FRONT + (NORMAL_STEP * 30);
+      rearPulse = MIN_PULSE_REAR + (NORMAL_STEP * 30);
+
+      moto_hover();
+      CU_ASSERT(rightPulse == HOVER_PULSE_RIGHT);
+      CU_ASSERT(leftPulse == HOVER_PULSE_LEFT);
+      CU_ASSERT(frontPulse == HOVER_PULSE_FRONT);
+      CU_ASSERT(rearPulse == HOVER_PULSE_REAR);
+
+      rightPulse = MIN_PULSE_RIGHT - (NORMAL_STEP * 30);
+      leftPulse = MIN_PULSE_LEFT - (NORMAL_STEP * 30);
+      frontPulse = MIN_PULSE_FRONT - (NORMAL_STEP * 30);
+      rearPulse = MIN_PULSE_REAR - (NORMAL_STEP * 30);
+
+      moto_hover();
+      CU_ASSERT(rightPulse == HOVER_PULSE_RIGHT);
+      CU_ASSERT(leftPulse == HOVER_PULSE_LEFT);
+      CU_ASSERT(frontPulse == HOVER_PULSE_FRONT);
+      CU_ASSERT(rearPulse == HOVER_PULSE_REAR);
+
+
+      rightPulse = MAX_PULSE_RIGHT - (NORMAL_STEP * 80);
+      leftPulse = MAX_PULSE_LEFT - (NORMAL_STEP * 80);
+      frontPulse = MAX_PULSE_FRONT - (NORMAL_STEP * 80);
+      rearPulse = MAX_PULSE_REAR - (NORMAL_STEP * 80);
+
+/* the motors are responding as expected */
+
+     temp_copy();
+     moto_hover();
+
+     rightPulse = MIN_PULSE_RIGHT + (NORMAL_STEP * 200);
+
+     leftPulse = MIN_PULSE_LEFT + (NORMAL_STEP * 200);
+
+     frontPulse = MIN_PULSE_FRONT + (NORMAL_STEP * 200);
+
+     rearPulse = MIN_PULSE_REAR + (NORMAL_STEP * 200);
+
+     temp_copy();
+     moto_hover();
+
+     rightPulse = MIN_PULSE_RIGHT - (NORMAL_STEP * 200);
+
+     leftPulse = MIN_PULSE_LEFT - (NORMAL_STEP * 200);
+
+     frontPulse = MIN_PULSE_FRONT - (NORMAL_STEP * 200);
+
+     rearPulse = MIN_PULSE_REAR - (NORMAL_STEP * 200);
+
+      moto_hover();
+      CU_ASSERT(rightPulse == HOVER_PULSE_RIGHT);
+      CU_ASSERT(leftPulse == HOVER_PULSE_LEFT);
+      CU_ASSERT(frontPulse == HOVER_PULSE_FRONT);
+      CU_ASSERT(rearPulse == HOVER_PULSE_REAR);
+
+      rightPulse = MAX_PULSE_RIGHT + (NORMAL_STEP * 8);
+      leftPulse = MAX_PULSE_LEFT + (NORMAL_STEP * 8);
+      frontPulse = MAX_PULSE_FRONT + (NORMAL_STEP * 8);
+      rearPulse = MAX_PULSE_REAR + (NORMAL_STEP * 8);
+
+     temp_copy();
+     moto_hover();
+
+     rightPulse = MAX_PULSE_RIGHT - (NORMAL_STEP * 100);
+
+     leftPulse = MAX_PULSE_LEFT - (NORMAL_STEP * 100);
+
+     frontPulse = MAX_PULSE_FRONT - (NORMAL_STEP * 100);
+
+     rearPulse = MAX_PULSE_REAR - (NORMAL_STEP *100);
+
+     temp_copy();
+     moto_hover();
+
+     rightPulse = MAX_PULSE_RIGHT + (NORMAL_STEP * 100);
+
+     leftPulse = MAX_PULSE_LEFT + (NORMAL_STEP * 100);
+
+     frontPulse = MAX_PULSE_FRONT + (NORMAL_STEP * 100);
+
+     rearPulse = MAX_PULSE_REAR + (NORMAL_STEP * 100);
+
+      moto_hover();
+      CU_ASSERT(rightPulse == HOVER_PULSE_RIGHT);
+      CU_ASSERT(leftPulse == HOVER_PULSE_LEFT);
+      CU_ASSERT(frontPulse == HOVER_PULSE_FRONT);
+      CU_ASSERT(rearPulse == HOVER_PULSE_REAR);
+
+
 }
 
 void test_moto_goForward(void){
 
-/* this function seems the most tolerable to the test 
-   go forward function test */
+     /* go forward normal steps */
+     /* all motors are on hover level*/
+     /* the motors are reacting as expected */
+
+/* go forward test function all motors are allready in the hover
+   level the pulses of the motors have to be between min and max pulses
+   and any where between min and max pulses has to pass  the motors are
+   reacting as expected and does not exceed max or min levels */
      
      temp_copy();
      moto_goForward();
@@ -295,11 +399,10 @@ void test_moto_goForward(void){
      CU_ASSERT(rearPulse == MAX_PULSE_REAR);
 
 
-     temp_copy();
-     moto_goForward();
-
      frontPulse == MIN_PULSE_FRONT + (NORMAL_STEP * 12);
      rearPulse == MAX_PULSE_REAR - (NORMAL_STEP * 12);
+
+     /* motors are responding exactly as expected "vatten tät code?" */
   
      temp_copy();
      moto_goForward();
@@ -354,17 +457,69 @@ void test_moto_goForward(void){
 
 void test_moto_goBackward(void){
 
- /* this one is less tolerable, than the previously one 
-    go backward function test */
+     /* go backward normal steps  */
+     /* all motors are on hover level*/
+     /* the motors are responding as expected and not exceeding the 
+        boundaries*/
   
-     
+
+/* go backward test function all motors are in the hover
+   level the pulses of the motors have to be between min and max pulses
+   and any where between min and max pulses has to pass  the motors are
+   reacting as expected and does not exceed max or min levels */
+
+/* motors are on hover level */
+  
+     moto_hover();
+     temp_copy();
+     moto_goBackward();
+
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
+
+     /* it is not exceeding the boundaries, "vatten tät code?" */
+
+     frontPulse == MAX_PULSE_FRONT - (NORMAL_STEP * 100);
+     rearPulse == MIN_PULSE_REAR + (NORMAL_STEP * 100);
+
+     temp_copy();
+     moto_goBackward();
+
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
+
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
+
+     temp_copy();
+     moto_goBackward();
+
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
+
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
+
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
+
+
+     moto_hover();
      temp_copy();
      moto_goBackward();
      CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
      CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
 
-     frontPulse == MAX_PULSE_FRONT - (NORMAL_STEP * 6);
-     rearPulse == MIN_PULSE_REAR + (NORMAL_STEP * 6);
+     frontPulse == MAX_PULSE_FRONT - (NORMAL_STEP * 120);
+     rearPulse == MIN_PULSE_REAR + (NORMAL_STEP * 120);
 
      temp_copy();
      moto_goBackward();
@@ -374,14 +529,55 @@ void test_moto_goBackward(void){
 }     
 
 void test_moto_strafeRight(void){
+
+     /* turn right normal steps */
+     /* all motors are on hover level*/
+     /* the motors are responding as expected and not exceeding the 
+        boundaries*/
      
+ /* moto_strafeRight here the motors are reacting as expected 
+    starting from hover increasing left pulse and at the same time
+    decreasing right pulse */
+
+ /* motors are on hover level */
+
+     moto_hover();
+     temp_copy();
+     moto_strafeRight();
+
+     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
+     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
+
+     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
+     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
+    
+     
+     /*motors are reacting as expected*/
+
+     temp_copy();
+     moto_strafeRight();
+
+     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
+     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
+
+     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
+     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
+
      temp_copy();
      moto_strafeRight();
      CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
      CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
 
-     leftPulse == MAX_PULSE_LEFT - (NORMAL_STEP *3);
-     rightPulse == MIN_PULSE_RIGHT + (NORMAL_STEP *3);
+     leftPulse == MAX_PULSE_LEFT - (NORMAL_STEP *60);
+     rightPulse == MIN_PULSE_RIGHT + (NORMAL_STEP *60);
 
      temp_copy();
      moto_strafeRight();
@@ -393,13 +589,50 @@ void test_moto_strafeRight(void){
 
 void test_moto_strafeLeft(void){
 
+     /* turn left normal steps */
+     /* all motors are on hover level*/
+     /* the motors are responding as expected and not exceeding the 
+        boundaries*/
+
+     /* moto_strafeLeft here the motors are reacting as expected 
+        increasing right pulse and at the same time decreasing
+        the left pulse */
+      
+     /* motors are on hover level */
+
+     moto_hover();
+     temp_copy();
+     moto_strafeLeft();
+
+     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
+     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
+
+     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP + NORMAL_STEP); 
+
+     temp_copy();
+     moto_strafeLeft();
+
+     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
+     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
+
+     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
+     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
+
+     moto_hover();
      temp_copy();
      moto_strafeLeft();
      CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
      CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
 
-     leftPulse == MIN_PULSE_LEFT + (NORMAL_STEP * 5);
-     rightPulse == MAX_PULSE_RIGHT - (NORMAL_STEP * 5);
+     leftPulse == MIN_PULSE_LEFT + (NORMAL_STEP * 80);
+     rightPulse == MAX_PULSE_RIGHT - (NORMAL_STEP * 80);
 
      temp_copy();
      moto_strafeLeft();
@@ -411,7 +644,35 @@ void test_moto_strafeLeft(void){
 void test_moto_rotateLeft(void){
 
      /* rotate to the left normal steps */
+     /* all motors are on hover level*/
+     /* the motors are responding as expected and not exceeding the 
+        boundaries*/
      
+ /* moto_rotateLeft rotate to the left without exceeding
+    the boundaries min and max pulses and the motors are reacting as 
+    expected */
+
+     /* motors are on hover level rotate to the left normal steps */
+
+     moto_hover();
+     temp_copy();
+     moto_rotateLeft();
+
+     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
+     CU_ASSERT(frontPulse == frontP - NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
+
+
+     temp_copy();
+     moto_rotateLeft();
+
+     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
+     CU_ASSERT(frontPulse == frontP - NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
+
+     moto_hover();
      temp_copy();
      moto_rotateLeft();
      CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
@@ -419,10 +680,10 @@ void test_moto_rotateLeft(void){
      CU_ASSERT(frontPulse == frontP - NORMAL_STEP);
      CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
 
-     leftPulse == MAX_PULSE_LEFT - (NORMAL_STEP * 4);
-     rightPulse == MAX_PULSE_RIGHT - (NORMAL_STEP * 4);
-     frontPulse == MIN_PULSE_FRONT + (NORMAL_STEP * 4);
-     rearPulse == MIN_PULSE_REAR + (NORMAL_STEP * 4);
+     leftPulse == MAX_PULSE_LEFT - (NORMAL_STEP * 400);
+     rightPulse == MAX_PULSE_RIGHT - (NORMAL_STEP * 400);
+     frontPulse == MIN_PULSE_FRONT + (NORMAL_STEP * 400);
+     rearPulse == MIN_PULSE_REAR + (NORMAL_STEP * 400);
 
      temp_copy();
      moto_rotateLeft();
@@ -430,15 +691,74 @@ void test_moto_rotateLeft(void){
      CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
      CU_ASSERT(frontPulse == frontP - NORMAL_STEP);
      CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
+
+     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
+     CU_ASSERT(frontPulse == frontP - NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP - NORMAL_STEP);  
+ 
+     temp_copy();
+     moto_rotateLeft();
+
+     CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
+     CU_ASSERT(frontPulse == frontP - NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP - NORMAL_STEP); 
 
 }
 
 void test_moto_rotateRight(void){
 
-     /* it seems like the size of the value doesn't affect the
-        result of the test */
-     /* rotate to the right normal steps is possible to
-        alter the pulse according to the min and max pulses*/
+     /* rotate to the right normal steps */
+     /* all motors are on hover level*/
+     /* the motors are responding as expected and not exceeding the 
+        boundaries*/
+
+ /* moto_rotateRight rotate to the right without exceeding
+    the boundaries min and max pulses and the motors are reacting as 
+    expected */
+
+  /* motors are on hover level rotate to the right normal steps */
+       
+     moto_hover();
+     temp_copy();
+     moto_rotateRight();
+
+     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP + NORMAL_STEP);
+
+     temp_copy();
+     moto_rotateRight();
+
+     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP + NORMAL_STEP);
+
+     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP + NORMAL_STEP);
+
+     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP + NORMAL_STEP);
+
+     moto_hover();
+     temp_copy();
+     moto_rotateRight();
+     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP + NORMAL_STEP);
+
+     leftPulse == MIN_PULSE_LEFT + (NORMAL_STEP * 140);
+     rightPulse == MIN_PULSE_RIGHT + (NORMAL_STEP * 140);
+     frontPulse == MAX_PULSE_FRONT - (NORMAL_STEP * 140);
+     rearPulse == MAX_PULSE_REAR - (NORMAL_STEP * 140);
 
      temp_copy();
      moto_rotateRight();
@@ -447,10 +767,18 @@ void test_moto_rotateRight(void){
      CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
      CU_ASSERT(rearPulse == rearP + NORMAL_STEP);
 
-     leftPulse == MIN_PULSE_LEFT + (NORMAL_STEP * 14);
-     rightPulse == MIN_PULSE_RIGHT + (NORMAL_STEP * 14);
-     frontPulse == MAX_PULSE_FRONT - (NORMAL_STEP * 14);
-     rearPulse == MAX_PULSE_REAR - (NORMAL_STEP * 14);
+     moto_hover();
+     temp_copy();
+     moto_rotateRight();
+     CU_ASSERT(leftPulse == leftP - NORMAL_STEP);
+     CU_ASSERT(rightPulse == rightP - NORMAL_STEP);
+     CU_ASSERT(frontPulse == frontP + NORMAL_STEP);
+     CU_ASSERT(rearPulse == rearP + NORMAL_STEP);
+
+     leftPulse == MIN_PULSE_LEFT + (NORMAL_STEP * 800);
+     rightPulse == MIN_PULSE_RIGHT + (NORMAL_STEP * 800);
+     frontPulse == MAX_PULSE_FRONT - (NORMAL_STEP * 800);
+     rearPulse == MAX_PULSE_REAR - (NORMAL_STEP * 800);
 
      temp_copy();
      moto_rotateRight();
@@ -537,7 +865,7 @@ int main(int argc){
      
     /* @uthor Bishare Sufi */
 
-    /* add appropriate test functions to the suite */
+    /* added appropriate test functions to the suite */
 
     CU_add_test(increase_decrease_all, "test_moto_hover", test_moto_hover);
     check_add_ok("Test test_moto_hover");
