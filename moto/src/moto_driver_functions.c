@@ -13,6 +13,7 @@
 #include "moto_driver_functions.h"
 #include <stdint.h>
 #include "moto_interface.h"
+#include <math.h>
 
 #ifdef ARDUINO_DBG
 	#define ARDUINO
@@ -758,7 +759,7 @@ uint16_t rearMotorLimitDecrease(uint16_t currentPulse,
     else{
         return MIN_PULSE_REAR;
     }
-    /*
+    /* -------------------TO GET THE DISCUSSION GOING-----------------------
         if((currentPulse - decrement) > MIN_PULSE_REAR){
             return map((currentPulse - decrement), MIN_PULSE, MAX_PULSE,
                                             MIN_PULSE_REAR, MAX_PULSE_REAR);
@@ -781,7 +782,7 @@ uint16_t map(uint16_t actual, uint16_t in_boundary1, uint16_t in_boundary2,
     double result = (in_boundary1 * temp1) + ((actual-in_boundary1)*steps);
     
     
-    double modfCrap;
+    double modfCrap; /*var. to take care of int val. after modf on result*/
     
     double modfRest = modf(result, &modfCrap);
     
@@ -806,5 +807,3 @@ uint16_t map(uint16_t actual, uint16_t in_boundary1, uint16_t in_boundary2,
         return out_boundary2;
     }
 }
-
-
