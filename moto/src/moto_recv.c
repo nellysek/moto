@@ -20,8 +20,11 @@ msg binary;
 msg_pointer moto_recvMsg(void){
 
 /* get message from protocol group and return it */
+
+
     inputFromProto = proto_read_motor();
     binary = INT_TO_BITFIELD(&inputFromProto);
     return &binary;
 
 }
+
