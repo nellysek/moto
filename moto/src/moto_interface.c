@@ -11,14 +11,13 @@
  */
 
 #include <stdint.h>
-/* #include "proto_mov_motor.h" */
+#include "moto_recv.h"
 #include "moto_interface.h"
-#include "moto_msg_manipulation.h"
 #include "moto_driver_functions.h"
 #include "moto_msg_handler.h"
 
 #ifdef ARDUINO_DBG
-	#define ARDUINO
+    #define ARDUINO
 #endif
 
 #ifdef ARDUINO
@@ -29,9 +28,8 @@
     #include "moto_stubs.h"
 #endif
 
-msg binary;
+/*Pointing to the actual message*/
 msg_pointer mp;
-uint8_t inputFromProto; 
 
 #ifdef ARDUINO
 /* Pins for testing */
@@ -63,12 +61,8 @@ int moto_init(void){
     escFront.writeMicroseconds(STOP_PULSE);
     escRear.writeMicroseconds(STOP_PULSE);
     pinMode(ledPin, OUTPUT);
-#elif defined PC
-        //------------------------------------------------------missing
 #endif
-
   moto_cyclesSinceLastMsg = 0;
-  mp = &binary;
   return 0;
 }
 
@@ -82,11 +76,8 @@ int moto_init(void){
  */
 int moto_run(void){
     moto_cyclesSinceLastMsg++;
-    /* Uncomment to use together with protocol group */
-    /* Also uncomment the include file at the top of the file */
-    /* inputFromProto = read_motor(); */
-    /* binary = INT_TO_BITFIELD(&inputFromProto); */
-    binary = scanHexMsgSTDIN();
+    mp = moto_recvMsg();
+
     if(BITFIELD_TO_CHAR(mp) == 0xf1)
     {
 #ifdef ARDUINO_DBG

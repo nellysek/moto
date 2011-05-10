@@ -1,69 +1,73 @@
-/**
- * Module:       message.c
- * Author(s):    Kristofer Hansson Aspman
+/*!@author Kristofer Hansson Aspman
+ * @file moto_msg_manipulation.c
+ * @version v0.02
+ * @date 2011-05-08
  *
- * Description:  Contains necessary tools
- *               for handling the messages.
+ * @brief Holds the implementations of the functions\n
+ * described in the corresponding .h file. For\n
+ * full description of the functions please refer\n
+ * to that file.\n
+ * Uses the types msg and msg_pointer defined in\n
+ * moto_msg_manipulation.h.
  *
+ * @history 2011-04-03: Created the file.
+ *          2011-04-07: Implemented ifdefs.
+ *          2011-05-08: Cleaned up a bit and added some comments.
  */
- #ifdef ARDUINO_DBG
-	#define ARDUINO
+#ifdef ARDUINO_DBG
+    #define ARDUINO
 #endif
 
 #ifdef ARDUINO
-   #include "WProgram.h"
+    #include "WProgram.h"
 #elif defined PC
-   #include <stdio.h>
+    #include <stdio.h>
 #endif
 
 #include "moto_msg_manipulation.h"
 
 void printMsg(msg_pointer mp){
 #ifdef ARDUINO_DBG
-  Serial.println("***********************************\n");
-  Serial.println("         Message Information\n");
-  Serial.println("\nBits are:\n");
-  Serial.print("ID: ");
-  Serial.println(mp->ID, DEC);
-  Serial.print("Increase: ");
-  Serial.println(mp->increase, DEC);
-  Serial.print("Panic: ");
-  Serial.println(mp->panic, DEC);
+    Serial.println("***********************************\n");
+    Serial.println("         Message Information\n");
+    Serial.println("\nBits are:\n");
+    Serial.print("ID: ");
+    Serial.println(mp->ID, DEC);
+    Serial.print("Increase: ");
+    Serial.println(mp->increase, DEC);
+    Serial.print("Panic: ");
+    Serial.println(mp->panic, DEC);
   
-  Serial.print("Right: ");
-  Serial.println(mp->right, DEC);
-  Serial.print("Left: ");
-  Serial.println(mp->left, DEC);
-  Serial.print("Front: ");
-  Serial.println(mp->front, DEC);
-  Serial.print("Rear: ");
-  Serial.println(mp->rear, DEC);
+    Serial.print("Right: ");
+    Serial.println(mp->right, DEC);
+    Serial.print("Left: ");
+    Serial.println(mp->left, DEC);
+    Serial.print("Front: ");
+    Serial.println(mp->front, DEC);
+    Serial.print("Rear: ");
+    Serial.println(mp->rear, DEC);
 
-  Serial.print("\nSize of bitfield: ");
-  Serial.println(sizeof(*mp), DEC);
-  Serial.print("Hexadecimal representation: ");
-  Serial.println(BITFIELD_TO_CHAR(mp), HEX);
-  Serial.print("Decimal representation: ");
-  Serial.println(BITFIELD_TO_CHAR(mp), DEC);
+    Serial.print("\nSize of bitfield: ");
+    Serial.println(sizeof(*mp), DEC);
+    Serial.print("Hexadecimal representation: ");
+    Serial.println(BITFIELD_TO_CHAR(mp), HEX);
+    Serial.print("Decimal representation: ");
+    Serial.println(BITFIELD_TO_CHAR(mp), DEC);
 
-  Serial.println("***********************************");
+    Serial.println("***********************************");
 
-#elif defined PC//PC Code
-  printf("***********************************\n");
-  printf("         Message Information\n");
-  printf("\nBits are:\n-ID: %d\n-Incr: %d\n-Panic: %d\n",
-	 mp->ID, mp->increase,
-	 mp->panic);
-  printf("-Left: %d\n-Right: %d\n-Front: %d\n-Rear: %d\n",
-	 mp->left, mp->right, 
-	 mp->front, mp->rear);
+#elif defined PC
+    printf("***********************************\n");
+    printf("         Message Information\n");
+    printf("\nBits are:\n-ID: %d\n-Incr: %d\n-Panic: %d\n",
+	   mp->ID, mp->increase, mp->panic);
+    printf("-Left: %d\n-Right: %d\n-Front: %d\n-Rear: %d\n",
+	   mp->left, mp->right, mp->front, mp->rear);
 
-  printf("\nSize of bitfield: %d\n", sizeof(*mp));
-  printf("Hexadecimal representation: %x\n",
-	 BITFIELD_TO_CHAR(mp));
-  printf("Decimal representation: %d\n",
-	 BITFIELD_TO_CHAR(mp));
-  printf("***********************************\n");
+    printf("\nSize of bitfield: %d\n", sizeof(*mp));
+    printf("Hexadecimal representation: %x\n", BITFIELD_TO_CHAR(mp));
+    printf("Decimal representation: %d\n", BITFIELD_TO_CHAR(mp));
+    printf("***********************************\n");
 
 #endif
 }

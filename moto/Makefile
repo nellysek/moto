@@ -35,6 +35,7 @@ TESTNAME=test_suite
 SRC=src/*.c  #test/cunit_stubs.c
 SRC2=include/*.cpp
 #SRC3=test/cunit_stubs.c
+PROTO_SRC=../proto_mega/src/*.c
 CUNIT_SRC=test/cunit_master_test_suite.c test/cunit_moto_msg_handler.h test/cunit_moto_msg_handler.c test/cunit_stubs.c test/cunit_moto_driver_functions.c
 OBJ=bin/*.o
 
@@ -60,7 +61,7 @@ test: EXT=x
 $(OBJ): $(SRC)
 
 	@ cd bin && \
-	avr-g++ -c -g -Os -w -fno-exceptions -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DARDUINO_DBG=22 -DF_CPU=$(F_CPU) -DARDUINO_DBG=22 -I../../include ../$(SRC) ../$(SRC2)
+	avr-g++ -c -g -Os -w -fno-exceptions -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DARDUINO_DBG=22 -DF_CPU=$(F_CPU) -DARDUINO_DBG=22 -I../../include ../$(SRC) ../$(SRC2) ../$(PROTO_SRC)
 	@ echo "Object files created"
 
 compile:
@@ -88,7 +89,7 @@ mega: clean install
 uno: clean install
 
 pc: clean
-	gcc -DPC $(SRC) -o bin/$(PROG).o # $(SRC3) 
+	gcc -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o # $(SRC3) 
 
 clean:
 	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.o
