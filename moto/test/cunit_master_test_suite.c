@@ -43,6 +43,12 @@ int main(int argc){
     CU_add_test(msg_handler, "test_moto_examineID_bad_msg",
         test_moto_examineID_bad_msg);
     check_add_ok("test test_moto_examineID_bad_msg");
+
+    CU_add_test(msg_handler, "test_moto_controlMotors", test_moto_controlMotors);
+    check_add_ok("test test_moto_controlMotors");
+
+    CU_add_test(msg_handler, "test_moto_specialMotorCommand", test_moto_specialMotorCommand);
+    check_add_ok("test test_moto_specialMotorCommand");    
     
     /* Create a test suite for start_stop functions */
     CU_pSuite start_stop = CU_add_suite("start_stop_motors",NULL,NULL);    
@@ -77,6 +83,8 @@ int main(int argc){
     CU_add_test(increase_decrease_all, "test_moto_decreaseAllPanic",
         test_moto_decreaseAllPanic);
     check_add_ok("test test_moto_decreaseAllPanic");
+
+
     
 /***************************************************************************/
 

@@ -16,4 +16,6 @@ void test_moto_increaseAllNormal(void);
 void test_moto_decreaseAllNormal(void);
 void test_moto_increaseAllPanic(void);
 void test_moto_decreaseAllPanic(void);
+void test_moto_specialMotorCommand(void);
+void test_moto_controlMotors(void);
 
