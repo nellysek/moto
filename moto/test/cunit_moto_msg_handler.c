@@ -92,7 +92,7 @@ void test_moto_specialMotorCommand(void){
     mp = &binary;
     specialMotorCommand(mp);
     CU_ASSERT(leftPulse == (1450 - PANIC_STEP));
-    CU_ASSERT(rightPulse == (1550 - PANIC_STEP);
+    CU_ASSERT(rightPulse == (1550 - PANIC_STEP));
     CU_ASSERT(frontPulse == (1500 - PANIC_STEP));
     CU_ASSERT(rearPulse == (1500 - PANIC_STEP));    
 }
