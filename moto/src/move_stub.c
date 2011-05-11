@@ -47,7 +47,7 @@ msg scanHexMsgSTDIN(void){
     else
         return INT_TO_BITFIELD(0xf); //returns BAD_MSG
 
-#elif defined PC
+#elif defined PC /* add DEBUG  */
     unsigned int input;
     printf("Enter the message in hexadecimal: ");
     scanf("%x", &input);

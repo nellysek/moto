@@ -1,8 +1,7 @@
 
 ########################### Added by jogr 110413 #########################
 
-LIB_SRC=moto_driver_functions.c moto_interface.c moto_msg_handler.c moto_msg_manipulation.c moto_stubs.c moto_recv.c move_stub.c
-
+LIB_SRC=moto_driver_functions.c moto_interface.c moto_msg_handler.c moto_msg_manipulation.c moto_stubs.c moto_recv.c move_stub.c 
 LIB_OBJ = $(LIB_SRC:.c=.o)
 
 %.o: %.c
