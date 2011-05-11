@@ -16,13 +16,13 @@ int move_run(){
 /* To simulate movement sending a struct of messages use the following lines*/
 /*----------------------------------------------------*/
     uint8_t msg1 = BITFIELD_TO_CHAR(mpo);
-    uint8_t msg2 = 0xB;
-    uint8_t msg3 = 0xB;
-    uint8_t msg4 = 0xB;
-    uint8_t msg5 = 0xB;
-    uint8_t msg6 = 0xB;
-    uint8_t msg7 = 0xB;
-    uint8_t msg8 = 0xB;
+    uint8_t msg2 = 0xEF;
+    uint8_t msg3 = 0xEF;
+    uint8_t msg4 = 0xEF;
+    uint8_t msg5 = 0xEF;
+    uint8_t msg6 = 0xEF;
+    uint8_t msg7 = 0xEF;
+    uint8_t msg8 = 0xEF;
     proto_write_motor2(msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8);
 
 
