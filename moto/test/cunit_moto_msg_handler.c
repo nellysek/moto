@@ -11,6 +11,8 @@
 #include "cunit_moto_msg_handler.h"
 #include "../src/moto_driver_functions.h"
 
+
+
 /*Holds the definition of the type msg and the macros INT_TO_BITFIELD(a)
 and BITFIELD_TO_CHAR(a)*/
 #include "../src/moto_msg_manipulation.h"
@@ -46,6 +48,14 @@ void test_moto_examineID_bad_msg(void){
     CU_ASSERT(examineID(mp)==1);
 }
 
+
+/* test_moto_controlMotors and test_moto_specialMotorCommand
+ * added by Björn Eriksson.
+ */
+
+
+
+
 void test_moto_controlMotors(void){
     leftPulse = IDLE_SPEED;
     rightPulse = IDLE_SPEED;
@@ -56,10 +66,22 @@ void test_moto_controlMotors(void){
     uint8_t a = 0xA1;
     binary = INT_TO_BITFIELD(&a);
     msg_pointer mp = &binary;
-
+    controlMotors(mp);
+    CU_ASSERT(leftPulse == IDLE_SPEED);
+    CU_ASSERT(rightPulse == IDLE_SPEED);
+    CU_ASSERT(frontPulse == IDLE_SPEED);
+    CU_ASSERT(rearPulse == (IDLE_SPEED + NORMAL_STEP));
 
     /* decrease right motor message */
     a = 0x88;
+    binary = INT_TO_BITFIELD(&a);
+    mp = &binary;
+    controlMotors(mp);
+    CU_ASSERT(leftPulse == IDLE_SPEED);
+    CU_ASSERT(rightPulse == (IDLE_SPEED - NORMAL_STEP));
+    CU_ASSERT(frontPulse == IDLE_SPEED);
+    CU_ASSERT(rearPulse == (IDLE_SPEED + NORMAL_STEP));
+
 }
 
 void test_moto_specialMotorCommand(void){

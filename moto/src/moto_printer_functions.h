@@ -22,7 +22,7 @@
     #define PRINT_DEC(a)
     #define PRINT_HEX(a)
     #define PRINT_NEW_LINE 
-#elif ARDUINO_DBG
+#elif defined ARDUINO_DBG
     #define PRINT_STRING(a) Serial.print(a)
     #define PRINT_DEC(a) Serial.print(a, DEC)
     #define PRINT_HEX(a) Serial.print(a, HEX)

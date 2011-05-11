@@ -91,7 +91,7 @@ test: clean $(OBJ) compile
 	@ echo "Test passed"
 
 testsuite: clean
-	gcc -DPC -DMASTER_TEST_SUITE $(CUNIT_SRC) $(SRC) -o bin/$(TESTNAME).o -lcunit
+	gcc -DPC -DMASTER_TEST_SUITE $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
 
 install: $(OBJ) compile
 	@ cd bin && avr-objcopy -O srec $(PROG).elf $(PROG).rom
