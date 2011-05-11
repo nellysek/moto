@@ -17,6 +17,7 @@
  
 #include "moto_driver_functions.h"
 #include <stdint.h>
+#include <math.h>
 #include "moto_interface.h"
 #include "moto_printer_functions.h"
 
@@ -489,7 +490,7 @@ void moto_increaseRightPanic(void){
     analogWrite(RIGHT_MOTOR, rightPulse);
 #endif
     PRINT_STRING("Increasing right motor pulse in PANIC!");
-    PRINT_NEW_LINE
+    PRINT_NEW_LINE;
 }
 
 void moto_increaseFrontPanic(void){
@@ -645,7 +646,7 @@ void printMotorStatus(void){
     PRINT_NEW_LINE;
     PRINT_STRING("Right:  ");
     PRINT_DEC(rightPulse);
-    PRINT_NEW_LINE
+    PRINT_NEW_LINE;
     PRINT_STRING("Left:  ");
     PRINT_DEC(leftPulse);
     PRINT_NEW_LINE;
