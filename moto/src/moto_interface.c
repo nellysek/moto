@@ -28,7 +28,6 @@
     #include "moto_stubs.h"
 #endif
 
-/*Pointing to the actual message*/
 msg_pointer mp;
 
 #ifdef ARDUINO
