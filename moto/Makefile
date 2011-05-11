@@ -16,7 +16,8 @@
 # Hint:
 #    Launch the Arduino program to see what your USB device 
 #    is called (look under the port settings)
-                                                                                  
+
+
 USB_PORT=/dev/ttyACM0
 #USB_PORT=/dev/tty.usbmodem411
 
@@ -34,11 +35,25 @@ PROG=test
 TESTNAME=test_suite
 SRC=src/*.c  #test/cunit_stubs.c
 SRC2=include/*.cpp
-#SRC3=test/cunit_stubs.c
 PROTO_SRC=../proto_mega/src/*.c
 CUNIT_SRC=test/cunit_master_test_suite.c test/cunit_moto_msg_handler.h test/cunit_moto_msg_handler.c test/cunit_stubs.c test/cunit_moto_driver_functions.c
 OBJ=bin/*.o
 
+default:
+	@echo "--- Normal compilation ----------------------------------"
+	@echo "make pc     produces binary in bin/"
+	@echo "make mega   produces binary for the Arduino and uploads"
+	@echo "            to the board"
+	@echo " "
+	@echo "--- Cleaning up -----------------------------------------"
+	@echo "make clean    recursively clean up subdirs"
+	@echo " "
+	@echo "--- Verification and debugging --------------------------"
+	@echo "make testsuite    compiles unit tests"
+	@echo "make gcovunit     run unit tests with gcov (statement coverage)"
+	@echo "make gcovunitb    run unit tests with gcov (branch coverage)"
+	@echo "make valgrind     run unit tests with valgrind"
+	@echo " "
 
 mega: MMCU=atmega2560
 mega: STK=stk500v2
@@ -89,12 +104,24 @@ mega: clean install
 uno: clean install
 
 pc: clean
-	gcc -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o # $(SRC3) 
+	gcc -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
+
+valgrind: clean
+	gcc -g -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
+
+gcov: clean
+	gcc -fprofile-arcs -ftest-coverage -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
+    #gcov ./bin/test.o
+    #cd $(SRC) && gcov *.c
+
+gcov2: clean
+	gcc -fprofile-arcs -ftest-coverage -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
 
 clean:
-	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.o
+	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.o \
+    ../*.gcno ../*.gcov
 	@ echo "Project cleaned"
-	
+
 version:
 	@ echo $(VERS)
 
@@ -104,5 +131,5 @@ help:
 # reprogram the fuses for the right clock source
 #fuse:
 #	avrdude -p atmega168 -c stk200 -U lfuse:w:0x62:m
-	
+
 .PHONY : clean compile test uno mega pc install help version
