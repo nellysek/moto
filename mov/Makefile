@@ -16,9 +16,8 @@
 # Hint:
 #    Launch the Arduino program to see what your USB device 
 #    is called (look under the port settings)
-
-
-USB_PORT=/dev/ttyACM0
+                                                                                  
+USB_PORT=/dev/cu.usbmodemfa131
 #USB_PORT=/dev/tty.usbmodem411
 
 #########################################################################
@@ -32,30 +31,8 @@ F_CPU=16000000
 VERS="Arduino Portable Makefile [APM] version 1.2, dated 10-04-2011"
 
 PROG=test
-TESTNAME=test_suite
-SRC=src/*.c  #test/cunit_stubs.c
-SRC2=include/*.cpp
-PROTO_SRC=../proto_mega/src/*.c
-MOV_SRC=../mov/src/*.c
-CA_SRC=../ca/src/*.c
-CUNIT_SRC=test/cunit_master_test_suite.c test/cunit_moto_msg_handler.h test/cunit_moto_msg_handler.c test/cunit_moto_driver_functions.c
+SRC=src/*.c
 OBJ=bin/*.o
-
-default:
-	@echo "--- Normal compilation ----------------------------------"
-	@echo "make pc     produces binary in bin/"
-	@echo "make mega   produces binary for the Arduino and uploads"
-	@echo "            to the board"
-	@echo " "
-	@echo "--- Cleaning up -----------------------------------------"
-	@echo "make clean    recursively clean up subdirs"
-	@echo " "
-	@echo "--- Verification and debugging --------------------------"
-	@echo "make test         compiles unit tests"
-	@echo "make gcovunit     run unit tests with gcov (statement coverage)"
-	@echo "make gcovunitb    run unit tests with gcov (branch coverage)"
-	@echo "make valgrind     run unit tests with valgrind"
-	@echo " "
 
 mega: MMCU=atmega2560
 mega: STK=stk500v2
@@ -76,22 +53,20 @@ test: EXT=x
 # -Wstrict-prototypes
 #-Wa,-ahlms=$(PROG).lst
 $(OBJ): $(SRC)
-
 	@ cd bin && \
-	avr-g++ -c -g -Os -w -fno-exceptions -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DARDUINO_DBG=22 -DF_CPU=$(F_CPU) -DARDUINO_DBG=22 -I../../include ../$(SRC) ../$(SRC2) ../$(PROTO_SRC)
+	avr-g++ -c -g -Os -w -fno-exceptions -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DARDUINO=22 -DTEST -DF_CPU=$(F_CPU) -DARDUINO=22 -I../include ../$(SRC)
 	@ echo "Object files created"
 
 compile:
-	@ avr-gcc $(OBJ) -Os -Wl,--gc-sections -mmcu=$(MMCU) -o bin/$(PROG).$(EXT) -l$(LIB) -Llib -lm
+	@ avr-gcc $(OBJ) -Os -Wl,--gc-sections -mmcu=$(MMCU) -DTEST -o bin/$(PROG).$(EXT) -l$(LIB) -Llib -lm
 	@ echo "Project compiled"
 
 #-DENABLE_PWM
 # avr-gcc $(OBJ) -Os -Wl,-Map=$(PROG).map,--cref -mmcu=$(MMCU) -DARDUINO=22 -l$(LIB) -Llib -lm \
 #		-fno-exceptions  -ffunction-sections -fdata-sections -o bin/$(PROG).x
 
-
-test: clean
-	gcc -DPC -DMASTER_TEST_SUITE $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
+test: clean $(OBJ) compile
+	@ echo "Test passed"
 
 install: $(OBJ) compile
 	@ cd bin && avr-objcopy -O srec $(PROG).elf $(PROG).rom
@@ -103,25 +78,20 @@ mega: clean install
 
 uno: clean install
 
+pc-simulator: clean
+	gcc -DPC -DSIMULATOR -DTEST -DDEBUG $(SRC) -lm -o bin/$(PROG).x
+
 pc: clean
-	gcc -DPC $(SRC) $(PROTO_SRC) $(MOV_SRC) $(CA_SRC) -o bin/$(PROG).o
+	gcc -DPC -DTEST $(SRC) -lm -o bin/$(PROG).x
 
-valgrind: clean
-	gcc -g -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
 
-gcov: clean
-	gcc -fprofile-arcs -ftest-coverage -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
-    #gcov ./bin/test.o
-    #cd $(SRC) && gcov *.c
-
-gcov2: clean
-	gcc -fprofile-arcs -ftest-coverage -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
+pc-debug: clean
+	gcc -DPC -DTEST -DDEBUG $(SRC) -lm -o bin/$(PROG).x
 
 clean:
-	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.o \
-    ../*.gcno ../*.gcov
+	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.x
 	@ echo "Project cleaned"
-
+	
 version:
 	@ echo $(VERS)
 
@@ -131,5 +101,5 @@ help:
 # reprogram the fuses for the right clock source
 #fuse:
 #	avrdude -p atmega168 -c stk200 -U lfuse:w:0x62:m
-
+	
 .PHONY : clean compile test uno mega pc install help version
