@@ -87,10 +87,7 @@ compile:
 # avr-gcc $(OBJ) -Os -Wl,-Map=$(PROG).map,--cref -mmcu=$(MMCU) -DARDUINO=22 -l$(LIB) -Llib -lm \
 #		-fno-exceptions  -ffunction-sections -fdata-sections -o bin/$(PROG).x
 
-test: clean $(OBJ) compile
-	@ echo "Test passed"
-
-testsuite: clean
+test: clean
 	gcc -DPC -DMASTER_TEST_SUITE $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
 
 install: $(OBJ) compile
