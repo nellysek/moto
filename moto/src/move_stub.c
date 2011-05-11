@@ -5,10 +5,28 @@ msg binMsg;
 msg_pointer mpo;
 
 int move_run(){
-
   binMsg = scanHexMsgSTDIN();
   mpo = &binMsg;
-  proto_write_motor(BITFIELD_TO_CHAR(mpo));
+/* To simulate movement sending just one message use the following line*/
+/*----------------------------------------------------*/
+/*proto_write_motor(BITFIELD_TO_CHAR(mpo));*/
+/*----------------------------------------------------*/
+
+
+/* To simulate movement sending a struct of messages use the following lines*/
+/*----------------------------------------------------*/
+    uint8_t msg1 = BITFIELD_TO_CHAR(mpo);
+    uint8_t msg2 = 0xB;
+    uint8_t msg3 = 0xB;
+    uint8_t msg4 = 0xB;
+    uint8_t msg5 = 0xB;
+    uint8_t msg6 = 0xB;
+    uint8_t msg7 = 0xB;
+    uint8_t msg8 = 0xB;
+    proto_write_motor2(msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8);
+
+
+/*----------------------------------------------------*/
   return 0;
 }
 
@@ -33,7 +51,6 @@ msg scanHexMsgSTDIN(void){
     unsigned int input;
     printf("Enter the message in hexadecimal: ");
     scanf("%x", &input);
-
     if (input > -1 || input < 256){
         return INT_TO_BITFIELD(&input);
     }

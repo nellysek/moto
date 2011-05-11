@@ -16,6 +16,8 @@
 
 uint8_t inputFromProto;
 msg binary;
+/* binaryStruct, only for moto_rcvMsg2 */
+msgStruct binaryStruct;
 
 msg_pointer moto_recvMsg(void){
 
@@ -25,6 +27,18 @@ msg_pointer moto_recvMsg(void){
     inputFromProto = proto_read_motor();
     binary = INT_TO_BITFIELD(&inputFromProto);
     return &binary;
+
+}
+
+
+msgStructPtr moto_recvMsg2(void){
+
+/* get message struct from protocol group and return it */
+
+
+    //binaryStruct = (msgStruct)proto_read_motor2();   
+    //return &binaryStruct;
+    return (msgStructPtr)proto_read_motor2();
 
 }
 

@@ -16,13 +16,26 @@
  * Will let the code result in different outputs (if any) depending
  * on what target it is compiled for.
  */
+#ifdef ARDUINO_DBG
+    #define ARDUINO
+#endif
 
 #ifdef ARDUINO
-    #define PRINT_STRING(a)
-    #define PRINT_DEC(a)
-    #define PRINT_HEX(a)
-    #define PRINT_NEW_LINE 
-#elif defined ARDUINO_DBG
+    #include "WProgram.h"
+#elif defined PC
+    #include <stdio.h>
+#endif
+
+#ifdef ARDUINO
+    #ifndef ARDUINO_DBG
+        #define PRINT_STRING(a)
+        #define PRINT_DEC(a)
+        #define PRINT_HEX(a)
+        #define PRINT_NEW_LINE 
+    #endif
+#endif
+
+#if defined ARDUINO_DBG
     #define PRINT_STRING(a) Serial.print(a)
     #define PRINT_DEC(a) Serial.print(a, DEC)
     #define PRINT_HEX(a) Serial.print(a, HEX)

@@ -28,6 +28,7 @@
     #include "moto_stubs.h"
 #endif
 
+
 msg_pointer mp;
 
 #ifdef ARDUINO
@@ -75,10 +76,38 @@ int moto_init(void){
  */
 int moto_run(void){
     moto_cyclesSinceLastMsg++;
-    mp = moto_recvMsg();
+/*
+ *  when moto_recvMsg() is used
+ *  ----------------------------------------------
+ *   mp = moto_recvMsg(); 
+ *  ----------------------------------------------
+ */
 
-    if(BITFIELD_TO_CHAR(mp) == 0xf1)
-    {
+/*
+ * if moto_recvMsg2() is used
+ * 
+ * for loop and "uint8_t i" SHALL be removed
+ */
+
+/* ---------------this one------------------------ */
+    msgStructPtr mpStruct;
+    mpStruct = moto_recvMsg2();
+    mp = (msg_pointer)&(mpStruct->msg1);
+/* ----------------------------------------------- */
+
+
+
+    /* will always receive 8 messages in the loop from struct */
+    uint8_t i;
+    for(i = 0; i < 8; i++){
+#ifdef ARDUINO_DBG
+      Serial.print("msg is: ");
+      Serial.println(BITFIELD_TO_CHAR(mp), HEX);
+#elif defined PC
+      printf("msg is: %x\n", BITFIELD_TO_CHAR(mp));
+#endif
+        if(BITFIELD_TO_CHAR(mp) == 0xf1)
+        {
 #ifdef ARDUINO_DBG
       Serial.println("No new message in protocol");
 #elif defined PC
@@ -97,6 +126,18 @@ int moto_run(void){
       return 0;
     }
 
+    if(BITFIELD_TO_CHAR(mp) == 0xB)
+    {
+#ifdef ARDUINO_DBG
+      Serial.println("Struct does not contain more messages!");
+#elif defined PC
+      printf("Struct does not contain more messages!\n");
+#endif
+      return 0;
+    }
+
+    
+
     moto_cyclesSinceLastMsg = 0;
     examineID(mp);
 
@@ -109,5 +150,13 @@ int moto_run(void){
     printMotorStatus();
     
 #endif
+/*
+ *
+ *  mp++ for moto_recvMsg2() 
+ *
+ * 
+ */
+    mp++;
+    } /* ends the for loop */
     return 0;
 }
