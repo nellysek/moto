@@ -21,21 +21,17 @@
 
 #define NORMAL_STEP 5
 #define PANIC_STEP 50
-/* ETT FÖRSLAG TILL ÄNDRING AV KONSTANTER *////////////////////////////
-// #define NORMAL_INCREMENT 2
-// #define PANIC_INCREMENT 4
-// #define NORMAL_DECREMENT -2
-// #define PANIC_DECREMENT -4
-/* defines which "pin" in the arduino, to be changed further on */
 
+/* defines which "pin" in the arduino, to be changed further on */
 #define RIGHT_MOTOR 2
 #define LEFT_MOTOR 3
 #define FRONT_MOTOR 5
 #define REAR_MOTOR 6
 
 
-/* defines maximum and minimum pulse width in µs for every motor */
-
+/* defines maximum and minimum pulse width in µs for every motor 
+   i.e. at which pulse the motor starts turning and at which pulse it
+   reaches its max speed */
 #define MIN_PULSE_FRONT 1000
 #define MAX_PULSE_FRONT 2000
 #define MIN_PULSE_REAR 1000
@@ -44,6 +40,10 @@
 #define MAX_PULSE_LEFT 2000
 #define MIN_PULSE_RIGHT 1000
 #define MAX_PULSE_RIGHT 2000
+
+/* defines the min and max values (pulse width in µs that are allowed) */
+#define MIN_ESC_PULSE 1000
+#define MAX_ESC_PULSE 2000
 
 #define IDLE_SPEED 1100
 #define STOP_PULSE 1000

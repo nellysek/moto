@@ -14,6 +14,8 @@
  *          2011-04-07: Implemented ifdefs. (Kristofer)
  *          2011-05-08: Cleaned up a bit and added some comments. (Kristofer)
  *          2011-05-09: Created macros for printing. (Magnus & Kristofer)
+ *          2011-05-09: Moved macros for printing, included .h file for it \n
+ *                      to be used by other files as well (Magnus)          
  */
 #ifdef ARDUINO_DBG
     #define ARDUINO
@@ -26,24 +28,7 @@
 #endif
 
 #include "moto_msg_manipulation.h"
-
-#ifdef ARDUINO
-    #define PRINT_STRING(a)
-    #define PRINT_DEC(a)
-    #define PRINT_HEX(a)
-    #define PRINT_NEW_LINE 
-#elif ARDUINO_DBG
-    #define PRINT_STRING(a) Serial.print(a)
-    #define PRINT_DEC(a) Serial.print(a, DEC)
-    #define PRINT_HEX(a) Serial.print(a, HEX)
-    #define PRINT_NEW_LINE Serial.println()
-#elif defined PC
-    #define PRINT_STRING(a) printf(a)
-    #define PRINT_DEC(a) printf("%d ", a)
-    #define PRINT_HEX(a) printf("%x ", a)
-    #define PRINT_NEW_LINE printf("\n")
-#endif
-
+#include "moto_printer_functions.h"
 
 void printMsg(msg_pointer mp){
     PRINT_STRING("***********************************");

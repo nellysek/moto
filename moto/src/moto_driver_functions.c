@@ -1,18 +1,24 @@
-/** 
- * Module:       motor_controls.c
- * Author(s):    Kristofer Hansson Aspman,
- *               Björn Eriksson
- *               Magnus Bergqvist
+ /*!@author Kristofer Hansson Aspman,
+ *          Björn Eriksson,
+ *          Magnus Bergqvist
+ *         
+ * @file moto_driver_functions.c
+ * @version v0.03
+ * @date 2011-05-09
  *
- * Description:  Contains the functions that
- *               sets the pulse width of the
- *               different motors.
+ * @brief Contains the functions that sets the pulse width of the \n
+ *        different motors.
  *
+ * @history 2011-04-03: Created the file. (Kristofer)
+ *          2011-05-09: Added map function and moved printout macros \n
+ *                      to moto_printer_functions, changed the printouts \n
+ *                      to fully comply with the new macro style (Magnus)
  */
  
 #include "moto_driver_functions.h"
 #include <stdint.h>
 #include "moto_interface.h"
+#include "moto_printer_functions.h"
 
 #ifdef ARDUINO_DBG
 	#define ARDUINO
@@ -24,22 +30,6 @@
 #elif defined PC
     #include <stdio.h>
     #include"moto_stubs.h"
-#endif
-
-/* 
- * A printout test inspired by Henrik Sandklef.
- * The defined names ending with a number specifies the
- * number of arguments each macro takes, i.e. the number
- * of arguments that is to be sent to the printout
- */
-#ifdef ARDUINO_DBG
-    #define PRINTOUT_1(a) Serial.print(a)
-    #define PRINTOUT_2(a, b) Serial.print(a, b)
-    #define PRINTOUT_3(a, b, c) Serial.print(a, b, c)
-#elif defined PC
-    #define PRINTOUT_1(a) printf(a)
-    #define PRINTOUT_2(a, b) printf(a, b)
-    #define PRINTOUT_3(a, b, c) printf(a, b, c)
 #endif
 
 /* These are the variables keeping track of the  */
@@ -62,7 +52,8 @@ void moto_left_motor(unsigned char increase,unsigned char panic){
 	#elif defined PC
 		analogWrite(LEFT_MOTOR, leftPulse);
 	#endif
-		PRINTOUT_1("Increasing left motor pulse\n");
+		PRINT_STRING("Increasing left motor pulse");
+		PRINT_NEW_LINE;
 }
 
 /*
@@ -77,7 +68,8 @@ void moto_right_motor(unsigned char increase,unsigned char panic){
 	#elif defined PC
 		analogWrite(RIGHT_MOTOR, rightPulse);
 	#endif
-		PRINTOUT_1("Increasing right motor pulse\n");
+		PRINT_STRING("Increasing right motor pulse");
+		PRINT_NEW_LINE;
 }
 
 /*
@@ -92,7 +84,8 @@ void moto_front_motor(unsigned char increase,unsigned char panic){
 	#elif defined PC
 		analogWrite(FRONT_MOTOR, frontPulse);
 	#endif
-		PRINTOUT_1("Increasing front motor pulse\n");
+		PRINT_STRING("Increasing front motor pulse");
+		PRINT_NEW_LINE;
 }
 
 /*
@@ -107,7 +100,8 @@ void moto_rear_motor(unsigned char increase,unsigned char panic){
 	#elif defined PC
 		analogWrite(REAR_MOTOR, rearPulse);
 	#endif
-		PRINTOUT_1("Increasing rear motor pulse\n");
+		PRINT_STRING("Increasing rear motor pulse");
+		PRINT_NEW_LINE;
 }
 
 
@@ -139,8 +133,8 @@ void moto_startMotors(void){
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
 #endif
-
-    PRINTOUT_1("Starting all motors\n");
+    PRINT_STRING("Starting all motors");
+    PRINT_NEW_LINE;
 }
 
 /**
@@ -169,8 +163,8 @@ void moto_stopMotors(void){
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
 #endif
-    
-    PRINTOUT_1("Stopping all motors\n");
+    PRINT_STRING("Stopping all motors");
+    PRINT_NEW_LINE;
 }
 /**
  * Function:    void moto_hover()
@@ -198,8 +192,8 @@ void moto_hover(void){
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
 #endif
-
-    PRINTOUT_1("Hovering\n");    
+    PRINT_STRING("Hovering");
+    PRINT_NEW_LINE;    
 }
 
 
@@ -330,8 +324,8 @@ void moto_increaseAllNormal(void){
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
 #endif
-
-    PRINTOUT_1("increases all motors\n");
+    PRINT_STRING("increases all motors");
+    PRINT_NEW_LINE;
 }
 
 void moto_increaseAllPanic(void){
@@ -350,8 +344,8 @@ void moto_increaseAllPanic(void){
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
 #endif
-
-    PRINTOUT_1("increases all motors\n");
+    PRINT_STRING("increases all motors");
+    PRINT_NEW_LINE;
 }
 /**
  * Functions:   moto_decreaseAll()
@@ -385,8 +379,8 @@ void moto_decreaseAllNormal(void){
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
 #endif
-
-    PRINTOUT_1("decreases all motors\n");
+    PRINT_STRING("decreases all motors\n");
+    PRINT_NEW_LINE;
 }
 
 void moto_decreaseAllPanic(void){
@@ -405,8 +399,8 @@ void moto_decreaseAllPanic(void){
     analogWrite(FRONT_MOTOR, frontPulse);
     analogWrite(REAR_MOTOR, rearPulse);
 #endif
-
-    PRINTOUT_1("decreases all motors\n");
+    PRINT_STRING("decreases all motors");
+    PRINT_NEW_LINE;
 }
 /**
  * Functions:   moto_increaseRightNormal()
@@ -439,7 +433,8 @@ void moto_increaseLeftNormal(void){
 #elif defined PC
     analogWrite(LEFT_MOTOR, leftPulse);
 #endif
-    PRINTOUT_1("Increasing left motor pulse\n");
+    PRINT_STRING("Increasing left motor pulse");
+    PRINT_NEW_LINE;
 }
 
 void moto_increaseRightNormal(void){
@@ -449,7 +444,8 @@ void moto_increaseRightNormal(void){
 #elif defined PC
     analogWrite(RIGHT_MOTOR, rightPulse);
 #endif
-    PRINTOUT_1("Increasing right motor pulse\n");
+    PRINT_STRING("Increasing right motor pulse");
+    PRINT_NEW_LINE;
 }
 
 void moto_increaseFrontNormal(void){
@@ -459,7 +455,8 @@ void moto_increaseFrontNormal(void){
 #elif defined PC
     analogWrite(FRONT_MOTOR, frontPulse);
 #endif
-    PRINTOUT_1("Increasing Front motor pulse\n");
+    PRINT_STRING("Increasing Front motor pulse");
+    PRINT_NEW_LINE;
 }
 
 void moto_increaseRearNormal(void){
@@ -469,7 +466,8 @@ void moto_increaseRearNormal(void){
 #elif defined PC
     analogWrite(REAR_MOTOR, rearPulse);
 #endif
-    PRINTOUT_1("Increasing rear motor pulse\n");
+    PRINT_STRING("Increasing rear motor pulse");
+    PRINT_NEW_LINE;
 }
 
 void moto_increaseLeftPanic(void){
@@ -479,7 +477,8 @@ void moto_increaseLeftPanic(void){
 #elif defined PC
     analogWrite(LEFT_MOTOR, leftPulse);
 #endif
-    PRINTOUT_1("Increasing left motor pulse in PANIC!\n");
+    PRINT_STRING("Increasing left motor pulse in PANIC!");
+    PRINT_NEW_LINE;
 }
 
 void moto_increaseRightPanic(void){
@@ -489,7 +488,8 @@ void moto_increaseRightPanic(void){
 #elif defined PC
     analogWrite(RIGHT_MOTOR, rightPulse);
 #endif
-    PRINTOUT_1("Increasing right motor pulse in PANIC!\n");
+    PRINT_STRING("Increasing right motor pulse in PANIC!");
+    PRINT_NEW_LINE
 }
 
 void moto_increaseFrontPanic(void){
@@ -499,8 +499,8 @@ void moto_increaseFrontPanic(void){
 #elif defined PC
     analogWrite(FRONT_MOTOR, frontPulse);
 #endif
-
-    PRINTOUT_1("Increasing Front motor pulse in PANIC!\n");
+    PRINT_STRING("Increasing Front motor pulse in PANIC!");
+    PRINT_NEW_LINE;
 }
 
 void moto_increaseRearPanic(void){
@@ -510,7 +510,8 @@ void moto_increaseRearPanic(void){
 #elif defined PC
     analogWrite(REAR_MOTOR, rearPulse);
 #endif
-    PRINTOUT_1("Increasing rear motor pulse in PANIC!\n");
+    PRINT_STRING("Increasing rear motor pulse in PANIC!");
+    PRINT_NEW_LINE;
 }
 
 /**
@@ -542,7 +543,8 @@ void moto_decreaseRightNormal(void){
 #elif defined PC
     analogWrite(RIGHT_MOTOR, rightPulse);
 #endif
-    PRINTOUT_1("Decreasing right motor pulse\n");
+    PRINT_STRING("Decreasing right motor pulse");
+    PRINT_NEW_LINE;
 }
 
 void moto_decreaseLeftNormal(void){
@@ -552,7 +554,8 @@ void moto_decreaseLeftNormal(void){
 #elif defined PC
     analogWrite(LEFT_MOTOR, leftPulse);
 #endif
-    PRINTOUT_1("Decreasing left motor pulse\n");
+    PRINT_STRING("Decreasing left motor pulse");
+    PRINT_NEW_LINE;
 }
 
 void moto_decreaseFrontNormal(void){
@@ -562,8 +565,8 @@ void moto_decreaseFrontNormal(void){
 #elif defined PC
     analogWrite(FRONT_MOTOR, frontPulse);
 #endif
-
-    PRINTOUT_1("Decreasing Front motor pulse\n");
+    PRINT_STRING("Decreasing Front motor pulse");
+    PRINT_NEW_LINE;
 }
 
 void moto_decreaseRearNormal(void){
@@ -573,7 +576,8 @@ void moto_decreaseRearNormal(void){
 #elif defined PC
     analogWrite(REAR_MOTOR, rearPulse);
 #endif
-    PRINTOUT_1("Decreasing rear motor pulse\n");
+    PRINT_STRING("Decreasing rear motor pulse");
+    PRINT_NEW_LINE;
 }
 
 void moto_decreaseLeftPanic(void){
@@ -583,7 +587,8 @@ void moto_decreaseLeftPanic(void){
 #elif defined PC
     analogWrite(LEFT_MOTOR, leftPulse);
 #endif
-    PRINTOUT_1("Decreasing left motor pulse in PANIC!\n");
+    PRINT_STRING("Decreasing left motor pulse in PANIC!");
+    PRINT_NEW_LINE;
 }
 
 void moto_decreaseRightPanic(void){
@@ -593,7 +598,8 @@ void moto_decreaseRightPanic(void){
 #elif defined PC
     analogWrite(RIGHT_MOTOR, rightPulse);
 #endif
-    PRINTOUT_1("Decreasing right motor pulse in PANIC!\n");
+    PRINT_STRING("Decreasing right motor pulse in PANIC!");
+    PRINT_NEW_LINE;
 }
 
 void moto_decreaseFrontPanic(void){
@@ -603,8 +609,8 @@ void moto_decreaseFrontPanic(void){
 #elif defined PC
     analogWrite(FRONT_MOTOR, frontPulse);
 #endif
-
-    PRINTOUT_1("Decreasing Front motor pulse in PANIC!\n");
+    PRINT_STRING("Decreasing Front motor pulse in PANIC!");
+    PRINT_NEW_LINE;
 }
 
 void moto_decreaseRearPanic(void){
@@ -614,13 +620,15 @@ void moto_decreaseRearPanic(void){
 #elif defined PC
     analogWrite(REAR_MOTOR, rearPulse);
 #endif
-    PRINTOUT_1("Decreasing rear motor pulse in PANIC!\n");
+    PRINT_STRING("Decreasing rear motor pulse in PANIC!");
+    PRINT_NEW_LINE;
 }
 
 
 /**
  * Function:     printMotorStatus()
- * Author(s):    Kristofer Hansson Aspman
+ * Author(s):    Kristofer Hansson Aspman,
+ *               Magnus Bergqvist
  *
  * Description:  Prints out the status of the
  *               motors to either the terminal
@@ -631,29 +639,24 @@ void moto_decreaseRearPanic(void){
  */
 
 void printMotorStatus(void){
-#ifdef ARDUINO_DBG
-    /* Arduino code begin*/
-    Serial.println("****************************");
-    Serial.println("Current status of the motors");
-    Serial.print("Right:  ");
-    Serial.println(rightPulse, DEC);
-    Serial.print("Left:  ");
-    Serial.println(leftPulse, DEC);
-    Serial.print("Front:  ");
-    Serial.println(frontPulse, DEC);
-    Serial.print("Rear:  ");
-    Serial.println(rearPulse, DEC);
-    Serial.println("****************************");
-    /* Arduino code end */
-#elif defined PC
-    /* PC code begin */
-    printf("****************************\n");
-    printf("Current status of the motors\n\n");
-    printf("Left:  %d   Right: %d\n", leftPulse, rightPulse);
-    printf("Front: %d   Rear:  %d\n", frontPulse, rearPulse);
-    printf("****************************\n");
-    /* PC code end */
-#endif
+    PRINT_STRING("****************************");
+    PRINT_NEW_LINE;
+    PRINT_STRING("Current status of the motors");
+    PRINT_NEW_LINE;
+    PRINT_STRING("Right:  ");
+    PRINT_DEC(rightPulse);
+    PRINT_NEW_LINE
+    PRINT_STRING("Left:  ");
+    PRINT_DEC(leftPulse);
+    PRINT_NEW_LINE;
+    PRINT_STRING("Front:  ");
+    PRINT_DEC(frontPulse);
+    PRINT_NEW_LINE;
+    PRINT_STRING("Rear:  ");
+    PRINT_DEC(rearPulse);
+    PRINT_NEW_LINE;
+    PRINT_STRING("****************************");
+    PRINT_NEW_LINE;
 }
 
 void sendMsg(void){
@@ -676,7 +679,7 @@ void sendMsg(void){
  * Description:  Functions contains the logic
  *               that determines and returns
  *               a valid input value to the motors.
- *               Returned values are calibrated for
+ *               Returned values are mapped for
  *               the functions corresponding motor.
  */
  
@@ -757,5 +760,60 @@ uint16_t rearMotorLimitDecrease(uint16_t currentPulse,
     }
     else{
         return MIN_PULSE_REAR;
+    }
+}
+
+/**
+ * Function:     map()
+ * Author(s):    Magnus Bergqvist
+ *
+ * Description:  The map function takes an input value (actual), and upper
+ *               and lower boundary value the wanted output as arguments.
+ *               According to these values combined with boundaries for the
+ *               systems actual output signals it returns a suitable
+ *               value for the calling function to use.
+ */
+uint16_t map(uint16_t actual, uint16_t out_boundary1, uint16_t out_boundary2){
+    
+    /*step size depending on inner value spectra 
+    compared to ESC output spectra*/
+    double steps = (double)(out_boundary2 - out_boundary1) / 
+                    (double)(MAX_ESC_PULSE - MIN_ESC_PULSE);
+    
+    /* calculating the result and make sure all values start from 
+        out_boundary1*/
+    double result = out_boundary1 + ((actual-MIN_ESC_PULSE)*steps);
+    
+    /* modfCrap is a var. to take care of int val. after a modf on result,
+       which we don't care about. We just want the decimal part to get
+       the rounding of the numbers more accurate*/
+    double modfCrap;
+    
+    /* modfRest will store the decimals from var. result to be used below
+       to determine if the returned value should be rounded up or down*/
+    double modfRest = modf(result, &modfCrap);
+    
+    /* final created to get a return variable that conforms with the
+       coding standard and allows final adjustment to the result before
+       it's returned*/
+    uint16_t final;
+    
+    /* If fractional part of result < 0.5 do nothing*/
+    if(modfRest < 0.5){
+        final = (uint16_t)result;
+    }
+    /* else add 1 to get a rounding upwards */
+    else{
+        final = (uint16_t)result + 1;
+    }
+    
+    if (final >= out_boundary1 && final <= out_boundary2){
+        return final;
+    }
+    else if(final < out_boundary1){
+        return out_boundary1;
+    }
+    else if(final > out_boundary2){
+        return out_boundary2;
     }
 }
