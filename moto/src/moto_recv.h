@@ -13,3 +13,15 @@
 #include "moto_msg_manipulation.h"
 
 msg_pointer moto_recvMsg(void);
+msg_pointer moto_recvMsg2(void);
+
+typedef struct {
+    uint8_t msg1;
+    uint8_t msg2;
+    uint8_t msg3;
+    uint8_t msg4;
+    uint8_t msg5;
+    uint8_t msg6;
+    uint8_t msg7;
+    uint8_t msg8;
+} moto_msgStruct;    
