@@ -11,6 +11,7 @@
  */
 
 #include <stdint.h>
+#include <stdlib.h>
 #include "moto_recv.h"
 #include "moto_interface.h"
 #include "moto_driver_functions.h"
@@ -79,6 +80,19 @@ int moto_init(void){
  */
 int moto_run(void){
     moto_cyclesSinceLastMsg++;
+    printf("Number of cycles without a message: %d\n", moto_cyclesSinceLastMsg);
+    if (moto_cyclesSinceLastMsg > 10)
+    {
+#ifdef ARDUINO_DBG
+        Serial.println("Now new message in protocol for too long!");
+        Serial.println("Initiating no-op command!");
+#elif defined PC
+        printf("Now new message in protocol for too long!\n");
+        printf("Initiating no-op command!\n");
+#endif
+        moto_cyclesSinceLastMsg = 0;
+        return 0;
+    }
 /*
  *  when moto_recvMsg() is used
  *  ----------------------------------------------
@@ -104,62 +118,73 @@ int moto_run(void){
     uint8_t i;
     for(i = 0; i < 8; i++){
 #ifdef ARDUINO_DBG
-      Serial.print("msg is: ");
-      Serial.println(BITFIELD_TO_CHAR(mp), HEX);
+        Serial.print("msg is: ");
+        Serial.println(BITFIELD_TO_CHAR(mp), HEX);
 #elif defined PC
-      printf("msg is: %x\n", BITFIELD_TO_CHAR(mp));
+        printf("msg is: %x\n", BITFIELD_TO_CHAR(mp));
 #endif
         if(BITFIELD_TO_CHAR(mp) == 0xf1)
         {
 #ifdef ARDUINO_DBG
-      Serial.println("No new message in protocol");
+            Serial.println("No new message in protocol");
 #elif defined PC
-      printf("No new message in protocol\n");
+            printf("No new message in protocol\n");
 #endif
-      return 0;
-    }
+            return 0;
+        }
 
-    if(BITFIELD_TO_CHAR(mp) == 0xf)
-    {
+/*Resets the counter that counts how many cycles has run since last message*/
+/*was written to protocol.*/
+        moto_cyclesSinceLastMsg = 0;
+        if(BITFIELD_TO_CHAR(mp) < 0x0 || BITFIELD_TO_CHAR(mp) > 0xff)
+        {
 #ifdef ARDUINO_DBG
-      Serial.println("No new message in scanhexmsg");
+            Serial.println("Message out of bounds");
 #elif defined PC
-      printf("No new message in scanhexmsg\n");
+            printf("Message out of bounds\n");
 #endif
-      return 0;
-    }
+            return 0;
+        }
 
-    if(BITFIELD_TO_CHAR(mp) == 0xB)
-    {
+        if(BITFIELD_TO_CHAR(mp) == 0xf)
+        {
 #ifdef ARDUINO_DBG
-      Serial.println("Struct does not contain more messages!");
+            Serial.println("No new message in scanhexmsg");
 #elif defined PC
-      printf("Struct does not contain more messages!\n");
+            printf("No new message in scanhexmsg\n");
 #endif
-      return 0;
-    }
+            return 0;
+        }
 
-    
+        if(BITFIELD_TO_CHAR(mp) == 0xB)
+        {
+#ifdef ARDUINO_DBG
+            Serial.println("Struct does not contain more messages!");
+#elif defined PC
+            printf("Struct does not contain more messages!\n");
+#endif
+            return 0;
+        }
 
-    moto_cyclesSinceLastMsg = 0;
-    examineID(mp);
+        examineID(mp);
 
 #ifdef ARDUINO_DBG
-  printMsg(mp);
-  printMotorStatus();
+        printMsg(mp);
+        printMotorStatus();
 
 #elif defined PC
-    printMsg(mp);
-    printMotorStatus();
+        printMsg(mp);
+        printMotorStatus();
     
 #endif
 /*
  *
  *  mp++ for moto_recvMsg2() 
- *
+ *  used when using the struct of messages
  * 
  */
-    mp++;
-    } /* ends the for loop */
+        mp++;
+        } /* ends the for loop */
+    free(mpStruct);
     return 0;
 }

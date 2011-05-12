@@ -117,7 +117,8 @@ gcov2: clean
 
 clean:
 	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.o \
-    ../*.gcno ../*.gcov
+    ../*.gcno ../*.gcov ../../proto_mega/bin/*.o ../../../mov/bin/*.o \
+    ../../../ca/bin/*.o ../../main.o
 	@ echo "Project cleaned"
 
 version:

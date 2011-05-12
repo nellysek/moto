@@ -38,7 +38,10 @@ msgStructPtr moto_recvMsg2(void){
 
     //binaryStruct = (msgStruct)proto_read_motor2();   
     //return &binaryStruct;
-    return (msgStructPtr)proto_read_motor2();
+    msgStructPtr binaryStructPtr;
+    binaryStructPtr = (msgStructPtr)proto_read_motor2();
+    createDefaultmove();
+    return binaryStructPtr;
 
 }
 
