@@ -26,6 +26,7 @@
     #include <stdio.h>
 #endif
 
+
 #ifdef ARDUINO
     #ifndef ARDUINO_DBG
         #define PRINT_STRING(a)
@@ -40,9 +41,14 @@
     #define PRINT_DEC(a) Serial.print(a, DEC)
     #define PRINT_HEX(a) Serial.print(a, HEX)
     #define PRINT_NEW_LINE Serial.println()
-#elif defined PC
+#elif defined PC_DBG
     #define PRINT_STRING(a) printf(a)
     #define PRINT_DEC(a) printf("%d ", a)
     #define PRINT_HEX(a) printf("%x ", a)
     #define PRINT_NEW_LINE printf("\n")
+#elif defined PC
+    #define PRINT_STRING(a)
+    #define PRINT_DEC(a)
+    #define PRINT_HEX(a)
+    #define PRINT_NEW_LINE 
 #endif
