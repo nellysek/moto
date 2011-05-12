@@ -4,6 +4,16 @@
 msg binMsg;
 msg_pointer mpo;
 
+int move_init()
+{
+#ifdef ARDUINO
+#ifdef DEBUG
+    Serial.println("inside move_init");
+#endif
+#endif
+    return 0;
+}
+
 int move_run(){
   binMsg = scanHexMsgSTDIN();
   mpo = &binMsg;
@@ -16,13 +26,13 @@ int move_run(){
 /* To simulate movement sending a struct of messages use the following lines*/
 /*----------------------------------------------------*/
     uint8_t msg1 = BITFIELD_TO_CHAR(mpo);
-    uint8_t msg2 = 0xEF;
-    uint8_t msg3 = 0xEF;
-    uint8_t msg4 = 0xEF;
-    uint8_t msg5 = 0xEF;
-    uint8_t msg6 = 0xEF;
-    uint8_t msg7 = 0xEF;
-    uint8_t msg8 = 0xEF;
+    uint8_t msg2 = 0xB;
+    uint8_t msg3 = 0xB;
+    uint8_t msg4 = 0xB;
+    uint8_t msg5 = 0xB;
+    uint8_t msg6 = 0xB;
+    uint8_t msg7 = 0xB;
+    uint8_t msg8 = 0xB;
     proto_write_motor2(msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8);
 
 
@@ -87,14 +97,14 @@ uint8_t serReadUnsignedChar(void)
     /* Array to hold input bytes*/
     char inputBytes [7];                     
     char * inputBytesPtr = &inputBytes[0];
-    delay(3000);
+    //delay(3000);
     /* Check to see if there are any serial input*/
     if (Serial.available()>0)                
     {
         Serial.println("serial available");
         /* Delay for terminal to finish transmitted, 5ms work great*/
         /* for 9600 baud (increase this number for slower baud)*/
-        delay(5);                              
+        //delay(5);                              
         numberOfAvailableInputs = Serial.available();
         
         /* Load input bytes into array*/

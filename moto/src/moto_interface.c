@@ -51,7 +51,10 @@ Servo escRear;
  */
 int moto_init(void){
 #ifdef ARDUINO
-    Serial.begin(9600); 
+    //Serial.begin(9600); 
+#ifdef DEBUG
+    Serial.println("Inside moto_init");
+#endif
     escRight.attach(RIGHT_MOTOR);
     escLeft.attach(LEFT_MOTOR);
     escFront.attach(FRONT_MOTOR);
