@@ -13,6 +13,7 @@
 #include "moto_driver_functions.h"
 #include <stdint.h>
 #include "moto_interface.h"
+#include <math.h>
 
 #ifdef ARDUINO_DBG
 	#define ARDUINO
@@ -757,5 +758,52 @@ uint16_t rearMotorLimitDecrease(uint16_t currentPulse,
     }
     else{
         return MIN_PULSE_REAR;
+    }
+    /* -------------------TO GET THE DISCUSSION GOING-----------------------
+        if((currentPulse - decrement) > MIN_PULSE_REAR){
+            return map((currentPulse - decrement), MIN_PULSE, MAX_PULSE,
+                                            MIN_PULSE_REAR, MAX_PULSE_REAR);
+        }
+        else{
+            return MIN_PULSE_REAR;
+        }
+    */
+}
+
+uint16_t map(uint16_t actual, uint16_t in_boundary1, uint16_t in_boundary2, 
+                            uint16_t out_boundary1, uint16_t out_boundary2){
+    
+    /*step size depending on inner value spectra 
+    compared to outer value spectra*/
+    double steps = (double)(out_boundary2 - out_boundary1) / 
+                    (double)(in_boundary2 - in_boundary1);
+    
+    double temp1 = (double)out_boundary1 / (double)in_boundary1;
+    double result = (in_boundary1 * temp1) + ((actual-in_boundary1)*steps);
+    
+    
+    double modfCrap; /*var. to take care of int val. after modf on result*/
+    
+    double modfRest = modf(result, &modfCrap);
+    
+    uint16_t final;
+    
+    /* If fractional part of result < 0.5 do nothing*/
+    if(modfRest < 0.5){
+        final = (uint16_t)result;
+    }
+    /* else add 1 to get a rounding upwards */
+    else{
+        final = (uint16_t)result + 1;
+    }
+    
+    if (final >= out_boundary1 && final <= out_boundary2){
+        return final;
+    }
+    if(final < out_boundary1){
+        return out_boundary1;
+    }
+    if(final > out_boundary2){
+        return out_boundary2;
     }
 }
