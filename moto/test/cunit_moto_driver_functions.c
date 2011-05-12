@@ -327,27 +327,27 @@ void test_moto_hover(void){
       frontPulse = MAX_PULSE_FRONT + (NORMAL_STEP * 8);
       rearPulse = MAX_PULSE_REAR + (NORMAL_STEP * 8);
 
-     temp_copy();
-     moto_hover();
+      temp_copy();
+      moto_hover();
 
-     rightPulse = MAX_PULSE_RIGHT - (NORMAL_STEP * 100);
+      rightPulse = MAX_PULSE_RIGHT - (NORMAL_STEP * 100);
 
-     leftPulse = MAX_PULSE_LEFT - (NORMAL_STEP * 100);
+      leftPulse = MAX_PULSE_LEFT - (NORMAL_STEP * 100);
 
-     frontPulse = MAX_PULSE_FRONT - (NORMAL_STEP * 100);
+      frontPulse = MAX_PULSE_FRONT - (NORMAL_STEP * 100);
 
-     rearPulse = MAX_PULSE_REAR - (NORMAL_STEP *100);
+      rearPulse = MAX_PULSE_REAR - (NORMAL_STEP *100);
 
-     temp_copy();
-     moto_hover();
+      temp_copy();
+      moto_hover();
 
-     rightPulse = MAX_PULSE_RIGHT + (NORMAL_STEP * 100);
+      rightPulse = MAX_PULSE_RIGHT + (NORMAL_STEP * 100);
 
-     leftPulse = MAX_PULSE_LEFT + (NORMAL_STEP * 100);
+      leftPulse = MAX_PULSE_LEFT + (NORMAL_STEP * 100);
 
-     frontPulse = MAX_PULSE_FRONT + (NORMAL_STEP * 100);
+      frontPulse = MAX_PULSE_FRONT + (NORMAL_STEP * 100);
 
-     rearPulse = MAX_PULSE_REAR + (NORMAL_STEP * 100);
+      rearPulse = MAX_PULSE_REAR + (NORMAL_STEP * 100);
 
       moto_hover();
       CU_ASSERT(rightPulse == HOVER_PULSE_RIGHT);
