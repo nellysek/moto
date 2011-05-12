@@ -111,7 +111,7 @@ uint16_t frontMotorLimitDecrease(uint16_t currentPulse, uint16_t decrement);
 uint16_t rearMotorLimitIncrease(uint16_t currentPulse, uint16_t increment);
 uint16_t rearMotorLimitDecrease(uint16_t currentPulse, uint16_t decrement);
 
-struct moto_to_move{
+struct pulses{
     uint16_t right;
     uint16_t left;
     uint16_t front;
