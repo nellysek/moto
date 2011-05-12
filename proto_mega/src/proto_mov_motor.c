@@ -78,14 +78,14 @@ void proto_write_motor2(uint8_t message1,uint8_t message2,uint8_t message3,uint8
 void createDefaultmove(){
 movPtr = (struct move_commands *) malloc(sizeof(struct move_commands));
 
-	movPtr->message1 = 1;
-	movPtr->message2 = 2;
-	movPtr->message3 = 3;
-	movPtr->message4 = 4;
-	movPtr->message5 = 5;
-	movPtr->message6 = 6;
-	movPtr->message7 = 7;
-	movPtr->message8 = 8;
+	movPtr->message1 = 0xB;
+	movPtr->message2 = 0xB;
+	movPtr->message3 = 0xB;
+	movPtr->message4 = 0xB;
+	movPtr->message5 = 0xB;
+	movPtr->message6 = 0xB;
+	movPtr->message7 = 0xB;
+	movPtr->message8 = 0xB;
 
        
 }
