@@ -13,6 +13,7 @@
 #include "moto_msg_handler.h"
 #include "moto_driver_functions.h"
 #include "moto_state_definitions.h"
+#include "moto_printer_functions.h"
 
 #ifdef ARDUINO_DBG
     #define ARDUINO
@@ -26,29 +27,22 @@
 
 
 int examineID(msg_pointer mp){
-#ifdef ARDUINO_DBG
-    Serial.print("ID is ");
-    Serial.println(mp->ID, DEC);
+
+    PRINT_STRING("ID is ");
+    PRINT_DEC(mp->ID);
+    PRINT_NEW_LINE;
+    
     if (BITFIELD_TO_CHAR(mp) == BAD_MESSAGE){
-        Serial.println("Bad message!");
+        PRINT_STRING("Bad message!");
+        PRINT_NEW_LINE;
         return 1;
     }
     if (BITFIELD_TO_CHAR(mp) > 0xFF){
-        Serial.println("Message value too high, ignoring message!");
-        return 1;
-    }
-#elif defined PC
-    printf("ID is %d\n", mp->ID);
-    if (BITFIELD_TO_CHAR(mp) == BAD_MESSAGE){
-        printf("Bad message!\n");
-        return 1;
-    }
-    if (BITFIELD_TO_CHAR(mp) > 0xFF){
-        printf("Message value too high, ignoring message!\n");
+        PRINT_STRING("Message value too high, ignoring message!");
+        PRINT_NEW_LINE;
         return 1;
     }
 
-#endif
 
     switch(mp->ID){
 
@@ -80,11 +74,8 @@ int examineID(msg_pointer mp){
  */
 
 void OLD_controlMotors(msg_pointer mp){
-	#ifdef ARDUINO_DBG
-		Serial.print("Standard Motor Control Message!\n");
-	#elif defined PC 
-		printf("Standard Motor Control Message!\n");
-	#endif
+        PRINT_STRING("Standard Motor Control Message!");
+        PRINT_NEW_LINE;
 
 	if(mp->left)    moto_left_motor(mp->increase,mp->panic);
 	if(mp->right)	moto_right_motor(mp->increase,mp->panic);
@@ -96,12 +87,8 @@ void OLD_controlMotors(msg_pointer mp){
   /*  The new one Implemented up here */
 
 void controlMotors(msg_pointer mp){
-#ifdef ARDUINO_DBG
-    Serial.print("Standard Motor Control Message!\n");
-#elif defined PC 
-    printf("Standard Motor Control Message!\n");
-#endif
-
+    PRINT_STRING("Standard Motor Control Message!");
+    
     /*Normal increase of the motors*/
     /*i.e. panic mode not set.*/
     if (mp->increase == 1 && mp->panic == 0){
@@ -157,11 +144,8 @@ void controlMotors(msg_pointer mp){
 }
 
 void specialMotorCommand(msg_pointer mp){
-#ifdef ARDUINO_DBG
-    Serial.print("Special Motor Control Message!\n");
-#elif defined PC
-    printf("Special Motor Control Message!\n");
-#endif
+    PRINT_STRING("Special Motor Control Message!");
+    PRINT_NEW_LINE;
 
     switch(BITFIELD_TO_CHAR(mp)){
     
