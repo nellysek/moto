@@ -247,7 +247,6 @@ void test_moto_decreaseAllPanic(void){
 }
 
 /* @uthor Bishare Sufi */
-/* this code has been improved once the old version is in deprecate folder */
 
 /* this code has been improved once the old cunit test
    for this file is in deprecate folder */
@@ -292,7 +291,9 @@ void test_moto_hover(void){
       frontPulse = MAX_PULSE_FRONT - (NORMAL_STEP * 80);
       rearPulse = MAX_PULSE_REAR - (NORMAL_STEP * 80);
 
-/* the motors are responding as expected */
+/* the motors are responding as expected when we both increase and
+   decrease the pulses normal steps there is not exceeding of the
+   boundaries */
 
      temp_copy();
      moto_hover();
@@ -530,7 +531,7 @@ void test_moto_goBackward(void){
 
 void test_moto_strafeRight(void){
 
-     /* turn right normal steps */
+     /* strafe right normal steps */
      /* all motors are on hover level*/
      /* the motors are responding as expected and not exceeding the 
         boundaries*/
@@ -589,7 +590,7 @@ void test_moto_strafeRight(void){
 
 void test_moto_strafeLeft(void){
 
-     /* turn left normal steps */
+     /* strafe left normal steps */
      /* all motors are on hover level*/
      /* the motors are responding as expected and not exceeding the 
         boundaries*/
