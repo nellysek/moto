@@ -1,4 +1,19 @@
-# #######################################################################
+# #####################################################################
+# This makefile has been modified from the original version to better
+# suit the motor control group.
+# 
+# Changes include targets for:
+# - default (just gives a nice printout with instructions)
+#   (Kristofer Hansson Aspman)
+# - valgrind (Kristofer Hansson Aspman)
+# - gcov (...coverage) (Kristofer Hansson Aspman)
+# - CUnit master test suite (Kristofer Hansson Aspman and Björn Eriksson)
+#
+# In addition to this the following targets have been altered by
+# Kristofer Hansson Aspman, Björn Eriksson and Magnus Bergqvist:
+# - mega
+# - pc
+# #####################################################################
 # Makefile for inclusion by other projects
 #   heavily copied from original libarduino sources
 #   (c) 2009, for all changes belong to Henrik Sandklef
@@ -33,11 +48,12 @@ VERS="Arduino Portable Makefile [APM] version 1.2, dated 10-04-2011"
 
 PROG=test
 TESTNAME=test_suite
-SRC=src/*.c  #test/cunit_stubs.c
+SRC=src/*.c
 SRC2=include/*.cpp
 PROTO_SRC=../proto_mega/src/*.c
 CUNIT_SRC=test/cunit_master_test_suite.c test/cunit_moto_msg_handler.h test/cunit_moto_msg_handler.c test/cunit_moto_driver_functions.c
 OBJ=bin/*.o
+TESTSUITE_OBJ=bin/test_suite.o
 
 default:
 	@echo "--- Normal compilation ----------------------------------"
@@ -71,8 +87,6 @@ test: MMCU=atmega328p
 test: LIB=coreuno
 test: EXT=x
 
-# -Wstrict-prototypes
-#-Wa,-ahlms=$(PROG).lst
 $(OBJ): $(SRC)
 
 	@ cd bin && \
@@ -106,19 +120,31 @@ pc: clean
 
 valgrind: clean
 	gcc -g -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
+	@ echo "Run with valgrind --leak-check=yes bin/test.o"
 
 gcov: clean
-	gcc -fprofile-arcs -ftest-coverage -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
-    #gcov ./bin/test.o
-    #cd $(SRC) && gcov *.c
+	gcc -lgcov -fprofile-arcs -ftest-coverage -DPC -DMASTER_TEST_SUITE -DAUTOMATED $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
+#	gcc -fprofile-arcs -ftest-coverage -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
+	@ echo "Compiled for gcov, now running testsuite..."
+	$(TESTSUITE_OBJ)
+#	gcov $(TESTSUITE_OBJ)
+	@ echo "After exec testsuite"
+	gcov src/*.c
+	@ echo ".gcov-files created in src-folder"
 
 gcov2: clean
-	gcc -fprofile-arcs -ftest-coverage -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
+	gcc -lgcov -fprofile-arcs -ftest-coverage -DPC -DMASTER_TEST_SUITE -DAUTOMATED $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
+#	gcc -fprofile-arcs -ftest-coverage -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
+	@ echo "Compiled for gcov, now running testsuite..."
+	$(TESTSUITE_OBJ)
+	@ echo "After exec testsuite"
+	gcov -b -c src/*.c
+	@ echo ".gcov-files created in src-folder"
 
 clean:
-	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.o \
-    ../*.gcno ../*.gcov ../../proto_mega/bin/*.o ../../../mov/bin/*.o \
-    ../../../ca/bin/*.o ../../main.o
+	@ cd bin && rm -f *.o *.rom *.elf *.map *~ *.lst *.o ../src/*.gcov \
+	../*.gcno ../*.gcov ../*.gcda ../../proto_mega/bin/*.o \
+	../../../mov/bin/*.o ../../../ca/bin/*.o ../../main.o
 	@ echo "Project cleaned"
 
 version:

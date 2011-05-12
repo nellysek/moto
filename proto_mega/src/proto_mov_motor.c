@@ -39,8 +39,8 @@ struct move_commands * proto_read_motor2(void){
  storeForTint(READ, MOTOR, UNKNOWN, movPtr->message7);
  storeForTint(READ, MOTOR, UNKNOWN, movPtr->message8);
 	#ifdef DEBUG
-	printf("move_commands value set to: %d , %d\n", movPtr.message1 , movPtr.message2,movPtr.message3,movPtr.message4,movPtr.message5,movPtr.message6,
-movPtr.message7,movPtr.message8);
+	printf("move_commands value set to: %d , %d\n", movPtr->message1 , movPtr->message2,movPtr->message3,movPtr->message4,movPtr->message5,movPtr->message6,
+movPtr->message7,movPtr->message8);
   #endif
 #endif
   return (struct move_commands *) movPtr;
@@ -70,22 +70,26 @@ void proto_write_motor2(uint8_t message1,uint8_t message2,uint8_t message3,uint8
  storeForTint(WRITE, MOVEMENT, UNKNOWN, movPtr->message8);
 
 	#ifdef DEBUG
-	printf("move_commands value set to: %d , %d\n", movPtr.message1 , movPtr.message2,movPtr.message3,movPtr.message4 , movPtr.message5,movPtr.message6, movPtr.message7,movPtr.message8);
+	printf("move_commands value set to: %d , %d\n", movPtr->message1 , movPtr->message2,movPtr->message3,movPtr->message4 , movPtr->message5,movPtr->message6, movPtr->message7,movPtr->message8);
   #endif
 #endif
 } 
 
 void createDefaultmove(){
+#ifdef DEBUG
+printf("Whatever\n");
+#endif
 movPtr = (struct move_commands *) malloc(sizeof(struct move_commands));
 
-	movPtr->message1 = 0xB;
-	movPtr->message2 = 0xB;
-	movPtr->message3 = 0xB;
-	movPtr->message4 = 0xB;
-	movPtr->message5 = 0xB;
-	movPtr->message6 = 0xB;
-	movPtr->message7 = 0xB;
-	movPtr->message8 = 0xB;
+	movPtr->message1 = 0xF1;
+	movPtr->message2 = 0xF1;
+	movPtr->message3 = 0xF1;
+	movPtr->message4 = 0xF1;
+	movPtr->message5 = 0xF1;
+	movPtr->message6 = 0xF1;
+	movPtr->message7 = 0xF1;
+	movPtr->message8 = 0xF1;
+    printf("Message reset in protocol\n");
 
        
 }

@@ -5,6 +5,9 @@
 #include "cunit_moto_msg_handler.h"
 #include "cunit_master_test_suite.h"
 
+#ifdef AUTOMATED
+    #include "CUnit/Basic.h"
+#endif
 
 /*check_add_ok() gives a print_out on the screen when a test suite or a test
 has been created, the char** passed to this function should always be in the 
@@ -88,8 +91,13 @@ int main(int argc){
 
     
 /***************************************************************************/
-
+#ifdef AUTOMATED
+    CU_basic_set_mode(CU_BRM_VERBOSE);
+    CU_basic_run_tests();
+#else
     CU_console_run_tests();
+#endif
     CU_cleanup_registry();
+    return CU_get_error();
 }
 #endif
