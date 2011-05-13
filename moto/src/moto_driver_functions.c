@@ -278,6 +278,7 @@ void moto_strafeLeft(void){
  *              
  */
 
+
 void moto_rotateLeft(void){
     moto_increaseLeftNormal();
     moto_increaseRightNormal();
@@ -530,6 +531,7 @@ void moto_increaseRearPanic(void){
  *
  * Description: Decreases the pulse width of
  *              the corresponding motor.
+
  *              Pulse width decreases either
  *              by the predefined normal
  *              decrement or by the predefined
@@ -818,3 +820,25 @@ uint16_t map(uint16_t actual, uint16_t out_boundary1, uint16_t out_boundary2){
         return out_boundary2;
     }
 }
+
+/**
+ * Function:    void sendMsg()
+ * Author(s):   Björn Eriksson
+
+ *
+ * Description: sends a message as a struct to movement
+ *              
+ */
+
+/*
+ *
+ *  function to sent the current pulses if we use the proto_read_motor()
+ *
+ *
+void sendMsg(void){
+    struct pulses currentPulses;
+    pulses = {rightPulse, leftPulse, frontPulse, rearPulse};
+    proto_write_move(currentPulses);
+}
+
+*/
