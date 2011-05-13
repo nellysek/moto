@@ -65,9 +65,9 @@ default:
 	@echo "make clean    recursively clean up subdirs"
 	@echo " "
 	@echo "--- Verification and debugging --------------------------"
-	@echo "make testsuite    compiles unit tests"
-	@echo "make gcovunit     run unit tests with gcov (statement coverage)"
-	@echo "make gcovunitb    run unit tests with gcov (branch coverage)"
+	@echo "make test         compiles unit tests"
+	@echo "make gcov         run unit tests with gcov (statement coverage)"
+	@echo "make gcov2        run unit tests with gcov (branch coverage)"
 	@echo "make valgrind     run unit tests with valgrind"
 	@echo " "
 
@@ -124,10 +124,8 @@ valgrind: clean
 
 gcov: clean
 	gcc -lgcov -fprofile-arcs -ftest-coverage -DPC -DMASTER_TEST_SUITE -DAUTOMATED $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
-#	gcc -fprofile-arcs -ftest-coverage -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
 	@ echo "Compiled for gcov, now running testsuite..."
 	$(TESTSUITE_OBJ)
-#	gcov $(TESTSUITE_OBJ)
 	@ echo "After exec testsuite"
 	gcov src/*.c
 	@ echo ".gcov-files created in src-folder"
