@@ -125,9 +125,20 @@ valgrind: clean
 gcov: clean
 	gcc -lgcov -fprofile-arcs -ftest-coverage -DPC -DMASTER_TEST_SUITE -DAUTOMATED $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
 	@ echo "Compiled for gcov, now running testsuite..."
+#	rm -fr ./gcov_output
+#	mkdir ./gcov_output
+#	pwd
+#	cd gcov_output/ && pwd && ./../bin/test_suite.o
+#	pwd
 	$(TESTSUITE_OBJ)
 	@ echo "After exec testsuite"
 	gcov src/*.c
+	rm -fr ./gcov_out
+	mkdir ./gcov_out
+	mv *.gcov gcov_out/
+#	lcov  --directory ./covs --zerocounters 
+#	lcov  --directory ./ --directory ./bin --directory ./src --directory ./../proto_mega/src/ --capture --output-file ./covs/stap.info
+#	genhtml -o covs/ covs/stap.info
 	@ echo ".gcov-files created in src-folder"
 
 gcov2: clean
