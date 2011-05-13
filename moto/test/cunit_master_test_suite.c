@@ -5,6 +5,9 @@
 #include "cunit_moto_msg_handler.h"
 #include "cunit_master_test_suite.h"
 
+#ifdef AUTOMATED
+    #include "CUnit/Basic.h"
+#endif
 
 /*check_add_ok() gives a print_out on the screen when a test suite or a test
 has been created, the char** passed to this function should always be in the 
@@ -85,11 +88,25 @@ int main(int argc){
         test_moto_decreaseAllPanic);
     check_add_ok("test test_moto_decreaseAllPanic");
 
+    /* Create a test suite for special command functions */
+    CU_pSuite special_commands = CU_add_suite("special commands",NULL,NULL);    
+    check_add_ok("suite special_commands");
+
+    /* Add appropriate test functions to the special_command suite */
+    CU_add_test(special_commands, "test_moto_specialCommands",
+        test_moto_specialCommands);
+    check_add_ok("Test test_moto_specialCommands");
+
 
     
 /***************************************************************************/
-
+#ifdef AUTOMATED
+    CU_basic_set_mode(CU_BRM_VERBOSE);
+    CU_basic_run_tests();
+#else
     CU_console_run_tests();
+#endif
     CU_cleanup_registry();
+    return CU_get_error();
 }
 #endif

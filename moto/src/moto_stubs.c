@@ -31,7 +31,7 @@ unsigned int readMicroseconds(void){
 /* attach from servo library from arduino standard libraries */
 unsigned char attach(unsigned char pin){
     PRINT_STRING ("attach was called for pin ");
-    PRINT_DEC(PIN);
+    PRINT_DEC(pin);
     PRINT_NEW_LINE;
 }
 
