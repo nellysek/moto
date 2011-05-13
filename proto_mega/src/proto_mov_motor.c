@@ -16,6 +16,11 @@
    #include <stdint.h>
 #endif
 
+#ifdef DEBUG
+   #include <stdio.h> 
+   #include <stdint.h>
+#endif
+
 #include <stdlib.h>
 #include "proto_lib.h"
 
@@ -76,8 +81,10 @@ void proto_write_motor2(uint8_t message1,uint8_t message2,uint8_t message3,uint8
 } 
 
 void createDefaultmove(){
+#ifdef PC
 #ifdef DEBUG
 printf("Whatever\n");
+#endif
 #endif
 movPtr = (struct move_commands *) malloc(sizeof(struct move_commands));
 
@@ -89,7 +96,6 @@ movPtr = (struct move_commands *) malloc(sizeof(struct move_commands));
 	movPtr->message6 = 0xF1;
 	movPtr->message7 = 0xF1;
 	movPtr->message8 = 0xF1;
-    printf("Message reset in protocol\n");
 
        
 }
