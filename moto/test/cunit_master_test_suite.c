@@ -88,6 +88,15 @@ int main(int argc){
         test_moto_decreaseAllPanic);
     check_add_ok("test test_moto_decreaseAllPanic");
 
+    /* Create a test suite for special command functions */
+    CU_pSuite special_commands = CU_add_suite("special commands",NULL,NULL);    
+    check_add_ok("suite special_commands");
+
+    /* Add appropriate test functions to the special_command suite */
+    CU_add_test(special_commands, "test_moto_specialCommands",
+        test_moto_specialCommands);
+    check_add_ok("Test test_moto_specialCommands");
+
 
     
 /***************************************************************************/

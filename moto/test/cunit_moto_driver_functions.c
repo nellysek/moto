@@ -788,6 +788,45 @@ void test_moto_rotateRight(void){
      CU_ASSERT(rearPulse == rearP + NORMAL_STEP);
 
 }
+/* test_moto_specialCommand, testing differend functions one time only
+ * to see if they are working properly
+ * added by Björn Eriksson.
+ */
+
+void test_moto_specialCommands(void){
+    leftPulse = IDLE_SPEED;
+    rightPulse = IDLE_SPEED;
+    frontPulse = IDLE_SPEED;
+    rearPulse = IDLE_SPEED;
+    moto_goForward();
+    CU_ASSERT(leftPulse == IDLE_SPEED);
+    CU_ASSERT(rightPulse == IDLE_SPEED);
+    CU_ASSERT(frontPulse == IDLE_SPEED - NORMAL_STEP);
+    CU_ASSERT(rearPulse == IDLE_SPEED + NORMAL_STEP);    
+    moto_goBackward();
+    CU_ASSERT(leftPulse == IDLE_SPEED);
+    CU_ASSERT(rightPulse == IDLE_SPEED);
+    CU_ASSERT(frontPulse == IDLE_SPEED);
+    CU_ASSERT(rearPulse == IDLE_SPEED);  
+    moto_strafeRight();
+    CU_ASSERT(leftPulse == IDLE_SPEED + NORMAL_STEP);
+    CU_ASSERT(rightPulse == IDLE_SPEED - NORMAL_STEP);
+    CU_ASSERT(frontPulse == IDLE_SPEED);
+    CU_ASSERT(rearPulse == IDLE_SPEED); 
+    temp_copy();
+    moto_rotateLeft();
+    CU_ASSERT(leftPulse == leftP + NORMAL_STEP);
+    CU_ASSERT(rightPulse == rightP + NORMAL_STEP);
+    CU_ASSERT(frontPulse == frontP - NORMAL_STEP);
+    CU_ASSERT(rearPulse == rearP - NORMAL_STEP);
+    moto_rotateRight();
+    CU_ASSERT(leftPulse == leftP);
+    CU_ASSERT(rightPulse == rightP);
+    CU_ASSERT(frontPulse == frontP);
+    CU_ASSERT(rearPulse == rearP);
+       
+}
+
 
 #ifndef MASTER_TEST_SUITE
 
@@ -895,6 +934,17 @@ int main(int argc){
     CU_add_test(increase_decrease_all, "test_moto_rotateRight",
         test_moto_rotateRight);
     check_add_ok("Test test_moto_rotateRight");
+
+    /*--------------------------------------------------------------------*/
+    /* Create a test suite for special command functions */
+    CU_pSuite special_commands = CU_add_suite("special commands",NULL,NULL);    
+    check_add_ok("suite special_commands");
+
+    /* Add appropriate test functions to the special_command suite */
+    CU_add_test(special_commands, "test_moto_specialCommands",
+        test_moto_specialCommands);
+    check_add_ok("Test test_moto_specialCommands");
+
 
 
     
