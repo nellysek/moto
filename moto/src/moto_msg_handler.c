@@ -33,16 +33,22 @@ int examineID(msg_pointer mp){
         Serial.println("Bad message!");
         return 1;
     }
+    if (BITFIELD_TO_CHAR(mp) > 0xFF){
+        Serial.println("Message value too high, ignoring message!");
+        return 1;
+    }
 #elif defined PC
     printf("ID is %d\n", mp->ID);
     if (BITFIELD_TO_CHAR(mp) == BAD_MESSAGE){
         printf("Bad message!\n");
         return 1;
     }
-#endif
-    if (BITFIELD_TO_CHAR(mp) == BAD_MESSAGE){
+    if (BITFIELD_TO_CHAR(mp) > 0xFF){
+        printf("Message value too high, ignoring message!\n");
         return 1;
     }
+
+#endif
 
     switch(mp->ID){
 
@@ -175,102 +181,23 @@ void specialMotorCommand(msg_pointer mp){
     case STRAFE_RIGHT:
         moto_strafeRight();
         break;
+    case INCREASE_ALL_NORMAL:
+        moto_increaseAllNormal();
+        break;
+    case DECREASE_ALL_NORMAL:
+        moto_decreaseAllNormal();
+        break;
+    case INCREASE_ALL_PANIC:
+        moto_increaseAllPanic();
+        break;
+    case DECREASE_ALL_PANIC:
+        moto_decreaseAllPanic();
+        break;
+    case HOVER:
+        moto_hover();
+        break;
     }
 
   return;
 
 }
-
-
-/**
- * Function:     msg scanHexMsgSTDIN()
- * Author(s):    Kristofer Hansson Aspman
- *
- * Description: When compiling for the ARDUINO this 
- *              converts the char given by serReadUnsignedChar()
- *              into a msg and returns it.
- *              When compiling for PC scanf() is used to read
- *              the variable.
- *              
- *
- */
-
-msg scanHexMsgSTDIN(void){
-
-#ifdef ARDUINO_DBG
-    uint8_t input;
-    Serial.println("Enter the message in hexadecimal!");
-  
-    input = serReadUnsignedChar();
-
-    Serial.print("Number entered: ");
-    Serial.println(input, HEX);
-  
-    if (input > -1 || input < 256){
-        return INT_TO_BITFIELD(&input);
-    }
-    else
-        return INT_TO_BITFIELD(0xf); //returns BAD_MSG
-
-#elif defined PC
-    unsigned int input;
-    printf("Enter the message in hexadecimal: ");
-    scanf("%x", &input);
-    return INT_TO_BITFIELD(&input);
-#endif
-}
-
-/**
- * Function:     uint8_t serReadUnsignedChar()
- * Author(s):    Kristofer Hansson Aspman
- *
- * Description: Reads and stores what's currently in
- *              Serial.available() in an array.
- *              If there is something in the serial in
- *              then this is converted to an uint8_t
- *              with the help of sscanf() and returned.
- *              Otherwise 0xf is returned which is
- *              considered a bad message.
- *              Only used when compiled to ARDUINO.
- *              
- * Inspired by reply number 3 in this thread:
- * http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1191880368
- */
-#ifdef ARDUINO_DBG
-uint8_t serReadUnsignedChar(void)
-{
-    int8_t i;
-    int8_t numberOfAvailableInputs;
-    uint8_t returnValue;
-
-    /* Array to hold input bytes*/
-    char inputBytes [7];                     
-    char * inputBytesPtr = &inputBytes[0];
-    delay(3000);
-    /* Check to see if there are any serial input*/
-    if (Serial.available()>0)                
-    {
-        Serial.println("serial available");
-        /* Delay for terminal to finish transmitted, 5ms work great*/
-        /* for 9600 baud (increase this number for slower baud)*/
-        delay(5);                              
-        numberOfAvailableInputs = Serial.available();
-        
-        /* Load input bytes into array*/
-        for (i=0; i<numberOfAvailableInputs; i++){
-            inputBytes[i] = Serial.read();
-        }
-        
-        /* Adding a NULL character at the end */
-        inputBytes[i] =  '\0';
-      
-        /*Scans the character string and stores it as a hexadecimal*/
-        sscanf(inputBytes, "%x", &returnValue);
-        return returnValue;
-    }
-    
-    else
-        /* Returns BAD_MSG 0xf (0000 1111) if there is no input*/
-        return 0xf;
-}
-#endif

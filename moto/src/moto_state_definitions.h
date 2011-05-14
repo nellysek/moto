@@ -29,9 +29,13 @@
 # define STOP_ID 0x00 //this was added
 # define CONTROL_ID 0x02 //this was added
 # define SPECIAL_COMMAND_ID 0x03 //this was added
-
+# define HOVER 0xFF
 # define BAD_MESSAGE 0xf //this was added, when bits are not within the 0-255 range
 
+# define INCREASE_ALL_NORMAL 0xEF
+# define DECREASE_ALL_NORMAL 0xCF
+# define INCREASE_ALL_PANIC 0xF0
+# define DECREASE_ALL_PANIC 0xD0
 
 # define  INCREASE_REAR_MOTOR 0xA1
 # define  DECREASE_REAR_MOTOR 0x81
