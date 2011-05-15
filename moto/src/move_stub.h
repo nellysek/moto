@@ -7,7 +7,5 @@
 int move_init();
 int move_run();
 msg scanHexMsgSTDIN(void);
-#ifdef ARDUINO_DBG
-    uint8_t serReadUnsignedChar(void);
-#endif
+uint8_t serReadUnsignedChar(void);
 #endif
