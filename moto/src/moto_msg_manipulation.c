@@ -17,9 +17,7 @@
  *          2011-05-09: Moved macros for printing, included .h file for it \n
  *                      to be used by other files as well (Magnus)          
  */
-#ifdef ARDUINO_DBG
-    #define ARDUINO
-#endif
+
 
 #ifdef ARDUINO
     #include "WProgram.h"

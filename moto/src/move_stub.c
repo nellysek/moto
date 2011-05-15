@@ -7,9 +7,9 @@ msg_pointer mpo;
 int move_init()
 {
 #ifdef ARDUINO
-#ifdef DEBUG
+    #ifdef DEBUG
     Serial.println("inside move_init");
-#endif
+    #endif
 #endif
     return 0;
 }
@@ -42,24 +42,28 @@ int move_run(){
 
 msg scanHexMsgSTDIN(void){
 
-#ifdef ARDUINO_DBG
+#ifdef ARDUINO
+    
     uint8_t input;
+    #ifdef DEBUG
     Serial.println("Enter the message in hexadecimal!");
-  
+    #endif
     input = serReadUnsignedChar();
-
+    #ifdef DEBUG
     Serial.print("Number entered: ");
     Serial.println(input, HEX);
-  
+    #endif
     if (input > -1 || input < 256){
         return INT_TO_BITFIELD(&input);
     }
     else
         return INT_TO_BITFIELD(0xf); //returns BAD_MSG
-
-#elif defined PC /* add DEBUG  */
+    #endif
+#elif defined PC 
     unsigned int input;
+    #ifdef DEBUG
     printf("Enter the message in hexadecimal: ");
+    #endif
     scanf("%x", &input);
     if (input > -1 || input < 256){
         return INT_TO_BITFIELD(&input);
@@ -87,7 +91,8 @@ msg scanHexMsgSTDIN(void){
  * Inspired by reply number 3 in this thread:
  * http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1191880368
  */
-#ifdef ARDUINO_DBG
+#ifdef ARDUINO
+    
 uint8_t serReadUnsignedChar(void)
 {
     int8_t i;
@@ -101,7 +106,9 @@ uint8_t serReadUnsignedChar(void)
     /* Check to see if there are any serial input*/
     if (Serial.available()>0)                
     {
+    #ifdef DEBUG
         Serial.println("serial available");
+    #endif
         /* Delay for terminal to finish transmitted, 5ms work great*/
         /* for 9600 baud (increase this number for slower baud)*/
         //delay(5);                              
@@ -124,4 +131,5 @@ uint8_t serReadUnsignedChar(void)
         /* Returns BAD_MSG 0xf (0000 1111) if there is no input*/
         return 0xf;
 }
+    #endif
 #endif

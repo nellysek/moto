@@ -15,9 +15,7 @@
 #include "moto_state_definitions.h"
 #include "moto_printer_functions.h"
 
-#ifdef ARDUINO_DBG
-    #define ARDUINO
-#endif
+
 
 #ifdef ARDUINO
     #include "WProgram.h"

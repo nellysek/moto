@@ -21,10 +21,6 @@
 #include "moto_interface.h"
 #include "moto_printer_functions.h"
 
-#ifdef ARDUINO_DBG
-	#define ARDUINO
-#endif
-
 #ifdef ARDUINO
     #include "WProgram.h"
     #include "../include/Servo.h"
@@ -277,6 +273,7 @@ void moto_strafeLeft(void){
  *              the drone turn either righ or left.
  *              
  */
+
 
 
 void moto_rotateLeft(void){
