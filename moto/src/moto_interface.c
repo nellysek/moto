@@ -11,7 +11,6 @@
  */
 
 #include <stdint.h>
-#include <stdlib.h>
 #include "moto_recv.h"
 #include "moto_interface.h"
 #include "moto_driver_functions.h"
@@ -82,17 +81,24 @@ int moto_run(void){
     PRINT_STRING("Number of cycles without a message: ");
     PRINT_DEC(moto_cyclesSinceLastMsg);
     PRINT_NEW_LINE;
+
+
+/*
+ *
+ *  maybe remove this if statement in the future 
+ *
+ */
     
     if (moto_cyclesSinceLastMsg > 10)
     {
         PRINT_STRING("No new message in protocol for too long!");
         PRINT_NEW_LINE;
         PRINT_STRING("Initiating no-op command!");
-        PRINT_NEW_LINE;
-        
+        PRINT_NEW_LINE;      
         moto_cyclesSinceLastMsg = 0;
         return 0;
     }
+
 /*
  *  when moto_recvMsg() is used
  *  ----------------------------------------------
@@ -171,6 +177,5 @@ int moto_run(void){
  */
         mp++;
         } /* ends the for loop */
-    free(mpStruct);
     return 0;
 }

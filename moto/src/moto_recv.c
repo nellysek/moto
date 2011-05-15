@@ -23,25 +23,16 @@ msg_pointer moto_recvMsg(void){
 
 /* get message from protocol group and return it */
 
-
     inputFromProto = proto_read_motor();
     binary = INT_TO_BITFIELD(&inputFromProto);
     return &binary;
-
 }
 
 
 msgStructPtr moto_recvMsg2(void){
-
 /* get message struct from protocol group and return it */
 
-
-    //binaryStruct = (msgStruct)proto_read_motor2();   
-    //return &binaryStruct;
-    msgStructPtr binaryStructPtr;
     binaryStructPtr = (msgStructPtr)proto_read_motor2();
-    createDefaultmove();
     return binaryStructPtr;
-
 }
 
