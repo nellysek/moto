@@ -17,9 +17,9 @@
 #include "moto_msg_handler.h"
 #include "moto_printer_functions.h"
 
-#ifdef ARDUINO_DBG
+/*#ifdef ARDUINO_DBG
     #define ARDUINO
-#endif
+#endif*/
 
 #ifdef ARDUINO
     #include "../include/Servo.h"
@@ -159,16 +159,8 @@ int moto_run(void){
 
         examineID(mp);
 
-/*------------------------------------printMsg in stubs??? NO, WHERE THEN??---------------------------*/
-#ifdef ARDUINO_DBG
         printMsg(mp);
         printMotorStatus();
-
-#elif defined PC
-        printMsg(mp);
-        printMotorStatus();
-    
-#endif
 /*
  *
  *  mp++ for moto_recvMsg2() 
