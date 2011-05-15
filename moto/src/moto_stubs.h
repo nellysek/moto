@@ -9,11 +9,12 @@
             cunit_stubs.c which is used during testing to replace any \n
             arduino library function that is called within the software
  */
-
+#ifndef MOTO_STUBS_H
+#define MOTO_STUBS_H
 #include <stdint.h>
 
 void writeMicroseconds(unsigned char value);
 unsigned int readMicroseconds(void);
 unsigned char attach(unsigned char pin);
 void analogWrite(int motor, uint16_t pulse);
-
+#endif

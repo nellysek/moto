@@ -2,7 +2,8 @@
 *  Author:  Rahwa Bahta, Reza moussavi
 *  
 */
-
+#ifndef MOTO_STATE_DEFINITIONS_H
+#define MOTO_STATE_DEFINITIONS_H
 #include <stdint.h>
 
 //Dont put any lines of code before this line
@@ -84,4 +85,5 @@ struct bits_type
 };
 
 // Dont put any code after this line
+#endif
 #endif

@@ -8,7 +8,8 @@
  *
  * @history 2011-05-08: Now reads from the protocol.
  */
-
+#ifndef MOTO_RECV_H
+#define MOTO_RECV_H
 #include <stdint.h>
 #include "moto_msg_manipulation.h"
 
@@ -25,5 +26,4 @@ typedef struct _msgStruct {
 
 msg_pointer moto_recvMsg(void);
 msgStructPtr moto_recvMsg2(void);
-
- 
+#endif

@@ -8,6 +8,8 @@
  *               by tools.c, motor_control.c and parser.c.
  *
  */
+#ifndef MOTO_DRIVER_FUNCTIONS_H
+    #define MOTO_DRIVER_FUNCTIONS_H
 
 #ifdef ARDUINO_DBG
     #define ARDUINO
@@ -117,3 +119,5 @@ struct pulses{
     uint16_t front;
     uint16_t rear;
 };
+
+#endif

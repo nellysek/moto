@@ -16,6 +16,8 @@
  * Will let the code result in different outputs (if any) depending
  * on what target it is compiled for.
  */
+#ifndef MOTO_PRINTER_FUNCTIONS_H
+#define MOTO_PRINTER_FUNCTIONS_H
 #ifdef ARDUINO_DBG
     #define ARDUINO
 #endif
@@ -51,4 +53,5 @@
     #define PRINT_DEC(a)
     #define PRINT_HEX(a)
     #define PRINT_NEW_LINE 
+#endif
 #endif

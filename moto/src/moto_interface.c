@@ -55,7 +55,6 @@ int moto_init(void){
     PRINT_STRING("Inside moto_init");
     PRINT_NEW_LINE;
 #ifdef ARDUINO
-    //Serial.begin(9600); 
     escRight.attach(RIGHT_MOTOR);
     escLeft.attach(LEFT_MOTOR);
     escFront.attach(FRONT_MOTOR);

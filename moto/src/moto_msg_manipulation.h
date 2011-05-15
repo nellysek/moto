@@ -14,7 +14,8 @@
  *          2011-04-07: Implemented ifdefs.
  *          2011-05-08: Cleaned up a bit and added some comments.
  */
-
+#ifndef MOTO_MSG_MANIPULATION_H
+    #define MOTO_MSG_MANIPULATION_H
 #include <stdint.h>
 
 #ifdef ARDUINO_DBG
@@ -69,3 +70,4 @@ typedef struct control_message{
  * for the compilation (ARDUINO_DBG or PC respectively).
  */
 void printMsg(msg_pointer mp);
+#endif

@@ -7,6 +7,8 @@
  *               by tools.c, motor_control.c and parser.c.
  *
  */
+#ifndef MOTO_MSG_HANDLER_H
+    #define MOTO_MSGHANDLER_H
 #include <stdint.h>
 
 #ifdef ARDUINO_DBG
@@ -26,3 +28,4 @@ void specialMotorCommand(msg_pointer mp);
 //#ifdef ARDUINO_DBG
 //uint8_t serReadUnsignedChar(void);
 //#endif
+#endif

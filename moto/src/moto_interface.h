@@ -1,3 +1,5 @@
+#ifndef MOTO_INTERFACE_H
+    #define MOTO_INTERFACE_H
 #ifdef ARDUINO_DBG
     #define ARDUINO
 #endif
@@ -20,3 +22,4 @@ static int moto_cyclesSinceLastMsg;
 
 int moto_init(void);
 int moto_run(void);
+#endif
