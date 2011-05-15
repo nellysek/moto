@@ -32,7 +32,7 @@ msg_pointer moto_recvMsg(void){
 msgStructPtr moto_recvMsg2(void){
 /* get message struct from protocol group and return it */
 
-    binaryStructPtr = (msgStructPtr)proto_read_motor2();
-    return binaryStructPtr;
+    
+    return (msgStructPtr)proto_read_motor2();
 }
 
