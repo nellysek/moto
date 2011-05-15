@@ -58,7 +58,6 @@ msg scanHexMsgSTDIN(void){
     }
     else
         return INT_TO_BITFIELD(0xf); //returns BAD_MSG
-    #endif
 #elif defined PC 
     unsigned int input;
     #ifdef DEBUG
@@ -131,5 +130,4 @@ uint8_t serReadUnsignedChar(void)
         /* Returns BAD_MSG 0xf (0000 1111) if there is no input*/
         return 0xf;
 }
-    #endif
 #endif
