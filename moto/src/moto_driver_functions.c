@@ -833,8 +833,8 @@ uint16_t map(uint16_t actual, uint16_t out_boundary1, uint16_t out_boundary2){
  *
  *
 void sendMsg(void){
-    struct pulses currentPulses;
-    pulses = {rightPulse, leftPulse, frontPulse, rearPulse};
+    struct pulses currentPulsess = {rightPulse, leftPulse, 
+                                    frontPulse, rearPulse};
     proto_write_move(currentPulses);
 }
 
