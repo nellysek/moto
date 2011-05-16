@@ -54,7 +54,7 @@
 # define  FORWARD  0xE3
 # define  BACKWARD 0xC3
 # define  STRAFE_RIGHT 0xEC
-# define  STRAFE_LEFT 0xCC //this was corrected
+# define  STRAFE_LEFT 0xCC
 # define  TURN_RIGHT 0xFC
 # define  TURN_LEFT 0xDC
  
