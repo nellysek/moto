@@ -59,6 +59,7 @@ FILES_TO_REMOVE=*.o *.rom *.elf *.map *~ *.lst *.o ../src/*.gcov \
 	../../../mov/bin/*.o ../../../ca/bin/*.o ../../main.o
 
 default:
+	@echo " "
 	@echo "--- Normal compilation ----------------------------------"
 	@echo "make pc     produces binary in bin/"
 	@echo "make mega   produces binary for the Arduino and uploads"
@@ -69,6 +70,7 @@ default:
 	@echo " "
 	@echo "--- Verification and debugging --------------------------"
 	@echo "make test         compiles unit tests"
+	@echo "make unit         compiles and runs unit tests"
 	@echo "make gcov         run unit tests with gcov (statement coverage)"
 	@echo "make gcov2        run unit tests with gcov (branch coverage)"
 	@echo "make valgrind     run unit tests with valgrind"
@@ -106,7 +108,10 @@ compile:
 
 
 test: clean
-	gcc -DPC -DMASTER_TEST_SUITE $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
+	gcc -DPC -DMASTER_TEST_SUITE -DAUTOMATED $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
+
+unit: test
+	$(TESTSUITE_OBJ)
 
 install: $(OBJ) compile
 	@ cd bin && avr-objcopy -O srec $(PROG).elf $(PROG).rom
