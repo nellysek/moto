@@ -17,6 +17,9 @@ README~
 *.c~
 *.c#
 *.map
+*.gcov
+*.gcno
+*.gcda
 test/*.x
 *.h~
 ../proto_mega/src/*.o
@@ -26,3 +29,4 @@ test/*.x
 bin/
 ../bin/
 doc/
+gcov_out/

@@ -122,8 +122,9 @@ pc: clean
 	gcc -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
 
 valgrind: clean
-	gcc -g -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
-	@ echo "Run with valgrind --leak-check=yes bin/test.o"
+	gcc -g -DPC -DDEBUG $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
+	@ echo "Running Valgrind memory tests..."
+	valgrind --leak-check=yes bin/test.o
 
 gcov: clean
 	gcc -lgcov -fprofile-arcs -ftest-coverage -DPC -DMASTER_TEST_SUITE -DAUTOMATED $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit

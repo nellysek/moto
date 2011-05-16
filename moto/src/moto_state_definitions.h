@@ -25,13 +25,13 @@
 
 //MESSAGE STATES
 # define START_MOTOR 0x40
-# define START_ID 0x01 //this was added
+# define START_ID 0x01
 # define STOP_MOTOR 0x0
-# define STOP_ID 0x00 //this was added
-# define CONTROL_ID 0x02 //this was added
-# define SPECIAL_COMMAND_ID 0x03 //this was added
+# define STOP_ID 0x00
+# define CONTROL_ID 0x02
+# define SPECIAL_COMMAND_ID 0x03
 # define HOVER 0xFF
-# define BAD_MESSAGE 0xf //this was added, when bits are not within the 0-255 range
+# define BAD_MESSAGE 0xF
 
 # define INCREASE_ALL_NORMAL 0xEF
 # define DECREASE_ALL_NORMAL 0xCF
@@ -55,8 +55,8 @@
 # define  BACKWARD 0xC3
 # define  STRAFE_RIGHT 0xEC
 # define  STRAFE_LEFT 0xCC //this was corrected
-# define  TURN_RIGHT 0xFC //this was added
-# define  TURN_LEFT 0xDC //this was added
+# define  TURN_RIGHT 0xFC
+# define  TURN_LEFT 0xDC
  
 # define  PANIC_INCREASE_REAR_MOTOR 0xB1
 # define  PANIC_DECREASE_REAR_MOTOR 0x91

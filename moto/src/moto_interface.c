@@ -1,13 +1,21 @@
-/*! @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
+/*!@author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
  * @file moto_interface.c
- * @version v0.02
- * @date 2011-04-10
- * @history 2011-04-26 - Major cleanup and restructuring of the code\n
+ * @version v0.05
+ * @date 2011-05-16
+ * @history 2011-05-16 - Implemented no-op instructions
+                        (Kristofer)
+            2011-05-11 - Worked with ifdefs
+                        (Magnus, Björn)
+            2011-05-10 - Added support for struct containing 8 messages
+                        (Magnus, Björn, Kristofer)
+            2011-04-26 - Major cleanup and restructuring of the code\n
                         (Magnus, Björn, Kristofer)
             2011-04-10 - Created first version
                         (Magnus, Björn, Kristofer)
+
  * @brief Contains the implementations of moto_init and moto_run.\n
-          Global variables set are: binary, mp, inputFromProto
+          Global variables set are: mp (a pointer to the hexadecimal message
+ *        read from the protocol).
  */
 
 #include <stdint.h>
@@ -16,7 +24,7 @@
 #include "moto_driver_functions.h"
 #include "moto_msg_handler.h"
 #include "moto_printer_functions.h"
-
+#include "moto_state_definitions.h"
 
 #ifdef ARDUINO
     #include "../include/Servo.h"
@@ -26,7 +34,7 @@
     #include "moto_stubs.h"
 #endif
 
-
+/* Stores the address to the actual bitfield containing the hex msg */
 msg_pointer mp;
 
 #ifdef ARDUINO
@@ -42,8 +50,8 @@ Servo escRear;
 /*! @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
  * @brief The init function requested by the CFG. It is
           called when the drone boots up.
- * @version v0.02
- * @date 2011-04-10
+ * @version v0.04
+ * @date 2011-05-01
  * @param none
  * @return int (0 if correctly carried out)
  */
@@ -68,8 +76,8 @@ int moto_init(void){
 /*! @author Kristofer Hansson Aspman
  * @brief The run function requested by the CFG. It is run
           each scheduled cycle.
- * @version v0.01
- * @date 2011-04-10
+ * @version v0.04
+ * @date 2011-05-16
  * @param none
  * @return int (0 if correctly carried out)
  */
@@ -79,19 +87,24 @@ int moto_run(void){
     PRINT_DEC(moto_cyclesSinceLastMsg);
     PRINT_NEW_LINE;
 
-
-/*
- *
- *  maybe remove this if statement in the future 
- *
+/* Initiates no-op command if no message has been written to the protocol
+ * in 5000 cycles. No-op command is currently set to HOVER but can be changed
+ * whatever command preferred.
  */
-    
-    if (moto_cyclesSinceLastMsg > 10)
+    if (moto_cyclesSinceLastMsg > 5000)
     {
         PRINT_STRING("No new message in protocol for too long!");
         PRINT_NEW_LINE;
         PRINT_STRING("Initiating no-op command!");
-        PRINT_NEW_LINE;      
+        PRINT_NEW_LINE;
+
+/* Set the uint8_t to HOVER and then casting it to a msg before sending
+ * it to examineID() to be parsed.
+ */
+        uint8_t no_op_hex = HOVER;
+        msg no_op_msg = INT_TO_BITFIELD(&no_op_hex);
+        mp = &no_op_msg;
+        examineID(mp);
         moto_cyclesSinceLastMsg = 0;
         return 0;
     }
