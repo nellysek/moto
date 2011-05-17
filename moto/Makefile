@@ -55,9 +55,10 @@ CUNIT_SRC=test/cunit_master_test_suite.c test/cunit_moto_msg_handler.h test/cuni
 OBJ=bin/*.o
 TESTSUITE_OBJ=bin/test_suite.o
 FILES_TO_REMOVE=*.o *.rom *.elf *.map *~ *.lst *.o ../src/*.gcov \
-	../gcov_out/*.gcno ../gcov_out/*.gcov ../gcov_out/*.gcda ../../proto_mega/bin/*.o \
-	../../../mov/bin/*.o ../../../ca/bin/*.o ../../main.o ../*.gcov ../*.gcno ../*.gcda \
-	../src/*.o ../test/*.gcov ../test/*.gcda ../test/*.gcno ../test/test_suite.*
+	../../proto_mega/bin/*.o ../../../mov/bin/*.o \
+	../../../ca/bin/*.o ../../main.o ../*.gcov ../*.gcno ../*.gcda \
+	../src/*.o ../test/*.gcov ../test/*.gcda ../test/*.gcno ../test/test_suite.* \
+	../test/..*c.gcov
 
 default:
 	@echo " "
@@ -145,10 +146,8 @@ gcov: clean
 	mv bin/test_suite.o ./
 	rm -fr ./covs/
 	mkdir ./covs/
-#	@ cd ./gcov_out && \
 	lcov --directory ./covs --zerocounters 
 	lcov --directory ./ --capture --output-file test_suite.o.info
-#	lcov  --directory ../ --directory ./src --directory ./bin --directory ./../proto_mega/src/ --capture --output-file ./covs/stap.info
 	genhtml -o ./covs/ test_suite.o.info
 	@ echo ".gcov-files created in gcov_out-folder"
 	make moveGCovFiles
@@ -162,20 +161,21 @@ gcov2: clean
 	mv bin/test_suite.o ./
 	rm -fr ./covs/
 	mkdir ./covs/
-#	@ cd ./gcov_out && \
 	lcov --directory ./covs --zerocounters 
 	lcov --directory ./ --capture --output-file test_suite.o.info
-#	lcov  --directory ../ --directory ./src --directory ./bin --directory ./../proto_mega/src/ --capture --output-file ./covs/stap.info
 	genhtml -o ./covs/ test_suite.o.info
 	@ echo ".gcov-files created in gcov_out-folder"
 	make moveGCovFiles
 
 moveGCovFiles:
 	mv test_suite.* test/
+	mv ..*c.gcov test/
 	mv *.gcno test/
 	mv *.gcda test/
 	@ echo ".gcov-files moved to test-folder"
+
 clean:
+	rm -fr ./covs/
 	@ cd bin && rm -f $(FILES_TO_REMOVE)
 	@ echo "Project cleaned"
 
