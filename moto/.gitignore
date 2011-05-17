@@ -27,6 +27,12 @@ test/*.x
 # Directories
 #################
 bin/
+lib/
 ../bin/
+../ca/
+../mov/lib/
+../sched/lib/
+../proto_mega/lib/
+../stab/lib/
 doc/
 gcov_out/
