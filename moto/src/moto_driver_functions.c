@@ -25,12 +25,13 @@
     #include "WProgram.h"
     #include "../include/Servo.h"
 #elif defined PC
-    #include <stdio.h>
     #include"moto_stubs.h"
 #endif
 
-/* These are the variables keeping track of the  */
-/* current state (pulse width) of each motor. */
+/* 
+ * These are the variables keeping track of the 
+ * current state (pulse width) of each motor. 
+ */
 uint16_t rightPulse;
 uint16_t leftPulse;
 uint16_t frontPulse;
@@ -38,72 +39,6 @@ uint16_t rearPulse;
 
 
 /*
-*	Function:		moto_left_mototr(unsigned char increase,unsigned char panic)
-*	Author(s):		Reza Moussavi, Rahwa Bahta
-*	Description:	To incease/decrease panic/normal the left motor
-*/
-void moto_left_motor(unsigned char increase,unsigned char panic){
-	leftPulse = increase?leftMotorLimitIncrease(leftPulse, panic?PANIC_STEP:NORMAL_STEP):leftMotorLimitDecrease(leftPulse, panic?PANIC_STEP:NORMAL_STEP);
-	#ifdef ARDUINO
-		escLeft.writeMicroseconds(leftPulse);
-	#elif defined PC
-		analogWrite(LEFT_MOTOR, leftPulse);
-	#endif
-		PRINT_STRING("Increasing left motor pulse");
-		PRINT_NEW_LINE;
-}
-
-/*
-*	Function:		moto_right_mototr(unsigned char increase,unsigned char panic)
-*	Author(s):		Reza Moussavi, Rahwa Bahta
-*	Description:	To incease/decrease panic/normal the right motor
-*/
-void moto_right_motor(unsigned char increase,unsigned char panic){
-	rightPulse = increase?rightMotorLimitIncrease(rightPulse, panic?PANIC_STEP:NORMAL_STEP):rightMotorLimitDecrease(rightPulse, panic?PANIC_STEP:NORMAL_STEP);
-	#ifdef ARDUINO
-		escRight.writeMicroseconds(rightPulse);
-	#elif defined PC
-		analogWrite(RIGHT_MOTOR, rightPulse);
-	#endif
-		PRINT_STRING("Increasing right motor pulse");
-		PRINT_NEW_LINE;
-}
-
-/*
-*	Function:		moto_front_mototr(unsigned char increase,unsigned char panic)
-*	Author(s):		Reza Moussavi, Rahwa Bahta
-*	Description:	To incease/decrease panic/normal the front motor
-*/
-void moto_front_motor(unsigned char increase,unsigned char panic){
-	frontPulse = increase?frontMotorLimitIncrease(frontPulse, panic?PANIC_STEP:NORMAL_STEP):frontMotorLimitDecrease(frontPulse, panic?PANIC_STEP:NORMAL_STEP);
-	#ifdef ARDUINO
-		escFront.writeMicroseconds(frontPulse);
-	#elif defined PC
-		analogWrite(FRONT_MOTOR, frontPulse);
-	#endif
-		PRINT_STRING("Increasing front motor pulse");
-		PRINT_NEW_LINE;
-}
-
-/*
-*	Function:		moto_rear_mototr(unsigned char increase,unsigned char panic)
-*	Author(s):		Reza Moussavi, Rahwa Bahta
-*	Description:	To incease/decrease panic/normal the rear motor
-*/
-void moto_rear_motor(unsigned char increase,unsigned char panic){
-	rearPulse = increase?rearMotorLimitIncrease(rearPulse, panic?PANIC_STEP:NORMAL_STEP):rearMotorLimitDecrease(rearPulse, panic?PANIC_STEP:NORMAL_STEP);
-	#ifdef ARDUINO
-		escRear.writeMicroseconds(rearPulse);
-	#elif defined PC
-		analogWrite(REAR_MOTOR, rearPulse);
-	#endif
-		PRINT_STRING("Increasing rear motor pulse");
-		PRINT_NEW_LINE;
-}
-
-
-
-/**
  * Function:    void moto_startMotors()
  * Author(s):   Kristofer Hansson Aspman,
  *              Björn Eriksson
@@ -112,8 +47,8 @@ void moto_rear_motor(unsigned char increase,unsigned char panic){
  * Description: Sets the pulse width to a state where
  *              all motors starts spinning but the
  *              drone does not lift off.
- *
  */
+
 void moto_startMotors(void){
     leftPulse = IDLE_SPEED;
     rightPulse = IDLE_SPEED;
@@ -134,7 +69,7 @@ void moto_startMotors(void){
     PRINT_NEW_LINE;
 }
 
-/**
+/*
  * Function:    void moto_stopMotors()
  * Author(s):   Kristofer Hansson Aspman,
  *              Björn Eriksson
@@ -142,7 +77,6 @@ void moto_startMotors(void){
  *
  * Description: Stops all motors, i.e. sets the
  *              pulse width to zero.
- *
  */
 void moto_stopMotors(void){
     rightPulse = STOP_PULSE;
@@ -163,7 +97,7 @@ void moto_stopMotors(void){
     PRINT_STRING("Stopping all motors");
     PRINT_NEW_LINE;
 }
-/**
+/*
  * Function:    void moto_hover()
  * Author(s):   Kristofer Hansson Aspman,
  *              Björn Eriksson
@@ -171,7 +105,6 @@ void moto_stopMotors(void){
  *
  * Description: Sets all motors to the same pulse width
  *              where to drone shall stay in hover state
- *
  */
 void moto_hover(void){
     rightPulse = HOVER_PULSE_RIGHT;
@@ -193,10 +126,7 @@ void moto_hover(void){
     PRINT_NEW_LINE;    
 }
 
-
-
-
-/**
+/*
  * Function:    void moto_goForward()
  * Author(s):   Kristofer Hansson Aspman,
  *              Björn Eriksson
@@ -206,16 +136,12 @@ void moto_hover(void){
  *              the pulse width of the front
  *              motor. This makes the drone go
  *              forward.
- *
  */
 void moto_goForward(void){
     moto_increaseRearNormal();
     moto_decreaseFrontNormal();
-    return;
-
 }
-
-/**
+/*
  * Function:    void moto_goBackward()
  * Author(s):   Kristofer Hansson Aspman,
  *              Björn Eriksson
@@ -225,15 +151,13 @@ void moto_goForward(void){
  *              the pulse width of the front
  *              motor. This makes the drone go
  *              backward.
- *
  */
 void moto_goBackward(void){
     moto_decreaseRearNormal();
     moto_increaseFrontNormal();
-    return;
 }
 
-/**
+/*
  * Functions:   moto_strafeRight()
  *              moto_strafeLeft()
  *
@@ -245,21 +169,18 @@ void moto_goBackward(void){
  *              the other in order to make
  *              the drone fly sideways to
  *              either left or right.
- *              
  */
 void moto_strafeRight(void){
     moto_decreaseRightNormal();
     moto_increaseLeftNormal();
-    return;
 }
 
 void moto_strafeLeft(void){
     moto_decreaseLeftNormal();
     moto_increaseRightNormal();
-    return;
 }
 
-/**
+/*
  * Functions:   moto_rotateLeft()
  *              moto_rotateRight()
  *
@@ -268,10 +189,9 @@ void moto_strafeLeft(void){
  *
  * Description: Increases either right and
  *              left or front and rear
-*               motor and decreases
+ *              motor and decreases
  *              the other in order to make
- *              the drone turn either righ or left.
- *              
+ *              the drone turn either righ or left.             
  */
 
 
@@ -281,7 +201,6 @@ void moto_rotateLeft(void){
     moto_increaseRightNormal();
     moto_decreaseFrontNormal();
     moto_decreaseRearNormal();
-    return;
 }
 
 void moto_rotateRight(void){
@@ -289,9 +208,8 @@ void moto_rotateRight(void){
     moto_decreaseRightNormal();
     moto_increaseFrontNormal();
     moto_increaseRearNormal();
-    return;
 }
-/**
+/*
  * Functions:   moto_increaseAll()
  *              moto_increaseAllPanic()
  * Author(s):   Kristofer Hansson Aspman,
@@ -304,49 +222,26 @@ void moto_rotateRight(void){
  *              by the predefined normal
  *              increment or by the predefined
  *              panic increment.
- *
  */
 
 void moto_increaseAllNormal(void){
-    rightPulse = rightMotorLimitIncrease(rightPulse, NORMAL_STEP);
-    leftPulse = leftMotorLimitIncrease(leftPulse, NORMAL_STEP);
-    frontPulse = frontMotorLimitIncrease(frontPulse, NORMAL_STEP);
-    rearPulse = rearMotorLimitIncrease(rearPulse, NORMAL_STEP);
-#ifdef ARDUINO 
-    escRight.writeMicroseconds(rightPulse);
-    escLeft.writeMicroseconds(leftPulse);
-    escFront.writeMicroseconds(frontPulse);
-    escRear.writeMicroseconds(rearPulse);
-#elif defined PC
-    analogWrite(RIGHT_MOTOR, rightPulse);
-    analogWrite(LEFT_MOTOR, leftPulse);
-    analogWrite(FRONT_MOTOR, frontPulse);
-    analogWrite(REAR_MOTOR, rearPulse);
-#endif
+    moto_increaseLeftNormal();
+    moto_increaseRightNormal();
+    moto_increaseFrontNormal();
+    moto_increaseRearNormal();
     PRINT_STRING("increases all motors");
     PRINT_NEW_LINE;
 }
 
 void moto_increaseAllPanic(void){
-    rightPulse = rightMotorLimitIncrease(rightPulse, PANIC_STEP);
-    leftPulse = leftMotorLimitIncrease(leftPulse, PANIC_STEP);
-    frontPulse = frontMotorLimitIncrease(frontPulse, PANIC_STEP);
-    rearPulse = rearMotorLimitIncrease(rearPulse, PANIC_STEP);
-#ifdef ARDUINO 
-    escRight.writeMicroseconds(rightPulse);
-    escLeft.writeMicroseconds(leftPulse);
-    escFront.writeMicroseconds(frontPulse);
-    escRear.writeMicroseconds(rearPulse);
-#elif defined PC
-    analogWrite(RIGHT_MOTOR, rightPulse);
-    analogWrite(LEFT_MOTOR, leftPulse);
-    analogWrite(FRONT_MOTOR, frontPulse);
-    analogWrite(REAR_MOTOR, rearPulse);
-#endif
+    moto_increaseLeftPanic();
+    moto_increaseRightPanic();
+    moto_increaseFrontPanic();
+    moto_increaseRearPanic();    
     PRINT_STRING("increases all motors");
     PRINT_NEW_LINE;
 }
-/**
+/*
  * Functions:   moto_decreaseAll()
  *              moto_decreaseAllPanic()
  * Author(s):   Kristofer Hansson Aspman,
@@ -359,49 +254,26 @@ void moto_increaseAllPanic(void){
  *              by the predefined normal
  *              decrement or by the predefined
  *              panic decrement.
- *
  */
 
 void moto_decreaseAllNormal(void){
-    rightPulse = rightMotorLimitDecrease(rightPulse, NORMAL_STEP);
-    leftPulse = leftMotorLimitDecrease(leftPulse, NORMAL_STEP);
-    frontPulse = frontMotorLimitDecrease(frontPulse, NORMAL_STEP);
-    rearPulse = rearMotorLimitDecrease(rearPulse, NORMAL_STEP);
-#ifdef ARDUINO 
-    escRight.writeMicroseconds(rightPulse);
-    escLeft.writeMicroseconds(leftPulse);
-    escFront.writeMicroseconds(frontPulse);
-    escRear.writeMicroseconds(rearPulse);
-#elif defined PC
-    analogWrite(RIGHT_MOTOR, rightPulse);
-    analogWrite(LEFT_MOTOR, leftPulse);
-    analogWrite(FRONT_MOTOR, frontPulse);
-    analogWrite(REAR_MOTOR, rearPulse);
-#endif
+    moto_decreaseLeftNormal();
+    moto_decreaseRightNormal();
+    moto_decreaseFrontNormal();
+    moto_decreaseRearNormal();
     PRINT_STRING("decreases all motors\n");
     PRINT_NEW_LINE;
 }
 
 void moto_decreaseAllPanic(void){
-    rightPulse = rightMotorLimitDecrease(rightPulse, PANIC_STEP);
-    leftPulse = leftMotorLimitDecrease(leftPulse, PANIC_STEP);
-    frontPulse = frontMotorLimitDecrease(frontPulse, PANIC_STEP);
-    rearPulse = rearMotorLimitDecrease(rearPulse, PANIC_STEP);
-#ifdef ARDUINO 
-    escRight.writeMicroseconds(rightPulse);
-    escLeft.writeMicroseconds(leftPulse);
-    escFront.writeMicroseconds(frontPulse);
-    escRear.writeMicroseconds(rearPulse);
-#elif defined PC
-    analogWrite(RIGHT_MOTOR, rightPulse);
-    analogWrite(LEFT_MOTOR, leftPulse);
-    analogWrite(FRONT_MOTOR, frontPulse);
-    analogWrite(REAR_MOTOR, rearPulse);
-#endif
+    moto_decreaseLeftPanic();
+    moto_decreaseRightPanic();
+    moto_decreaseFrontPanic();
+    moto_decreaseRearPanic();
     PRINT_STRING("decreases all motors");
     PRINT_NEW_LINE;
 }
-/**
+/*
  * Functions:   moto_increaseRightNormal()
  *              moto_increaseLeftNormal()
  *              moto_increaseFrontNormal()
@@ -421,8 +293,7 @@ void moto_decreaseAllPanic(void){
  *              increment or by the predefined
  *              panic increment. Every motor
  *              can have individual max & min
- *              levels due to HW tolerances
- *              
+ *              levels due to HW tolerances              
  */
     
 void moto_increaseLeftNormal(void){
@@ -513,7 +384,7 @@ void moto_increaseRearPanic(void){
     PRINT_NEW_LINE;
 }
 
-/**
+/*
  * Functions:   moto_decreaseRightNormal()
  *              moto_decreaseLeftNormal()
  *              moto_decreaseFrontNormal()
@@ -528,12 +399,11 @@ void moto_increaseRearPanic(void){
  *
  * Description: Decreases the pulse width of
  *              the corresponding motor.
-
+ *
  *              Pulse width decreases either
  *              by the predefined normal
  *              decrement or by the predefined
  *              panic decrement.
- *
  */
 
 void moto_decreaseRightNormal(void){
@@ -625,7 +495,7 @@ void moto_decreaseRearPanic(void){
 }
 
 
-/**
+/*
  * Function:     printMotorStatus()
  * Author(s):    Kristofer Hansson Aspman,
  *               Magnus Bergqvist
@@ -635,7 +505,6 @@ void moto_decreaseRearPanic(void){
  *               or the serial monitor depending
  *               on whether the ARDUINO or PC
  *               flags are set.
- *
  */
 
 void printMotorStatus(void){
@@ -665,7 +534,7 @@ void sendMsg(void){
     /* send(currentPulse);  not sure how the send funcrion till look like */
 }
 
-/**
+/*
  * Functions:    rightMotorLimitIncrease()
  *               rightMotorLimitDecrease()
  *               leftMotorLimitIncrease()
@@ -763,7 +632,7 @@ uint16_t rearMotorLimitDecrease(uint16_t currentPulse,
     }
 }
 
-/**
+/*
  * Function:     map()
  * Author(s):    Magnus Bergqvist
  *
@@ -775,30 +644,41 @@ uint16_t rearMotorLimitDecrease(uint16_t currentPulse,
  */
 uint16_t map(uint16_t actual, uint16_t out_boundary1, uint16_t out_boundary2){
     
-    /*step size depending on inner value spectra 
-    compared to ESC output spectra*/
+    /* 
+     * step size depending on inner value spectra 
+     * compared to ESC output spectra
+     */
     double steps = (double)(out_boundary2 - out_boundary1) / 
                     (double)(MAX_ESC_PULSE - MIN_ESC_PULSE);
     
-    /* calculating the result and make sure all values start from 
-        out_boundary1*/
+    /*
+     * calculating the result and make sure all values start from 
+     * out_boundary1
+     */
     double result = out_boundary1 + ((actual-MIN_ESC_PULSE)*steps);
     
-    /* modfCrap is a var. to take care of int val. after a modf on result,
-       which we don't care about. We just want the decimal part to get
-       the rounding of the numbers more accurate*/
+    /*
+     * modfCrap is a var. to take care of int val. after a modf on result,
+     * which we don't care about. We just want the decimal part to get
+     * the rounding of the numbers more accurate
+     */
+    
     double modfCrap;
     
-    /* modfRest will store the decimals from var. result to be used below
-       to determine if the returned value should be rounded up or down*/
+    /*
+     * modfRest will store the decimals from var. result to be used below
+     * to determine if the returned value should be rounded up or down
+     */
     double modfRest = modf(result, &modfCrap);
     
-    /* final created to get a return variable that conforms with the
-       coding standard and allows final adjustment to the result before
-       it's returned*/
+    /* 
+     * final created to get a return variable that conforms with the
+     * coding standard and allows final adjustment to the result before
+     * it's returned
+     */
     uint16_t final;
     
-    /* If fractional part of result < 0.5 do nothing*/
+    /* If fractional part of result < 0.5 do nothing */
     if(modfRest < 0.5){
         final = (uint16_t)result;
     }
@@ -817,25 +697,3 @@ uint16_t map(uint16_t actual, uint16_t out_boundary1, uint16_t out_boundary2){
         return out_boundary2;
     }
 }
-
-/**
- * Function:    void sendMsg()
- * Author(s):   Björn Eriksson
-
- *
- * Description: sends a message as a struct to movement
- *              
- */
-
-/*
- *
- *  function to sent the current pulses if we use the proto_read_motor()
- *
- *
-void sendMsg(void){
-    struct pulses currentPulsess = {rightPulse, leftPulse, 
-                                    frontPulse, rearPulse};
-    proto_write_move(currentPulses);
-}
-
-*/

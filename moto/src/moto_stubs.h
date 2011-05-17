@@ -13,8 +13,5 @@
 #define MOTO_STUBS_H
 #include <stdint.h>
 
-void writeMicroseconds(unsigned char value);
-unsigned int readMicroseconds(void);
-unsigned char attach(unsigned char pin);
 void analogWrite(int motor, uint16_t pulse);
 #endif
