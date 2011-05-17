@@ -56,8 +56,8 @@ OBJ=bin/*.o
 TESTSUITE_OBJ=bin/test_suite.o
 FILES_TO_REMOVE=*.o *.rom *.elf *.map *~ *.lst *.o ../src/*.gcov \
 	../gcov_out/*.gcno ../gcov_out/*.gcov ../gcov_out/*.gcda ../../proto_mega/bin/*.o \
-	../../../mov/bin/*.o ../../../ca/bin/*.o ../../main.o ../*.gcno ../*.gcda \
-	../src/*.o
+	../../../mov/bin/*.o ../../../ca/bin/*.o ../../main.o ../*.gcov ../*.gcno ../*.gcda \
+	../src/*.o ../test/*.gcov ../test/*.gcda ../test/*.gcno ../test/test_suite.*
 
 default:
 	@echo " "
@@ -142,33 +142,39 @@ gcov: clean
 	$(TESTSUITE_OBJ)
 	@ echo "After exec testsuite"
 	gcov src/*.c
-	make moveGCovFiles
-#	rm -fr ./covs/
-#	mkdir ./covs/
+	mv bin/test_suite.o ./
+	rm -fr ./covs/
+	mkdir ./covs/
 #	@ cd ./gcov_out && \
-#	lcov  --directory ../covs --zerocounters 
-#	lcov  --directory ../ --directory ./gcov_out --directory ./../proto_mega/src/ --capture --output-file ./covs/stap.info
+	lcov --directory ./covs --zerocounters 
+	lcov --directory ./ --capture --output-file test_suite.o.info
 #	lcov  --directory ../ --directory ./src --directory ./bin --directory ./../proto_mega/src/ --capture --output-file ./covs/stap.info
-#	genhtml -o ../covs/ ../covs/stap.info
+	genhtml -o ./covs/ test_suite.o.info
 	@ echo ".gcov-files created in gcov_out-folder"
+	make moveGCovFiles
 
 gcov2: clean
 	gcc -lgcov -fprofile-arcs -ftest-coverage -DPC -DMASTER_TEST_SUITE -DAUTOMATED $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
-#	gcc -fprofile-arcs -ftest-coverage -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
 	@ echo "Compiled for gcov, now running testsuite..."
 	$(TESTSUITE_OBJ)
 	@ echo "After exec testsuite"
-	gcov -b -c src/*.c
+	gcov -o -c src/*.c
+	mv bin/test_suite.o ./
+	rm -fr ./covs/
+	mkdir ./covs/
+#	@ cd ./gcov_out && \
+	lcov --directory ./covs --zerocounters 
+	lcov --directory ./ --capture --output-file test_suite.o.info
+#	lcov  --directory ../ --directory ./src --directory ./bin --directory ./../proto_mega/src/ --capture --output-file ./covs/stap.info
+	genhtml -o ./covs/ test_suite.o.info
+	@ echo ".gcov-files created in gcov_out-folder"
 	make moveGCovFiles
-	@ echo ".gcov-files created in src-folder"
 
 moveGCovFiles:
-	rm -fr ./gcov_out
-	mkdir ./gcov_out
-	mv *.gcov gcov_out/
-	mv *.gcno gcov_out/
-	mv *.gcda gcov_out/
-
+	mv test_suite.* test/
+	mv *.gcno test/
+	mv *.gcda test/
+	@ echo ".gcov-files moved to test-folder"
 clean:
 	@ cd bin && rm -f $(FILES_TO_REMOVE)
 	@ echo "Project cleaned"
