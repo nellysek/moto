@@ -56,7 +56,8 @@ OBJ=bin/*.o
 TESTSUITE_OBJ=bin/test_suite.o
 FILES_TO_REMOVE=*.o *.rom *.elf *.map *~ *.lst *.o ../src/*.gcov \
 	../gcov_out/*.gcno ../gcov_out/*.gcov ../gcov_out/*.gcda ../../proto_mega/bin/*.o \
-	../../../mov/bin/*.o ../../../ca/bin/*.o ../../main.o
+	../../../mov/bin/*.o ../../../ca/bin/*.o ../../main.o ../*.gcno ../*.gcda \
+	../src/*.o
 
 default:
 	@echo " "
@@ -69,6 +70,7 @@ default:
 	@echo "make clean    recursively clean up subdirs"
 	@echo " "
 	@echo "--- Verification and debugging --------------------------"
+	@echo "make pc-dbg       produces debug modebinary in bin/"
 	@echo "make test         compiles unit tests"
 	@echo "make unit         compiles and runs unit tests"
 	@echo "make gcov         run unit tests with gcov (statement coverage)"
@@ -125,6 +127,9 @@ uno: clean install
 
 pc: clean
 	gcc -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
+
+pc-dbg: clean
+	gcc -DPC -DDEBUG $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
 
 valgrind: clean
 	gcc -g -DPC -DDEBUG $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
