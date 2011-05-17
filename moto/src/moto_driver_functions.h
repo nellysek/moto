@@ -1,4 +1,4 @@
-/**
+/*!
  * Module:       motor_control.h
  * Author(s):    Kristofer Hansson Aspman
  *               Magnus Bergqvist
@@ -6,7 +6,6 @@
  * Description:  The typedef of the bitfield struct and
  *               all the prototypes for the functions used
  *               by tools.c, motor_control.c and parser.c.
- *
  */
 #ifndef MOTO_DRIVER_FUNCTIONS_H
     #define MOTO_DRIVER_FUNCTIONS_H
@@ -104,14 +103,11 @@ void moto_right_motor(unsigned char,unsigned char);
 void moto_front_motor(unsigned char,unsigned char);
 void moto_rear_motor(unsigned char,unsigned char);
 
-uint16_t rightMotorLimitIncrease(uint16_t currentPulse, uint16_t increment);
-uint16_t rightMotorLimitDecrease(uint16_t currentPulse, uint16_t decrement);
-uint16_t leftMotorLimitIncrease(uint16_t currentPulse, uint16_t increment);
-uint16_t leftMotorLimitDecrease(uint16_t currentPulse, uint16_t decrement);
-uint16_t frontMotorLimitIncrease(uint16_t currentPulse, uint16_t increment);
-uint16_t frontMotorLimitDecrease(uint16_t currentPulse, uint16_t decrement);
-uint16_t rearMotorLimitIncrease(uint16_t currentPulse, uint16_t increment);
-uint16_t rearMotorLimitDecrease(uint16_t currentPulse, uint16_t decrement);
+uint16_t moto_LimitIncrease(uint16_t currentPulse, uint16_t increment);
+uint16_t moto_LimitDecrease(uint16_t currentPulse, uint16_t decrement);
+
+uint16_t moto_map(uint16_t actual, uint16_t out_boundary1,
+                                    uint16_t out_boundary2);
 
 struct pulses{
     uint16_t right;

@@ -1,6 +1,7 @@
- /*!@author Kristofer Hansson Aspman,
- *          Björn Eriksson,
- *          Magnus Bergqvist
+/*!
+ * @author Kristofer Hansson Aspman,
+ *         Björn Eriksson,
+ *         Magnus Bergqvist
  *         
  * @file moto_driver_functions.c
  * @version v0.03
@@ -9,10 +10,14 @@
  * @brief Contains the functions that sets the pulse width of the \n
  *        different motors.
  *
- * @history 2011-04-03: Created the file. (Kristofer)
- *          2011-05-09: Added map function and moved printout macros \n
- *                      to moto_printer_functions, changed the printouts \n
- *                      to fully comply with the new macro style (Magnus)
+ * @history 2011-05-17: Implemented moto_map() function \n
+                        (Magnus) \n
+            2011-05-09: Added map function and moved printout macros \n
+                        to moto_printer_functions, changed the printouts \n
+                        to fully comply with the new macro style \n
+                        (Magnus) \n
+            2011-04-03: Created the file. \n 
+                        (Kristofer)
  */
  
 #include "moto_driver_functions.h"
@@ -297,88 +302,104 @@ void moto_decreaseAllPanic(void){
  */
     
 void moto_increaseLeftNormal(void){
-    leftPulse = leftMotorLimitIncrease(leftPulse, NORMAL_STEP);
+    leftPulse = moto_LimitIncrease(leftPulse, NORMAL_STEP);
 #ifdef ARDUINO
-    escLeft.writeMicroseconds(leftPulse);
+    escLeft.writeMicroseconds(moto_map(
+                            leftPulse, MIN_PULSE_LEFT, MAX_PULSE_LEFT));
 #elif defined PC
-    analogWrite(LEFT_MOTOR, leftPulse);
+    analogWrite(LEFT_MOTOR, moto_map(
+                            leftPulse, MIN_PULSE_LEFT, MAX_PULSE_LEFT));
 #endif
     PRINT_STRING("Increasing left motor pulse");
     PRINT_NEW_LINE;
 }
 
 void moto_increaseRightNormal(void){
-    rightPulse = rightMotorLimitIncrease(rightPulse, NORMAL_STEP);
+    rightPulse = moto_LimitIncrease(rightPulse, NORMAL_STEP);
 #ifdef ARDUINO
-    escRight.writeMicroseconds(rightPulse);
+    escRight.writeMicroseconds(moto_map(
+                            rightPulse, MIN_PULSE_RIGHT, MAX_PULSE_RIGHT));
 #elif defined PC
-    analogWrite(RIGHT_MOTOR, rightPulse);
+    analogWrite(RIGHT_MOTOR, moto_map(
+                            rightPulse, MIN_PULSE_RIGHT, MAX_PULSE_RIGHT));
 #endif
     PRINT_STRING("Increasing right motor pulse");
     PRINT_NEW_LINE;
 }
 
 void moto_increaseFrontNormal(void){
-    frontPulse = frontMotorLimitIncrease(frontPulse, NORMAL_STEP);
+    frontPulse = moto_LimitIncrease(frontPulse, NORMAL_STEP);
 #ifdef ARDUINO
-    escFront.writeMicroseconds(frontPulse);
+    escFront.writeMicroseconds(moto_map(
+                            frontPulse, MIN_PULSE_FRONT, MAX_PULSE_FRONT));
 #elif defined PC
-    analogWrite(FRONT_MOTOR, frontPulse);
+    analogWrite(FRONT_MOTOR, moto_map(
+                            frontPulse, MIN_PULSE_FRONT, MAX_PULSE_FRONT));
 #endif
     PRINT_STRING("Increasing Front motor pulse");
     PRINT_NEW_LINE;
 }
 
 void moto_increaseRearNormal(void){
-    rearPulse = rearMotorLimitIncrease(rearPulse, NORMAL_STEP);
+    rearPulse = moto_LimitIncrease(rearPulse, NORMAL_STEP);
 #ifdef ARDUINO
-    escRear.writeMicroseconds(rearPulse);
+    escRear.writeMicroseconds(moto_map(
+                            rearPulse, MIN_PULSE_REAR, MAX_PULSE_REAR));
 #elif defined PC
-    analogWrite(REAR_MOTOR, rearPulse);
+    analogWrite(REAR_MOTOR, moto_map(
+                            rearPulse, MIN_PULSE_REAR, MAX_PULSE_REAR));
 #endif
     PRINT_STRING("Increasing rear motor pulse");
     PRINT_NEW_LINE;
 }
 
 void moto_increaseLeftPanic(void){
-    leftPulse = leftMotorLimitIncrease(leftPulse, PANIC_STEP);
+    leftPulse = moto_LimitIncrease(leftPulse, PANIC_STEP);
 #ifdef ARDUINO
-    escLeft.writeMicroseconds(leftPulse);
+    escLeft.writeMicroseconds(moto_map(
+                          leftPulse, MIN_PULSE_LEFT, MAX_PULSE_LEFT));
 #elif defined PC
-    analogWrite(LEFT_MOTOR, leftPulse);
+    analogWrite(LEFT_MOTOR, moto_map(
+                          leftPulse, MIN_PULSE_LEFT, MAX_PULSE_LEFT));
 #endif
     PRINT_STRING("Increasing left motor pulse in PANIC!");
     PRINT_NEW_LINE;
 }
 
 void moto_increaseRightPanic(void){
-    rightPulse = rightMotorLimitIncrease(rightPulse, PANIC_STEP);
+    rightPulse = moto_LimitIncrease(rightPulse, PANIC_STEP);
 #ifdef ARDUINO
-    escRight.writeMicroseconds(rightPulse);
+    escRight.writeMicroseconds(moto_map(
+                            rightPulse, MIN_PULSE_RIGHT, MAX_PULSE_RIGHT));
 #elif defined PC
-    analogWrite(RIGHT_MOTOR, rightPulse);
+    analogWrite(RIGHT_MOTOR, moto_map(
+                            rightPulse, MIN_PULSE_RIGHT, MAX_PULSE_RIGHT));
 #endif
     PRINT_STRING("Increasing right motor pulse in PANIC!");
     PRINT_NEW_LINE;
 }
 
 void moto_increaseFrontPanic(void){
-    frontPulse = frontMotorLimitIncrease(frontPulse, PANIC_STEP);
+    frontPulse = moto_LimitIncrease(frontPulse, PANIC_STEP);
 #ifdef ARDUINO
-    escFront.writeMicroseconds(frontPulse);
+    escFront.writeMicroseconds(moto_map(
+                            frontPulse, MIN_PULSE_FRONT, MAX_PULSE_FRONT));
 #elif defined PC
-    analogWrite(FRONT_MOTOR, frontPulse);
+    analogWrite(FRONT_MOTOR, moto_map(
+                            frontPulse, MIN_PULSE_FRONT, MAX_PULSE_FRONT));
 #endif
     PRINT_STRING("Increasing Front motor pulse in PANIC!");
     PRINT_NEW_LINE;
 }
 
 void moto_increaseRearPanic(void){
-    rearPulse = rearMotorLimitIncrease(rearPulse, PANIC_STEP);
+    rearPulse = moto_LimitIncrease(rearPulse, PANIC_STEP);
 #ifdef ARDUINO
-    escRear.writeMicroseconds(rearPulse);
+    escRear.writeMicroseconds(moto_map(
+                            rearPulse, MIN_PULSE_REAR, MAX_PULSE_REAR));
 #elif defined PC
-    analogWrite(REAR_MOTOR, rearPulse);
+    analogWrite(REAR_MOTOR, moto_map(
+                            rearPulse, MIN_PULSE_REAR, MAX_PULSE_REAR));
 #endif
     PRINT_STRING("Increasing rear motor pulse in PANIC!");
     PRINT_NEW_LINE;
@@ -407,88 +428,104 @@ void moto_increaseRearPanic(void){
  */
 
 void moto_decreaseRightNormal(void){
-    rightPulse = rightMotorLimitDecrease(rightPulse, NORMAL_STEP);
+    rightPulse = moto_LimitDecrease(rightPulse, NORMAL_STEP);
 #ifdef ARDUINO
-    escRight.writeMicroseconds(rightPulse);
+    escRight.writeMicroseconds(moto_map(
+                            rightPulse, MIN_PULSE_RIGHT, MAX_PULSE_RIGHT));
 #elif defined PC
-    analogWrite(RIGHT_MOTOR, rightPulse);
+    analogWrite(RIGHT_MOTOR, moto_map(
+                            rightPulse, MIN_PULSE_RIGHT, MAX_PULSE_RIGHT));
 #endif
     PRINT_STRING("Decreasing right motor pulse");
     PRINT_NEW_LINE;
 }
 
 void moto_decreaseLeftNormal(void){
-    leftPulse = leftMotorLimitDecrease(leftPulse, NORMAL_STEP);
+    leftPulse = moto_LimitDecrease(leftPulse, NORMAL_STEP);
 #ifdef ARDUINO
-    escLeft.writeMicroseconds(leftPulse);
+    escLeft.writeMicroseconds(moto_map(
+                            leftPulse, MIN_PULSE_LEFT, MAX_PULSE_LEFT));
 #elif defined PC
-    analogWrite(LEFT_MOTOR, leftPulse);
+    analogWrite(LEFT_MOTOR, moto_map(
+                            leftPulse, MIN_PULSE_LEFT, MAX_PULSE_LEFT));
 #endif
     PRINT_STRING("Decreasing left motor pulse");
     PRINT_NEW_LINE;
 }
 
 void moto_decreaseFrontNormal(void){
-    frontPulse = frontMotorLimitDecrease(frontPulse, NORMAL_STEP);
+    frontPulse = moto_LimitDecrease(frontPulse, NORMAL_STEP);
 #ifdef ARDUINO
-    escFront.writeMicroseconds(frontPulse);
+    escFront.writeMicroseconds(moto_map(
+                            frontPulse, MIN_PULSE_FRONT, MAX_PULSE_FRONT));
 #elif defined PC
-    analogWrite(FRONT_MOTOR, frontPulse);
+    analogWrite(FRONT_MOTOR, moto_map(
+                            frontPulse, MIN_PULSE_FRONT, MAX_PULSE_FRONT));
 #endif
     PRINT_STRING("Decreasing Front motor pulse");
     PRINT_NEW_LINE;
 }
 
 void moto_decreaseRearNormal(void){
-    rearPulse = rearMotorLimitDecrease(rearPulse, NORMAL_STEP);
+    rearPulse = moto_LimitDecrease(rearPulse, NORMAL_STEP);
 #ifdef ARDUINO
-    escRear.writeMicroseconds(rearPulse);
+    escRear.writeMicroseconds(moto_map(
+                            rearPulse, MIN_PULSE_REAR, MAX_PULSE_REAR));
 #elif defined PC
-    analogWrite(REAR_MOTOR, rearPulse);
+    analogWrite(REAR_MOTOR, moto_map(
+                            rearPulse, MIN_PULSE_REAR, MAX_PULSE_REAR));
 #endif
     PRINT_STRING("Decreasing rear motor pulse");
     PRINT_NEW_LINE;
 }
 
 void moto_decreaseLeftPanic(void){
-    leftPulse = leftMotorLimitDecrease(leftPulse, PANIC_STEP);
+    leftPulse = moto_LimitDecrease(leftPulse, PANIC_STEP);
 #ifdef ARDUINO
-    escLeft.writeMicroseconds(leftPulse);
+    escLeft.writeMicroseconds(moto_map(
+                            leftPulse, MIN_PULSE_LEFT, MAX_PULSE_LEFT));
 #elif defined PC
-    analogWrite(LEFT_MOTOR, leftPulse);
+    analogWrite(LEFT_MOTOR, moto_map(
+                            leftPulse, MIN_PULSE_LEFT, MAX_PULSE_LEFT));
 #endif
     PRINT_STRING("Decreasing left motor pulse in PANIC!");
     PRINT_NEW_LINE;
 }
 
 void moto_decreaseRightPanic(void){
-    rightPulse = rightMotorLimitDecrease(rightPulse, PANIC_STEP);
+    rightPulse = moto_LimitDecrease(rightPulse, PANIC_STEP);
 #ifdef ARDUINO
-    escRight.writeMicroseconds(rightPulse);
+    escRight.writeMicroseconds(moto_map(
+                            rightPulse, MIN_PULSE_RIGHT, MAX_PULSE_RIGHT));
 #elif defined PC
-    analogWrite(RIGHT_MOTOR, rightPulse);
+    analogWrite(RIGHT_MOTOR, moto_map(
+                            rightPulse, MIN_PULSE_RIGHT, MAX_PULSE_RIGHT));
 #endif
     PRINT_STRING("Decreasing right motor pulse in PANIC!");
     PRINT_NEW_LINE;
 }
 
 void moto_decreaseFrontPanic(void){
-    frontPulse = frontMotorLimitDecrease(frontPulse, PANIC_STEP);
+    frontPulse = moto_LimitDecrease(frontPulse, PANIC_STEP);
 #ifdef ARDUINO
-    escFront.writeMicroseconds(frontPulse);
+    escFront.writeMicroseconds(moto_map(
+                            frontPulse, MIN_PULSE_FRONT, MAX_PULSE_FRONT));
 #elif defined PC
-    analogWrite(FRONT_MOTOR, frontPulse);
+    analogWrite(FRONT_MOTOR, moto_map(
+                            frontPulse, MIN_PULSE_FRONT, MAX_PULSE_FRONT));
 #endif
     PRINT_STRING("Decreasing Front motor pulse in PANIC!");
     PRINT_NEW_LINE;
 }
 
 void moto_decreaseRearPanic(void){
-    rearPulse = rearMotorLimitDecrease(rearPulse, PANIC_STEP);
+    rearPulse = moto_LimitDecrease(rearPulse, PANIC_STEP);
 #ifdef ARDUINO
-    escRear.writeMicroseconds(rearPulse);
+    escRear.writeMicroseconds(moto_map(
+                            rearPulse, MIN_PULSE_REAR, MAX_PULSE_REAR));
 #elif defined PC
-    analogWrite(REAR_MOTOR, rearPulse);
+    analogWrite(REAR_MOTOR, moto_map(
+                            rearPulse, MIN_PULSE_REAR, MAX_PULSE_REAR));
 #endif
     PRINT_STRING("Decreasing rear motor pulse in PANIC!");
     PRINT_NEW_LINE;
@@ -501,7 +538,8 @@ void moto_decreaseRearPanic(void){
  *               Magnus Bergqvist
  *
  * Description:  Prints out the status of the
- *               motors to either the terminal
+ *               motors to either the terminalmoto_map(
+                              leftPulse,MIN_PULSE_LEFT,MAX_PULSE_LEFT))
  *               or the serial monitor depending
  *               on whether the ARDUINO or PC
  *               flags are set.
@@ -535,105 +573,38 @@ void sendMsg(void){
 }
 
 /*
- * Functions:    rightMotorLimitIncrease()
- *               rightMotorLimitDecrease()
- *               leftMotorLimitIncrease()
- *               leftMotorLimitDecrease()
- *               frontMotorLimitIncrease()
- *               frontMotorLimitDecrease()
- *               rearMotorLimitIncrease()
- *               rearMotorLimitDecrease()
+ * Functions:    moto_LimitIncrease()
+ *               moto_LimitDecrease()
  * Author(s):    Magnus Bergqvist
  *
  * Description:  Functions contains the logic
  *               that determines and returns
  *               a valid input value to the motors.
- *               Returned values are mapped for
- *               the functions corresponding motor.
  */
  
-uint16_t rightMotorLimitIncrease(uint16_t currentPulse,
+uint16_t moto_LimitIncrease(uint16_t currentPulse,
                                         uint16_t increment){
-    if((currentPulse + increment) < MAX_PULSE_RIGHT){
+    if((currentPulse + increment) < MAX_ESC_PULSE){
         return (currentPulse + increment);
     }
     else{
-        return MAX_PULSE_RIGHT;
+        return MAX_ESC_PULSE;
     }
 }
 
-uint16_t rightMotorLimitDecrease(uint16_t currentPulse,
+uint16_t moto_LimitDecrease(uint16_t currentPulse,
                                         uint16_t decrement){
-    if((currentPulse - decrement) > MIN_PULSE_RIGHT){
+    if((currentPulse - decrement) > MIN_ESC_PULSE){
         return (currentPulse - decrement);
     }
     else{
-        return MIN_PULSE_RIGHT;
+        return MIN_ESC_PULSE;
     }
 }
 
-uint16_t leftMotorLimitIncrease(uint16_t currentPulse,
-                                        uint16_t increment){
-    if((currentPulse + increment) < MAX_PULSE_LEFT){
-        return (currentPulse + increment);
-    }
-    else{
-        return MAX_PULSE_LEFT;
-    }
-}
-
-uint16_t leftMotorLimitDecrease(uint16_t currentPulse,
-                                        uint16_t decrement){
-    if((currentPulse - decrement) > MIN_PULSE_LEFT){
-        return (currentPulse - decrement);
-    }
-    else{
-        return MIN_PULSE_LEFT;
-    }
-}
-
-uint16_t frontMotorLimitIncrease(uint16_t currentPulse,
-                                        uint16_t increment){
-    if((currentPulse + increment) < MAX_PULSE_FRONT){
-        return (currentPulse + increment);
-    }
-    else{
-        return MAX_PULSE_FRONT;
-    }
-}
-
-uint16_t frontMotorLimitDecrease(uint16_t currentPulse,
-                                        uint16_t decrement){
-    if((currentPulse - decrement) > MIN_PULSE_FRONT){
-        return (currentPulse - decrement);
-    }
-    else{
-        return MIN_PULSE_FRONT;
-    }
-}
-
-uint16_t rearMotorLimitIncrease(uint16_t currentPulse,
-                                        uint16_t increment){
-    if((currentPulse + increment) < MAX_PULSE_REAR){
-        return (currentPulse + increment);
-    }
-    else{
-        return MAX_PULSE_REAR;
-    }
-}
-
-uint16_t rearMotorLimitDecrease(uint16_t currentPulse,
-                                        uint16_t decrement){
-    if((currentPulse - decrement) > MIN_PULSE_REAR){
-        return (currentPulse - decrement);
-    }
-    else{
-        return MIN_PULSE_REAR;
-    }
-}
 
 /*
- * Function:     map()
+ * Function:     moto_map()
  * Author(s):    Magnus Bergqvist
  *
  * Description:  The map function takes an input value (actual), and upper
@@ -642,8 +613,8 @@ uint16_t rearMotorLimitDecrease(uint16_t currentPulse,
  *               systems actual output signals it returns a suitable
  *               value for the calling function to use.
  */
-uint16_t map(uint16_t actual, uint16_t out_boundary1, uint16_t out_boundary2){
-    
+uint16_t moto_map(uint16_t actual, uint16_t out_boundary1, 
+                                    uint16_t out_boundary2){    
     /* 
      * step size depending on inner value spectra 
      * compared to ESC output spectra
