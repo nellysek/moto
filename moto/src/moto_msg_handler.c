@@ -61,29 +61,6 @@ int examineID(msg_pointer mp){
     return 0;
 }
 
-/*
-*	Function:		controlMotors(msg_pointer)
-*	Author(s):		Reza Moussavi, Rahwa Bahta
-*	Description:	Optimized last one
-*/
-
-/* changed this one to old since it's not followig the architecture 
- * and the other one is easier to modify and work with
- */
-
-void OLD_controlMotors(msg_pointer mp){
-        PRINT_STRING("Standard Motor Control Message!");
-        PRINT_NEW_LINE;
-
-	if(mp->left)    moto_left_motor(mp->increase,mp->panic);
-	if(mp->right)	moto_right_motor(mp->increase,mp->panic);
-	if(mp->front)	moto_front_motor(mp->increase,mp->panic);
-	if(mp->rear)	moto_rear_motor(mp->increase,mp->panic);
-}
-
-  /* This has been renamed to OLDxxxx to prevent duplication */
-  /*  The new one Implemented up here */
-
 void controlMotors(msg_pointer mp){
     PRINT_STRING("Standard Motor Control Message!");
     
