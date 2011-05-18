@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - test_suite.o.info - moto/src/moto_msg_manipulation.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">moto/src</a> - moto_msg_manipulation.c<span style="font-size: 80%;"> (source / <a href="moto_msg_manipulation.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">test_suite.o.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2011-05-18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryHi">-</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*!@author Kristofer Hansson Aspman &amp; Magnus Bergqvist</a>
+<span class="lineNum">       2 </span>                :            :  * @file moto_msg_manipulation.c
+<span class="lineNum">       3 </span>                :            :  * @version v0.03
+<span class="lineNum">       4 </span>                :            :  * @date 2011-05-09
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * @brief Holds the implementations of the functions\n
+<span class="lineNum">       7 </span>                :            :  * described in the corresponding .h file. For\n
+<span class="lineNum">       8 </span>                :            :  * full description of the functions please refer\n
+<span class="lineNum">       9 </span>                :            :  * to that file.\n
+<span class="lineNum">      10 </span>                :            :  * Uses the types msg and msg_pointer defined in\n
+<span class="lineNum">      11 </span>                :            :  * moto_msg_manipulation.h.
+<span class="lineNum">      12 </span>                :            :  *
+<span class="lineNum">      13 </span>                :            :  * @history 2011-04-03: Created the file. (Kristofer)
+<span class="lineNum">      14 </span>                :            :  *          2011-04-07: Implemented ifdefs. (Kristofer)
+<span class="lineNum">      15 </span>                :            :  *          2011-05-08: Cleaned up a bit and added some comments. (Kristofer)
+<span class="lineNum">      16 </span>                :            :  *          2011-05-09: Created macros for printing. (Magnus &amp; Kristofer)
+<span class="lineNum">      17 </span>                :            :  *          2011-05-09: Moved macros for printing, included .h file for it \n
+<span class="lineNum">      18 </span>                :            :  *                      to be used by other files as well (Magnus)          
+<span class="lineNum">      19 </span>                :            :  */
+<span class="lineNum">      20 </span>                :            : 
+<span class="lineNum">      21 </span>                :            : 
+<span class="lineNum">      22 </span>                :            : #ifdef ARDUINO
+<span class="lineNum">      23 </span>                :            :     #include &quot;WProgram.h&quot;
+<span class="lineNum">      24 </span>                :            : #endif
+<span class="lineNum">      25 </span>                :            : 
+<span class="lineNum">      26 </span>                :            : #include &quot;moto_msg_manipulation.h&quot;
+<a name="27"><span class="lineNum">      27 </span>                :            : #include &quot;moto_printer_functions.h&quot;</a>
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :<span class="lineNoCov">          0 : void printMsg(msg_pointer mp){</span>
+<span class="lineNum">      30 </span>                :            :     PRINT_STRING(&quot;***********************************&quot;);
+<span class="lineNum">      31 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      32 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      33 </span>                :            :     PRINT_STRING(&quot;         Message Information&quot;);
+<span class="lineNum">      34 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      35 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      36 </span>                :            :     PRINT_STRING(&quot;Bits are:&quot;);
+<span class="lineNum">      37 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      38 </span>                :            :     PRINT_STRING(&quot;ID: &quot;);
+<span class="lineNum">      39 </span>                :            :     PRINT_DEC(mp-&gt;ID);
+<span class="lineNum">      40 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      41 </span>                :            :     PRINT_STRING(&quot;Increase: &quot;);
+<span class="lineNum">      42 </span>                :            :     PRINT_DEC(mp-&gt;increase);
+<span class="lineNum">      43 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      44 </span>                :            :     PRINT_STRING(&quot;Panic: &quot;);
+<span class="lineNum">      45 </span>                :            :     PRINT_DEC(mp-&gt;panic);
+<span class="lineNum">      46 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      47 </span>                :            :     
+<span class="lineNum">      48 </span>                :            :     PRINT_STRING(&quot;Right: &quot;);
+<span class="lineNum">      49 </span>                :            :     PRINT_DEC(mp-&gt;right);
+<span class="lineNum">      50 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      51 </span>                :            :     PRINT_STRING(&quot;Left: &quot;);
+<span class="lineNum">      52 </span>                :            :     PRINT_DEC(mp-&gt;left);
+<span class="lineNum">      53 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      54 </span>                :            :     PRINT_STRING(&quot;Front: &quot;);
+<span class="lineNum">      55 </span>                :            :     PRINT_DEC(mp-&gt;front);
+<span class="lineNum">      56 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      57 </span>                :            :     PRINT_STRING(&quot;Rear: &quot;);
+<span class="lineNum">      58 </span>                :            :     PRINT_DEC(mp-&gt;rear);
+<span class="lineNum">      59 </span>                :            :     
+<span class="lineNum">      60 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      61 </span>                :            :     PRINT_STRING(&quot;Size of bitfield: &quot;);
+<span class="lineNum">      62 </span>                :            :     PRINT_DEC(sizeof(*mp));
+<span class="lineNum">      63 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      64 </span>                :            :     PRINT_STRING(&quot;Hexadecimal representation: &quot;);
+<span class="lineNum">      65 </span>                :            :     PRINT_HEX(BITFIELD_TO_CHAR(mp));
+<span class="lineNum">      66 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      67 </span>                :            :     PRINT_STRING(&quot;Decimal representation: &quot;);
+<span class="lineNum">      68 </span>                :            :     PRINT_DEC(BITFIELD_TO_CHAR(mp));
+<span class="lineNum">      69 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      70 </span>                :            :     
+<span class="lineNum">      71 </span>                :            :     PRINT_STRING(&quot;***********************************&quot;);
+<span class="lineNum">      72 </span>                :            :     PRINT_NEW_LINE;
+<span class="lineNum">      73 </span>                :            : 
+<span class="lineNum">      74 </span>                :<span class="lineNoCov">          0 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+# The files and file extensions mentioned within this file
+# will be ignored by git
+
+# Specific files
+#################
+src/main.c
+.gitignore~
+Makefile~
+README~
+../Makefile
+../Makefile-template
+../src/blink.c
+
+# File types
+#################
+*.o
+*.c~
+*.c#
+*.map
+*.gcov
+*.gcno
+*.gcda
+test/*.x
+*.h~
+../proto_mega/src/*.o
+
+# Directories
+#################
+bin/
+lib/
+../bin/
+../ca/
+../mov/lib/
+../sched/lib/
+../proto_mega/lib/
+../stab/lib/
+doc/
+gcov_out/
