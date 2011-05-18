@@ -627,6 +627,9 @@ void examineID_specialCommands(void){
     CU_ASSERT(leftPulse== left_motor + NORMAL_STEP);
     CU_ASSERT(frontPulse== front_motor - NORMAL_STEP);
     CU_ASSERT(rearPulse== rear_motor - NORMAL_STEP);
+    
+/* printMsg is simply to get full coverage of moto_msg_manipulation */
+    printMsg(testStructPtr);
 
     free(testStructPtr);
 }
