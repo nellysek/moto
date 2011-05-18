@@ -38,9 +38,10 @@ int main(int argc){
 /***************************************************************************/
 
     /* msg_handler tests */
+    
     CU_pSuite msg_handler = CU_add_suite("msg_handler",NULL,NULL);    
     check_add_ok("suite msg_handler");
-
+    
     CU_add_test(msg_handler, "test_moto_examineID", test_moto_examineID);
     check_add_ok("test test_moto_examineID");
     
@@ -52,8 +53,24 @@ int main(int argc){
     check_add_ok("test test_moto_controlMotors");
 
     CU_add_test(msg_handler, "test_moto_specialMotorCommand", test_moto_specialMotorCommand);
-    check_add_ok("test test_moto_specialMotorCommand");    
+    check_add_ok("test test_moto_specialMotorCommand");
+
+    /*examineID suite*/    
+    CU_pSuite examineID = CU_add_suite("examine_ID",NULL,NULL);
+    check_add_ok("suite examine_ID");
+
+    CU_add_test(examineID, "test_examineID_start", test_examineID_start);
+    check_add_ok("test test_examineID_start");    
     
+    CU_add_test(examineID, "test_examineID_stop", test_examineID_stop);
+    check_add_ok("test test_examineID_stop");  
+    
+    CU_add_test(examineID, "examineID_controlMotors", examineID_controlMotors);
+    check_add_ok("examineID_controlMotors");  
+  
+    CU_add_test(examineID, "examineID_specialCommands", examineID_specialCommands);
+    check_add_ok("examineID_specialCommands");    
+
     /* Create a test suite for start_stop functions */
     CU_pSuite start_stop = CU_add_suite("start_stop_motors",NULL,NULL);    
     check_add_ok("suite start_stop_motors");
