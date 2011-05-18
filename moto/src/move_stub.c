@@ -3,7 +3,7 @@
 #include <stdio.h>
 msg binMsg;
 msg_pointer mpo;
-
+unsigned int input;
 int move_init()
 {
 #ifdef ARDUINO
@@ -59,7 +59,7 @@ msg scanHexMsgSTDIN(void){
     else
         return INT_TO_BITFIELD(0xf); //returns BAD_MSG
 #elif defined PC 
-    unsigned int input;
+/*    unsigned int input; */
     #ifdef DEBUG
     printf("Enter the message in hexadecimal: ");
     #endif
