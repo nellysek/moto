@@ -103,28 +103,27 @@ uint8_t serReadUnsignedChar(void)
     char * inputBytesPtr = &inputBytes[0];
     //delay(3000);
     /* Check to see if there are any serial input*/
-    if (Serial.available()>0)                
-    {
-    #ifdef DEBUG
-        Serial.println("serial available");
+    #ifdef DEBUG    
+        if (Serial.available()>0){
+            Serial.println("serial available");
     #endif
-        /* Delay for terminal to finish transmitted, 5ms work great*/
-        /* for 9600 baud (increase this number for slower baud)*/
-        //delay(5);                              
-        numberOfAvailableInputs = Serial.available();
+            /* Delay for terminal to finish transmitted, 5ms work great*/
+            /* for 9600 baud (increase this number for slower baud)*/
+            //delay(5);                              
+            numberOfAvailableInputs = Serial.available();
         
-        /* Load input bytes into array*/
-        for (i=0; i<numberOfAvailableInputs; i++){
-            inputBytes[i] = Serial.read();
-        }
+            /* Load input bytes into array*/
+            for (i=0; i<numberOfAvailableInputs; i++){
+                inputBytes[i] = Serial.read();
+            }
         
-        /* Adding a NULL character at the end */
-        inputBytes[i] =  '\0';
+            /* Adding a NULL character at the end */
+            inputBytes[i] =  '\0';
       
-        /*Scans the character string and stores it as a hexadecimal*/
-        sscanf(inputBytes, "%x", &returnValue);
-        return returnValue;
-    }
+            /*Scans the character string and stores it as a hexadecimal*/
+            sscanf(inputBytes, "%x", &returnValue);
+            return returnValue;
+        }
     
     else
         /* Returns BAD_MSG 0xf (0000 1111) if there is no input*/
