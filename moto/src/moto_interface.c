@@ -3,7 +3,11 @@
  * @file moto_interface.c
  * @version v0.06
  * @date 2011-05-16
- * @history 2011-05-17 - Updated after code review \n
+ * @history 2011-05-18 - Removed all traces of old code for parsing just \n
+                         one 8 bit message. Now uses the 8x8 bit struct \n
+                         as requested by the movement group. \n
+                        (Kristofer)
+            2011-05-17 - Updated after code review \n
                         (Magnus) \n
             2011-05-16 - Implemented no-op instructions \n
                         (Kristofer) \n
@@ -161,6 +165,7 @@ int16_t moto_run(void){
             return 0;
         }
 
+        /* Message is well formed and is sent for further parsing */
         examineID(mp);
 
         printMsg(mp);
