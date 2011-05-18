@@ -31,14 +31,14 @@
 /* defines maximum and minimum pulse width in µs for every motor 
    i.e. at which pulse the motor starts turning and at which pulse it
    reaches its max speed */
-#define MIN_PULSE_FRONT 1000
-#define MAX_PULSE_FRONT 2000
-#define MIN_PULSE_REAR 1000
-#define MAX_PULSE_REAR 2000
-#define MIN_PULSE_LEFT 1000
-#define MAX_PULSE_LEFT 2000
-#define MIN_PULSE_RIGHT 1000
-#define MAX_PULSE_RIGHT 2000
+#define MIN_PULSE_FRONT 1044
+#define MAX_PULSE_FRONT 1900
+#define MIN_PULSE_REAR 1044
+#define MAX_PULSE_REAR 1900
+#define MIN_PULSE_LEFT 1044
+#define MAX_PULSE_LEFT 1900
+#define MIN_PULSE_RIGHT 1044
+#define MAX_PULSE_RIGHT 1900
 
 /* defines the min and max values (pulse width in µs that are allowed) */
 #define MIN_ESC_PULSE 1000

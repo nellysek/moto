@@ -658,7 +658,7 @@ uint16_t moto_map(uint16_t actual, uint16_t out_boundary1,
     else if(final < out_boundary1){
         return out_boundary1;
     }
-    else if(final > out_boundary2){
+    else{
         return out_boundary2;
     }
 }
