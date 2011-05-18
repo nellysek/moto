@@ -115,6 +115,15 @@ int main(int argc){
     CU_add_test(special_commands, "test_moto_specialCommands",
         test_moto_specialCommands);
     check_add_ok("Test test_moto_specialCommands");
+
+    /* holds tests from from cunit_moto_interface.c */
+    /* add interface suite */
+    CU_pSuite interface = CU_add_suite("interface",NULL,NULL);    
+    check_add_ok("suite msg_handler");
+
+    /* add test_moto_init to suite */
+    CU_add_test(interface, "test_moto_init", test_moto_init);
+    check_add_ok("test test_moto_init");
     
 /***************************************************************************/
 #ifdef AUTOMATED

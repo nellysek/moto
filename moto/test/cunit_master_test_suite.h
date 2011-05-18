@@ -12,38 +12,49 @@
  */
 
 /* -----------------------------------------------------------
-* Test cases defined in cunit_moto_msg_handler.c
-* (Can be compiled separately with 
-* gcc -DPC -DAUTOMATED test/cunit_moto_msg_handler.c test/cunit_master_test_suite.h src/*.c ../proto_mega/src/*.c -o bin/q.o -lcunit
-*
-*  -----------------------------------------------------------
-*/
+ * Test cases defined in cunit_moto_interface.c
+ * (Can be compiled separately with 
+ * gcc -DPC -DAUTOMATED test/cunit_moto_interface.c test/cunit_master_test_suite.h src/*.c ../proto_mega/src/*.c -o bin/q.o -lcunit
+ *
+ *  -----------------------------------------------------------
+ */
 
-/*Björns test cases*/ 
+/* Björns test cases */ 
+void test_moto_init(void);
+/* -----------------------------------------------------------
+ * Test cases defined in cunit_moto_msg_handler.c
+ * (Can be compiled separately with 
+ * gcc -DPC -DAUTOMATED test/cunit_moto_msg_handler.c test/cunit_master_test_suite.h src/*.c ../proto_mega/src/*.c -o bin/q.o -lcunit
+ *
+ *  -----------------------------------------------------------
+ */
+
+/* Björns test cases */ 
 void test_moto_specialMotorCommand(void);
 void test_moto_controlMotors(void);
 
-/*Kristofers test cases*/ 
+/* Kristofers test cases */ 
 void test_moto_examineID(void);
 void test_moto_examineID_bad_msg(void);
 
-/*Rahwas test cases*/ 
+/* Rahwas test cases */ 
 void test_examineID_start(void);
 void examineID_controlMotors(void);
 void examineID_specialCommands(void);
 void test_examineID_stop(void);
 
 /* -----------------------------------------------------------
-* Test cases defined in cunit_moto_driver_functions.c
-* (Can be compiled separately with 
-* gcc -DPC -DAUTOMATED test/cunit_moto_driver_functions.c test/cunit_master_test_suite.h src/*.c ../proto_mega/src/*.c -o bin/q.o -lcunit
-*
-*  -----------------------------------------------------------
+ * Test cases defined in cunit_moto_driver_functions.c
+ * (Can be compiled separately with 
+ * gcc -DPC -DAUTOMATED test/cunit_moto_driver_functions.c test/cunit_master_test_suite.h src/*.c ../proto_mega/src/*.c -o bin/q.o -lcunit
+ *
+ *  -----------------------------------------------------------
+ */
 
-*//*Björns test cases defined in cunit_moto_driver_functions*/
+/* Björns test cases defined in cunit_moto_driver_functions */
 void test_moto_specialCommands(void);
 
-/* Bishares test cases defined in cunit_moto_driver_functions*/
+/* Bishares test cases defined in cunit_moto_driver_functions */
 void test_moto_startMotors(void);
 void test_moto_stopMotors(void);
 void test_moto_increaseAllNormal(void);
