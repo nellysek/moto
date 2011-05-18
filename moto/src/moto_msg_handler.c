@@ -1,4 +1,5 @@
-/*! @author Kristofer Hansson Aspman, Reza Moussavi
+/*! 
+ * @author Kristofer Hansson Aspman, Reza Moussavi
  * @file moto_msg_handler.c
  * @version v0.01
  * @date 2011-04-14

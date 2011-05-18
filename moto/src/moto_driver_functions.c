@@ -1,15 +1,10 @@
 /*!
- * @author Kristofer Hansson Aspman,
- *         Björn Eriksson,
- *         Magnus Bergqvist
- *         
+ * @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist        
  * @file moto_driver_functions.c
  * @version v0.03
  * @date 2011-05-09
- *
  * @brief Contains the functions that sets the pulse width of the \n
- *        different motors.
- *
+          different motors.
  * @history 2011-05-17: Implemented moto_map() function \n
                         (Magnus) \n
             2011-05-09: Added map function and moved printout macros \n

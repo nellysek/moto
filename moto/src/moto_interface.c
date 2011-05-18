@@ -19,7 +19,7 @@
                         (Magnus, Björn, Kristofer) \n
             2011-04-10 - Created first version \n
                         (Magnus, Björn, Kristofer) \n
-
+ *
  * @brief Contains the implementations of moto_init and moto_run.\n
    Global variables set are: mp (a pointer to the hexadecimal \n
    message read from the protocol).
