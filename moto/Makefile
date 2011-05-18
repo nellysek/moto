@@ -105,7 +105,7 @@ test: EXT=x
 $(OBJ): $(SRC)
 
 	@ cd bin && \
-	avr-g++ -c -g -Os -w -fno-exceptions -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DARDUINO_DBG=22 -DF_CPU=$(F_CPU) -DARDUINO_DBG=22 -I../../include ../$(SRC) ../$(SRC2) ../$(PROTO_SRC)
+	avr-g++ -c -g -Os -w -fno-exceptions -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DF_CPU=$(F_CPU) -DARDUINO -I../../include ../$(SRC) ../$(SRC2) ../$(PROTO_SRC)
 	@ echo "Object files created"
 
 compile:

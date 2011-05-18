@@ -35,4 +35,4 @@ lib/
 ../proto_mega/lib/
 ../stab/lib/
 doc/
-gcov_out/
+covs/
