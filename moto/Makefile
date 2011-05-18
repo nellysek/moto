@@ -76,6 +76,7 @@ default:
 	@echo "make unit         compiles and runs unit tests"
 	@echo "make gcov         run unit tests with gcov (statement coverage)"
 	@echo "make gcov2        run unit tests with gcov (branch coverage)"
+	@echo "                  need to have LCov 1.9 installed!"
 	@echo "make valgrind     run unit tests with valgrind"
 	@echo " "
 
@@ -157,19 +158,19 @@ gcov2: clean
 	@ echo "Compiled for gcov, now running testsuite..."
 	$(TESTSUITE_OBJ)
 	@ echo "After exec testsuite"
-	gcov -o -c src/*.c
+	gcov -b -c src/*.c
 	mv bin/test_suite.o ./
 	rm -fr ./covs/
 	mkdir ./covs/
 	lcov --directory ./covs --zerocounters 
 	lcov --directory ./ --capture --output-file test_suite.o.info
-	genhtml -o ./covs/ test_suite.o.info
+	genhtml --branch-coverage -o ./covs/ test_suite.o.info
 	@ echo ".gcov-files created in gcov_out-folder"
 	make moveGCovFiles
 
 moveGCovFiles:
 	mv test_suite.* test/
-	mv ..*c.gcov test/
+#	mv ..*c.gcov test/
 	mv *.gcno test/
 	mv *.gcda test/
 	@ echo ".gcov-files moved to test-folder"
