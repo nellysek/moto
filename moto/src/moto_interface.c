@@ -147,18 +147,29 @@ int16_t moto_run(void){
          */
         moto_cyclesSinceLastMsg = 0;
         
+        /* If the message is not within the range 0x0 - 0xff it is
+         * considered out of bounds and thus invalid
+         */
         if(BITFIELD_TO_CHAR(mp) < 0x0 || BITFIELD_TO_CHAR(mp) > 0xff){
             PRINT_STRING("Message out of bounds");
             PRINT_NEW_LINE;
             return 0;
         }
 
+        /* If the message is 0xF this means that there is no new message
+         * to read from stdin or Serial.read when in debug mode
+         */
+#ifdef DEBUG
         if(BITFIELD_TO_CHAR(mp) == 0xf){
             PRINT_STRING("No new message in scanhexmsg");
             PRINT_NEW_LINE;
             return 0;
         }
+#endif
 
+        /* The 0xB message indicates that there are no more messages
+         * inside the message struct read from the protocol
+         */
         if(BITFIELD_TO_CHAR(mp) == 0xB){
             PRINT_STRING("Struct does not contain more messages!");
             PRINT_NEW_LINE;

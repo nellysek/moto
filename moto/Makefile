@@ -156,7 +156,7 @@ gcov: clean
 	lcov --directory ./covs --zerocounters 
 	lcov --directory ./ --capture --output-file test_suite.o.info
 	genhtml -o ./covs/ test_suite.o.info
-	@ echo ".gcov-files created in gcov_out-folder"
+	@ echo "genhtml created files in covs-folder"
 	make moveGCovFiles
 
 gcov2: clean
@@ -171,7 +171,7 @@ gcov2: clean
 	lcov --directory ./covs --zerocounters 
 	lcov --directory ./ --capture --output-file test_suite.o.info
 	genhtml --branch-coverage -o ./covs/ test_suite.o.info
-	@ echo ".gcov-files created in gcov_out-folder"
+	@ echo "genhtml created files in covs-folder"
 	make moveGCovFiles
 
 moveGCovFiles:

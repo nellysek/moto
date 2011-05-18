@@ -12,7 +12,7 @@ void test_moto_init(void){
     moto_init();
     /* 
      * since the values are only change if ARDUINO is defined,
-     *  nothing will happen 
+     * nothing will happen 
      * CU_ASSERT(leftPulse == STOP_PULSE);
      * CU_ASSERT(rightPulse == STOP_PULSE);
      * CU_ASSERT(frontPulse == STOP_PULSE);
@@ -20,14 +20,17 @@ void test_moto_init(void){
      */
     int i;
     for(i = 0; i < 5001; i++){
-    moto_run();
-
+        moto_run();
     }
+
     CU_ASSERT(leftPulse == HOVER_PULSE_LEFT);
     CU_ASSERT(rightPulse == HOVER_PULSE_RIGHT);
     CU_ASSERT(frontPulse == HOVER_PULSE_FRONT);
-    CU_ASSERT(rearPulse == HOVER_PULSE_REAR);    
+    CU_ASSERT(rearPulse == HOVER_PULSE_REAR);
+    
     /* same problem with moto_run, just to gain branch coverage :) */
+    move_run();
+    moto_run();
 }
 
 

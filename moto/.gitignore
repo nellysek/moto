@@ -24,6 +24,11 @@ test/test_suite.o.info
 test/*.x
 *.h~
 ../proto_mega/src/*.o
+../ca/lib/*.a
+../mov/lib/*.a
+../sched/lib/*.a
+../proto_mega/lib/*.a
+../stab/lib/*.a
 
 # Directories
 #################

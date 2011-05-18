@@ -15,8 +15,14 @@ int move_init()
 }
 
 int move_run(){
-  binMsg = scanHexMsgSTDIN();
-  mpo = &binMsg;
+
+#ifdef AUTOMATED
+    uint8_t hardcodedTestMsg = 0xa3;
+    binMsg = INT_TO_BITFIELD(&hardcodedTestMsg);
+#else
+    binMsg = scanHexMsgSTDIN();
+#endif
+    mpo = &binMsg;
 /* To simulate movement sending just one message use the following line*/
 /*----------------------------------------------------*/
 /*proto_write_motor(BITFIELD_TO_CHAR(mpo));*/
@@ -59,7 +65,7 @@ msg scanHexMsgSTDIN(void){
         return INT_TO_BITFIELD(0xf); //returns BAD_MSG
     #endif
 #elif defined PC 
-/*    unsigned int input; */
+/*  unsigned int input; */
     #ifdef DEBUG
     printf("Enter the message in hexadecimal: ");
     #endif

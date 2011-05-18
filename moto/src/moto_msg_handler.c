@@ -150,6 +150,7 @@ void specialMotorCommand(msg_pointer mp){
     case HOVER:
         moto_hover();
         break;
+    default: break;
     }
 
   return;
