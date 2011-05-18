@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - test_suite.o.info - moto/test/cunit_moto_interface.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">moto/test</a> - cunit_moto_interface.c<span style="font-size: 80%;"> (source / <a href="cunit_moto_interface.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">test_suite.o.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2011-05-18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : </a>
+<span class="lineNum">       2 </span>                :            : 
+<span class="lineNum">       3 </span>                :            : #include &quot;../src/moto_driver_functions.h&quot;
+<span class="lineNum">       4 </span>                :            : #include &lt;stdint.h&gt;
+<span class="lineNum">       5 </span>                :            : #include &quot;cunit_master_test_suite.h&quot;
+<span class="lineNum">       6 </span>                :            : #include &quot;CUnit/CUnit.h&quot;
+<a name="7"><span class="lineNum">       7 </span>                :            : </a>
+<span class="lineNum">       8 </span>                :            : 
+<span class="lineNum">       9 </span>                :<span class="lineCov">          1 : void test_moto_init(void){</span>
+<span class="lineNum">      10 </span>                :            : 
+<span class="lineNum">      11 </span>                :            : 
+<span class="lineNum">      12 </span>                :<span class="lineCov">          1 :     moto_init();</span>
+<span class="lineNum">      13 </span>                :            :     /* 
+<span class="lineNum">      14 </span>                :            :      * since the values are only change if ARDUINO is defined,
+<span class="lineNum">      15 </span>                :            :      *  nothing will happen 
+<span class="lineNum">      16 </span>                :            :      * CU_ASSERT(leftPulse == STOP_PULSE);
+<span class="lineNum">      17 </span>                :            :      * CU_ASSERT(rightPulse == STOP_PULSE);
+<span class="lineNum">      18 </span>                :            :      * CU_ASSERT(frontPulse == STOP_PULSE);
+<span class="lineNum">      19 </span>                :            :      * CU_ASSERT(rearPulse == STOP_PULSE);
+<span class="lineNum">      20 </span>                :            :      */
+<span class="lineNum">      21 </span>                :            :     int i;
+<span class="lineNum">      22 </span>        [<span class="branchCov" title="Branch 0 was taken 5001 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">       5002 :     for(i = 0; i &lt; 5001; i++){</span>
+<span class="lineNum">      23 </span>                :<span class="lineCov">       5001 :     moto_run();</span>
+<span class="lineNum">      24 </span>                :            :     }
+<span class="lineNum">      25 </span>                :<span class="lineCov">          1 :     CU_ASSERT(leftPulse == HOVER_PULSE_LEFT);</span>
+<span class="lineNum">      26 </span>                :<span class="lineCov">          1 :     CU_ASSERT(rightPulse == HOVER_PULSE_RIGHT);</span>
+<span class="lineNum">      27 </span>                :<span class="lineCov">          1 :     CU_ASSERT(frontPulse == HOVER_PULSE_FRONT);</span>
+<span class="lineNum">      28 </span>                :<span class="lineCov">          1 :     CU_ASSERT(rearPulse == HOVER_PULSE_REAR);    </span>
+<span class="lineNum">      29 </span>                :            :     /* same problem with moto_run, just to gain branch coverage :) */
+<span class="lineNum">      30 </span>                :<span class="lineCov">          1 : }</span>
+<span class="lineNum">      31 </span>                :            : 
+<span class="lineNum">      32 </span>                :            : 
+<span class="lineNum">      33 </span>                :            : #ifndef MASTER_TEST_SUITE
+<span class="lineNum">      34 </span>                :            : /*check_add_ok() gives a print_out on the screen when a test suite or a test
+<span class="lineNum">      35 </span>                :            : has been created, the char** passed to this function should always be in the 
+<span class="lineNum">      36 </span>                :            : style:
+<span class="lineNum">      37 </span>                :            :     suite &quot;suite name&quot;
+<span class="lineNum">      38 </span>                :            :     test &quot;test name&quot;*/
+<span class="lineNum">      39 </span>                :            : void check_add_ok(char* msg){
+<span class="lineNum">      40 </span>                :            : 
+<span class="lineNum">      41 </span>                :            :     if(CU_get_error() == CUE_SUCCESS){
+<span class="lineNum">      42 </span>                :            :             fprintf(stdout, &quot;%s created successfully!\n&quot;,msg);
+<span class="lineNum">      43 </span>                :            :     }
+<span class="lineNum">      44 </span>                :            :     else{
+<span class="lineNum">      45 </span>                :            :         fprintf(stdout, &quot;failed to create %s\n&quot;,msg);
+<span class="lineNum">      46 </span>                :            :     }
+<span class="lineNum">      47 </span>                :            : }
+<span class="lineNum">      48 </span>                :            : 
+<span class="lineNum">      49 </span>                :            : uint16_t main(uint16_t argc){
+<span class="lineNum">      50 </span>                :            : /***************************************************************************/
+<span class="lineNum">      51 </span>                :            :     CU_ErrorCode ec = CU_initialize_registry();    
+<span class="lineNum">      52 </span>                :            :     if(ec == CUE_SUCCESS){
+<span class="lineNum">      53 </span>                :            :         fprintf(stdout, &quot;\ntest register initialized successfully!\n&quot;);   
+<span class="lineNum">      54 </span>                :            :     }
+<span class="lineNum">      55 </span>                :            :     else{
+<span class="lineNum">      56 </span>                :            :         fprintf(stdout, &quot;Failed to initialize test register&quot;);
+<span class="lineNum">      57 </span>                :            :         return;
+<span class="lineNum">      58 </span>                :            :     }   
+<span class="lineNum">      59 </span>                :            : 
+<span class="lineNum">      60 </span>                :            : /***************************************************************************/
+<span class="lineNum">      61 </span>                :            : 
+<span class="lineNum">      62 </span>                :            :     /* add interface suite */
+<span class="lineNum">      63 </span>                :            :     CU_pSuite interface = CU_add_suite(&quot;interface&quot;,NULL,NULL);    
+<span class="lineNum">      64 </span>                :            :     check_add_ok(&quot;suite msg_handler&quot;);
+<span class="lineNum">      65 </span>                :            : 
+<span class="lineNum">      66 </span>                :            :     /* add test_moto_init to suite */
+<span class="lineNum">      67 </span>                :            :     CU_add_test(interface, &quot;test_moto_init&quot;, test_moto_init);
+<span class="lineNum">      68 </span>                :            :     check_add_ok(&quot;test test_moto_init&quot;);
+<span class="lineNum">      69 </span>                :            :     
+<span class="lineNum">      70 </span>                :            :    
+<span class="lineNum">      71 </span>                :            :     CU_console_run_tests();
+<span class="lineNum">      72 </span>                :            :     CU_cleanup_registry();
+<span class="lineNum">      73 </span>                :            : }
+<span class="lineNum">      74 </span>                :            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
