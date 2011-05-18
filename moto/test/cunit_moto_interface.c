@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include "cunit_master_test_suite.h"
 #include "CUnit/CUnit.h"
-
+#include "../src/move_stub.h"
 
 void test_moto_init(void){
 
@@ -21,6 +21,7 @@ void test_moto_init(void){
     int i;
     for(i = 0; i < 5001; i++){
     moto_run();
+
     }
     CU_ASSERT(leftPulse == HOVER_PULSE_LEFT);
     CU_ASSERT(rightPulse == HOVER_PULSE_RIGHT);

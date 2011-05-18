@@ -145,7 +145,7 @@ valgrind: clean
 	valgrind --leak-check=yes bin/test.o
 
 gcov: clean
-	gcc -lgcov -fprofile-arcs -ftest-coverage -DPC -DMASTER_TEST_SUITE -DAUTOMATED $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
+	gcc -lgcov -fprofile-arcs -ftest-coverage -DPC -DDEBUG -DMASTER_TEST_SUITE -DAUTOMATED $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
 	@ echo "Compiled for gcov, now running testsuite..."
 	$(TESTSUITE_OBJ)
 	@ echo "After exec testsuite"
