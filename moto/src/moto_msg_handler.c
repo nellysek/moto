@@ -129,8 +129,10 @@ void specialMotorCommand(msg_pointer mp){
         moto_goBackward();
         break;
     case TURN_LEFT:
+        moto_rotateLeft();
         break;
     case TURN_RIGHT:
+        moto_rotateRight();
         break;
     case STRAFE_LEFT:
         moto_strafeLeft();

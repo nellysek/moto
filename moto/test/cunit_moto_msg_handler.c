@@ -11,7 +11,6 @@
 #include <stdlib.h>
 #include "CUnit/CUnit.h"
 #include "cunit_master_test_suite.h"
-//#include "cunit_moto_msg_handler.h"
 #include "../src/moto_driver_functions.h"
 
 /*Holds the definition of the type msg and the macros INT_TO_BITFIELD(a)
@@ -208,7 +207,7 @@ void examineID_controlMotors(void){
     current_value();
   
 /*Decrease all motor speed normal step */
-  /*  testStructPtr -> ID = 2;
+    testStructPtr -> ID = 2;
     testStructPtr -> increase = 0;
     testStructPtr -> panic = 0;
     testStructPtr -> right  = 1;
@@ -223,7 +222,7 @@ void examineID_controlMotors(void){
     CU_ASSERT(frontPulse== front_motor -  NORMAL_STEP);
     CU_ASSERT(rearPulse== rear_motor - NORMAL_STEP);
 
-    current_value();*/
+    current_value();
 
 /*Decrease all panic motors speed panic step*/
 
@@ -484,6 +483,18 @@ void examineID_controlMotors(void){
 }
 
 void examineID_specialCommands(void){
+
+/* Sets the initial pulses to hover */
+    rightPulse = HOVER_PULSE_RIGHT;
+    leftPulse = HOVER_PULSE_LEFT;
+    frontPulse = HOVER_PULSE_FRONT;
+    rearPulse = HOVER_PULSE_REAR;
+
+    right_motor = HOVER_PULSE_RIGHT;
+    left_motor = HOVER_PULSE_LEFT;
+    front_motor = HOVER_PULSE_FRONT;
+    rear_motor = HOVER_PULSE_REAR;
+
 /* Allocate memory, freed in the last statement of this function*/
     testStructPtr = malloc(sizeof(msg));   
 /*Increase rear and decrease front motor speed normal step*/

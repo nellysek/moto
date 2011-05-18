@@ -70,8 +70,10 @@
 
 #define  PANIC_FORWARD 0xF3
 #define  PANIC_BACKWARD 0xD3
-#define  PANIC_TURN_RIGHT 0xFC
-#define  PANIC_TURN_LEFT 0xDC
+#define  PANIC_TURN_RIGHT 0xFD
+#define  PANIC_TURN_LEFT 0xDD
+
+//ADD A PANIC STRAFE?
 
 struct bits_type
 {
