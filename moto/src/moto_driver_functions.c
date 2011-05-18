@@ -1,5 +1,7 @@
 /*!
- * @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist        
+ * @author Kristofer Hansson Aspman \n
+ *         Björn Eriksson \n
+ *         Magnus Bergqvist        
  * @file moto_driver_functions.c
  * @version v0.03
  * @date 2011-05-09
@@ -38,7 +40,9 @@ uint16_t frontPulse;
 uint16_t rearPulse;
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson \n
+           Magnus Bergqvist
  * @function moto_startMotors
  * @param void
  * @return void
@@ -66,7 +70,9 @@ void moto_startMotors(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson \n
+           Magnus Bergqvist
  * @function moto_stopMotors
  * @param void
  * @return void
@@ -94,7 +100,9 @@ void moto_stopMotors(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson \n
+           Magnus Bergqvist
  * @function moto_hover
  * @param void
  * @return void
@@ -125,7 +133,8 @@ void moto_hover(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson
  * @function moto_goForward
  * @param void
  * @return void
@@ -138,7 +147,8 @@ void moto_goForward(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson
  * @function moto_goForwardPanic
  * @param void
  * @return void
@@ -152,7 +162,8 @@ void moto_goForwardPanic(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson
  * @function moto_goBackward
  * @param void
  * @return void
@@ -165,7 +176,8 @@ void moto_goBackward(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson
  * @function moto_goBackwardPanic
  * @param void
  * @return void
@@ -179,7 +191,8 @@ void moto_goBackwardPanic(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson
  * @function moto_strafeRight
  * @param void
  * @return void
@@ -192,7 +205,8 @@ void moto_strafeRight(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson
  * @function moto_strafeLeft
  * @param void
  * @return void
@@ -205,7 +219,8 @@ void moto_strafeLeft(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson
  * @function moto_rotateLeft()
  * @param void
  * @return void
@@ -220,7 +235,8 @@ void moto_rotateLeft(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson
  * @function moto_rotateRight()
  * @param void
  * @return void
@@ -235,7 +251,9 @@ void moto_rotateRight(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson \n
+           Magnus Bergqvist
  * @function moto_increaseAllNormal()
  * @param void
  * @return void
@@ -252,7 +270,9 @@ void moto_increaseAllNormal(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson \n
+           Magnus Bergqvist
  * @function moto_increaseAllPanic()
  * @param void
  * @return void
@@ -269,7 +289,9 @@ void moto_increaseAllPanic(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson \n
+           Magnus Bergqvist
  * @function moto_decreaseAllNormal()
  * @param void
  * @return void
@@ -286,7 +308,9 @@ void moto_decreaseAllNormal(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson \n
+           Magnus Bergqvist
  * @function moto_increaseAllPanic()
  * @param void
  * @return void
@@ -303,7 +327,9 @@ void moto_decreaseAllPanic(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson \n
+           Magnus Bergqvist
  * @function moto_increaseLeftNormal()
  * @function moto_increaseRightNormal()
  * @function moto_increaseFrontNormal()
@@ -442,7 +468,9 @@ void moto_increaseRearPanic(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
+ * @author Kristofer Hansson Aspman \n
+           Björn Eriksson \n
+           Magnus Bergqvist
  * @function moto_decreaseRightNormal()
  * @function moto_decreaseLeftNormal()
  * @function moto_decreaseFrontNormal()
@@ -581,7 +609,8 @@ void moto_decreaseRearPanic(void){
 }
 
 /* !
- * @author Kristofer Hansson Aspman, Magnus Bergqvist
+ * @author Kristofer Hansson Aspman \n
+           Magnus Bergqvist
  * @function printMotorStatus
  * @param void
  * @return void
@@ -656,17 +685,6 @@ uint16_t moto_LimitDecrease(uint16_t currentPulse,
     }
 }
 
-
-/*
- * Function:     moto_map()
- * Author(s):    Magnus Bergqvist
- *
- * Description:  The map function takes an input value (actual), and upper
- *               and lower boundary value the wanted output as arguments.
- *               According to these values combined with boundaries for the
- *               systems actual output signals it returns a suitable
- *               value for the calling function to use.
- */
 /* !
  * @author Magnus Bergqvist
  * @function moto_map
