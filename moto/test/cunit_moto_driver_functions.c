@@ -824,6 +824,13 @@ void test_moto_specialCommands(void){
     CU_ASSERT(rightPulse == rightP);
     CU_ASSERT(frontPulse == frontP);
     CU_ASSERT(rearPulse == rearP);
+    printMotorStatus(); 
+    rearPulse = 3000;
+    frontPulse = 500;
+    rearPulse = moto_map(rearPulse, MIN_PULSE_REAR, MAX_PULSE_REAR);
+    frontPulse = moto_map(frontPulse, MIN_PULSE_FRONT, MAX_PULSE_FRONT);
+    CU_ASSERT(frontPulse == MIN_PULSE_FRONT);
+    CU_ASSERT(rearPulse == MAX_PULSE_REAR);
        
 }
 
