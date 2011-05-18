@@ -1,4 +1,5 @@
-/*!@author Rahwa Bahta, Reza moussavi
+/*!
+ * @author Rahwa Bahta, Reza moussavi
  * @file msg_parsing.c
  * @version 0.05
  * @date 2011-05-01
@@ -7,14 +8,10 @@
  *  
  */
 #ifndef MOTO_STATE_DEFINITIONS_H
-#define MOTO_STATE_DEFINITIONS_H
+    #define MOTO_STATE_DEFINITIONS_H
 #include <stdint.h>
 
-//Dont put any lines of code before this line
-#ifndef _STATE_DEFINITIONS_H_
-#define _STATE_DEFINITIONS_H_
-
-//MASKS
+/* MASKS */
 #define MSG_ID_MASK	0xC0
 #define MSG_CONTROL_MASK 0x80
 #define MSG_SPECIAL_MASK 0xC0
@@ -27,7 +24,7 @@
 #define MSG_PANIC_MASK 0x10
 #define MSG_INCREASE_MASK 0x20
 
-//MESSAGE STATES
+/* MESSAGE STATES */
 #define START_MOTOR 0x40
 #define START_ID 0x01
 #define STOP_MOTOR 0x0
@@ -41,7 +38,7 @@
 #define DECREASE_ALL_NORMAL 0xCF
 #define INCREASE_ALL_PANIC 0xF0
 #define DECREASE_ALL_PANIC 0xD0
-
+    
 #define  INCREASE_REAR_MOTOR 0xA1
 #define  DECREASE_REAR_MOTOR 0x81
 #define  INCREASE_FRONT_MOTOR 0xA2
@@ -86,7 +83,4 @@ struct bits_type
 	uint8_t FRONT :1;
 	uint8_t REAR :1;
 };
-
-// Dont put any code after this line
-#endif
 #endif

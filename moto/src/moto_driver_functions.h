@@ -15,8 +15,6 @@
 #endif
 #ifdef ARDUINO
    #include "WProgram.h"
-#elif defined PC
-   #include <stdio.h>
 #endif
 #include <stdint.h>
 
@@ -108,12 +106,5 @@ uint16_t moto_LimitDecrease(uint16_t currentPulse, uint16_t decrement);
 
 uint16_t moto_map(uint16_t actual, uint16_t out_boundary1,
                                     uint16_t out_boundary2);
-
-struct pulses{
-    uint16_t right;
-    uint16_t left;
-    uint16_t front;
-    uint16_t rear;
-};
 
 #endif

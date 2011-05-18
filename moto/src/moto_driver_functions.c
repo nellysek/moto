@@ -566,12 +566,6 @@ void printMotorStatus(void){
     PRINT_NEW_LINE;
 }
 
-void sendMsg(void){
-    struct pulses currentPulse = 
-    {rightPulse, leftPulse, frontPulse, rearPulse};
-    /* send(currentPulse);  not sure how the send funcrion till look like */
-}
-
 /*
  * Functions:    moto_LimitIncrease()
  *               moto_LimitDecrease()

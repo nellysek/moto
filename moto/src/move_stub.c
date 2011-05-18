@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include "move_stub.h"
-
+#include <stdio.h>
 msg binMsg;
 msg_pointer mpo;
 
