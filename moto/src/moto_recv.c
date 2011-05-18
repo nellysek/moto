@@ -9,6 +9,8 @@
  * moto_msg_manipulation.h.
  *
  * @history 2011-05-18: Updated after code review. \n
+                        Removed old moto_recvMsg() incl. variables \n
+                        belonging to it. \n
                         (Magnus) \n
             2011-05-08: Now reads from the protocol. \n
                         (Kristofer) \n
