@@ -1,23 +1,24 @@
-/*!@author Kristofer Hansson Aspman & Magnus Bergqvist
+/*!
+ * @author Kristofer Hansson Aspman & Magnus Bergqvist
  * @file moto_msg_manipulation.c
  * @version v0.03
  * @date 2011-05-09
  *
  * @brief Holds the implementations of the functions\n
- * described in the corresponding .h file. For\n
- * full description of the functions please refer\n
- * to that file.\n
- * Uses the types msg and msg_pointer defined in\n
- * moto_msg_manipulation.h.
+   described in the corresponding .h file. For\n
+   full description of the functions please refer\n
+   to that file.\n
+   Uses the types msg and msg_pointer defined in\n
+   moto_msg_manipulation.h.\n
+   Uses macros for printing defined in moto_printer_functions.h
  *
  * @history 2011-04-03: Created the file. (Kristofer)
- *          2011-04-07: Implemented ifdefs. (Kristofer)
- *          2011-05-08: Cleaned up a bit and added some comments. (Kristofer)
- *          2011-05-09: Created macros for printing. (Magnus & Kristofer)
- *          2011-05-09: Moved macros for printing, included .h file for it \n
- *                      to be used by other files as well (Magnus)          
+            2011-04-07: Implemented ifdefs. (Kristofer)
+            2011-05-08: Cleaned up a bit and added some comments. (Kristofer)
+            2011-05-09: Created macros for printing. (Magnus & Kristofer)
+            2011-05-09: Moved macros for printing, included .h file for it \n
+                        to be used by other files as well (Magnus)          
  */
-
 
 #ifdef ARDUINO
     #include "WProgram.h"
@@ -26,6 +27,17 @@
 #include "moto_msg_manipulation.h"
 #include "moto_printer_functions.h"
 
+/*!
+ * @author Kristofer Hansson Aspman
+ * @function printMsg
+ * @param msg_pointer
+ * @return void
+ * @brief Simply prints out necessary debug information\n
+   such as the status of the motors and the bits of the message\n
+   sent in as a parameter to the functions.\n
+   Uses Serial.print or printf depending on what flag has been set\n
+   for the compilation (MEGA plus DEBUG or PC plus DEBUG respectively).
+ */
 void printMsg(msg_pointer mp){
     PRINT_STRING("***********************************");
     PRINT_NEW_LINE;

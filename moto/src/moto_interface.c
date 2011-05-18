@@ -17,8 +17,8 @@
                         (Magnus, Björn, Kristofer) \n
 
  * @brief Contains the implementations of moto_init and moto_run.\n
-          Global variables set are: mp (a pointer to the hexadecimal \n
-          message read from the protocol).
+   Global variables set are: mp (a pointer to the hexadecimal \n
+   message read from the protocol).
  */
 
 #include <stdint.h>
@@ -48,10 +48,13 @@ Servo escFront;
 Servo escRear;
 #endif
 
-/* 
- * author(s): Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
- * The moto_init function requested by the CFG. It is called when the 
- * drone boots up.
+/* !
+ * @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
+ * @function moto_init
+ * @param void
+ * @return int16_t (0 if carried out correctly)
+ * @brief The moto_init function requested by the CFG. It is called when \n
+   the drone boots up.
  */
 int16_t moto_init(void){
     PRINT_STRING("Inside moto_init");
@@ -70,9 +73,19 @@ int16_t moto_init(void){
   return 0;
 }
 
-/*
- * author(s): Kristofer Hansson Aspman
- * The moto_run function requested by the CFG. It is run each scheduled cycle.
+/* !
+ * @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
+ * @function moto_run
+ * @param void
+ * @return int16_t (0 if carried out correctly)
+ * @brief The moto_run function requested by the CFG. It is run each \n
+   scheduled cycle.
+ * @details The binary message is read from the protocol and checked for \n
+   both consistency and validity before it's sent to the parser. If no \n
+   message has been written to the protocol by the movement component in \n
+   more than 5000 cycles a no-op command is carried out (making the drone \n
+   hover).\n
+   Printouts will only be visible if the DEBUG flag is set.
  */
 int16_t moto_run(void){
     moto_cyclesSinceLastMsg++;
@@ -102,21 +115,6 @@ int16_t moto_run(void){
         return 0;
     }
 
-    /*
-     *  when moto_recvMsg() is used
-     *  ----------------------------------------------
-     *   mp = moto_recvMsg(); 
-     *  ----------------------------------------------
-     */
-
-    /*
-     * if moto_recvMsg() is used
-     * 
-     * for loop statements and "uint8_t i" SHALL be removed
-     */
-
-    /* ---------------this one------------------------ */
-    
     /* 
      * Creates a msgStructPtr and fetches data from mot_recvMsg2, it then
      * picks out the poiter to the first message in the struct. The rest
@@ -126,10 +124,6 @@ int16_t moto_run(void){
     mpStruct = moto_recvMsg2();
     mp = (msg_pointer)&(mpStruct->msg1);
     
-    /* ----------------------------------------------- */
-
-
-
     /* will always receive 8 messages in the loop from struct */
     uint8_t i;
     for(i = 0; i < 8; i++){

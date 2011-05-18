@@ -10,6 +10,7 @@ README~
 ../Makefile
 ../Makefile-template
 ../src/blink.c
+test/test_suite.o.info
 
 # File types
 #################

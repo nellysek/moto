@@ -2,7 +2,7 @@
  * @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
  * @file moto_interface.c
  * @version v0.05
- * @date 2011-05-11
+ * @date 2011-05-17
  * @history 2011-05-17 - Update after code review \n
                         (Magnus) \n
             2011-05-11 - Worked with ifdefs \n
@@ -13,10 +13,10 @@
                         (Magnus, Björn, Kristofer) \n
 
  * @brief Contains the implementations of moto_init and moto_run.\n
-          Global variables set are: mp (a pointer to the hexadecimal \n
-          message read from the protocol).
+          Global variables set are: moto_cyclesSinceLastMsg (stores the
+          amount of cycles since last message was written to the protocol
+          by the movement component).
  */
-
 
 #ifndef MOTO_INTERFACE_H
     #define MOTO_INTERFACE_H

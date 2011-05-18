@@ -2,11 +2,11 @@
  * @author Kristofer Hansson Aspman
  * @file moto_recv.c
  * @version v0.02
- * @date 2011-05-08
+ * @date 2011-05-18
  *
  * @brief Intended to pick up the message held by the protocol.\n
- * Uses the types msg and msg_pointer defined in\n
- * moto_msg_manipulation.h.
+   Uses the types msg and msg_pointer defined in\n
+   moto_msg_manipulation.h.
  *
  * @history 2011-05-18: Updated after code review. \n
                         Removed old moto_recvMsg() incl. variables \n
@@ -22,7 +22,7 @@
 #include "../../proto_mega/src/proto_lib.h"
 
 msgStructPtr moto_recvMsg2(void){
-    /* get message struct from protocol group and return it */
+    /* get message struct from protocol and return it */
     return (msgStructPtr)proto_read_motor2();
 }
 
