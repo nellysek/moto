@@ -1,5 +1,5 @@
 #ifndef MOVE_STUB_H
-#define MOVE_STUB_H
+    #define MOVE_STUB_H
 #include <stdint.h>
 #include "moto_msg_manipulation.h"
 #include "../../proto_mega/src/proto_lib.h"

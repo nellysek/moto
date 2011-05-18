@@ -16,17 +16,18 @@
           Global variables set are: mp (a pointer to the hexadecimal \n
           message read from the protocol).
  */
-#include <stdint.h>
+
 
 #ifndef MOTO_INTERFACE_H
     #define MOTO_INTERFACE_H
+#include <stdint.h>
 #ifdef ARDUINO_DBG
     #define ARDUINO
 #endif
 
 #ifdef ARDUINO
-   #include "WProgram.h"
-   #include "../include/Servo.h"
+    #include "WProgram.h"
+    #include "../include/Servo.h"
 #endif
 
 #ifdef ARDUINO
