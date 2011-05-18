@@ -1,5 +1,5 @@
 /*!
- * @file cunit_stubs.c
+ * @file moto_stubs.c
  * @brief Stub functions for use during testing.
  * @date 2011-04-18
  * @author Magnus Bergqvist
