@@ -10,10 +10,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "CUnit/CUnit.h"
-#include "cunit_moto_msg_handler.h"
+#include "cunit_master_test_suite.h"
+//#include "cunit_moto_msg_handler.h"
 #include "../src/moto_driver_functions.h"
-
-
 
 /*Holds the definition of the type msg and the macros INT_TO_BITFIELD(a)
 and BITFIELD_TO_CHAR(a)*/
@@ -70,9 +69,6 @@ void test_moto_examineID_bad_msg(void){
 /* test_moto_controlMotors and test_moto_specialMotorCommand
  * added by Björn Eriksson.
  */
-
-
-
 
 void test_moto_controlMotors(void){
     leftPulse = IDLE_SPEED;

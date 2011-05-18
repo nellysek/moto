@@ -1,12 +1,13 @@
 # #####################################################################
 # This makefile has been modified from the original version to better
-# suit the motor control group.
+# suit the motor control group. Please see below for copyright information
 # 
 # Changes include targets for:
 # - default (just gives a nice printout with instructions)
 #   (Kristofer Hansson Aspman)
+# - pc-dbg (Kristofer Hansson Aspman)
 # - valgrind (Kristofer Hansson Aspman)
-# - gcov (...coverage) (Kristofer Hansson Aspman)
+# - gcov (...coverage) also includes LCov! (Kristofer Hansson Aspman)
 # - CUnit master test suite (Kristofer Hansson Aspman and Björn Eriksson)
 #
 # In addition to this the following targets have been altered by
@@ -14,7 +15,11 @@
 # - mega
 # - pc
 # #####################################################################
-# Makefile for inclusion by other projects
+#
+#   Original description and copyright follow:
+#
+# #####################################################################
+#   Makefile for inclusion by other projects
 #   heavily copied from original libarduino sources
 #   (c) 2009, for all changes belong to Henrik Sandklef
 #	which lead to the current version

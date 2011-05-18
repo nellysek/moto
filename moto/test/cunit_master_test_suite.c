@@ -2,7 +2,6 @@
 
 #include <stdio.h>
 #include "CUnit/CUnit.h"
-#include "cunit_moto_msg_handler.h"
 #include "cunit_master_test_suite.h"
 
 #ifdef AUTOMATED
@@ -37,7 +36,7 @@ int main(int argc){
 
 /***************************************************************************/
 
-    /* msg_handler tests */
+    /* msg_handler, holds tests from cunit_moto_msg_handler.c */
     
     CU_pSuite msg_handler = CU_add_suite("msg_handler",NULL,NULL);    
     check_add_ok("suite msg_handler");
@@ -55,7 +54,7 @@ int main(int argc){
     CU_add_test(msg_handler, "test_moto_specialMotorCommand", test_moto_specialMotorCommand);
     check_add_ok("test test_moto_specialMotorCommand");
 
-    /*examineID suite*/    
+    /*examineID suite, holds tests from cunit_moto_msg_handler.c */    
     CU_pSuite examineID = CU_add_suite("examine_ID",NULL,NULL);
     check_add_ok("suite examine_ID");
 
@@ -72,6 +71,7 @@ int main(int argc){
     check_add_ok("examineID_specialCommands");    
 
     /* Create a test suite for start_stop functions */
+    /* holds tests from from cunit_moto_driver_functions.c */
     CU_pSuite start_stop = CU_add_suite("start_stop_motors",NULL,NULL);    
     check_add_ok("suite start_stop_motors");
 
@@ -84,6 +84,7 @@ int main(int argc){
     check_add_ok("test test_moto_stopMotors");
     
     /* Create a test suite for increase/decrease all-functions */
+    /* holds tests from from cunit_moto_driver_functions.c */
     CU_pSuite increase_decrease_all = 
         CU_add_suite("increase_decrese_all",NULL,NULL);
     check_add_ok("suite increase_decrease_all");
@@ -106,6 +107,7 @@ int main(int argc){
     check_add_ok("test test_moto_decreaseAllPanic");
 
     /* Create a test suite for special command functions */
+    /* holds tests from from cunit_moto_driver_functions.c */
     CU_pSuite special_commands = CU_add_suite("special commands",NULL,NULL);    
     check_add_ok("suite special_commands");
 
@@ -113,8 +115,6 @@ int main(int argc){
     CU_add_test(special_commands, "test_moto_specialCommands",
         test_moto_specialCommands);
     check_add_ok("Test test_moto_specialCommands");
-
-
     
 /***************************************************************************/
 #ifdef AUTOMATED
