@@ -1,11 +1,10 @@
-/*!
- * Module:       motor_control.h
- * Author(s):    Kristofer Hansson Aspman
- *               Magnus Bergqvist
- *
- * Description:  The typedef of the bitfield struct and
- *               all the prototypes for the functions used
- *               by tools.c, motor_control.c and parser.c.
+ /*!
+ * @author Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist        
+ * @file moto_driver_functions.h
+ * @date 2011-05-18
+ * @brief Header file containing prototypes of functions in \n
+          moto_driver_functions.c and also predefined values. \n
+          Also contains the typedef of the bitfield struct.
  */
 #ifndef MOTO_DRIVER_FUNCTIONS_H
     #define MOTO_DRIVER_FUNCTIONS_H
@@ -21,16 +20,18 @@
 #define NORMAL_STEP 5
 #define PANIC_STEP 50
 
-/* defines which "pin" in the arduino, to be changed further on */
+/* Defines which "pin" on the arduino the ESCs are connected to. */
 #define RIGHT_MOTOR 2
 #define LEFT_MOTOR 3
 #define FRONT_MOTOR 5
 #define REAR_MOTOR 6
 
 
-/* defines maximum and minimum pulse width in µs for every motor 
-   i.e. at which pulse the motor starts turning and at which pulse it
-   reaches its max speed */
+/* 
+ * Defines maximum and minimum pulse width in µs for every motor 
+ * i.e. at which pulse the motor starts turning and at which pulse it
+ * reaches its max speed.
+ */
 #define MIN_PULSE_FRONT 1044
 #define MAX_PULSE_FRONT 1900
 #define MIN_PULSE_REAR 1044
@@ -40,14 +41,18 @@
 #define MIN_PULSE_RIGHT 1044
 #define MAX_PULSE_RIGHT 1900
 
-/* defines the min and max values (pulse width in µs that are allowed) */
+/*
+ * Defines the min and max values for the pulse width (in µs) 
+ * that are allowed in the system. 
+ */
 #define MIN_ESC_PULSE 1000
 #define MAX_ESC_PULSE 2000
 
+/* Defines at which pulses the motors should stop or idle. */
 #define IDLE_SPEED 1100
 #define STOP_PULSE 1000
 
-/* defines hover speed pulse width in µs for every motor */
+/* Defines hover speed pulse width in µs for every motor. */
 #define HOVER_PULSE_RIGHT 1400
 #define HOVER_PULSE_LEFT 1400
 #define HOVER_PULSE_FRONT 1400
@@ -58,7 +63,7 @@ extern uint16_t leftPulse;
 extern uint16_t frontPulse;
 extern uint16_t rearPulse;
 
-/*Motor pulse modification*/
+/* prototypes for the motor pulse modification functions */
 void moto_startMotors(void);
 void moto_stopMotors(void);
 void moto_hover(void);
