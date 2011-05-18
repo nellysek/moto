@@ -117,29 +117,17 @@ void test_moto_specialMotorCommand(void){
     CU_ASSERT(rightPulse == (HOVER_PULSE_RIGHT + NORMAL_STEP));
     CU_ASSERT(frontPulse == HOVER_PULSE_FRONT);
     CU_ASSERT(rearPulse == HOVER_PULSE_REAR);
-    /* a = decrease all panic message */
-    leftPulse = 1450;
-    rightPulse = 1550;
-    frontPulse = 1500;
-    rearPulse = 1500;
-    a = 0xD0;
-    binary = INT_TO_BITFIELD(&a);
-    mp = &binary;
-    specialMotorCommand(mp);
-    CU_ASSERT(leftPulse == (1450 - PANIC_STEP));
-    CU_ASSERT(rightPulse == (1550 - PANIC_STEP));
-    CU_ASSERT(frontPulse == (1500 - PANIC_STEP));
-    CU_ASSERT(rearPulse == (1500 - PANIC_STEP));    
+
 }
 
- /* test _examineID_start testes if  the start command is send that the moters will
-* be in IDLE_SPEED
-* Added by Rahwa Bahta
-*/
- void test_examineID_start(void){
+/*
+ * test _examineID_start testes if  the start command is send that the moters will
+ * be in IDLE_SPEED
+ * Added by Rahwa Bahta
+ */
+void test_examineID_start(void){
 	
-	
-    testStructPtr = malloc(sizeof(msg));   
+	testStructPtr = malloc(sizeof(msg));   
     
     testStructPtr -> ID = 1;
     testStructPtr -> increase = 0;
@@ -160,16 +148,11 @@ void test_moto_specialMotorCommand(void){
 	
 }
 
-/*
- *   to be tested:
- *   controlMotors()
- *   specialMotorCommand()
- *
- */
+
 void examineID_controlMotors(void){
-    /* Allocate memory, freed in the last statement of this function*/
+/* Allocate memory, freed in the last statement of this function */
     testStructPtr = malloc(sizeof(msg));   
-/* increase all motor speed normal step*/
+/* increase all motor speed normal step */
     testStructPtr -> ID = 2;
     testStructPtr -> increase = 1;
     testStructPtr -> panic = 0;
@@ -187,7 +170,7 @@ void examineID_controlMotors(void){
 
     current_value();
 	
-/* Increase all motor speed panic step*/
+/* Increase all motor speed panic step */
 
     testStructPtr -> ID = 2;
     testStructPtr -> increase = 1;
@@ -206,7 +189,7 @@ void examineID_controlMotors(void){
     
     current_value();
   
-/*Decrease all motor speed normal step */
+/* Decrease all motor speed normal step */
     testStructPtr -> ID = 2;
     testStructPtr -> increase = 0;
     testStructPtr -> panic = 0;
@@ -525,7 +508,8 @@ void examineID_specialCommands(void){
     CU_ASSERT(rearPulse== rear_motor - NORMAL_STEP);
     current_value();
 
-/*Increase left and decrease right motor speed normal step*/
+/* Strafe Right */
+/* Increase left and decrease right motor speed normal step*/
     testStructPtr -> ID = 3;
     testStructPtr -> increase = 1;
     testStructPtr -> panic = 0;
@@ -538,8 +522,9 @@ void examineID_specialCommands(void){
     CU_ASSERT(leftPulse== left_motor +NORMAL_STEP);
     CU_ASSERT(rightPulse== right_motor - NORMAL_STEP);
     current_value();
-    
-    /*Increase right and decrease left motor speed normal step*/
+
+    /* Strafe left */
+    /* Increase right and decrease left motor speed normal step */
     testStructPtr -> ID = 3;
     testStructPtr -> increase = 0;
     testStructPtr -> panic = 0;
@@ -554,7 +539,95 @@ void examineID_specialCommands(void){
     current_value(); 
     
 /*Go forward*/
-//---------------------------------------------------------------------------------------------> to be added
+    testStructPtr -> ID = 3;
+    testStructPtr -> increase = 1;
+    testStructPtr -> panic = 0;
+    testStructPtr -> right  = 0;
+    testStructPtr -> left = 0;
+    testStructPtr -> front = 1;
+    testStructPtr -> rear = 1;
+    
+    examineID(testStructPtr);
+    CU_ASSERT(frontPulse== front_motor - NORMAL_STEP);
+    CU_ASSERT(rearPulse== rear_motor + NORMAL_STEP);
+    current_value();
+
+/*Panic forward*/
+    testStructPtr -> ID = 3;
+    testStructPtr -> increase = 1;
+    testStructPtr -> panic = 1;
+    testStructPtr -> right  = 0;
+    testStructPtr -> left = 0;
+    testStructPtr -> front = 1;
+    testStructPtr -> rear = 1;
+    
+    examineID(testStructPtr);
+    CU_ASSERT(frontPulse== front_motor - PANIC_STEP);
+    CU_ASSERT(rearPulse== rear_motor + PANIC_STEP);
+    current_value();
+    
+/* Go backward */
+    testStructPtr -> ID = 3;
+    testStructPtr -> increase = 0;
+    testStructPtr -> panic = 0;
+    testStructPtr -> right  = 0;
+    testStructPtr -> left = 0;
+    testStructPtr -> front = 1;
+    testStructPtr -> rear = 1;
+    
+    examineID(testStructPtr);
+    CU_ASSERT(frontPulse== front_motor + NORMAL_STEP);
+    CU_ASSERT(rearPulse== rear_motor - NORMAL_STEP);
+    current_value();
+
+/*Panic go backward*/
+    testStructPtr -> ID = 3;
+    testStructPtr -> increase = 0;
+    testStructPtr -> panic = 1;
+    testStructPtr -> right  = 0;
+    testStructPtr -> left = 0;
+    testStructPtr -> front = 1;
+    testStructPtr -> rear = 1;
+    
+    examineID(testStructPtr);
+    CU_ASSERT(frontPulse== front_motor +PANIC_STEP);
+    CU_ASSERT(rearPulse== rear_motor - PANIC_STEP);
+    current_value();
+
+/*rotate right*/
+    testStructPtr -> ID = 3;
+    testStructPtr -> increase = 1;
+    testStructPtr -> panic = 1;
+    testStructPtr -> right  = 1;
+    testStructPtr -> left = 1;
+    testStructPtr -> front = 0;
+    testStructPtr -> rear = 0;
+    
+    examineID(testStructPtr);
+    
+    CU_ASSERT(rightPulse== right_motor - NORMAL_STEP);
+    CU_ASSERT(leftPulse== left_motor - NORMAL_STEP);
+    CU_ASSERT(frontPulse== front_motor + NORMAL_STEP);
+    CU_ASSERT(rearPulse== rear_motor + NORMAL_STEP);
+    
+    current_value();
+
+/*rotate left*/
+    testStructPtr -> ID = 3;
+    testStructPtr -> increase = 0;
+    testStructPtr -> panic = 1;
+    testStructPtr -> right  = 1;
+    testStructPtr -> left = 1;
+    testStructPtr -> front = 0;
+    testStructPtr -> rear = 0;
+    
+    examineID(testStructPtr);
+    
+    CU_ASSERT(rightPulse== right_motor + NORMAL_STEP);
+    CU_ASSERT(leftPulse== left_motor + NORMAL_STEP);
+    CU_ASSERT(frontPulse== front_motor - NORMAL_STEP);
+    CU_ASSERT(rearPulse== rear_motor - NORMAL_STEP);
+
     free(testStructPtr);
 }
 

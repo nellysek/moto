@@ -133,6 +133,7 @@ void moto_hover(void){
 
 /*
  * Function:    void moto_goForward()
+ *              void moto_goForwardPanic()
  * Author(s):   Kristofer Hansson Aspman,
  *              Björn Eriksson
  *
@@ -146,8 +147,13 @@ void moto_goForward(void){
     moto_increaseRearNormal();
     moto_decreaseFrontNormal();
 }
+void moto_goForwardPanic(void){
+    moto_increaseRearPanic();
+    moto_decreaseFrontPanic();
+}
 /*
  * Function:    void moto_goBackward()
+ *              void moto_goBackwardPanic()
  * Author(s):   Kristofer Hansson Aspman,
  *              Björn Eriksson
  *
@@ -160,6 +166,11 @@ void moto_goForward(void){
 void moto_goBackward(void){
     moto_decreaseRearNormal();
     moto_increaseFrontNormal();
+}
+
+void moto_goBackwardPanic(void){
+    moto_decreaseRearPanic();
+    moto_increaseFrontPanic();
 }
 
 /*

@@ -58,13 +58,14 @@ extern uint16_t leftPulse;
 extern uint16_t frontPulse;
 extern uint16_t rearPulse;
 
-
 /*Motor pulse modification*/
 void moto_startMotors(void);
 void moto_stopMotors(void);
 void moto_hover(void);
 void moto_goForward(void);
+void moto_goForwardPanic(void);
 void moto_goBackward(void);
+void moto_goBackwardPanic(void);
 void moto_strafeRight(void);
 void moto_strafeLeft(void);
 void moto_rotateLeft(void);

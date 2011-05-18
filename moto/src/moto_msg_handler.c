@@ -125,8 +125,14 @@ void specialMotorCommand(msg_pointer mp){
     case FORWARD:
         moto_goForward();
         break;
+    case PANIC_FORWARD:
+        moto_goForwardPanic();
+        break;
     case BACKWARD:
         moto_goBackward();
+        break;
+    case PANIC_BACKWARD:
+        moto_goBackwardPanic();
         break;
     case TURN_LEFT:
         moto_rotateLeft();
@@ -139,18 +145,6 @@ void specialMotorCommand(msg_pointer mp){
         break;
     case STRAFE_RIGHT:
         moto_strafeRight();
-        break;
-    case INCREASE_ALL_NORMAL:
-        moto_increaseAllNormal();
-        break;
-    case DECREASE_ALL_NORMAL:
-        moto_decreaseAllNormal();
-        break;
-    case INCREASE_ALL_PANIC:
-        moto_increaseAllPanic();
-        break;
-    case DECREASE_ALL_PANIC:
-        moto_decreaseAllPanic();
         break;
     case HOVER:
         moto_hover();
