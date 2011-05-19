@@ -16,30 +16,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  ****************************************************************************/
+#include <stdio.h>
+#include "moto_msg_handler.h"
 
-#ifndef MOTO_DRIVER_FUNCTIONS_H
-#define MOTO_DRIVER_FUNCTIONS_H
+void snd(msg_pointer);
 
-#define NORMAL_STEP 1
-#define PANIC_STEP 2
+struct bits_type msg;
 
-#define START_MOTOR_VAL 200
-#define STOP_MOTOR_VAL 0
-#define HOVER_MOTOR_VAL 1000
+/*
+* main function, NOT part of the code
+* testing purpose ONLY
+*/
+int main(int argc, char** argv){
+    char input[8];
+    printf("Enter numbers for ID,Increase,Panic,Left,Right,Front,Rear or x to exit: ");
+    scanf("%s",input);
+    while(input[0]!='x'){
+        printf("Enter numbers for ID,Increase,Panic,Left,Right,Front,Rear or x to exit: ");
+        scanf("%s",input);
+        msg.ID=input[0]-'0';
+        msg.INCREASE=input[1]-'0';
+        msg.PANIC=input[2]-'0';
+        msg.LEFT=input[3]-'0';
+        msg.RIGHT=input[4]-'0';
+        msg.FRONT=input[5]-'0';
+        msg.REAR=input[6]-'0';
+        snd(&msg);
+    }
+    return 0;
+}
 
-#define MAX_MOTOR_VAL 2000
-#define MIN_MOTOR_VAL 100
-
-/*Motor pulse modification*/
-void moto_startMotors(void);
-void moto_stopMotors(void);
-void moto_hover(void);
-
-void moto_left_motor(uint8_t,uint8_t);
-void moto_right_motor(uint8_t,uint8_t);
-void moto_front_motor(uint8_t,uint8_t);
-void moto_rear_motor(uint8_t,uint8_t);
-
-uint8_t applyPulse(uint8_t, uint8_t );
-
-#endif
+void snd(msg_pointer mp){
+    examineID(mp);
+}

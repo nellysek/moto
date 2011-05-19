@@ -16,30 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  ****************************************************************************/
+#ifndef MOTO_MSG_HANDLER_H
+#define MOTO_MSG_HANDLER_H
 
-#ifndef MOTO_DRIVER_FUNCTIONS_H
-#define MOTO_DRIVER_FUNCTIONS_H
+#include "moto_state_definitions.h"
 
-#define NORMAL_STEP 1
-#define PANIC_STEP 2
-
-#define START_MOTOR_VAL 200
-#define STOP_MOTOR_VAL 0
-#define HOVER_MOTOR_VAL 1000
-
-#define MAX_MOTOR_VAL 2000
-#define MIN_MOTOR_VAL 100
-
-/*Motor pulse modification*/
-void moto_startMotors(void);
-void moto_stopMotors(void);
-void moto_hover(void);
-
-void moto_left_motor(uint8_t,uint8_t);
-void moto_right_motor(uint8_t,uint8_t);
-void moto_front_motor(uint8_t,uint8_t);
-void moto_rear_motor(uint8_t,uint8_t);
-
-uint8_t applyPulse(uint8_t, uint8_t );
+uint8_t examineID(msg_pointer);
+void controlMotors(msg_pointer);
+void specialMotorCommand(msg_pointer);
 
 #endif
