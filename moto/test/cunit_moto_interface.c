@@ -29,6 +29,7 @@ void test_moto_init(void){
     CU_ASSERT(rearPulse == HOVER_PULSE_REAR);
     
     /* same problem with moto_run, just to gain branch coverage :) */
+    move_init();
     move_run();
     moto_run();
 }
