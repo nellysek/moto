@@ -166,9 +166,9 @@ void examineID_controlMotors(void){
     testStructPtr -> left = 1;
     testStructPtr -> front = 1;
     testStructPtr -> rear = 1;
-    printf("Before examineID\n");
+
     examineID(testStructPtr);
-    printf("After examineID\n");	
+
     CU_ASSERT(rightPulse== right_motor + NORMAL_STEP);
     CU_ASSERT(leftPulse== left_motor + NORMAL_STEP);
     CU_ASSERT(frontPulse== front_motor + NORMAL_STEP);

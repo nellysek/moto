@@ -33,7 +33,6 @@ test/*.x
 # Directories
 #################
 bin/
-lib/
 ../bin/
 ../ca/
 ../mov/lib/
