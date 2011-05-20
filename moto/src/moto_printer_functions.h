@@ -38,9 +38,6 @@
  */
 #ifndef MOTO_PRINTER_FUNCTIONS_H
     #define MOTO_PRINTER_FUNCTIONS_H
-/*#ifdef ARDUINO_DBG
-    #define ARDUINO
-#endif*/
 
 #ifdef ARDUINO
     #include "WProgram.h"

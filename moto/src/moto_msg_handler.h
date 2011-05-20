@@ -18,15 +18,16 @@
  *
  ****************************************************************************/
 
-/**
- * Module:       moto_msg_handler.h
- * Author(s):    Kristofer Hansson Aspman
- *
- * Description:  The typedef of the bitfield struct and
- *               all the prototypes for the functions used
- *               by tools.c, motor_control.c and parser.c.
- *
+/*!
+ * @author Kristofer Hansson Aspman
+ * @file moto_msg_handler.h
+ * @version v0.03
+ * @date 2011-05-18
+ * @brief The typedef of the bitfield struct and
+          all the prototypes for the functions used
+          by tools.c, motor_control.c and parser.c.
  */
+
 #ifndef MOTO_MSG_HANDLER_H
     #define MOTO_MSGHANDLER_H
 #include <stdint.h>
