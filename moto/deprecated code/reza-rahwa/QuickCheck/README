@@ -1,0 +1,8 @@
+README file for Quick Check on message parsing
+
+You need to have erlang installed.
+In erlang shel goto this directory and
+Run following lines of code to run the Quick Check code:
+    > c(examineID).
+    > eqc_c:start(test_msg_handler_examineID).
+    > eqc:quickcheck(ecxamineID:prop_inputID()).
