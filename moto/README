@@ -19,7 +19,8 @@ make gcov2        run unit tests with gcov (branch coverage)
 make valgrind     run unit tests with valgrind
 ###########################################################################
 
-
+Read the information carefully, especially when it comes to the part
+about gcov2.
 
 Note: When a make is made for pc, pc-dbg or valgrind a separate main.c is
       required. The quickest way to produce this is to go into the /src folder
