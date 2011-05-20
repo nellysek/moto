@@ -1,3 +1,23 @@
+                                                        
+                                             
+/*****************************************************************************
+ * Copyright (C) 2011  Kristofer Hansson Aspman
+ * 
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ ****************************************************************************/
+
 /*!
  * @file cunit_master_test_suite.h 
  * @brief   Header file for prototyping all test functions.
@@ -14,8 +34,9 @@
 /* -----------------------------------------------------------
  * Test cases defined in cunit_moto_interface.c
  * (Can be compiled separately with 
- * gcc -DPC -DAUTOMATED test/cunit_moto_interface.c test/cunit_master_test_suite.h src/*.c ../proto_mega/src/*.c -o bin/q.o -lcunit
- *
+ * gcc -DPC -DAUTOMATED test/cunit_moto_interface.c 
+ * test/cunit_master_test_suite.h src/*.c ../proto_mega/src/*.c -o 
+ * bin/q.o -lcunit
  *  -----------------------------------------------------------
  */
 
@@ -24,8 +45,9 @@ void test_moto_init(void);
 /* -----------------------------------------------------------
  * Test cases defined in cunit_moto_msg_handler.c
  * (Can be compiled separately with 
- * gcc -DPC -DAUTOMATED test/cunit_moto_msg_handler.c test/cunit_master_test_suite.h src/*.c ../proto_mega/src/*.c -o bin/q.o -lcunit
- *
+ * gcc -DPC -DAUTOMATED test/cunit_moto_msg_handler.c 
+ * test/cunit_master_test_suite.h src/*.c ../proto_mega/src/*.c -o 
+ * bin/q.o -lcunit
  *  -----------------------------------------------------------
  */
 
@@ -46,8 +68,9 @@ void test_examineID_stop(void);
 /* -----------------------------------------------------------
  * Test cases defined in cunit_moto_driver_functions.c
  * (Can be compiled separately with 
- * gcc -DPC -DAUTOMATED test/cunit_moto_driver_functions.c test/cunit_master_test_suite.h src/*.c ../proto_mega/src/*.c -o bin/q.o -lcunit
- *
+ * gcc -DPC -DAUTOMATED test/cunit_moto_driver_functions.c 
+ * test/cunit_master_test_suite.h src/*.c ../proto_mega/src/*.c -o 
+ * bin/q.o -lcunit
  *  -----------------------------------------------------------
  */
 

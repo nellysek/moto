@@ -1,15 +1,36 @@
+                                                        
+                                             
+/***************************************************************************
+ * Copyright (C) 2011  Bishare Sufi, Björn Eriksson, Magnus Bergqvist 
+ * 
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ ****************************************************************************/
+
 /*!
  * @file cunit_moto_driver_functions.c
  * @brief cunit tests for moto_driver_functions.c
  * @date 2011-04-25
- * @author Magnus Bergqvist
- * extent by @Bishare Sufi
+ * @author Magnus Bergqvist\n
+           Bishare Sufi\n
+           Björn Eriksson\n
  * @version 5
  * @history 2011-04-07 - created first draft \n
             2011-04-15 - adjusted it for new moto_driver_functions.c \n
-            2011-04-18 - updated and new tests added
+            2011-04-18 - updated and new tests added\n
             2011-04-23 - new tests added, auto adjustment possibilities \n
-                         to code changes was added
+                         to code changes was added\n
             2011-04-25 - new tests added and minor adjustments to other
  * @details compile with something like this: \n
     gcc cunit_moto_driver_functions.c cunit_stubs.c \n

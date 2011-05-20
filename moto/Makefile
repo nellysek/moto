@@ -1,16 +1,22 @@
 # #####################################################################
+# Authors: Kristofer Hansson Aspman, Björn Eriksson, Magnus Bergqvist
+#          and of course the creators of the original file, mentioned
+#          below.
+#
+# #####################################################################
 # This makefile has been modified from the original version to better
 # suit the motor control group. Please see below for copyright information
 # 
-# Changes include targets for:
+# Changes include rules for:
 # - default (just gives a nice printout with instructions)
 #   (Kristofer Hansson Aspman)
 # - pc-dbg (Kristofer Hansson Aspman)
 # - valgrind (Kristofer Hansson Aspman)
 # - gcov (...coverage) also includes LCov! (Kristofer Hansson Aspman)
-# - CUnit master test suite (Kristofer Hansson Aspman and Björn Eriksson)
+# - test and unit (CUnit master test suite) (Kristofer Hansson Aspman
+#   and Björn Eriksson)
 #
-# In addition to this the following targets have been altered by
+# In addition to this the following rules have been altered by
 # Kristofer Hansson Aspman, Björn Eriksson and Magnus Bergqvist:
 # - mega
 # - pc
@@ -49,22 +55,30 @@ USB_PORT=/dev/ttyACM0
 F_CPU=16000000
 #F_CPU=8000000
 
-VERS="Arduino Portable Makefile [APM] version 1.2, dated 10-04-2011"
+VERS="Arduino Portable Makefile [APM] version 1.2, dated 10-04-2011. Last updated 18-05-2011 by Kristofer Hansson Aspman"
+
+### Additions/alterations made by Kristofer, Magnus, Björn
+#########################################################################
 
 PROG=test
 TESTNAME=test_suite
 SRC=src/*.c
 SRC2=include/*.cpp
 PROTO_SRC=../proto_mega/src/*.c
-CUNIT_SRC=test/cunit_master_test_suite.c test/cunit_moto_msg_handler.c test/cunit_moto_driver_functions.c test/cunit_moto_interface.c
+CUNIT_SRC=test/*.c
 
 OBJ=bin/*.o
-TESTSUITE_OBJ=bin/test_suite.o
+#########################################################################
+
+### Additions/alterations made by Kristofer
+#########################################################################
+TESTSUITE_OBJ=bin/$(TESTNAME).o
 FILES_TO_REMOVE=*.o *.rom *.elf *.map *~ *.lst *.o ../src/*.gcov \
 	../../proto_mega/bin/*.o ../../../mov/bin/*.o \
 	../../../ca/bin/*.o ../../main.o ../*.gcov ../*.gcno ../*.gcda \
 	../src/*.o ../test/*.gcov ../test/*.gcda ../test/*.gcno ../test/test_suite.* \
 	../test/..*c.gcov
+PC_FLAGS=-DPC
 
 default:
 	@echo " "
@@ -86,6 +100,8 @@ default:
 	@echo "make valgrind     run unit tests with valgrind"
 	@echo " "
 
+#########################################################################
+
 mega: MMCU=atmega2560
 mega: STK=stk500v2
 mega: BAUD=115200
@@ -98,12 +114,9 @@ uno: BAUD=115200
 uno: LIB=coreuno
 uno: EXT=elf
 
-test: MMCU=atmega328p
-test: LIB=coreuno
-test: EXT=x
-
+# I guess we have messed a bit with this one as well. Kristofer,
+# Magnus and Björn
 $(OBJ): $(SRC)
-
 	@ cd bin && \
 	avr-g++ -c -g -Os -w -fno-exceptions -ffunction-sections -fdata-sections -mmcu=$(MMCU) -DF_CPU=$(F_CPU) -DARDUINO -I../../include ../$(SRC) ../$(SRC2) ../$(PROTO_SRC)
 	@ echo "Object files created"
@@ -116,18 +129,20 @@ compile:
 # avr-gcc $(OBJ) -Os -Wl,-Map=$(PROG).map,--cref -mmcu=$(MMCU) -DARDUINO=22 -l$(LIB) -Llib -lm \
 #		-fno-exceptions  -ffunction-sections -fdata-sections -o bin/$(PROG).x
 
-
+# Additions/Alterations by Kristofer Hansson Aspman
+#########################################################################
+test: PC_FLAGS+= -DMASTER_TEST_SUITE -DAUTOMATED
 test: clean
-	gcc -DPC -DMASTER_TEST_SUITE -DAUTOMATED $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
+	gcc $(PC_FLAGS) $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
 
 unit: test
 	$(TESTSUITE_OBJ)
+#########################################################################
 
 install: $(OBJ) compile
 	@ cd bin && avr-objcopy -O srec $(PROG).elf $(PROG).rom
 #	checksize $(PROG).elf
 	@ avrdude -p $(MMCU) -P $(USB_PORT) -c $(STK) -b $(BAUD) -F -u -U flash:w:bin/$(PROG).rom
-
 
 mega: clean install
 
@@ -136,16 +151,25 @@ uno: clean install
 pc: clean
 	gcc -DPC $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
 
+# Additions/Alterations by Kristofer Hansson Aspman
+#########################################################################
+pc-dbg: PC_FLAGS+= -DDEBUG
 pc-dbg: clean
 	gcc -DPC -DDEBUG $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
 
+valgrind: PC_FLAGS+= -g -DDEBUG
 valgrind: clean
-	gcc -g -DPC -DDEBUG $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
+	gcc $(PC_FLAGS) $(SRC) $(PROTO_SRC) -o bin/$(PROG).o
 	@ echo "Running Valgrind memory tests..."
 	valgrind --leak-check=yes bin/test.o
 
+profiler: PC_FLAGS+= -lgcov -fprofile-arcs -ftest-coverage -DMASTER_TEST_SUITE -DAUTOMATED
+profiler:
+	gcc $(PC_FLAGS) $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
+
+## Works with v1.7 of LCov /Kristofer
 gcov: clean
-	gcc -lgcov -fprofile-arcs -ftest-coverage -DPC -DMASTER_TEST_SUITE -DAUTOMATED $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
+	make profiler
 	@ echo "Compiled for gcov, now running testsuite..."
 	$(TESTSUITE_OBJ)
 	@ echo "After exec testsuite"
@@ -159,8 +183,9 @@ gcov: clean
 	@ echo "genhtml created files in covs-folder"
 	make moveGCovFiles
 
+## Works with v1.9 of LCov /Kristofer
 gcov2: clean
-	gcc -lgcov -fprofile-arcs -ftest-coverage -DPC -DMASTER_TEST_SUITE -DAUTOMATED $(CUNIT_SRC) $(SRC) $(PROTO_SRC) -o bin/$(TESTNAME).o -lcunit
+	make profiler
 	@ echo "Compiled for gcov, now running testsuite..."
 	$(TESTSUITE_OBJ)
 	@ echo "After exec testsuite"
@@ -185,6 +210,7 @@ clean:
 	rm -fr ./covs/
 	@ cd bin && rm -f $(FILES_TO_REMOVE)
 	@ echo "Project cleaned"
+#########################################################################
 
 version:
 	@ echo $(VERS)

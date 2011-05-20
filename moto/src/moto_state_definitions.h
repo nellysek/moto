@@ -1,11 +1,30 @@
+                                                        
+                                             
+/***************************************************************************
+ * Copyright (C) 2011  Rahwa Bahta, Reza Moussavi
+ * 
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ ****************************************************************************/
+
 /*!
  * @author Rahwa Bahta, Reza moussavi
- * @file msg_parsing.c
+ * @file moto_state_definitions.h
  * @version 0.05
  * @date 2011-05-01
  * @history
- * @brief
- *  
+ * @brief contaions all message definitions and a struct for the bitfield 
  */
 #ifndef MOTO_STATE_DEFINITIONS_H
     #define MOTO_STATE_DEFINITIONS_H
@@ -73,7 +92,7 @@
 #define  PANIC_TURN_RIGHT 0xFD
 #define  PANIC_TURN_LEFT 0xDD
 
-//ADD A PANIC STRAFE?
+/* ADD A PANIC STRAFE? */
 
 struct bits_type
 {
