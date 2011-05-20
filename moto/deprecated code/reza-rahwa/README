@@ -1,0 +1,13 @@
+README file for motor message handler
+
+In this folder you should find following files>
+    - moto_driver_functions.c
+	- moto_driver_functions.h
+	- moto_msg_handler.c
+	- moto_msg_handler.h
+	- moto_run.c (which contains main function for testing purpose)
+	- moto_state_definitions.h
+
+Run 'make' to compile all and then run ./motor
+
+Run 'make clean' to clean up object files.
