@@ -1,9 +1,29 @@
-Valgrind (sudo apt-get install valgrind)
+README for the moto folder.
 
-To run valgrind, first compile with 
+Typing make in terminal from this folder will produce following information:
+###########################################################################
+make pc     produces binary in bin/
+make mega   produces binary for the Arduino and uploads
+            to the board
+ 
+--- Cleaning up -----------------------------------------
+make clean    recursively clean up subdirs
+ 
+--- Verification and debugging --------------------------
+make pc-dbg       produces debug modebinary in bin/
+make test         compiles unit tests
+make unit         compiles and runs unit tests
+make gcov         run unit tests with gcov (statement coverage)
+make gcov2        run unit tests with gcov (branch coverage)
+                  need to have LCov 1.9 installed!
+make valgrind     run unit tests with valgrind
+###########################################################################
 
-make valgrind
 
-and then type
-valgrind --leak-check=yes bin/test.o
-in the terminal
+
+Note: When a make is made for pc, pc-dbg or valgrind a separate main.c is
+      required. The quickest way to produce this is to go into the /src folder
+      and open the README file there. In that file there is code to copy/paste
+      into a new file which then is to be saved as main.c
+      
+      Make and be happy! /Motor group
