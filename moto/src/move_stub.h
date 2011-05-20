@@ -17,7 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  ****************************************************************************/
-
+/*!
+ * @author Kristofer Hansson Aspman
+ * @file move_stub.h
+ * @version v0.03
+ * @date 2011-05-18
+ * @brief Header file belonging to move_stub.c.\n
+          The functionality is described in the .c file.
+ */
 #ifndef MOVE_STUB_H
     #define MOVE_STUB_H
 #include <stdint.h>

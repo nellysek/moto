@@ -18,6 +18,14 @@
  *
  ****************************************************************************/
 
+/*!
+ * @author Kristofer Hansson Aspman
+ * @file move_stub.c
+ * @version v0.03
+ * @date 2011-05-18
+ * @brief the purpose of this .c file is to simulate to move messages
+ */
+
 #include <stdint.h>
 #include "move_stub.h"
 #include <stdio.h>

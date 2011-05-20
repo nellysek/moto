@@ -23,9 +23,8 @@
  * @file moto_msg_handler.h
  * @version v0.03
  * @date 2011-05-18
- * @brief The typedef of the bitfield struct and
-          all the prototypes for the functions used
-          by tools.c, motor_control.c and parser.c.
+ * @brief Header file belonging to moto_msg_handler.c.\n
+                 The functionality is described in the .c file.
  */
 
 #ifndef MOTO_MSG_HANDLER_H
