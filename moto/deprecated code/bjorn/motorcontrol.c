@@ -30,7 +30,7 @@
           easier to test.
  * @history 2011-04-03: merged with moto_driver_functions.c
  */
-
+#ifdef ARDUINO
 #include "motorcontrol.h"
 #include <stdint.h>
 uint8_t leftPulse = 0;
@@ -164,4 +164,5 @@ void sendMsg(void){
     struct pulses currentPulsess = {rightPulse, leftPulse, 
                                     frontPulse, rearPulse};
     proto_write_move(currentPulses);
-}	
+}
+#endif	

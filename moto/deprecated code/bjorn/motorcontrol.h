@@ -29,6 +29,8 @@
           will be used.
  * @history 2011-04-03: merged with moto_driver_functions.h
  */
+#ifndef MOTORCONTROL_H
+#define MOTORCONTROL_H
 #include <stdint.h>
 
 /* defines the motor pins on the arduino */
@@ -59,3 +61,4 @@ struct pulses{
     uint16_t front;
     uint16_t rear;
 };
+#endif
