@@ -1,0 +1,7 @@
+Created by: Magnus Bergqvist
+
+This folder contains a QuickCheck test for the function moto_map() and
+the moto_map() function in an own c-module, taken out of its context due
+to restrictions in QuickChecks ability to test code in complete systems.
+The code is actually not deprecated, but it does not fit in elsewhere in the
+repository.
